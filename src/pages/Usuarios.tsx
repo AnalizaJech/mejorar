@@ -328,8 +328,7 @@ export default function Usuarios() {
                   Gestión de Clientes
                 </h1>
                 <p className="text-vet-gray-600">
-                  Administra las cuentas de clientes y crea nuevas desde
-                  pre-citas
+                  Administra las cuentas de clientes y usuarios del sistema
                 </p>
               </div>
             </div>
@@ -429,65 +428,6 @@ export default function Usuarios() {
             </Card>
           </div>
 
-          {/* Pre-Citas que pueden convertirse en cuentas */}
-          {preCitasPendientes.length > 0 && (
-            <Card className="mb-8">
-              <CardHeader>
-                <CardTitle className="flex items-center space-x-2">
-                  <Clock className="w-5 h-5 text-yellow-600" />
-                  <span>
-                    Pre-Citas Sin Cuenta ({preCitasPendientes.length})
-                  </span>
-                </CardTitle>
-                <CardDescription>
-                  Estas personas enviaron pre-citas pero no tienen cuenta de
-                  cliente. Puedes crearles una cuenta.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid gap-4">
-                  {preCitasPendientes.slice(0, 5).map((preCita) => (
-                    <div
-                      key={preCita.id}
-                      className="flex items-center justify-between p-4 border border-vet-gray-200 rounded-lg bg-yellow-50"
-                    >
-                      <div className="flex-1">
-                        <div className="flex items-center space-x-4">
-                          <div>
-                            <p className="font-medium text-vet-gray-900">
-                              {preCita.nombreCliente}
-                            </p>
-                            <p className="text-sm text-vet-gray-600">
-                              {preCita.email}
-                            </p>
-                            <p className="text-xs text-vet-gray-500">
-                              Mascota: {preCita.nombreMascota} •{" "}
-                              {preCita.motivoConsulta}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <Button
-                          size="sm"
-                          onClick={() => createClientFromPreCita(preCita)}
-                          className="bg-vet-primary hover:bg-vet-primary-dark"
-                        >
-                          <UserPlus className="w-4 h-4 mr-2" />
-                          Crear Cuenta
-                        </Button>
-                      </div>
-                    </div>
-                  ))}
-                  {preCitasPendientes.length > 5 && (
-                    <p className="text-sm text-vet-gray-500 text-center">
-                      Y {preCitasPendientes.length - 5} pre-citas más...
-                    </p>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
-          )}
 
           {/* Controls */}
           <Card className="mb-8">
