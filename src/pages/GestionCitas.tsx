@@ -935,15 +935,7 @@ export default function GestionCitas() {
                           <div className="flex items-center space-x-4 mb-6">
                             {/* Foto de perfil */}
                             <div className="w-16 h-16 rounded-full overflow-hidden bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center flex-shrink-0 border-3 border-white shadow-lg">
-                              {propietario.foto ? (
-                                <img
-                                  src={propietario.foto}
-                                  alt={`Foto de ${propietario.nombre}`}
-                                  className="w-full h-full object-cover"
-                                />
-                              ) : (
-                                <User className="w-8 h-8 text-blue-600" />
-                              )}
+                              <User className="w-8 h-8 text-blue-600" />
                             </div>
 
                             <div className="flex-1">
