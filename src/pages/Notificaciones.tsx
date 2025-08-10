@@ -28,7 +28,6 @@ export default function Notificaciones() {
   const {
     user,
     citas,
-    preCitas,
     mascotas,
     getNotificacionesByUser,
     markNotificacionAsRead,
