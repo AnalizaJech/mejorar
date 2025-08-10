@@ -392,8 +392,149 @@ export default function Index() {
         <div className="absolute bottom-20 left-20 w-40 h-40 bg-vet-secondary/5 rounded-full animate-float delay-1000"></div>
       </section>
 
+      {/* Servicios Section */}
+      <section id="servicios" className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-vet-gray-900 mb-4">
+              Nuestros Servicios
+            </h2>
+            <p className="text-lg text-vet-gray-600 max-w-2xl mx-auto">
+              Ofrecemos atención veterinaria integral con los más altos estándares de calidad y cuidado profesional
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Consulta General */}
+            <div className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-vet-gray-100 hover:border-vet-primary/20">
+              <div className="w-16 h-16 bg-vet-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-vet-primary/20 transition-colors">
+                <Stethoscope className="w-8 h-8 text-vet-primary" />
+              </div>
+              <h3 className="text-xl font-bold text-vet-gray-900 mb-3">Consulta General</h3>
+              <p className="text-vet-gray-600 mb-4 leading-relaxed">
+                Evaluaciones médicas completas y exámenes de rutina para mantener la salud óptima de tu mascota.
+              </p>
+              <div className="flex items-center justify-between pt-4 border-t border-vet-gray-100">
+                <span className="text-2xl font-bold text-vet-primary">S/. 80</span>
+                <span className="text-sm text-vet-gray-500">30-45 min</span>
+              </div>
+            </div>
+
+            {/* Vacunación */}
+            <div className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-vet-gray-100 hover:border-vet-primary/20">
+              <div className="w-16 h-16 bg-green-100 rounded-xl flex items-center justify-center mb-6 group-hover:bg-green-200 transition-colors">
+                <Syringe className="w-8 h-8 text-green-600" />
+              </div>
+              <h3 className="text-xl font-bold text-vet-gray-900 mb-3">Vacunación</h3>
+              <p className="text-vet-gray-600 mb-4 leading-relaxed">
+                Aplicación de vacunas según el esquema apropiado para la edad y especie de tu mascota.
+              </p>
+              <div className="flex items-center justify-between pt-4 border-t border-vet-gray-100">
+                <span className="text-2xl font-bold text-green-600">S/. 65</span>
+                <span className="text-sm text-vet-gray-500">15-20 min</span>
+              </div>
+            </div>
+
+            {/* Emergencias */}
+            <div className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-vet-gray-100 hover:border-red-500/20">
+              <div className="w-16 h-16 bg-red-100 rounded-xl flex items-center justify-center mb-6 group-hover:bg-red-200 transition-colors">
+                <Zap className="w-8 h-8 text-red-600" />
+              </div>
+              <h3 className="text-xl font-bold text-vet-gray-900 mb-3">Emergencias</h3>
+              <p className="text-vet-gray-600 mb-4 leading-relaxed">
+                Atención médica urgente 24/7 para casos críticos que requieren intervención inmediata.
+              </p>
+              <div className="flex items-center justify-between pt-4 border-t border-vet-gray-100">
+                <span className="text-2xl font-bold text-red-600">S/. 150</span>
+                <span className="text-sm text-vet-gray-500">45-90 min</span>
+              </div>
+            </div>
+
+            {/* Grooming */}
+            <div className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-vet-gray-100 hover:border-vet-secondary/20">
+              <div className="w-16 h-16 bg-vet-secondary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-vet-secondary/20 transition-colors">
+                <Scissors className="w-8 h-8 text-vet-secondary" />
+              </div>
+              <h3 className="text-xl font-bold text-vet-gray-900 mb-3">Grooming</h3>
+              <p className="text-vet-gray-600 mb-4 leading-relaxed">
+                Servicios de higiene y estética integral para mantener a tu mascota limpia y saludable.
+              </p>
+              <div className="flex items-center justify-between pt-4 border-t border-vet-gray-100">
+                <span className="text-2xl font-bold text-vet-secondary">S/. 45</span>
+                <span className="text-sm text-vet-gray-500">60-120 min</span>
+              </div>
+            </div>
+
+            {/* Cirugía */}
+            <div className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-vet-gray-100 hover:border-purple-500/20">
+              <div className="w-16 h-16 bg-purple-100 rounded-xl flex items-center justify-center mb-6 group-hover:bg-purple-200 transition-colors">
+                <Activity className="w-8 h-8 text-purple-600" />
+              </div>
+              <h3 className="text-xl font-bold text-vet-gray-900 mb-3">Cirugía</h3>
+              <p className="text-vet-gray-600 mb-4 leading-relaxed">
+                Procedimientos quirúrgicos especializados realizados con tecnología de vanguardia.
+              </p>
+              <div className="flex items-center justify-between pt-4 border-t border-vet-gray-100">
+                <span className="text-2xl font-bold text-purple-600">S/. 250</span>
+                <span className="text-sm text-vet-gray-500">90-180 min</span>
+              </div>
+            </div>
+
+            {/* Diagnóstico */}
+            <div className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-vet-gray-100 hover:border-blue-500/20">
+              <div className="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mb-6 group-hover:bg-blue-200 transition-colors">
+                <FileText className="w-8 h-8 text-blue-600" />
+              </div>
+              <h3 className="text-xl font-bold text-vet-gray-900 mb-3">Diagnóstico</h3>
+              <p className="text-vet-gray-600 mb-4 leading-relaxed">
+                Exámenes y análisis especializados para diagnósticos precisos y tratamientos efectivos.
+              </p>
+              <div className="flex items-center justify-between pt-4 border-t border-vet-gray-100">
+                <span className="text-2xl font-bold text-blue-600">S/. 120</span>
+                <span className="text-sm text-vet-gray-500">30-45 min</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Call to Action */}
+          <div className="text-center mt-16">
+            <div className="bg-gradient-to-r from-vet-primary/5 to-vet-secondary/5 rounded-2xl p-8">
+              <h3 className="text-2xl font-bold text-vet-gray-900 mb-4">
+                ¿Necesitas agendar una cita?
+              </h3>
+              <p className="text-vet-gray-600 mb-6 max-w-2xl mx-auto">
+                Nuestro equipo de veterinarios especializados está listo para brindar el mejor cuidado a tu mascota.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                {isAuthenticated ? (
+                  <Link to="/nueva-cita">
+                    <Button size="lg" className="bg-vet-primary hover:bg-vet-primary-dark">
+                      Agendar Cita
+                      <Calendar className="ml-2 w-5 h-5" />
+                    </Button>
+                  </Link>
+                ) : (
+                  <Link to="/login">
+                    <Button size="lg" className="bg-vet-primary hover:bg-vet-primary-dark">
+                      Agendar Cita
+                      <Calendar className="ml-2 w-5 h-5" />
+                    </Button>
+                  </Link>
+                )}
+                <a href="#emergencias">
+                  <Button size="lg" variant="outline" className="border-vet-primary text-vet-primary hover:bg-vet-primary hover:text-white">
+                    Urgencias 24/7
+                    <Phone className="ml-2 w-5 h-5" />
+                  </Button>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Why Choose PetLA - Carousel Section */}
-      <div id="servicios">
+      <div id="caracteristicas">
         <FeaturesCarousel />
       </div>
 
