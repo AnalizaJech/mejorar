@@ -208,7 +208,10 @@ export default function Layout({
     <div className="min-h-screen bg-vet-gray-50">
       {/* Scroll Progress Indicator - Only on homepage */}
       {location.pathname === "/" && (
-        <div className="scroll-indicator fixed top-0 left-0 h-1 bg-gradient-to-r from-vet-primary to-vet-secondary z-50 w-full origin-left transform scale-x-0"></div>
+        <div
+          className="fixed top-0 left-0 h-1 bg-gradient-to-r from-vet-primary to-vet-secondary z-50 transition-all duration-150 ease-out"
+          style={{ width: `${scrollProgress}%` }}
+        ></div>
       )}
       {/* Header */}
       <header className="bg-white border-b border-vet-gray-200 sticky top-0 z-50">
