@@ -727,59 +727,66 @@ export default function Index() {
                   </a>
                 </div>
 
-                {/* Emergency Info */}
-                <div className="bg-gradient-to-br from-red-50 to-white rounded-2xl p-6 border border-red-100 shadow-lg relative overflow-hidden">
-                  {/* Header */}
-                  <div className="flex items-center mb-6">
-                    <div className="w-10 h-10 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center mr-3 shadow-lg">
-                      <Heart className="w-5 h-5 text-white" />
-                    </div>
-                    <h4 className="text-xl font-bold text-gray-900">
-                      ¿Qué hacer mientras llegas?
-                    </h4>
-                  </div>
+                {/* Emergency Steps - Colorful Harmonious Design */}
+                <div className="flex flex-col h-[240px]">
+                  <h3 className="text-2xl font-bold text-vet-gray-900 mb-6">
+                    ¿Qué hacer mientras llegas?
+                  </h3>
 
-                  {/* Steps */}
-                  <div className="space-y-4">
-                    <div className="flex items-start space-x-3 bg-white/60 backdrop-blur-sm rounded-xl p-4 border border-red-100/50">
-                      <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <span className="text-white font-bold text-sm">1</span>
-                      </div>
-                      <div className="flex-1">
-                        <h5 className="font-bold text-gray-900 mb-1">
-                          Mantén la calma
-                        </h5>
-                        <p className="text-gray-600 text-sm">
-                          Tu mascota puede sentir tu ansiedad
-                        </p>
-                      </div>
-                    </div>
+                  <div className="relative flex-1">
+                    {/* Connection Line - connects all circles perfectly */}
+                    <div className="absolute left-6 top-6 h-[128px] w-1 bg-gradient-to-b from-blue-400 via-emerald-400 to-amber-400 rounded-full"></div>
 
-                    <div className="flex items-start space-x-3 bg-white/60 backdrop-blur-sm rounded-xl p-4 border border-red-100/50">
-                      <div className="w-8 h-8 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <span className="text-white font-bold text-sm">2</span>
+                    <div className="space-y-8">
+                      {/* Step 1 */}
+                      <div className="relative flex items-center space-x-6">
+                        <div className="relative z-10 w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-lg">
+                          <span className="text-white font-bold text-lg">
+                            1
+                          </span>
+                        </div>
+                        <div className="flex-1 pl-2">
+                          <h5 className="font-bold text-blue-700 text-lg mb-1">
+                            Mantén la calma
+                          </h5>
+                          <p className="text-blue-600">
+                            Tu mascota puede sentir tu ansiedad
+                          </p>
+                        </div>
                       </div>
-                      <div className="flex-1">
-                        <h5 className="font-bold text-gray-900 mb-1">
-                          Observa los síntomas
-                        </h5>
-                        <p className="text-gray-600 text-sm">
-                          Toma nota de lo que ves
-                        </p>
-                      </div>
-                    </div>
 
-                    <div className="flex items-start space-x-3 bg-white/60 backdrop-blur-sm rounded-xl p-4 border border-red-100/50">
-                      <div className="w-8 h-8 bg-gradient-to-br from-amber-500 to-amber-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <span className="text-white font-bold text-sm">3</span>
+                      {/* Step 2 */}
+                      <div className="relative flex items-center space-x-6">
+                        <div className="relative z-10 w-12 h-12 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center shadow-lg">
+                          <span className="text-white font-bold text-lg">
+                            2
+                          </span>
+                        </div>
+                        <div className="flex-1 pl-2">
+                          <h5 className="font-bold text-emerald-700 text-lg mb-1">
+                            Observa los síntomas
+                          </h5>
+                          <p className="text-emerald-600">
+                            Toma nota de lo que ves
+                          </p>
+                        </div>
                       </div>
-                      <div className="flex-1">
-                        <h5 className="font-bold text-gray-900 mb-1">
-                          No mediques
-                        </h5>
-                        <p className="text-gray-600 text-sm">
-                          Espera instrucciones del veterinario
-                        </p>
+
+                      {/* Step 3 */}
+                      <div className="relative flex items-center space-x-6">
+                        <div className="relative z-10 w-12 h-12 bg-gradient-to-br from-amber-500 to-amber-600 rounded-full flex items-center justify-center shadow-lg">
+                          <span className="text-white font-bold text-lg">
+                            3
+                          </span>
+                        </div>
+                        <div className="flex-1 pl-2">
+                          <h5 className="font-bold text-amber-700 text-lg mb-1">
+                            No mediques
+                          </h5>
+                          <p className="text-amber-600">
+                            Espera instrucciones del veterinario
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
