@@ -411,23 +411,6 @@ function AdminDashboard({
       );
     });
 
-    // Recent pre-citas (last 7 days)
-    const recentPreCitas = preCitas.filter((p) => {
-      if (!p.fechaCreacion) return false;
-      const daysSince =
-        (now.getTime() - new Date(p.fechaCreacion).getTime()) /
-        (1000 * 60 * 60 * 24);
-      return daysSince <= 7;
-    });
-
-    // Recent newsletter subscriptions (last 7 days)
-    const recentNewsletterSubs = suscriptoresNewsletter.filter((s) => {
-      if (!s.fechaSuscripcion) return false;
-      const daysSince =
-        (now.getTime() - new Date(s.fechaSuscripcion).getTime()) /
-        (1000 * 60 * 60 * 24);
-      return daysSince <= 7 && s.activo;
-    });
 
     // Add client activities
     recentClients.forEach((client) => {
