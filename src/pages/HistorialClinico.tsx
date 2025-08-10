@@ -670,10 +670,10 @@ export default function HistorialClinico() {
           if (consulta.temperatura)
             addText(`  • Temperatura: ${consulta.temperatura}°C`);
           if (consulta.presionArterial)
-            addText(`  ��� Presión Arterial: ${consulta.presionArterial}`);
+            addText(`  • Presión Arterial: ${consulta.presionArterial}`);
           if (consulta.frecuenciaCardiaca)
             addText(
-              `  • Frecuencia Card��aca: ${consulta.frecuenciaCardiaca} bpm`,
+              `  • Frecuencia Cardíaca: ${consulta.frecuenciaCardiaca} bpm`,
             );
         }
 
@@ -1187,7 +1187,7 @@ export default function HistorialClinico() {
                       <p className="text-vet-gray-600 mb-6">
                         {selectedMascota} no tiene consultas generales en su
                         historial. Los servicios de consulta general aparecerán
-                        aqu��.
+                        aquí.
                       </p>
                       <Button
                         onClick={() => (window.location.href = "/mis-citas")}
@@ -1959,7 +1959,7 @@ export default function HistorialClinico() {
                                   )}
                                 </div>
                                 <div>
-                                  <strong>Hora de Atenci��n:</strong>{" "}
+                                  <strong>Hora de Atención:</strong>{" "}
                                   {new Date(servicio.fecha).toLocaleTimeString(
                                     "es-ES",
                                     { hour: "2-digit", minute: "2-digit" },
