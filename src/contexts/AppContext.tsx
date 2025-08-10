@@ -1477,16 +1477,17 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
     // Notificar a todos los administradores sobre la nueva cita
     const admins = usuarios.filter((u) => u.rol === "admin");
-    const clienteNombre =
-      newCita.clienteNombre ||
-      usuarios.find((u) => u.id === newCita.clienteId)?.nombre ||
-      "Cliente";
+    const cliente = usuarios.find((u) => u.id === newCita.clienteId);
+    const clienteNombreCompleto = cliente
+      ? `${cliente.nombre}${cliente.apellidos ? ` ${cliente.apellidos}` : ''}`
+      : newCita.clienteNombre || "Cliente";
+
     admins.forEach((admin) => {
       addNotificacion({
         usuarioId: admin.id,
         tipo: "nueva_cita",
         titulo: "Nueva cita programada",
-        mensaje: `${clienteNombre} ha programado una cita para ${newCita.mascota} el ${new Date(newCita.fecha).toLocaleDateString("es-ES")} - ${newCita.tipoConsulta}`,
+        mensaje: `${clienteNombreCompleto} ha programado una cita para ${newCita.mascota} el ${new Date(newCita.fecha).toLocaleDateString("es-ES")} - ${newCita.tipoConsulta}`,
         leida: false,
       });
     });
