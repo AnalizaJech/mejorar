@@ -120,7 +120,10 @@ export default function MisMascotas() {
       let factors = 0;
 
       // Name similarity (weight: 30%)
-      const nameSimilarity = calculateStringSimilarity(pet1.nombre, pet2.nombre);
+      const nameSimilarity = calculateStringSimilarity(
+        pet1.nombre,
+        pet2.nombre,
+      );
       score += nameSimilarity * 0.3;
       factors += 0.3;
 
@@ -145,37 +148,44 @@ export default function MisMascotas() {
     };
 
     // Check for duplicate and similar pets
-    const userPets = mascotas.filter(mascota =>
-      mascota.clienteId === user?.id &&
-      (!editingMascota || mascota.id !== editingMascota.id)
+    const userPets = mascotas.filter(
+      (mascota) =>
+        mascota.clienteId === user?.id &&
+        (!editingMascota || mascota.id !== editingMascota.id),
     );
 
     // Check for exact duplicates first
-    const isDuplicate = userPets.some(mascota =>
-      mascota.nombre.toLowerCase().trim() === newMascota.nombre.toLowerCase().trim() &&
-      mascota.especie.toLowerCase() === newMascota.especie.toLowerCase() &&
-      mascota.raza.toLowerCase().trim() === newMascota.raza.toLowerCase().trim() &&
-      mascota.sexo?.toLowerCase() === newMascota.sexo.toLowerCase()
+    const isDuplicate = userPets.some(
+      (mascota) =>
+        mascota.nombre.toLowerCase().trim() ===
+          newMascota.nombre.toLowerCase().trim() &&
+        mascota.especie.toLowerCase() === newMascota.especie.toLowerCase() &&
+        mascota.raza.toLowerCase().trim() ===
+          newMascota.raza.toLowerCase().trim() &&
+        mascota.sexo?.toLowerCase() === newMascota.sexo.toLowerCase(),
     );
 
     if (isDuplicate) {
       toast({
         title: "Mascota duplicada",
-        description: "Ya tienes una mascota registrada con el mismo nombre, especie, raza y sexo. Por favor verifica los datos.",
+        description:
+          "Ya tienes una mascota registrada con el mismo nombre, especie, raza y sexo. Por favor verifica los datos.",
         variant: "destructive",
       });
       return;
     }
 
     // Check for high similarity (75% or more)
-    const similarPets = userPets.filter(mascota => {
+    const similarPets = userPets.filter((mascota) => {
       const similarity = calculatePetSimilarity(newMascota, mascota);
       return similarity >= 0.75;
     });
 
     if (similarPets.length > 0) {
       const mostSimilar = similarPets[0];
-      const similarity = Math.round(calculatePetSimilarity(newMascota, mostSimilar) * 100);
+      const similarity = Math.round(
+        calculatePetSimilarity(newMascota, mostSimilar) * 100,
+      );
 
       toast({
         title: "Mascota similar encontrada",
