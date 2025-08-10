@@ -417,20 +417,20 @@ export default function CitaDetailModal({
 
                   {/* Documento */}
                   {selectedCita.propietario?.documento && (
-                    <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div className="bg-gradient-to-br from-amber-50 to-amber-100 rounded-xl p-4 shadow-sm border border-amber-200 hover:shadow-lg transition-all duration-300 hover:scale-105">
                       <div className="flex items-center space-x-3">
-                        <div className="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center">
-                          <IdCard className="w-5 h-5 text-amber-600" />
+                        <div className="w-12 h-12 bg-gradient-to-r from-amber-500 to-amber-600 rounded-xl flex items-center justify-center shadow-lg">
+                          <IdCard className="w-6 h-6 text-white" />
                         </div>
                         <div className="flex-1">
-                          <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block mb-1">
-                            {selectedCita.propietario?.tipoDocumento === "dni" && "DNI"}
-                            {selectedCita.propietario?.tipoDocumento === "pasaporte" && "Pasaporte"}
-                            {selectedCita.propietario?.tipoDocumento === "carnet_extranjeria" && "Carnet de Extranjería"}
-                            {selectedCita.propietario?.tipoDocumento === "cedula" && "Cédula"}
-                            {!selectedCita.propietario?.tipoDocumento && "Documento"}
+                          <span className="text-xs font-bold text-amber-700 uppercase tracking-wide block mb-1">
+                            {selectedCita.propietario?.tipoDocumento === "dni" && "🆔 DNI"}
+                            {selectedCita.propietario?.tipoDocumento === "pasaporte" && "📘 Pasaporte"}
+                            {selectedCita.propietario?.tipoDocumento === "carnet_extranjeria" && "🗂️ Carnet de Extranjería"}
+                            {selectedCita.propietario?.tipoDocumento === "cedula" && "📇 Cédula"}
+                            {!selectedCita.propietario?.tipoDocumento && "📋 Documento"}
                           </span>
-                          <p className="text-lg font-bold text-vet-gray-900 font-mono">
+                          <p className="text-xl font-bold text-amber-900 font-mono">
                             {selectedCita.propietario.documento}
                           </p>
                         </div>
@@ -440,17 +440,21 @@ export default function CitaDetailModal({
 
                   {/* Género */}
                   {selectedCita.propietario?.genero && (
-                    <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div className="bg-gradient-to-br from-pink-50 to-pink-100 rounded-xl p-4 shadow-sm border border-pink-200 hover:shadow-lg transition-all duration-300 hover:scale-105">
                       <div className="flex items-center space-x-3">
-                        <div className="w-10 h-10 bg-pink-100 rounded-xl flex items-center justify-center">
-                          <Users className="w-5 h-5 text-pink-600" />
+                        <div className="w-12 h-12 bg-gradient-to-r from-pink-500 to-pink-600 rounded-xl flex items-center justify-center shadow-lg">
+                          <Users className="w-6 h-6 text-white" />
                         </div>
                         <div className="flex-1">
-                          <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block mb-1">
+                          <span className="text-xs font-bold text-pink-700 uppercase tracking-wide block mb-1">
                             Género
                           </span>
-                          <p className="text-sm font-semibold text-vet-gray-900 capitalize">
-                            {selectedCita.propietario.genero}
+                          <p className="text-lg font-bold text-pink-900 capitalize">
+                            {selectedCita.propietario.genero === 'masculino' && '♂️ Masculino'}
+                            {selectedCita.propietario.genero === 'femenino' && '♀️ Femenino'}
+                            {selectedCita.propietario.genero === 'otro' && '⚧️ Otro'}
+                            {selectedCita.propietario.genero === 'prefiero_no_decir' && '🤐 Prefiero no decir'}
+                            {!['masculino', 'femenino', 'otro', 'prefiero_no_decir'].includes(selectedCita.propietario.genero) && selectedCita.propietario.genero}
                           </p>
                         </div>
                       </div>
@@ -459,24 +463,24 @@ export default function CitaDetailModal({
 
                   {/* Fecha de Nacimiento */}
                   {selectedCita.propietario?.fechaNacimiento && (
-                    <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div className="bg-gradient-to-br from-teal-50 to-teal-100 rounded-xl p-4 shadow-sm border border-teal-200 hover:shadow-lg transition-all duration-300 hover:scale-105">
                       <div className="flex items-center space-x-3">
-                        <div className="w-10 h-10 bg-indigo-100 rounded-xl flex items-center justify-center">
-                          <Calendar className="w-5 h-5 text-indigo-600" />
+                        <div className="w-12 h-12 bg-gradient-to-r from-teal-500 to-teal-600 rounded-xl flex items-center justify-center shadow-lg">
+                          <Calendar className="w-6 h-6 text-white" />
                         </div>
                         <div className="flex-1">
-                          <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block mb-1">
-                            Fecha de Nacimiento
+                          <span className="text-xs font-bold text-teal-700 uppercase tracking-wide block mb-1">
+                            🎂 Fecha de Nacimiento
                           </span>
-                          <p className="text-sm font-semibold text-vet-gray-900">
+                          <p className="text-lg font-bold text-teal-900">
                             {new Date(selectedCita.propietario.fechaNacimiento).toLocaleDateString("es-ES", {
                               year: "numeric",
                               month: "long",
                               day: "numeric",
                             })}
                           </p>
-                          <span className="text-xs text-vet-gray-500">
-                            ({Math.floor((new Date().getTime() - new Date(selectedCita.propietario.fechaNacimiento).getTime()) / (365.25 * 24 * 60 * 60 * 1000))} años)
+                          <span className="text-sm font-semibold text-teal-600">
+                            🕐 {Math.floor((new Date().getTime() - new Date(selectedCita.propietario.fechaNacimiento).getTime()) / (365.25 * 24 * 60 * 60 * 1000))} años
                           </span>
                         </div>
                       </div>
@@ -485,16 +489,16 @@ export default function CitaDetailModal({
 
                   {/* Dirección */}
                   {selectedCita.propietario?.direccion && (
-                    <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-4 shadow-sm border border-orange-200 hover:shadow-lg transition-all duration-300 hover:scale-105">
                       <div className="flex items-center space-x-3">
-                        <div className="w-10 h-10 bg-red-100 rounded-xl flex items-center justify-center">
-                          <MapPin className="w-5 h-5 text-red-600" />
+                        <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg">
+                          <MapPin className="w-6 h-6 text-white" />
                         </div>
                         <div className="flex-1">
-                          <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block mb-1">
-                            Dirección
+                          <span className="text-xs font-bold text-orange-700 uppercase tracking-wide block mb-1">
+                            🏠 Dirección
                           </span>
-                          <p className="text-sm font-semibold text-vet-gray-900 leading-tight">
+                          <p className="text-sm font-bold text-orange-900 leading-tight">
                             {selectedCita.propietario.direccion}
                           </p>
                         </div>
