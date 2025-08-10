@@ -27,6 +27,7 @@ import FeaturesCarousel from "@/components/FeaturesCarousel";
 import { useAppContext } from "@/contexts/AppContext";
 import {
   Dog,
+  Cat,
   Heart,
   Calendar,
   Shield,
@@ -43,6 +44,10 @@ import {
   TrendingUp,
   FileText,
   ChevronDown,
+  Activity,
+  Scissors,
+  Syringe,
+  Zap,
 } from "lucide-react";
 
 export default function Index() {
