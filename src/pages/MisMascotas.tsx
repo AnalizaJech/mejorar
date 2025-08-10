@@ -86,6 +86,9 @@ export default function MisMascotas() {
     if (!newMascota.fechaNacimiento) {
       return; // Don't submit without date
     }
+    if (!newMascota.sexo) {
+      return; // Don't submit without sex
+    }
 
     if (editingMascota) {
       // Edit existing mascota
@@ -427,7 +430,7 @@ export default function MisMascotas() {
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="sexo">Sexo</Label>
+                        <Label htmlFor="sexo">Sexo *</Label>
                         <Select
                           value={newMascota.sexo}
                           onValueChange={(value) =>
@@ -437,8 +440,8 @@ export default function MisMascotas() {
                             })
                           }
                         >
-                          <SelectTrigger>
-                            <SelectValue placeholder="Selecciona el sexo" />
+                          <SelectTrigger className={!newMascota.sexo ? "border-red-300" : ""}>
+                            <SelectValue placeholder="Selecciona el sexo *" />
                           </SelectTrigger>
                           <SelectContent>
                             <SelectItem value="Macho">Macho</SelectItem>
