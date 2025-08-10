@@ -728,24 +728,24 @@ export default function Index() {
                 </div>
 
                 {/* Emergency Steps - Colorful Harmonious Design */}
-                <div className="flex flex-col h-[240px]">
+                <div className="flex flex-col">
                   <h3 className="text-2xl font-bold text-vet-gray-900 mb-6">
                     ¿Qué hacer mientras llegas?
                   </h3>
 
                   <div className="relative flex-1">
-                    {/* Connection Line - connects all circles perfectly */}
-                    <div className="absolute left-6 top-6 h-[128px] w-1 bg-gradient-to-b from-blue-400 via-emerald-400 to-amber-400 rounded-full"></div>
+                    {/* Connection Line - connects all circles perfectly to the end */}
+                    <div className="absolute left-6 top-6 h-[172px] w-1 bg-gradient-to-b from-blue-400 via-emerald-400 to-amber-400 rounded-full"></div>
 
-                    <div className="space-y-8">
+                    <div className="space-y-6">
                       {/* Step 1 */}
-                      <div className="relative flex items-center space-x-6">
+                      <div className="relative flex items-start space-x-6 min-h-[56px]">
                         <div className="relative z-10 w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-lg">
                           <span className="text-white font-bold text-lg">
                             1
                           </span>
                         </div>
-                        <div className="flex-1 pl-2">
+                        <div className="flex-1 pl-2 pt-1">
                           <h5 className="font-bold text-blue-700 text-lg mb-1">
                             Mantén la calma
                           </h5>
@@ -756,13 +756,13 @@ export default function Index() {
                       </div>
 
                       {/* Step 2 */}
-                      <div className="relative flex items-center space-x-6">
+                      <div className="relative flex items-start space-x-6 min-h-[56px]">
                         <div className="relative z-10 w-12 h-12 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center shadow-lg">
                           <span className="text-white font-bold text-lg">
                             2
                           </span>
                         </div>
-                        <div className="flex-1 pl-2">
+                        <div className="flex-1 pl-2 pt-1">
                           <h5 className="font-bold text-emerald-700 text-lg mb-1">
                             Observa los síntomas
                           </h5>
@@ -773,13 +773,13 @@ export default function Index() {
                       </div>
 
                       {/* Step 3 */}
-                      <div className="relative flex items-center space-x-6">
+                      <div className="relative flex items-start space-x-6 min-h-[56px]">
                         <div className="relative z-10 w-12 h-12 bg-gradient-to-br from-amber-500 to-amber-600 rounded-full flex items-center justify-center shadow-lg">
                           <span className="text-white font-bold text-lg">
                             3
                           </span>
                         </div>
-                        <div className="flex-1 pl-2">
+                        <div className="flex-1 pl-2 pt-1">
                           <h5 className="font-bold text-amber-700 text-lg mb-1">
                             No mediques
                           </h5>
