@@ -203,13 +203,6 @@ interface AppContextType {
   updateCita: (id: string, updates: Partial<Cita>) => void;
   deleteCita: (id: string) => void;
 
-  // Pre-citas state
-  preCitas: PreCita[];
-  addPreCita: (
-    preCita: Omit<PreCita, "id" | "estado" | "fechaCreacion">,
-  ) => void;
-  updatePreCita: (id: string, updates: Partial<PreCita>) => void;
-  deletePreCita: (id: string) => void;
 
   // Historial Clinico state
   historialClinico: HistorialClinico[];
@@ -221,22 +214,6 @@ interface AppContextType {
   deleteHistorialEntry: (id: string) => void;
   getHistorialByMascota: (mascotaId: string) => HistorialClinico[];
 
-  // Newsletter state
-  suscriptoresNewsletter: SuscriptorNewsletter[];
-  addSuscriptorNewsletter: (email: string) => Promise<boolean>;
-  updateSuscriptorNewsletter: (
-    id: string,
-    updates: Partial<SuscriptorNewsletter>,
-  ) => void;
-  deleteSuscriptorNewsletter: (id: string) => void;
-
-  newsletterEmails: NewsletterEmail[];
-  addNewsletterEmail: (email: Omit<NewsletterEmail, "id">) => void;
-  updateNewsletterEmail: (
-    id: string,
-    updates: Partial<NewsletterEmail>,
-  ) => void;
-  deleteNewsletterEmail: (id: string) => void;
 
   // Notificaciones state
   notificaciones: Notificacion[];
