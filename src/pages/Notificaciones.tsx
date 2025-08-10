@@ -73,7 +73,7 @@ export default function Notificaciones() {
           icon = FileText;
           color = "blue-500";
           priority = "normal";
-          type = "historial";
+          type = "sistema";
           break;
       }
 
