@@ -6,7 +6,6 @@ console.log("[CLEAN] Limpiando datos ficticios...");
 // Limpiar datos específicos de la aplicación
 localStorage.removeItem("mascotas");
 localStorage.removeItem("citas");
-localStorage.removeItem("preCitas");
 localStorage.removeItem("historialClinico");
 localStorage.removeItem("usuarios");
 
