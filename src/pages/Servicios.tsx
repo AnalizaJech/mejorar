@@ -528,7 +528,9 @@ export default function Servicios() {
                     {/* Icono seleccionado actualmente */}
                     <div className="flex items-center space-x-3 p-3 border border-vet-gray-300 rounded-lg bg-vet-gray-50">
                       {(() => {
-                        const selectedIcon = iconos.find(i => i.id === formData.icono);
+                        const selectedIcon = iconos.find(
+                          (i) => i.id === formData.icono,
+                        );
                         if (selectedIcon) {
                           const IconComponent = selectedIcon.component;
                           return (
@@ -536,17 +538,25 @@ export default function Servicios() {
                               <div className="w-8 h-8 bg-vet-primary/10 rounded-lg flex items-center justify-center">
                                 <IconComponent className="w-5 h-5 text-vet-primary" />
                               </div>
-                              <span className="font-medium text-vet-gray-900">{selectedIcon.nombre}</span>
+                              <span className="font-medium text-vet-gray-900">
+                                {selectedIcon.nombre}
+                              </span>
                             </>
                           );
                         }
-                        return <span className="text-vet-gray-500">Selecciona un icono</span>;
+                        return (
+                          <span className="text-vet-gray-500">
+                            Selecciona un icono
+                          </span>
+                        );
                       })()}
                     </div>
 
                     {/* Grid de iconos scrolleable */}
                     <div className="border border-vet-gray-300 rounded-lg p-4 bg-white">
-                      <p className="text-sm text-vet-gray-600 mb-3">Selecciona un icono:</p>
+                      <p className="text-sm text-vet-gray-600 mb-3">
+                        Selecciona un icono:
+                      </p>
                       <div className="max-h-48 overflow-y-auto pr-2">
                         <div className="grid grid-cols-4 gap-2">
                           {iconos.map((icono) => {
@@ -556,18 +566,23 @@ export default function Servicios() {
                               <button
                                 key={icono.id}
                                 type="button"
-                                onClick={() => setFormData({ ...formData, icono: icono.id })}
+                                onClick={() =>
+                                  setFormData({ ...formData, icono: icono.id })
+                                }
                                 className={`
                                   flex flex-col items-center justify-center p-3 rounded-lg border-2 transition-all hover:shadow-md
-                                  ${isSelected
-                                    ? 'border-vet-primary bg-vet-primary/10 text-vet-primary'
-                                    : 'border-vet-gray-200 hover:border-vet-primary/50 text-vet-gray-600 hover:text-vet-primary'
+                                  ${
+                                    isSelected
+                                      ? "border-vet-primary bg-vet-primary/10 text-vet-primary"
+                                      : "border-vet-gray-200 hover:border-vet-primary/50 text-vet-gray-600 hover:text-vet-primary"
                                   }
                                 `}
                                 title={icono.nombre}
                               >
                                 <IconComponent className="w-5 h-5 mb-1" />
-                                <span className="text-xs text-center leading-tight">{icono.nombre}</span>
+                                <span className="text-xs text-center leading-tight">
+                                  {icono.nombre}
+                                </span>
                               </button>
                             );
                           })}

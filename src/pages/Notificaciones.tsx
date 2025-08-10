@@ -287,7 +287,9 @@ export default function Notificaciones() {
 
           {/* Filters */}
           <Tabs value={selectedFilter} onValueChange={setSelectedFilter}>
-            <TabsList className={`grid w-full mb-6 ${(user.rol === "admin" || user.rol === "veterinario") ? "grid-cols-2 lg:grid-cols-5" : "grid-cols-2 lg:grid-cols-4"}`}>
+            <TabsList
+              className={`grid w-full mb-6 ${user.rol === "admin" || user.rol === "veterinario" ? "grid-cols-2 lg:grid-cols-5" : "grid-cols-2 lg:grid-cols-4"}`}
+            >
               <TabsTrigger value="todas">Todas</TabsTrigger>
               <TabsTrigger value="no_leidas">No leídas</TabsTrigger>
               <TabsTrigger value="cita">Citas</TabsTrigger>

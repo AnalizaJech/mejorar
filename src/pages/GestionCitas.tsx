@@ -944,7 +944,9 @@ export default function GestionCitas() {
                               </h4>
                               <div className="flex items-center space-x-2">
                                 <span className="w-2 h-2 bg-green-400 rounded-full"></span>
-                                <span className="text-sm text-vet-gray-600">Cliente activo</span>
+                                <span className="text-sm text-vet-gray-600">
+                                  Cliente activo
+                                </span>
                               </div>
                             </div>
                           </div>
@@ -952,14 +954,17 @@ export default function GestionCitas() {
                           {/* Bio/Descripción personal si está disponible */}
                           {(() => {
                             try {
-                              const bio = localStorage.getItem('petla_user_bio');
-                              if (bio && bio !== '""' && bio !== 'null') {
+                              const bio =
+                                localStorage.getItem("petla_user_bio");
+                              if (bio && bio !== '""' && bio !== "null") {
                                 const bioText = JSON.parse(bio);
                                 if (bioText && bioText.trim()) {
                                   return (
                                     <div className="mb-6 p-4 bg-white/60 rounded-lg border border-blue-100">
                                       <div className="flex items-start space-x-2">
-                                        <span className="text-blue-600 text-lg">💬</span>
+                                        <span className="text-blue-600 text-lg">
+                                          💬
+                                        </span>
                                         <div>
                                           <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block mb-1">
                                             Acerca de mí
@@ -974,7 +979,7 @@ export default function GestionCitas() {
                                 }
                               }
                             } catch (e) {
-                              console.error('Error loading bio:', e);
+                              console.error("Error loading bio:", e);
                             }
                             return null;
                           })()}
@@ -1012,7 +1017,9 @@ export default function GestionCitas() {
                                   <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
                                     <div className="flex items-center space-x-3">
                                       <div className="w-8 h-8 bg-slate-100 rounded-lg flex items-center justify-center">
-                                        <span className="text-slate-600 font-bold text-sm">@</span>
+                                        <span className="text-slate-600 font-bold text-sm">
+                                          @
+                                        </span>
                                       </div>
                                       <div>
                                         <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
@@ -1058,8 +1065,14 @@ export default function GestionCitas() {
                                         </span>
                                         <p className="text-lg font-semibold text-vet-gray-900">
                                           {(() => {
-                                            const phoneNumber = propietario.telefono.replace(/\D/g, "");
-                                            return phoneNumber.startsWith('51') && phoneNumber.length === 11
+                                            const phoneNumber =
+                                              propietario.telefono.replace(
+                                                /\D/g,
+                                                "",
+                                              );
+                                            return phoneNumber.startsWith(
+                                              "51",
+                                            ) && phoneNumber.length === 11
                                               ? `+${phoneNumber}`
                                               : `+51${phoneNumber}`;
                                           })()}
@@ -1070,18 +1083,25 @@ export default function GestionCitas() {
                                 )}
 
                                 {/* Documento de Identidad */}
-                                {(propietario.documento || propietario.tipoDocumento) && (
+                                {(propietario.documento ||
+                                  propietario.tipoDocumento) && (
                                   <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
                                     <div className="flex items-center space-x-3">
                                       <div className="w-8 h-8 bg-yellow-100 rounded-lg flex items-center justify-center">
-                                        <span className="text-yellow-600 font-bold text-sm">🆔</span>
+                                        <span className="text-yellow-600 font-bold text-sm">
+                                          🆔
+                                        </span>
                                       </div>
                                       <div>
                                         <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
                                           Documento de Identidad
                                         </span>
                                         <p className="text-sm font-medium text-vet-gray-900">
-                                          {propietario.tipoDocumento?.toUpperCase() || 'DOC'}: {propietario.documento || 'No especificado'}
+                                          {propietario.tipoDocumento?.toUpperCase() ||
+                                            "DOC"}
+                                          :{" "}
+                                          {propietario.documento ||
+                                            "No especificado"}
                                         </p>
                                       </div>
                                     </div>
@@ -1093,26 +1113,41 @@ export default function GestionCitas() {
                                   <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
                                     <div className="flex items-center space-x-3">
                                       <div className="w-8 h-8 bg-pink-100 rounded-lg flex items-center justify-center">
-                                        <span className="text-pink-600 font-bold text-sm">🎂</span>
+                                        <span className="text-pink-600 font-bold text-sm">
+                                          🎂
+                                        </span>
                                       </div>
                                       <div>
                                         <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
                                           Fecha de Nacimiento
                                         </span>
                                         <p className="text-sm font-medium text-vet-gray-900">
-                                          {new Date(propietario.fechaNacimiento).toLocaleDateString('es-ES', {
-                                            year: 'numeric',
-                                            month: 'long',
-                                            day: 'numeric'
+                                          {new Date(
+                                            propietario.fechaNacimiento,
+                                          ).toLocaleDateString("es-ES", {
+                                            year: "numeric",
+                                            month: "long",
+                                            day: "numeric",
                                           })}
                                         </p>
                                         <p className="text-xs text-vet-gray-500">
                                           {(() => {
                                             const today = new Date();
-                                            const birthDate = new Date(propietario.fechaNacimiento);
-                                            let age = today.getFullYear() - birthDate.getFullYear();
-                                            const monthDiff = today.getMonth() - birthDate.getMonth();
-                                            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                                            const birthDate = new Date(
+                                              propietario.fechaNacimiento,
+                                            );
+                                            let age =
+                                              today.getFullYear() -
+                                              birthDate.getFullYear();
+                                            const monthDiff =
+                                              today.getMonth() -
+                                              birthDate.getMonth();
+                                            if (
+                                              monthDiff < 0 ||
+                                              (monthDiff === 0 &&
+                                                today.getDate() <
+                                                  birthDate.getDate())
+                                            ) {
                                               age--;
                                             }
                                             return `${age} años`;
@@ -1129,7 +1164,11 @@ export default function GestionCitas() {
                                     <div className="flex items-center space-x-3">
                                       <div className="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center">
                                         <span className="text-indigo-600 font-bold text-sm">
-                                          {propietario.genero === 'masculino' ? '♂️' : propietario.genero === 'femenino' ? '♀️' : '⚧️'}
+                                          {propietario.genero === "masculino"
+                                            ? "♂️"
+                                            : propietario.genero === "femenino"
+                                              ? "♀️"
+                                              : "⚧️"}
                                         </span>
                                       </div>
                                       <div>
@@ -1149,25 +1188,35 @@ export default function GestionCitas() {
                                   <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
                                     <div className="flex items-center space-x-3">
                                       <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
-                                        <span className="text-gray-600 font-bold text-sm">📅</span>
+                                        <span className="text-gray-600 font-bold text-sm">
+                                          📅
+                                        </span>
                                       </div>
                                       <div>
                                         <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
                                           Cliente desde
                                         </span>
                                         <p className="text-sm font-medium text-vet-gray-900">
-                                          {new Date(propietario.fechaCreacion).toLocaleDateString('es-ES', {
-                                            year: 'numeric',
-                                            month: 'long',
-                                            day: 'numeric'
+                                          {new Date(
+                                            propietario.fechaCreacion,
+                                          ).toLocaleDateString("es-ES", {
+                                            year: "numeric",
+                                            month: "long",
+                                            day: "numeric",
                                           })}
                                         </p>
                                         <p className="text-xs text-vet-gray-500">
                                           {(() => {
                                             const today = new Date();
-                                            const createdDate = new Date(propietario.fechaCreacion);
-                                            const diffTime = Math.abs(today - createdDate);
-                                            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                                            const createdDate = new Date(
+                                              propietario.fechaCreacion,
+                                            );
+                                            const diffTime = Math.abs(
+                                              today - createdDate,
+                                            );
+                                            const diffDays = Math.ceil(
+                                              diffTime / (1000 * 60 * 60 * 24),
+                                            );
                                             if (diffDays < 30) {
                                               return `${diffDays} días`;
                                             } else if (diffDays < 365) {
@@ -1185,20 +1234,32 @@ export default function GestionCitas() {
                                 {/* Estado de verificación de email */}
                                 <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
                                   <div className="flex items-center space-x-3">
-                                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${propietario.emailVerificado ? 'bg-green-100' : 'bg-yellow-100'}`}>
-                                      <span className={`font-bold text-sm ${propietario.emailVerificado ? 'text-green-600' : 'text-yellow-600'}`}>
-                                        {propietario.emailVerificado ? '✓' : '⚠️'}
+                                    <div
+                                      className={`w-8 h-8 rounded-lg flex items-center justify-center ${propietario.emailVerificado ? "bg-green-100" : "bg-yellow-100"}`}
+                                    >
+                                      <span
+                                        className={`font-bold text-sm ${propietario.emailVerificado ? "text-green-600" : "text-yellow-600"}`}
+                                      >
+                                        {propietario.emailVerificado
+                                          ? "✓"
+                                          : "⚠️"}
                                       </span>
                                     </div>
                                     <div>
                                       <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
                                         Estado del Email
                                       </span>
-                                      <p className={`text-sm font-medium ${propietario.emailVerificado ? 'text-green-700' : 'text-yellow-700'}`}>
-                                        {propietario.emailVerificado ? 'Verificado' : 'No verificado'}
+                                      <p
+                                        className={`text-sm font-medium ${propietario.emailVerificado ? "text-green-700" : "text-yellow-700"}`}
+                                      >
+                                        {propietario.emailVerificado
+                                          ? "Verificado"
+                                          : "No verificado"}
                                       </p>
                                       <p className="text-xs text-vet-gray-500">
-                                        {propietario.emailVerificado ? 'Email confirmado por el cliente' : 'Email pendiente de confirmación'}
+                                        {propietario.emailVerificado
+                                          ? "Email confirmado por el cliente"
+                                          : "Email pendiente de confirmación"}
                                       </p>
                                     </div>
                                   </div>
@@ -1207,34 +1268,62 @@ export default function GestionCitas() {
                                 {/* Preferencias de comunicación */}
                                 {(() => {
                                   try {
-                                    const notifications = localStorage.getItem('petla_notifications');
+                                    const notifications = localStorage.getItem(
+                                      "petla_notifications",
+                                    );
                                     if (notifications) {
                                       const prefs = JSON.parse(notifications);
                                       return (
                                         <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
                                           <div className="flex items-start space-x-3">
                                             <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
-                                              <span className="text-purple-600 font-bold text-sm">🔔</span>
+                                              <span className="text-purple-600 font-bold text-sm">
+                                                🔔
+                                              </span>
                                             </div>
                                             <div className="flex-1">
                                               <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block mb-2">
                                                 Preferencias de Comunicación
                                               </span>
                                               <div className="grid grid-cols-2 gap-2 text-xs">
-                                                <div className={`flex items-center space-x-1 ${prefs.emailNotifications ? 'text-green-700' : 'text-gray-500'}`}>
-                                                  <span>{prefs.emailNotifications ? '✓' : '✗'}</span>
+                                                <div
+                                                  className={`flex items-center space-x-1 ${prefs.emailNotifications ? "text-green-700" : "text-gray-500"}`}
+                                                >
+                                                  <span>
+                                                    {prefs.emailNotifications
+                                                      ? "✓"
+                                                      : "✗"}
+                                                  </span>
                                                   <span>Email</span>
                                                 </div>
-                                                <div className={`flex items-center space-x-1 ${prefs.smsNotifications ? 'text-green-700' : 'text-gray-500'}`}>
-                                                  <span>{prefs.smsNotifications ? '✓' : '✗'}</span>
+                                                <div
+                                                  className={`flex items-center space-x-1 ${prefs.smsNotifications ? "text-green-700" : "text-gray-500"}`}
+                                                >
+                                                  <span>
+                                                    {prefs.smsNotifications
+                                                      ? "✓"
+                                                      : "✗"}
+                                                  </span>
                                                   <span>SMS</span>
                                                 </div>
-                                                <div className={`flex items-center space-x-1 ${prefs.appointmentReminders ? 'text-green-700' : 'text-gray-500'}`}>
-                                                  <span>{prefs.appointmentReminders ? '✓' : '✗'}</span>
+                                                <div
+                                                  className={`flex items-center space-x-1 ${prefs.appointmentReminders ? "text-green-700" : "text-gray-500"}`}
+                                                >
+                                                  <span>
+                                                    {prefs.appointmentReminders
+                                                      ? "✓"
+                                                      : "✗"}
+                                                  </span>
                                                   <span>Recordatorios</span>
                                                 </div>
-                                                <div className={`flex items-center space-x-1 ${prefs.vaccineReminders ? 'text-green-700' : 'text-gray-500'}`}>
-                                                  <span>{prefs.vaccineReminders ? '✓' : '✗'}</span>
+                                                <div
+                                                  className={`flex items-center space-x-1 ${prefs.vaccineReminders ? "text-green-700" : "text-gray-500"}`}
+                                                >
+                                                  <span>
+                                                    {prefs.vaccineReminders
+                                                      ? "✓"
+                                                      : "✗"}
+                                                  </span>
                                                   <span>Vacunas</span>
                                                 </div>
                                               </div>
@@ -1244,11 +1333,13 @@ export default function GestionCitas() {
                                       );
                                     }
                                   } catch (e) {
-                                    console.error('Error loading notification preferences:', e);
+                                    console.error(
+                                      "Error loading notification preferences:",
+                                      e,
+                                    );
                                   }
                                   return null;
                                 })()}
-
 
                                 {/* Dirección - ancho completo */}
                                 {propietario.direccion && (
@@ -1269,12 +1360,13 @@ export default function GestionCitas() {
                                   </div>
                                 )}
 
-
                                 {/* Estadísticas del Cliente */}
                                 <div className="bg-gradient-to-r from-vet-primary/5 to-blue-50 rounded-lg p-4 shadow-sm border border-blue-100 md:col-span-2 lg:col-span-3">
                                   <div className="flex items-center space-x-3 mb-4">
                                     <div className="w-8 h-8 bg-vet-primary/20 rounded-lg flex items-center justify-center">
-                                      <span className="text-vet-primary font-bold text-sm">📊</span>
+                                      <span className="text-vet-primary font-bold text-sm">
+                                        📊
+                                      </span>
                                     </div>
                                     <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide">
                                       Estadísticas del Cliente
@@ -1283,30 +1375,60 @@ export default function GestionCitas() {
                                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                                     <div className="text-center">
                                       <div className="text-2xl font-bold text-vet-primary">
-                                        {mascotas.filter(m => m.clienteId === propietario.id).length}
+                                        {
+                                          mascotas.filter(
+                                            (m) =>
+                                              m.clienteId === propietario.id,
+                                          ).length
+                                        }
                                       </div>
-                                      <div className="text-xs text-vet-gray-600">Mascotas</div>
+                                      <div className="text-xs text-vet-gray-600">
+                                        Mascotas
+                                      </div>
                                     </div>
                                     <div className="text-center">
                                       <div className="text-2xl font-bold text-green-600">
-                                        {citas.filter(c => c.clienteId === propietario.id).length}
+                                        {
+                                          citas.filter(
+                                            (c) =>
+                                              c.clienteId === propietario.id,
+                                          ).length
+                                        }
                                       </div>
-                                      <div className="text-xs text-vet-gray-600">Total Citas</div>
+                                      <div className="text-xs text-vet-gray-600">
+                                        Total Citas
+                                      </div>
                                     </div>
                                     <div className="text-center">
                                       <div className="text-2xl font-bold text-blue-600">
-                                        {citas.filter(c => c.clienteId === propietario.id && c.estado === 'atendida').length}
+                                        {
+                                          citas.filter(
+                                            (c) =>
+                                              c.clienteId === propietario.id &&
+                                              c.estado === "atendida",
+                                          ).length
+                                        }
                                       </div>
-                                      <div className="text-xs text-vet-gray-600">Citas Atendidas</div>
+                                      <div className="text-xs text-vet-gray-600">
+                                        Citas Atendidas
+                                      </div>
                                     </div>
                                     <div className="text-center">
                                       <div className="text-2xl font-bold text-yellow-600">
-                                        {citas.filter(c =>
-                                          c.clienteId === propietario.id &&
-                                          ['pendiente_pago', 'aceptada'].includes(c.estado)
-                                        ).length}
+                                        {
+                                          citas.filter(
+                                            (c) =>
+                                              c.clienteId === propietario.id &&
+                                              [
+                                                "pendiente_pago",
+                                                "aceptada",
+                                              ].includes(c.estado),
+                                          ).length
+                                        }
                                       </div>
-                                      <div className="text-xs text-vet-gray-600">Citas Pendientes</div>
+                                      <div className="text-xs text-vet-gray-600">
+                                        Citas Pendientes
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
@@ -1907,9 +2029,11 @@ export default function GestionCitas() {
                               "",
                             );
                             // Validar si ya tiene código de país (+51)
-                            const finalNumber = phoneNumber.startsWith('51') && phoneNumber.length === 11
-                              ? `+${phoneNumber}`
-                              : `+51${phoneNumber}`;
+                            const finalNumber =
+                              phoneNumber.startsWith("51") &&
+                              phoneNumber.length === 11
+                                ? `+${phoneNumber}`
+                                : `+51${phoneNumber}`;
                             window.open(`tel:${finalNumber}`, "_self");
                             setShowContactModal(false);
                           }}
@@ -1919,8 +2043,10 @@ export default function GestionCitas() {
                             <p className="font-medium text-green-700">Llamar</p>
                             <p className="text-sm text-green-600">
                               {(() => {
-                                const phoneNumber = propietario.telefono.replace(/\D/g, "");
-                                return phoneNumber.startsWith('51') && phoneNumber.length === 11
+                                const phoneNumber =
+                                  propietario.telefono.replace(/\D/g, "");
+                                return phoneNumber.startsWith("51") &&
+                                  phoneNumber.length === 11
                                   ? `+${phoneNumber}`
                                   : `+51${phoneNumber}`;
                               })()}
@@ -1937,9 +2063,11 @@ export default function GestionCitas() {
                               "",
                             );
                             // Validar si ya tiene código de país (+51)
-                            const finalNumber = phoneNumber.startsWith('51') && phoneNumber.length === 11
-                              ? phoneNumber
-                              : `51${phoneNumber}`;
+                            const finalNumber =
+                              phoneNumber.startsWith("51") &&
+                              phoneNumber.length === 11
+                                ? phoneNumber
+                                : `51${phoneNumber}`;
                             const message = `Hola ${propietario.nombre}, me comunico de la clínica veterinaria respecto a la cita de ${selectedContactCita.mascota} programada para el ${new Date(selectedContactCita.fecha).toLocaleDateString("es-ES")}.`;
                             window.open(
                               `https://wa.me/${finalNumber}?text=${encodeURIComponent(message)}`,
@@ -1955,8 +2083,10 @@ export default function GestionCitas() {
                             </p>
                             <p className="text-sm text-green-600">
                               {(() => {
-                                const phoneNumber = propietario.telefono.replace(/\D/g, "");
-                                return phoneNumber.startsWith('51') && phoneNumber.length === 11
+                                const phoneNumber =
+                                  propietario.telefono.replace(/\D/g, "");
+                                return phoneNumber.startsWith("51") &&
+                                  phoneNumber.length === 11
                                   ? `+${phoneNumber}`
                                   : `+51${phoneNumber}`;
                               })()}
@@ -1973,9 +2103,11 @@ export default function GestionCitas() {
                               "",
                             );
                             // Validar si ya tiene código de país (+51)
-                            const finalNumber = phoneNumber.startsWith('51') && phoneNumber.length === 11
-                              ? `+${phoneNumber}`
-                              : `+51${phoneNumber}`;
+                            const finalNumber =
+                              phoneNumber.startsWith("51") &&
+                              phoneNumber.length === 11
+                                ? `+${phoneNumber}`
+                                : `+51${phoneNumber}`;
                             const message = `Hola ${propietario.nombre}, me comunico de la clínica veterinaria respecto a la cita de ${selectedContactCita.mascota}.`;
                             window.open(
                               `sms:${finalNumber}?body=${encodeURIComponent(message)}`,
@@ -1989,8 +2121,10 @@ export default function GestionCitas() {
                             <p className="font-medium text-purple-700">SMS</p>
                             <p className="text-sm text-purple-600">
                               {(() => {
-                                const phoneNumber = propietario.telefono.replace(/\D/g, "");
-                                return phoneNumber.startsWith('51') && phoneNumber.length === 11
+                                const phoneNumber =
+                                  propietario.telefono.replace(/\D/g, "");
+                                return phoneNumber.startsWith("51") &&
+                                  phoneNumber.length === 11
                                   ? `+${phoneNumber}`
                                   : `+51${phoneNumber}`;
                               })()}

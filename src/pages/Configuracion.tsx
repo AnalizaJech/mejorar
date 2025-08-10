@@ -1774,7 +1774,8 @@ export default function Configuracion() {
                         <span>Administración de Datos del Sistema</span>
                       </h4>
                       <p className="text-sm text-gray-600 mb-6">
-                        Herramientas para gestionar y sincronizar todos los datos del sistema veterinario.
+                        Herramientas para gestionar y sincronizar todos los
+                        datos del sistema veterinario.
                       </p>
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -1792,13 +1793,15 @@ export default function Configuracion() {
 
                               if (success) {
                                 setSavedMessage(
-                                  "✅ Datos del sistema recargados correctamente. Se han sincronizado usuarios, mascotas, citas y servicios."
+                                  "✅ Datos del sistema recargados correctamente. Se han sincronizado usuarios, mascotas, citas y servicios.",
                                 );
 
                                 // Forzar re-render del componente
                                 window.location.reload();
                               } else {
-                                setErrorMessage("❌ Error al recargar los datos del sistema");
+                                setErrorMessage(
+                                  "❌ Error al recargar los datos del sistema",
+                                );
                               }
                             }, 1500);
                           }}
@@ -1813,7 +1816,9 @@ export default function Configuracion() {
                           ) : (
                             <>
                               <Database className="w-5 h-5 mb-1" />
-                              <span className="text-sm font-medium">Recargar Sistema</span>
+                              <span className="text-sm font-medium">
+                                Recargar Sistema
+                              </span>
                             </>
                           )}
                         </Button>
@@ -1829,16 +1834,25 @@ export default function Configuracion() {
                               setIsLoading(false);
 
                               // Verificar integridad de datos
-                              const orphanPets = mascotas.filter(m => !usuarios.find(u => u.id === m.clienteId));
-                              const orphanCitas = citas.filter(c => !usuarios.find(u => u.id === c.clienteId));
+                              const orphanPets = mascotas.filter(
+                                (m) =>
+                                  !usuarios.find((u) => u.id === m.clienteId),
+                              );
+                              const orphanCitas = citas.filter(
+                                (c) =>
+                                  !usuarios.find((u) => u.id === c.clienteId),
+                              );
 
-                              if (orphanPets.length === 0 && orphanCitas.length === 0) {
+                              if (
+                                orphanPets.length === 0 &&
+                                orphanCitas.length === 0
+                              ) {
                                 setSavedMessage(
-                                  "✅ Integridad de datos verificada. No se encontraron inconsistencias."
+                                  "✅ Integridad de datos verificada. No se encontraron inconsistencias.",
                                 );
                               } else {
                                 setErrorMessage(
-                                  `⚠️ Se encontraron inconsistencias: ${orphanPets.length} mascotas huérfanas, ${orphanCitas.length} citas huérfanas.`
+                                  `⚠️ Se encontraron inconsistencias: ${orphanPets.length} mascotas huérfanas, ${orphanCitas.length} citas huérfanas.`,
                                 );
                               }
                             }, 1000);
@@ -1855,7 +1869,9 @@ export default function Configuracion() {
                           ) : (
                             <>
                               <Shield className="w-5 h-5 mb-1 text-orange-600" />
-                              <span className="text-sm font-medium text-orange-600">Verificar Integridad</span>
+                              <span className="text-sm font-medium text-orange-600">
+                                Verificar Integridad
+                              </span>
                             </>
                           )}
                         </Button>
@@ -1873,7 +1889,9 @@ export default function Configuracion() {
                         <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
                           <div className="flex items-center space-x-3">
                             <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
-                              <span className="text-green-600 font-bold text-lg">🐾</span>
+                              <span className="text-green-600 font-bold text-lg">
+                                🐾
+                              </span>
                             </div>
                             <div>
                               <span className="text-xs font-medium text-gray-500 uppercase tracking-wide block">
@@ -1897,7 +1915,10 @@ export default function Configuracion() {
                                 Total Propietarios
                               </span>
                               <span className="text-2xl font-bold text-gray-900">
-                                {usuarios.filter(u => u.rol === 'cliente').length}
+                                {
+                                  usuarios.filter((u) => u.rol === "cliente")
+                                    .length
+                                }
                               </span>
                             </div>
                           </div>
@@ -1907,7 +1928,9 @@ export default function Configuracion() {
                         <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
                           <div className="flex items-center space-x-3">
                             <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-                              <span className="text-purple-600 font-bold text-lg">📅</span>
+                              <span className="text-purple-600 font-bold text-lg">
+                                📅
+                              </span>
                             </div>
                             <div>
                               <span className="text-xs font-medium text-gray-500 uppercase tracking-wide block">
@@ -1931,7 +1954,11 @@ export default function Configuracion() {
                                 Veterinarios
                               </span>
                               <span className="text-2xl font-bold text-gray-900">
-                                {usuarios.filter(u => u.rol === 'veterinario').length}
+                                {
+                                  usuarios.filter(
+                                    (u) => u.rol === "veterinario",
+                                  ).length
+                                }
                               </span>
                             </div>
                           </div>
@@ -1940,31 +1967,54 @@ export default function Configuracion() {
 
                       {/* Estado detallado de citas */}
                       <div className="mt-6 pt-4 border-t border-blue-200">
-                        <h6 className="font-medium text-gray-700 mb-3">Estado de Citas</h6>
+                        <h6 className="font-medium text-gray-700 mb-3">
+                          Estado de Citas
+                        </h6>
                         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm">
                           <div className="bg-yellow-50 rounded-lg p-3 text-center">
                             <div className="font-semibold text-yellow-700">
-                              {citas.filter(c => c.estado === 'pendiente_pago').length}
+                              {
+                                citas.filter(
+                                  (c) => c.estado === "pendiente_pago",
+                                ).length
+                              }
                             </div>
-                            <div className="text-yellow-600 text-xs">Pendientes</div>
+                            <div className="text-yellow-600 text-xs">
+                              Pendientes
+                            </div>
                           </div>
                           <div className="bg-green-50 rounded-lg p-3 text-center">
                             <div className="font-semibold text-green-700">
-                              {citas.filter(c => c.estado === 'aceptada').length}
+                              {
+                                citas.filter((c) => c.estado === "aceptada")
+                                  .length
+                              }
                             </div>
-                            <div className="text-green-600 text-xs">Aceptadas</div>
+                            <div className="text-green-600 text-xs">
+                              Aceptadas
+                            </div>
                           </div>
                           <div className="bg-blue-50 rounded-lg p-3 text-center">
                             <div className="font-semibold text-blue-700">
-                              {citas.filter(c => c.estado === 'atendida').length}
+                              {
+                                citas.filter((c) => c.estado === "atendida")
+                                  .length
+                              }
                             </div>
-                            <div className="text-blue-600 text-xs">Atendidas</div>
+                            <div className="text-blue-600 text-xs">
+                              Atendidas
+                            </div>
                           </div>
                           <div className="bg-red-50 rounded-lg p-3 text-center">
                             <div className="font-semibold text-red-700">
-                              {citas.filter(c => c.estado === 'cancelada').length}
+                              {
+                                citas.filter((c) => c.estado === "cancelada")
+                                  .length
+                              }
                             </div>
-                            <div className="text-red-600 text-xs">Canceladas</div>
+                            <div className="text-red-600 text-xs">
+                              Canceladas
+                            </div>
                           </div>
                         </div>
                       </div>
