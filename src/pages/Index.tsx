@@ -741,7 +741,9 @@ export default function Index() {
                       {/* Step 1 */}
                       <div className="relative flex items-center space-x-6">
                         <div className="relative z-10 w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-lg">
-                          <span className="text-white font-bold text-lg">1</span>
+                          <span className="text-white font-bold text-lg">
+                            1
+                          </span>
                         </div>
                         <div className="flex-1 pl-2">
                           <h5 className="font-bold text-blue-700 text-lg mb-1">
@@ -756,7 +758,9 @@ export default function Index() {
                       {/* Step 2 */}
                       <div className="relative flex items-center space-x-6">
                         <div className="relative z-10 w-12 h-12 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center shadow-lg">
-                          <span className="text-white font-bold text-lg">2</span>
+                          <span className="text-white font-bold text-lg">
+                            2
+                          </span>
                         </div>
                         <div className="flex-1 pl-2">
                           <h5 className="font-bold text-emerald-700 text-lg mb-1">
@@ -771,7 +775,9 @@ export default function Index() {
                       {/* Step 3 */}
                       <div className="relative flex items-center space-x-6">
                         <div className="relative z-10 w-12 h-12 bg-gradient-to-br from-amber-500 to-amber-600 rounded-full flex items-center justify-center shadow-lg">
-                          <span className="text-white font-bold text-lg">3</span>
+                          <span className="text-white font-bold text-lg">
+                            3
+                          </span>
                         </div>
                         <div className="flex-1 pl-2">
                           <h5 className="font-bold text-amber-700 text-lg mb-1">
