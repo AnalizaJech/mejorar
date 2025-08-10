@@ -962,9 +962,9 @@ export default function GestionCitas() {
                                   return (
                                     <div className="mb-6 p-4 bg-white/60 rounded-lg border border-blue-100">
                                       <div className="flex items-start space-x-2">
-                                        <span className="text-blue-600 text-lg">
-                                          💬
-                                        </span>
+                                        <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                                          <MessageCircle className="w-4 h-4 text-blue-600" />
+                                        </div>
                                         <div>
                                           <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block mb-1">
                                             Acerca de mí
