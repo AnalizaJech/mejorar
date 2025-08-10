@@ -272,8 +272,9 @@ export default function Index() {
                 NUESTRO IMPACTO
               </span>
             </div>
-            <h2 className="text-3xl lg:text-4xl font-bold text-vet-gray-900 mb-4">
-              Resultados que hablan por sí solos
+            <h2 className="text-3xl lg:text-4xl font-bold mb-4">
+              <span className="text-vet-gray-900">¿Por qué eligen</span>
+              <span className="block text-vet-primary">PetLA?</span>
             </h2>
             <p className="text-xl text-vet-gray-600 max-w-3xl mx-auto">
               Miles de familias han confiado en nosotros para cuidar la salud de
