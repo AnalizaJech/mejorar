@@ -140,11 +140,11 @@ export default function Index() {
                       className="bg-vet-primary hover:bg-vet-primary-dark text-white shadow-lg"
                       onClick={() =>
                         document
-                          .getElementById("pre-cita-form")
+                          .getElementById("servicios")
                           ?.scrollIntoView({ behavior: "smooth" })
                       }
                     >
-                      Solicitar Cita Gratis
+                      Ver Servicios
                       <ArrowRight className="ml-2 w-4 h-4" />
                     </Button>
                     <Link to="/login">
