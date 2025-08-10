@@ -424,11 +424,11 @@ export default function CitaDetailModal({
                         </div>
                         <div className="flex-1">
                           <span className="text-xs font-bold text-amber-700 uppercase tracking-wide block mb-1">
-                            {selectedCita.propietario?.tipoDocumento === "dni" && "🆔 DNI"}
-                            {selectedCita.propietario?.tipoDocumento === "pasaporte" && "📘 Pasaporte"}
-                            {selectedCita.propietario?.tipoDocumento === "carnet_extranjeria" && "🗂️ Carnet de Extranjería"}
-                            {selectedCita.propietario?.tipoDocumento === "cedula" && "📇 Cédula"}
-                            {!selectedCita.propietario?.tipoDocumento && "📋 Documento"}
+                            {selectedCita.propietario?.tipoDocumento === "dni" && "DNI"}
+                            {selectedCita.propietario?.tipoDocumento === "pasaporte" && "Pasaporte"}
+                            {selectedCita.propietario?.tipoDocumento === "carnet_extranjeria" && "Carnet de Extranjería"}
+                            {selectedCita.propietario?.tipoDocumento === "cedula" && "Cédula"}
+                            {!selectedCita.propietario?.tipoDocumento && "Documento"}
                           </span>
                           <p className="text-xl font-bold text-amber-900 font-mono">
                             {selectedCita.propietario.documento}
@@ -450,10 +450,10 @@ export default function CitaDetailModal({
                             Género
                           </span>
                           <p className="text-lg font-bold text-pink-900 capitalize">
-                            {selectedCita.propietario.genero === 'masculino' && '♂️ Masculino'}
-                            {selectedCita.propietario.genero === 'femenino' && '♀️ Femenino'}
-                            {selectedCita.propietario.genero === 'otro' && '⚧️ Otro'}
-                            {selectedCita.propietario.genero === 'prefiero_no_decir' && '🤐 Prefiero no decir'}
+                            {selectedCita.propietario.genero === 'masculino' && 'Masculino'}
+                            {selectedCita.propietario.genero === 'femenino' && 'Femenino'}
+                            {selectedCita.propietario.genero === 'otro' && 'Otro'}
+                            {selectedCita.propietario.genero === 'prefiero_no_decir' && 'Prefiero no decir'}
                             {!['masculino', 'femenino', 'otro', 'prefiero_no_decir'].includes(selectedCita.propietario.genero) && selectedCita.propietario.genero}
                           </p>
                         </div>
@@ -470,7 +470,7 @@ export default function CitaDetailModal({
                         </div>
                         <div className="flex-1">
                           <span className="text-xs font-bold text-teal-700 uppercase tracking-wide block mb-1">
-                            🎂 Fecha de Nacimiento
+                            Fecha de Nacimiento
                           </span>
                           <p className="text-lg font-bold text-teal-900">
                             {new Date(selectedCita.propietario.fechaNacimiento).toLocaleDateString("es-ES", {
@@ -480,7 +480,7 @@ export default function CitaDetailModal({
                             })}
                           </p>
                           <span className="text-sm font-semibold text-teal-600">
-                            🕐 {Math.floor((new Date().getTime() - new Date(selectedCita.propietario.fechaNacimiento).getTime()) / (365.25 * 24 * 60 * 60 * 1000))} años
+                            {Math.floor((new Date().getTime() - new Date(selectedCita.propietario.fechaNacimiento).getTime()) / (365.25 * 24 * 60 * 60 * 1000))} años
                           </span>
                         </div>
                       </div>
@@ -496,7 +496,7 @@ export default function CitaDetailModal({
                         </div>
                         <div className="flex-1">
                           <span className="text-xs font-bold text-orange-700 uppercase tracking-wide block mb-1">
-                            🏠 Dirección
+                            Dirección
                           </span>
                           <p className="text-sm font-bold text-orange-900 leading-tight">
                             {selectedCita.propietario.direccion}
