@@ -727,20 +727,25 @@ export default function Index() {
                   </a>
                 </div>
 
-                {/* Emergency Steps - Matching Height Design */}
+                {/* Emergency Steps - Connected Design */}
                 <div className="flex flex-col h-full">
                   <h3 className="text-2xl font-bold text-vet-gray-900 mb-6">
                     ¿Qué hacer mientras llegas?
                   </h3>
 
-                  <div className="space-y-4 flex-1">
-                    {/* Step 1 */}
-                    <div className="bg-gradient-to-r from-blue-50 to-blue-100/30 rounded-2xl p-4 border-l-4 border-blue-500 shadow-sm">
-                      <div className="flex items-center space-x-4">
-                        <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+                  <div className="relative flex-1">
+                    {/* Connection Line */}
+                    <div className="absolute left-6 top-8 bottom-8 w-0.5 bg-gradient-to-b from-blue-200 via-green-200 to-orange-200"></div>
+
+                    <div className="space-y-6">
+                      {/* Step 1 */}
+                      <div className="relative flex items-center space-x-6 group">
+                        <div className="relative z-10 w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-300">
                           <span className="text-white font-bold text-lg">1</span>
                         </div>
-                        <div className="flex-1">
+                        {/* Curved connection from circle to text */}
+                        <div className="absolute left-12 top-6 w-6 h-0.5 bg-blue-300 rounded-full"></div>
+                        <div className="flex-1 bg-white rounded-2xl p-4 shadow-md border border-gray-100 group-hover:shadow-lg group-hover:border-blue-200 transition-all duration-300">
                           <h5 className="font-bold text-gray-900 text-lg mb-1">
                             Mantén la calma
                           </h5>
@@ -749,15 +754,15 @@ export default function Index() {
                           </p>
                         </div>
                       </div>
-                    </div>
 
-                    {/* Step 2 */}
-                    <div className="bg-gradient-to-r from-green-50 to-green-100/30 rounded-2xl p-4 border-l-4 border-green-500 shadow-sm">
-                      <div className="flex items-center space-x-4">
-                        <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center flex-shrink-0">
+                      {/* Step 2 */}
+                      <div className="relative flex items-center space-x-6 group">
+                        <div className="relative z-10 w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-300">
                           <span className="text-white font-bold text-lg">2</span>
                         </div>
-                        <div className="flex-1">
+                        {/* Curved connection from circle to text */}
+                        <div className="absolute left-12 top-6 w-6 h-0.5 bg-green-300 rounded-full"></div>
+                        <div className="flex-1 bg-white rounded-2xl p-4 shadow-md border border-gray-100 group-hover:shadow-lg group-hover:border-green-200 transition-all duration-300">
                           <h5 className="font-bold text-gray-900 text-lg mb-1">
                             Observa los síntomas
                           </h5>
@@ -766,15 +771,15 @@ export default function Index() {
                           </p>
                         </div>
                       </div>
-                    </div>
 
-                    {/* Step 3 */}
-                    <div className="bg-gradient-to-r from-orange-50 to-orange-100/30 rounded-2xl p-4 border-l-4 border-orange-500 shadow-sm">
-                      <div className="flex items-center space-x-4">
-                        <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center flex-shrink-0">
+                      {/* Step 3 */}
+                      <div className="relative flex items-center space-x-6 group">
+                        <div className="relative z-10 w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-300">
                           <span className="text-white font-bold text-lg">3</span>
                         </div>
-                        <div className="flex-1">
+                        {/* Curved connection from circle to text */}
+                        <div className="absolute left-12 top-6 w-6 h-0.5 bg-orange-300 rounded-full"></div>
+                        <div className="flex-1 bg-white rounded-2xl p-4 shadow-md border border-gray-100 group-hover:shadow-lg group-hover:border-orange-200 transition-all duration-300">
                           <h5 className="font-bold text-gray-900 text-lg mb-1">
                             No mediques
                           </h5>
