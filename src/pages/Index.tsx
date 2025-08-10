@@ -627,7 +627,7 @@ export default function Index() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Floating Emergency Badge */}
-          <div className="absolute top-4 left-4 md:top-8 md:left-8 animate-bounce z-20">
+          <div className="hidden md:block absolute top-4 left-4 md:top-8 md:left-8 animate-bounce z-20">
             <div className="bg-red-100 rounded-full p-3 md:p-4 shadow-lg border border-red-200">
               <div className="text-lg md:text-2xl font-bold text-red-600">24/7</div>
             </div>
