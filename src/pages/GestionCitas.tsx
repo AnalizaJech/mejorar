@@ -1529,6 +1529,139 @@ export default function GestionCitas() {
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* Contact Propietario Modal */}
+      <Dialog open={showContactModal} onOpenChange={setShowContactModal}>
+        <DialogContent className="sm:max-w-[500px]">
+          <DialogHeader>
+            <DialogTitle className="flex items-center space-x-2">
+              <MessageCircle className="w-5 h-5 text-vet-primary" />
+              <span>Contactar Propietario</span>
+            </DialogTitle>
+            <DialogDescription>
+              {selectedContactCita && (() => {
+                const propietario = usuarios.find(u => u.id === selectedContactCita.clienteId);
+                return propietario ?
+                  `Opciones de contacto para ${propietario.nombre} (${selectedContactCita.mascota})` :
+                  'Selecciona cómo contactar al propietario';
+              })()}
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="space-y-4">
+            {selectedContactCita && (() => {
+              const propietario = usuarios.find(u => u.id === selectedContactCita.clienteId);
+              if (!propietario) return <p className="text-vet-gray-600">No se encontró información del propietario.</p>;
+
+              return (
+                <div className="grid gap-3">
+                  {/* Información del propietario */}
+                  <div className="bg-vet-gray-50 rounded-lg p-4 mb-4">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-10 h-10 bg-vet-primary/10 rounded-full flex items-center justify-center">
+                        <User className="w-5 h-5 text-vet-primary" />
+                      </div>
+                      <div>
+                        <p className="font-medium text-vet-gray-900">{propietario.nombre}</p>
+                        <p className="text-sm text-vet-gray-600">
+                          Cita: {selectedContactCita.mascota} - {new Date(selectedContactCita.fecha).toLocaleDateString('es-ES')}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Opciones de contacto */}
+                  {propietario.telefono && (
+                    <>
+                      <Button
+                        variant="outline"
+                        className="w-full h-14 flex items-center justify-start space-x-3 border-green-200 hover:bg-green-50"
+                        onClick={() => {
+                          const phoneNumber = propietario.telefono.replace(/\D/g, '');
+                          window.open(`tel:+51${phoneNumber}`, '_self');
+                          setShowContactModal(false);
+                        }}
+                      >
+                        <Phone className="w-5 h-5 text-green-600" />
+                        <div className="text-left">
+                          <p className="font-medium text-green-700">Llamar</p>
+                          <p className="text-sm text-green-600">{propietario.telefono}</p>
+                        </div>
+                      </Button>
+
+                      <Button
+                        variant="outline"
+                        className="w-full h-14 flex items-center justify-start space-x-3 border-green-200 hover:bg-green-50"
+                        onClick={() => {
+                          const phoneNumber = propietario.telefono.replace(/\D/g, '');
+                          const message = `Hola ${propietario.nombre}, me comunico de la clínica veterinaria respecto a la cita de ${selectedContactCita.mascota} programada para el ${new Date(selectedContactCita.fecha).toLocaleDateString('es-ES')}.`;
+                          window.open(`https://wa.me/51${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+                          setShowContactModal(false);
+                        }}
+                      >
+                        <MessageCircle className="w-5 h-5 text-green-700" />
+                        <div className="text-left">
+                          <p className="font-medium text-green-700">WhatsApp</p>
+                          <p className="text-sm text-green-600">Enviar mensaje</p>
+                        </div>
+                      </Button>
+
+                      <Button
+                        variant="outline"
+                        className="w-full h-14 flex items-center justify-start space-x-3 border-purple-200 hover:bg-purple-50"
+                        onClick={() => {
+                          const phoneNumber = propietario.telefono.replace(/\D/g, '');
+                          const message = `Hola ${propietario.nombre}, me comunico de la clínica veterinaria respecto a la cita de ${selectedContactCita.mascota}.`;
+                          window.open(`sms:+51${phoneNumber}?body=${encodeURIComponent(message)}`, '_self');
+                          setShowContactModal(false);
+                        }}
+                      >
+                        <MessageSquare className="w-5 h-5 text-purple-600" />
+                        <div className="text-left">
+                          <p className="font-medium text-purple-700">SMS</p>
+                          <p className="text-sm text-purple-600">Mensaje de texto</p>
+                        </div>
+                      </Button>
+                    </>
+                  )}
+
+                  {propietario.email && (
+                    <Button
+                      variant="outline"
+                      className="w-full h-14 flex items-center justify-start space-x-3 border-blue-200 hover:bg-blue-50"
+                      onClick={() => {
+                        const subject = `Cita veterinaria - ${selectedContactCita.mascota}`;
+                        const body = `Estimado/a ${propietario.nombre},\n\nMe comunico respecto a la cita programada para ${selectedContactCita.mascota} el ${new Date(selectedContactCita.fecha).toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} a las ${new Date(selectedContactCita.fecha).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}.\n\nSaludos,\nClínica Veterinaria`;
+                        window.open(`mailto:${propietario.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`, '_self');
+                        setShowContactModal(false);
+                      }}
+                    >
+                      <Mail className="w-5 h-5 text-blue-600" />
+                      <div className="text-left">
+                        <p className="font-medium text-blue-700">Email</p>
+                        <p className="text-sm text-blue-600">{propietario.email}</p>
+                      </div>
+                    </Button>
+                  )}
+
+                  {!propietario.telefono && !propietario.email && (
+                    <div className="text-center py-8">
+                      <AlertCircle className="w-12 h-12 text-vet-gray-400 mx-auto mb-4" />
+                      <p className="text-vet-gray-600">No hay información de contacto disponible para este propietario.</p>
+                    </div>
+                  )}
+                </div>
+              );
+            })()}
+          </div>
+
+          <div className="flex justify-end pt-4">
+            <Button variant="outline" onClick={() => setShowContactModal(false)}>
+              Cerrar
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </Layout>
   );
 }
