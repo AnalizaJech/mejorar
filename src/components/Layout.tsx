@@ -104,12 +104,6 @@ const navigationItems: NavItem[] = [
     roles: ["veterinario"],
   },
   {
-    label: "Pre-Citas",
-    path: "/pre-citas",
-    icon: Clock,
-    roles: ["admin"],
-  },
-  {
     label: "Gestión de Citas",
     path: "/gestion-citas",
     icon: Calendar,
@@ -125,12 +119,6 @@ const navigationItems: NavItem[] = [
     label: "Veterinarios",
     path: "/veterinarios",
     icon: Stethoscope,
-    roles: ["admin"],
-  },
-  {
-    label: "Newsletter",
-    path: "/gestion-newsletter",
-    icon: Mail,
     roles: ["admin"],
   },
 ];
@@ -419,27 +407,6 @@ export default function Layout({
                     }}
                   >
                     Servicios
-                  </a>
-                  <a
-                    href="#newsletter"
-                    className="px-3 py-2 text-sm font-medium text-vet-gray-600 hover:text-vet-primary transition-colors"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      if (location.pathname !== "/") {
-                        navigate("/");
-                        setTimeout(() => {
-                          document
-                            .getElementById("newsletter")
-                            ?.scrollIntoView({ behavior: "smooth" });
-                        }, 100);
-                      } else {
-                        document
-                          .getElementById("newsletter")
-                          ?.scrollIntoView({ behavior: "smooth" });
-                      }
-                    }}
-                  >
-                    Newsletter
                   </a>
                   <a
                     href="#emergencias"
