@@ -638,61 +638,59 @@ export default function MisMascotas() {
             </DialogDescription>
           </DialogHeader>
 
-          <div className="flex-1 overflow-y-auto">
-            <div className="space-y-3 py-2">
-              {/* Current or preview photo */}
-              <div className="flex justify-center">
-                <div className="w-24 h-24 rounded-full overflow-hidden bg-vet-gray-100 flex items-center justify-center flex-shrink-0">
-                  {photoPreviewURL ? (
-                    <img
-                      src={photoPreviewURL}
-                      alt="Vista previa"
-                      className="w-full h-full object-cover"
-                    />
-                  ) : selectedMascotaPhoto?.foto ? (
-                    <img
-                      src={selectedMascotaPhoto.foto}
-                      alt={`Foto actual de ${selectedMascotaPhoto.nombre}`}
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <PawPrint className="w-12 h-12 text-vet-gray-400" />
-                  )}
+          <div className="space-y-4">
+            {/* Current or preview photo */}
+            <div className="flex justify-center">
+              <div className="w-32 h-32 rounded-full overflow-hidden bg-vet-gray-100 flex items-center justify-center flex-shrink-0">
+                {photoPreviewURL ? (
+                  <img
+                    src={photoPreviewURL}
+                    alt="Vista previa"
+                    className="w-full h-full object-cover"
+                  />
+                ) : selectedMascotaPhoto?.foto ? (
+                  <img
+                    src={selectedMascotaPhoto.foto}
+                    alt={`Foto actual de ${selectedMascotaPhoto.nombre}`}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <PawPrint className="w-16 h-16 text-vet-gray-400" />
+                )}
+              </div>
+            </div>
+
+            {/* Photo info */}
+            {photoFile && (
+              <div className="bg-vet-gray-50 rounded-lg p-3">
+                <div className="flex items-center space-x-2">
+                  <ImageIcon className="w-5 h-5 text-vet-primary flex-shrink-0" />
+                  <div className="min-w-0">
+                    <p className="text-sm font-medium text-vet-gray-900 truncate">
+                      {photoFile.name}
+                    </p>
+                    <p className="text-xs text-vet-gray-500">
+                      {(photoFile.size / 1024 / 1024).toFixed(2)} MB
+                    </p>
+                  </div>
                 </div>
               </div>
+            )}
 
-              {/* Photo info */}
-              {photoFile && (
-                <div className="bg-vet-gray-50 rounded-lg p-2">
-                  <div className="flex items-center space-x-2">
-                    <ImageIcon className="w-4 h-4 text-vet-primary flex-shrink-0" />
-                    <div className="min-w-0">
-                      <p className="text-sm font-medium text-vet-gray-900 truncate">
-                        {photoFile.name}
-                      </p>
-                      <p className="text-xs text-vet-gray-500">
-                        {(photoFile.size / 1024 / 1024).toFixed(2)} MB
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* Instructions */}
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-2">
-                <div className="flex items-start space-x-2">
-                  <Camera className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
-                  <div className="min-w-0">
-                    <p className="text-sm text-blue-700 font-medium">
-                      Consejos para una buena foto:
-                    </p>
-                    <ul className="text-xs text-blue-600 mt-1 space-y-0.5">
-                      <li>• Buena iluminación natural</li>
-                      <li>• Enfoque del rostro</li>
-                      <li>• Fondo simple</li>
-                      <li>• Máximo 5MB</li>
-                    </ul>
-                  </div>
+            {/* Instructions */}
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+              <div className="flex items-start space-x-2">
+                <Camera className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+                <div className="min-w-0">
+                  <p className="text-sm text-blue-700 font-medium">
+                    Consejos para una buena foto:
+                  </p>
+                  <ul className="text-xs text-blue-600 mt-1 space-y-0.5">
+                    <li>• Buena iluminación natural</li>
+                    <li>• Enfoque del rostro</li>
+                    <li>• Fondo simple</li>
+                    <li>• Máximo 5MB</li>
+                  </ul>
                 </div>
               </div>
             </div>
