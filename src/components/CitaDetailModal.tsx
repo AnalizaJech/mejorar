@@ -189,13 +189,21 @@ export default function CitaDetailModal({
               </CardContent>
             </Card>
 
-            {/* Datos del propietario */}
-            <Card>
-              <CardHeader className="pb-3">
+            {/* Información del Propietario - Rediseñado */}
+            <Card className="overflow-hidden">
+              <CardHeader className="pb-4 bg-gradient-to-r from-vet-primary/5 to-vet-secondary/5">
                 <CardTitle className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2 text-lg">
-                    <User className="w-5 h-5 text-vet-primary" />
-                    <span>Datos del Propietario</span>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-10 h-10 bg-vet-primary rounded-xl flex items-center justify-center">
+                      <User className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-vet-gray-900">Información del Propietario</h3>
+                      <div className="flex items-center space-x-2 mt-1">
+                        <span className="w-2 h-2 bg-green-400 rounded-full"></span>
+                        <span className="text-sm text-vet-gray-600">Cliente activo</span>
+                      </div>
+                    </div>
                   </div>
                   {/* Acciones de contacto */}
                   <div className="flex items-center space-x-2">
@@ -204,7 +212,7 @@ export default function CitaDetailModal({
                         <Button
                           size="sm"
                           variant="outline"
-                          className="h-8 w-8 p-0 border-green-500 text-green-600 hover:bg-green-50"
+                          className="h-9 w-9 p-0 border-green-500 text-green-600 hover:bg-green-50 hover:scale-105 transition-all"
                           onClick={() => {
                             const phoneNumber =
                               selectedCita.propietario.telefono.replace(
@@ -220,7 +228,7 @@ export default function CitaDetailModal({
                         <Button
                           size="sm"
                           variant="outline"
-                          className="h-8 w-8 p-0 border-green-600 text-green-700 hover:bg-green-50"
+                          className="h-9 w-9 p-0 border-green-600 text-green-700 hover:bg-green-50 hover:scale-105 transition-all"
                           onClick={() => {
                             const phoneNumber =
                               selectedCita.propietario.telefono.replace(
@@ -240,7 +248,7 @@ export default function CitaDetailModal({
                         <Button
                           size="sm"
                           variant="outline"
-                          className="h-8 w-8 p-0 border-purple-500 text-purple-600 hover:bg-purple-50"
+                          className="h-9 w-9 p-0 border-purple-500 text-purple-600 hover:bg-purple-50 hover:scale-105 transition-all"
                           onClick={() => {
                             const phoneNumber =
                               selectedCita.propietario.telefono.replace(
@@ -263,7 +271,7 @@ export default function CitaDetailModal({
                       <Button
                         size="sm"
                         variant="outline"
-                        className="h-8 w-8 p-0 border-blue-500 text-blue-600 hover:bg-blue-50"
+                        className="h-9 w-9 p-0 border-blue-500 text-blue-600 hover:bg-blue-50 hover:scale-105 transition-all"
                         onClick={() => {
                           const subject = `Cita veterinaria - ${selectedCita.cita.mascota}`;
                           const body = `Estimado/a ${selectedCita.propietario.nombre},\n\nMe comunico respecto a la cita programada para ${selectedCita.cita.mascota} el ${new Date(selectedCita.cita.fecha).toLocaleDateString("es-ES", { weekday: "long", year: "numeric", month: "long", day: "numeric" })} a las ${new Date(selectedCita.cita.fecha).toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" })}.\n\nSaludos,\nClínica Veterinaria`;
@@ -280,158 +288,224 @@ export default function CitaDetailModal({
                   </div>
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-3">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <Label className="text-sm font-medium text-vet-gray-600">
-                      Nombre Completo
-                    </Label>
-                    <p className="font-semibold text-vet-gray-900">
-                      {selectedCita.propietario?.nombre || "Sin asignar"}
-                      {selectedCita.propietario?.apellidos &&
-                        ` ${selectedCita.propietario.apellidos}`}
-                    </p>
+              <CardContent className="p-6">
+                {/* Bio/Descripción personal si está disponible */}
+                {(() => {
+                  try {
+                    const bio = localStorage.getItem("petla_user_bio");
+                    if (bio && bio !== '""' && bio !== "null") {
+                      const bioText = JSON.parse(bio);
+                      if (bioText && bioText.trim()) {
+                        return (
+                          <div className="mb-6 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-200">
+                            <div className="flex items-start space-x-3">
+                              <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <MessageCircle className="w-4 h-4 text-blue-600" />
+                              </div>
+                              <div>
+                                <span className="text-xs font-medium text-blue-600 uppercase tracking-wide block mb-1">
+                                  Acerca del cliente
+                                </span>
+                                <p className="text-sm text-vet-gray-700 italic leading-relaxed">
+                                  "{bioText}"
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      }
+                    }
+                  } catch (e) {
+                    console.error("Error loading bio:", e);
+                  }
+                  return null;
+                })()}
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {/* Nombre Completo */}
+                  <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
+                        <User className="w-5 h-5 text-blue-600" />
+                      </div>
+                      <div className="flex-1">
+                        <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block mb-1">
+                          Nombre Completo
+                        </span>
+                        <p className="text-lg font-bold text-vet-gray-900 leading-tight">
+                          {selectedCita.propietario?.nombre || "Sin asignar"}
+                          {selectedCita.propietario?.apellidos &&
+                            ` ${selectedCita.propietario.apellidos}`}
+                        </p>
+                      </div>
+                    </div>
                   </div>
+
+                  {/* Username */}
                   {selectedCita.propietario?.username && (
-                    <div>
-                      <Label className="text-sm font-medium text-vet-gray-600">
-                        Usuario
-                      </Label>
-                      <p className="text-vet-gray-900">
-                        @{selectedCita.propietario.username}
-                      </p>
+                    <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center">
+                          <span className="text-slate-600 font-bold text-lg">@</span>
+                        </div>
+                        <div className="flex-1">
+                          <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block mb-1">
+                            Usuario
+                          </span>
+                          <p className="text-sm font-semibold text-vet-gray-900">
+                            @{selectedCita.propietario.username}
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   )}
-                </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {/* Email */}
+                  {selectedCita.propietario?.email && (
+                    <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center">
+                          <Mail className="w-5 h-5 text-green-600" />
+                        </div>
+                        <div className="flex-1">
+                          <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block mb-1">
+                            Email
+                          </span>
+                          <p className="text-sm font-semibold text-vet-gray-900 break-all">
+                            {selectedCita.propietario.email}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Teléfono */}
+                  {selectedCita.propietario?.telefono && (
+                    <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center">
+                          <Phone className="w-5 h-5 text-purple-600" />
+                        </div>
+                        <div className="flex-1">
+                          <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block mb-1">
+                            Teléfono
+                          </span>
+                          <p className="text-lg font-bold text-vet-gray-900 font-mono">
+                            {selectedCita.propietario.telefono}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Documento */}
                   {selectedCita.propietario?.documento && (
-                    <div>
-                      <Label className="text-sm font-medium text-vet-gray-600">
-                        <div className="flex items-center space-x-1">
-                          <IdCard className="w-3 h-3" />
-                          <span>
-                            {selectedCita.propietario?.tipoDocumento ===
-                              "dni" && "DNI"}
-                            {selectedCita.propietario?.tipoDocumento ===
-                              "pasaporte" && "Pasaporte"}
-                            {selectedCita.propietario?.tipoDocumento ===
-                              "carnet_extranjeria" && "Carnet de Extranjería"}
-                            {selectedCita.propietario?.tipoDocumento ===
-                              "cedula" && "Cédula"}
-                            {!selectedCita.propietario?.tipoDocumento &&
-                              "Documento"}
+                    <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center">
+                          <IdCard className="w-5 h-5 text-amber-600" />
+                        </div>
+                        <div className="flex-1">
+                          <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block mb-1">
+                            {selectedCita.propietario?.tipoDocumento === "dni" && "DNI"}
+                            {selectedCita.propietario?.tipoDocumento === "pasaporte" && "Pasaporte"}
+                            {selectedCita.propietario?.tipoDocumento === "carnet_extranjeria" && "Carnet de Extranjería"}
+                            {selectedCita.propietario?.tipoDocumento === "cedula" && "Cédula"}
+                            {!selectedCita.propietario?.tipoDocumento && "Documento"}
+                          </span>
+                          <p className="text-lg font-bold text-vet-gray-900 font-mono">
+                            {selectedCita.propietario.documento}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Género */}
+                  {selectedCita.propietario?.genero && (
+                    <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 bg-pink-100 rounded-xl flex items-center justify-center">
+                          <Users className="w-5 h-5 text-pink-600" />
+                        </div>
+                        <div className="flex-1">
+                          <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block mb-1">
+                            Género
+                          </span>
+                          <p className="text-sm font-semibold text-vet-gray-900 capitalize">
+                            {selectedCita.propietario.genero}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Fecha de Nacimiento */}
+                  {selectedCita.propietario?.fechaNacimiento && (
+                    <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 bg-indigo-100 rounded-xl flex items-center justify-center">
+                          <Calendar className="w-5 h-5 text-indigo-600" />
+                        </div>
+                        <div className="flex-1">
+                          <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block mb-1">
+                            Fecha de Nacimiento
+                          </span>
+                          <p className="text-sm font-semibold text-vet-gray-900">
+                            {new Date(selectedCita.propietario.fechaNacimiento).toLocaleDateString("es-ES", {
+                              year: "numeric",
+                              month: "long",
+                              day: "numeric",
+                            })}
+                          </p>
+                          <span className="text-xs text-vet-gray-500">
+                            ({Math.floor((new Date().getTime() - new Date(selectedCita.propietario.fechaNacimiento).getTime()) / (365.25 * 24 * 60 * 60 * 1000))} años)
                           </span>
                         </div>
-                      </Label>
-                      <p className="text-vet-gray-900 font-mono">
-                        {selectedCita.propietario.documento}
-                      </p>
+                      </div>
                     </div>
                   )}
-                  {selectedCita.propietario?.genero && (
-                    <div>
-                      <Label className="text-sm font-medium text-vet-gray-600">
-                        <div className="flex items-center space-x-1">
-                          <Users className="w-3 h-3" />
-                          <span>Género</span>
+
+                  {/* Dirección */}
+                  {selectedCita.propietario?.direccion && (
+                    <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 bg-red-100 rounded-xl flex items-center justify-center">
+                          <MapPin className="w-5 h-5 text-red-600" />
                         </div>
-                      </Label>
-                      <p className="text-vet-gray-900 capitalize">
-                        {selectedCita.propietario.genero}
-                      </p>
+                        <div className="flex-1">
+                          <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block mb-1">
+                            Dirección
+                          </span>
+                          <p className="text-sm font-semibold text-vet-gray-900 leading-tight">
+                            {selectedCita.propietario.direccion}
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   )}
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {selectedCita.propietario?.telefono && (
-                    <div>
-                      <Label className="text-sm font-medium text-vet-gray-600">
-                        <div className="flex items-center space-x-1">
-                          <Phone className="w-3 h-3" />
-                          <span>Teléfono</span>
-                        </div>
-                      </Label>
-                      <p className="text-vet-gray-900 font-mono">
-                        {selectedCita.propietario.telefono}
-                      </p>
-                    </div>
-                  )}
-                  {selectedCita.propietario?.email && (
-                    <div>
-                      <Label className="text-sm font-medium text-vet-gray-600">
-                        <div className="flex items-center space-x-1">
-                          <Mail className="w-3 h-3" />
-                          <span>Email</span>
-                        </div>
-                      </Label>
-                      <p className="text-vet-gray-900">
-                        {selectedCita.propietario.email}
-                      </p>
-                    </div>
-                  )}
-                </div>
-
-                {selectedCita.propietario?.fechaNacimiento && (
-                  <div>
-                    <Label className="text-sm font-medium text-vet-gray-600">
-                      <div className="flex items-center space-x-1">
-                        <Calendar className="w-3 h-3" />
-                        <span>Fecha de Nacimiento</span>
-                      </div>
-                    </Label>
-                    <p className="text-vet-gray-900">
-                      {new Date(
-                        selectedCita.propietario.fechaNacimiento,
-                      ).toLocaleDateString("es-ES", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      })}
-                      <span className="text-sm text-vet-gray-500 ml-2">
-                        (
-                        {Math.floor(
-                          (new Date().getTime() -
-                            new Date(
-                              selectedCita.propietario.fechaNacimiento,
-                            ).getTime()) /
-                            (365.25 * 24 * 60 * 60 * 1000),
-                        )}{" "}
-                        años)
-                      </span>
-                    </p>
-                  </div>
-                )}
-
-                {selectedCita.propietario?.direccion && (
-                  <div>
-                    <Label className="text-sm font-medium text-vet-gray-600">
-                      <div className="flex items-center space-x-1">
-                        <MapPin className="w-3 h-3" />
-                        <span>Dirección</span>
-                      </div>
-                    </Label>
-                    <p className="text-vet-gray-900">
-                      {selectedCita.propietario.direccion}
-                    </p>
-                  </div>
-                )}
-
+                {/* Cliente desde */}
                 {selectedCita.propietario?.fechaCreacion && (
-                  <div className="border-t pt-3 mt-4">
-                    <Label className="text-sm font-medium text-vet-gray-600">
-                      Cliente desde
-                    </Label>
-                    <p className="text-vet-gray-900 text-sm">
-                      {new Date(
-                        selectedCita.propietario.fechaCreacion,
-                      ).toLocaleDateString("es-ES", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      })}
-                    </p>
+                  <div className="mt-6 p-4 bg-gradient-to-r from-vet-gray-50 to-vet-gray-100 rounded-xl border border-vet-gray-200">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-8 h-8 bg-vet-primary rounded-lg flex items-center justify-center">
+                        <CalendarIcon className="w-4 h-4 text-white" />
+                      </div>
+                      <div>
+                        <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block mb-1">
+                          Cliente desde
+                        </span>
+                        <p className="text-lg font-bold text-vet-gray-900">
+                          {new Date(selectedCita.propietario.fechaCreacion).toLocaleDateString("es-ES", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                          })}
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 )}
               </CardContent>
