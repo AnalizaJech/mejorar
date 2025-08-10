@@ -622,7 +622,7 @@ export default function MisMascotas() {
 
       {/* Photo Management Modal */}
       <Dialog open={showPhotoModal} onOpenChange={setShowPhotoModal}>
-        <DialogContent className="max-w-sm w-full mx-4 max-h-[85vh] overflow-hidden flex flex-col">
+        <DialogContent className="max-w-2xl max-h-[95vh] overflow-y-auto">
           <DialogHeader className="flex-shrink-0">
             <DialogTitle className="flex items-center space-x-2 text-base">
               <Camera className="w-4 h-4 text-vet-primary flex-shrink-0" />
