@@ -397,6 +397,27 @@ export default function Layout({
                     Servicios
                   </a>
                   <a
+                    href="#caracteristicas"
+                    className="px-3 py-2 text-sm font-medium text-vet-gray-600 hover:text-vet-primary transition-colors"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if (location.pathname !== "/") {
+                        navigate("/");
+                        setTimeout(() => {
+                          document
+                            .getElementById("caracteristicas")
+                            ?.scrollIntoView({ behavior: "smooth" });
+                        }, 100);
+                      } else {
+                        document
+                          .getElementById("caracteristicas")
+                          ?.scrollIntoView({ behavior: "smooth" });
+                      }
+                    }}
+                  >
+                    Características
+                  </a>
+                  <a
                     href="#emergencias"
                     className="px-3 py-2 text-sm font-medium text-vet-gray-600 hover:text-vet-primary transition-colors"
                     onClick={(e) => {
