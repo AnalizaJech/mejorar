@@ -624,6 +624,28 @@ export default function GestionCitas() {
                                 Ver detalles
                               </DropdownMenuItem>
 
+                              {/* Voucher related options for admin */}
+                              {user?.rol === "admin" &&
+                                cita.comprobantePago && (
+                                  <DropdownMenuItem
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      setSelectedCita(cita);
+                                      setVoucherModalMode("view");
+                                      // Cargar datos del comprobante
+                                      const receiptData = getComprobante(
+                                        cita.id,
+                                      );
+                                      setCurrentReceiptData(receiptData);
+                                      setShowVoucherModal(true);
+                                    }}
+                                    className="flex items-center cursor-pointer hover:bg-vet-gray-50"
+                                  >
+                                    <FileText className="w-4 h-4 mr-2 text-purple-600" />
+                                    Ver Comprobante
+                                  </DropdownMenuItem>
+                                )}
+
                               {/* Contact Propietario Action */}
                               {(() => {
                                 const propietario = usuarios.find(
@@ -636,46 +658,19 @@ export default function GestionCitas() {
                                   return null;
 
                                 return (
-                                  <>
-                                    <DropdownMenuSeparator />
-                                    <DropdownMenuItem
-                                      onClick={(e) => {
-                                        e.stopPropagation();
-                                        setSelectedContactCita(cita);
-                                        setShowContactModal(true);
-                                      }}
-                                      className="flex items-center cursor-pointer hover:bg-vet-gray-50"
-                                    >
-                                      <MessageCircle className="w-4 h-4 mr-2 text-vet-primary" />
-                                      Contactar Propietario
-                                    </DropdownMenuItem>
-                                  </>
+                                  <DropdownMenuItem
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      setSelectedContactCita(cita);
+                                      setShowContactModal(true);
+                                    }}
+                                    className="flex items-center cursor-pointer hover:bg-vet-gray-50"
+                                  >
+                                    <MessageCircle className="w-4 h-4 mr-2 text-vet-primary" />
+                                    Contactar Propietario
+                                  </DropdownMenuItem>
                                 );
                               })()}
-
-                              {/* Voucher related options for admin */}
-                              {user?.rol === "admin" &&
-                                cita.comprobantePago && (
-                                  <>
-                                    <DropdownMenuItem
-                                      onClick={(e) => {
-                                        e.stopPropagation();
-                                        setSelectedCita(cita);
-                                        setVoucherModalMode("view");
-                                        // Cargar datos del comprobante
-                                        const receiptData = getComprobante(
-                                          cita.id,
-                                        );
-                                        setCurrentReceiptData(receiptData);
-                                        setShowVoucherModal(true);
-                                      }}
-                                      className="flex items-center cursor-pointer hover:bg-vet-gray-50"
-                                    >
-                                      <FileText className="w-4 h-4 mr-2 text-purple-600" />
-                                      Ver Comprobante
-                                    </DropdownMenuItem>
-                                  </>
-                                )}
 
                               {/* Attendance option for veterinarians */}
                               {user?.rol === "veterinario" &&
