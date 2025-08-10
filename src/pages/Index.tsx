@@ -264,15 +264,15 @@ export default function Index() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
-            <div className="inline-flex items-center px-4 py-2 bg-vet-primary/10 rounded-full mb-6">
-              <TrendingUp className="w-4 h-4 text-vet-primary mr-2" />
-              <span className="text-vet-primary font-semibold text-sm">
+            <div className="inline-flex items-center px-4 py-2 bg-purple-100 rounded-full mb-6">
+              <TrendingUp className="w-4 h-4 text-purple-600 mr-2" />
+              <span className="text-purple-600 font-semibold text-sm">
                 NUESTRO IMPACTO
               </span>
             </div>
             <h2 className="text-3xl lg:text-4xl font-bold mb-4">
               <span className="text-vet-gray-900">¿Por qué eligen</span>
-              <span className="block text-vet-primary">PetLA?</span>
+              <span className="block text-purple-600">PetLA?</span>
             </h2>
             <p className="text-xl text-vet-gray-600 max-w-3xl mx-auto">
               Miles de familias han confiado en nosotros para cuidar la salud de
@@ -389,13 +389,13 @@ export default function Index() {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center mb-20">
-            <div className="inline-flex items-center gap-2 bg-vet-primary/10 text-vet-primary px-4 py-2 rounded-full text-sm font-semibold mb-6">
+            <div className="inline-flex items-center gap-2 bg-emerald-100 text-emerald-600 px-4 py-2 rounded-full text-sm font-semibold mb-6">
               <Stethoscope className="w-4 h-4" />
               SERVICIOS VETERINARIOS
             </div>
             <h2 className="text-4xl lg:text-5xl font-bold mb-6">
               <span className="text-vet-gray-900">¿Buscas el mejor cuidado para</span>
-              <span className="block text-vet-primary">tu mascota?</span>
+              <span className="block text-emerald-600">tu mascota?</span>
             </h2>
             <p className="text-xl text-vet-gray-600 max-w-3xl mx-auto leading-relaxed">
               Ofrecemos servicios veterinarios especializados con tecnología de vanguardia
