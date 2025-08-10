@@ -727,55 +727,61 @@ export default function Index() {
                   </a>
                 </div>
 
-                {/* Emergency Steps - Compact Linear Design */}
-                <div className="h-[240px] flex flex-col justify-between">
-                  <h4 className="text-xl font-bold text-gray-900 mb-4">
+                {/* Emergency Steps - Matching Height Design */}
+                <div className="flex flex-col h-full">
+                  <h3 className="text-2xl font-bold text-vet-gray-900 mb-6">
                     ¿Qué hacer mientras llegas?
-                  </h4>
+                  </h3>
 
-                  <div className="space-y-3 flex-1">
+                  <div className="space-y-4 flex-1">
                     {/* Step 1 */}
-                    <div className="bg-gradient-to-r from-blue-50 to-blue-100/50 rounded-xl p-4 border-l-4 border-blue-500 shadow-sm h-[60px] flex items-center">
-                      <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center flex-shrink-0 mr-3">
-                        <span className="text-white font-bold text-sm">1</span>
-                      </div>
-                      <div className="flex-1">
-                        <h5 className="font-bold text-gray-900 text-base leading-tight">
-                          Mantén la calma
-                        </h5>
-                        <p className="text-gray-600 text-sm">
-                          Tu mascota puede sentir tu ansiedad
-                        </p>
+                    <div className="bg-gradient-to-r from-blue-50 to-blue-100/30 rounded-2xl p-4 border-l-4 border-blue-500 shadow-sm">
+                      <div className="flex items-center space-x-4">
+                        <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+                          <span className="text-white font-bold text-lg">1</span>
+                        </div>
+                        <div className="flex-1">
+                          <h5 className="font-bold text-gray-900 text-lg mb-1">
+                            Mantén la calma
+                          </h5>
+                          <p className="text-gray-600 text-sm">
+                            Tu mascota puede sentir tu ansiedad
+                          </p>
+                        </div>
                       </div>
                     </div>
 
                     {/* Step 2 */}
-                    <div className="bg-gradient-to-r from-emerald-50 to-emerald-100/50 rounded-xl p-4 border-l-4 border-emerald-500 shadow-sm h-[60px] flex items-center">
-                      <div className="w-8 h-8 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center flex-shrink-0 mr-3">
-                        <span className="text-white font-bold text-sm">2</span>
-                      </div>
-                      <div className="flex-1">
-                        <h5 className="font-bold text-gray-900 text-base leading-tight">
-                          Observa los síntomas
-                        </h5>
-                        <p className="text-gray-600 text-sm">
-                          Toma nota de lo que ves
-                        </p>
+                    <div className="bg-gradient-to-r from-green-50 to-green-100/30 rounded-2xl p-4 border-l-4 border-green-500 shadow-sm">
+                      <div className="flex items-center space-x-4">
+                        <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center flex-shrink-0">
+                          <span className="text-white font-bold text-lg">2</span>
+                        </div>
+                        <div className="flex-1">
+                          <h5 className="font-bold text-gray-900 text-lg mb-1">
+                            Observa los síntomas
+                          </h5>
+                          <p className="text-gray-600 text-sm">
+                            Toma nota de lo que ves
+                          </p>
+                        </div>
                       </div>
                     </div>
 
                     {/* Step 3 */}
-                    <div className="bg-gradient-to-r from-amber-50 to-amber-100/50 rounded-xl p-4 border-l-4 border-amber-500 shadow-sm h-[60px] flex items-center">
-                      <div className="w-8 h-8 bg-gradient-to-br from-amber-500 to-amber-600 rounded-full flex items-center justify-center flex-shrink-0 mr-3">
-                        <span className="text-white font-bold text-sm">3</span>
-                      </div>
-                      <div className="flex-1">
-                        <h5 className="font-bold text-gray-900 text-base leading-tight">
-                          No mediques
-                        </h5>
-                        <p className="text-gray-600 text-sm">
-                          Espera instrucciones del veterinario
-                        </p>
+                    <div className="bg-gradient-to-r from-orange-50 to-orange-100/30 rounded-2xl p-4 border-l-4 border-orange-500 shadow-sm">
+                      <div className="flex items-center space-x-4">
+                        <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center flex-shrink-0">
+                          <span className="text-white font-bold text-lg">3</span>
+                        </div>
+                        <div className="flex-1">
+                          <h5 className="font-bold text-gray-900 text-lg mb-1">
+                            No mediques
+                          </h5>
+                          <p className="text-gray-600 text-sm">
+                            Espera instrucciones del veterinario
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
