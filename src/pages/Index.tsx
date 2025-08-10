@@ -211,7 +211,7 @@ export default function Index() {
               </div>
 
                   {/* Quality badge */}
-                  <div className="absolute top-2 right-2 md:top-4 md:right-4 bg-white rounded-xl shadow-lg p-2 md:p-4 z-10 transform hover:scale-105 transition-all duration-300">
+                  <div className="hidden md:block absolute top-2 right-2 md:top-4 md:right-4 bg-white rounded-xl shadow-lg p-2 md:p-4 z-10 transform hover:scale-105 transition-all duration-300">
                     <div className="flex items-center space-x-2 md:space-x-3">
                       <div className="w-8 h-8 md:w-10 md:h-10 bg-indigo-100 rounded-full flex items-center justify-center">
                         <CheckCircle className="w-4 h-4 md:w-5 md:h-5 text-indigo-600" />
