@@ -634,18 +634,15 @@ function ClientDashboard({ stats }: { stats: any }) {
               </Button>
             </Link>
 
-            <Button
-              variant="outline"
-              className="w-full h-20 flex flex-col items-center justify-center space-y-2"
-              onClick={() =>
-                document
-                  .getElementById("servicios")
-                  ?.scrollIntoView({ behavior: "smooth" })
-              }
-            >
-              <Plus className="w-6 h-6 text-vet-primary" />
-              <span className="text-sm">Nueva Cita</span>
-            </Button>
+            <Link to="/nueva-cita">
+              <Button
+                variant="outline"
+                className="w-full h-20 flex flex-col items-center justify-center space-y-2"
+              >
+                <Plus className="w-6 h-6 text-vet-primary" />
+                <span className="text-sm">Nueva Cita</span>
+              </Button>
+            </Link>
           </CardContent>
         </Card>
 
