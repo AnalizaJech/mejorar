@@ -566,20 +566,6 @@ function AdminDashboard({
             </CardDescription>
           </CardHeader>
           <CardContent className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-            <Link to="/pre-citas">
-              <Button
-                variant="outline"
-                className="w-full h-20 flex flex-col items-center justify-center space-y-2"
-              >
-                <Clock className="w-6 h-6 text-vet-primary" />
-                <span className="text-sm">Pre-Citas</span>
-                {adminStats.preCitasPendientes > 0 && (
-                  <Badge className="bg-yellow-100 text-yellow-800">
-                    {adminStats.preCitasPendientes}
-                  </Badge>
-                )}
-              </Button>
-            </Link>
 
             <Link to="/gestion-citas">
               <Button
