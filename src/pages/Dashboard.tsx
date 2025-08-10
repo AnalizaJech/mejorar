@@ -573,15 +573,6 @@ function AdminDashboard({
               </Button>
             </Link>
 
-            <Link to="/gestion-newsletter">
-              <Button
-                variant="outline"
-                className="w-full h-20 flex flex-col items-center justify-center space-y-2"
-              >
-                <Mail className="w-6 h-6 text-vet-primary" />
-                <span className="text-sm">Newsletter</span>
-              </Button>
-            </Link>
 
             <Link to="/usuarios">
               <Button
@@ -603,14 +594,15 @@ function AdminDashboard({
               </Button>
             </Link>
 
-            <Button
-              variant="outline"
-              className="w-full h-20 flex flex-col items-center justify-center space-y-2"
-              onClick={() => setShowServicesModal(true)}
-            >
-              <Stethoscope className="w-6 h-6 text-vet-primary" />
-              <span className="text-sm">Servicios</span>
-            </Button>
+            <Link to="/servicios">
+              <Button
+                variant="outline"
+                className="w-full h-20 flex flex-col items-center justify-center space-y-2"
+              >
+                <Stethoscope className="w-6 h-6 text-vet-primary" />
+                <span className="text-sm">Servicios</span>
+              </Button>
+            </Link>
           </CardContent>
         </Card>
 
