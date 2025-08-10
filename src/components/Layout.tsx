@@ -222,10 +222,11 @@ export default function Layout({
       {location.pathname === "/" && scrollProgress > 10 && (
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="fixed bottom-6 right-6 w-12 h-12 bg-vet-primary hover:bg-vet-primary-dark text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 z-40 flex items-center justify-center group"
+          className="fixed bottom-6 right-6 w-12 h-12 bg-vet-primary hover:bg-vet-primary-dark text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 z-40 flex items-center justify-center group cursor-pointer touch-manipulation"
           aria-label="Volver arriba"
+          style={{ WebkitTouchCallout: 'none', WebkitUserSelect: 'none' }}
         >
-          <ChevronUp className="w-6 h-6 transform group-hover:-translate-y-0.5 transition-transform duration-200 pointer-events-none" />
+          <ChevronUp className="w-6 h-6 transform group-hover:-translate-y-0.5 transition-transform duration-200 pointer-events-none select-none" />
         </button>
       )}
       {/* Header */}
