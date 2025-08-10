@@ -173,31 +173,3 @@ export interface RegistroMascotaFormData {
   fechaNacimiento: string;
   imagen?: File;
 }
-
-// Newsletter subscription types
-export interface SuscriptorNewsletter {
-  id: string;
-  email: string;
-  fechaSuscripcion: Date;
-  activo: boolean;
-}
-
-interface ArchivoGuardado {
-  name: string;
-  data: string; // base64
-  size: number;
-  type: string;
-}
-
-export interface NewsletterEmail {
-  id: string;
-  asunto: string;
-  contenido: string;
-  fechaEnvio: Date;
-  destinatarios: string[];
-  estado: "enviado" | "programado" | "borrador";
-  colorTema?: string;
-  plantilla?: string;
-  imagenes?: ArchivoGuardado[];
-  archivos?: ArchivoGuardado[];
-}
