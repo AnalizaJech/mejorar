@@ -1603,7 +1603,11 @@ export default function GestionCitas() {
                               /\D/g,
                               "",
                             );
-                            window.open(`tel:+51${phoneNumber}`, "_self");
+                            // Validar si ya tiene código de país (+51)
+                            const finalNumber = phoneNumber.startsWith('51') && phoneNumber.length === 11
+                              ? `+${phoneNumber}`
+                              : `+51${phoneNumber}`;
+                            window.open(`tel:${finalNumber}`, "_self");
                             setShowContactModal(false);
                           }}
                         >
@@ -1611,7 +1615,12 @@ export default function GestionCitas() {
                           <div className="text-left">
                             <p className="font-medium text-green-700">Llamar</p>
                             <p className="text-sm text-green-600">
-                              {propietario.telefono}
+                              {(() => {
+                                const phoneNumber = propietario.telefono.replace(/\D/g, "");
+                                return phoneNumber.startsWith('51') && phoneNumber.length === 11
+                                  ? `+${phoneNumber}`
+                                  : `+51${phoneNumber}`;
+                              })()}
                             </p>
                           </div>
                         </Button>
