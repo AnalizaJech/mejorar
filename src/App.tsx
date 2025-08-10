@@ -22,6 +22,7 @@ import Usuarios from "./pages/Usuarios";
 import GestionCitas from "./pages/GestionCitas";
 import GestionCitasPago from "./pages/GestionCitasPago";
 import Veterinarios from "./pages/Veterinarios";
+import Servicios from "./pages/Servicios";
 import Calendario from "./pages/Calendario";
 import MisPacientes from "./pages/MisPacientes";
 import HistorialClinicoVeterinario from "./pages/HistorialClinicoVeterinario";
@@ -85,14 +86,13 @@ const App = () => (
           <Route path="/terminos" element={<Terminos />} />
           <Route path="/cookies" element={<Cookies />} />
 
+          {/* Protected admin route for services management */}
           <Route
             path="/servicios"
             element={
-              <PlaceholderPage
-                title="Nuestros Servicios"
-                description="Servicios veterinarios completos para el cuidado de tus mascotas"
-                icon={<Stethoscope className="w-8 h-8 text-vet-primary" />}
-              />
+              <ProtectedRoute allowedRoles={["admin"]}>
+                <Servicios />
+              </ProtectedRoute>
             }
           />
           <Route
