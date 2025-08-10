@@ -186,8 +186,8 @@ export default function Index() {
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <div className="aspect-[4/3] relative">
                   <img
-                    src="https://images.pexels.com/photos/6234612/pexels-photo-6234612.jpeg"
-                    alt="Veterinarios sonrientes con cabello completo examinando Pomeranian en clínica"
+                    src="https://images.pexels.com/photos/7465697/pexels-photo-7465697.jpeg"
+                    alt="Equipo veterinario profesional en clínica moderna con ambiente colaborativo"
                     className="w-full h-full object-cover scale-110"
                   />
                   {/* Gradient overlay for text readability */}
@@ -626,8 +626,8 @@ export default function Index() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Floating Emergency Badge */}
           <div className="absolute top-8 right-8 animate-bounce">
-            <div className="bg-indigo-100 rounded-full p-4 shadow-lg border border-indigo-200">
-              <div className="text-2xl font-bold text-indigo-600">24/7</div>
+            <div className="bg-red-100 rounded-full p-4 shadow-lg border border-red-200">
+              <div className="text-2xl font-bold text-red-600">24/7</div>
             </div>
           </div>
 
@@ -726,12 +726,12 @@ export default function Index() {
                 </div>
 
                 {/* Emergency Info */}
-                <div className="bg-gradient-to-br from-indigo-50 to-white rounded-2xl p-8 border-2 border-indigo-100 shadow-lg">
-                  <div className="flex items-center mb-6">
-                    <div className="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center mr-3">
-                      <CheckCircle className="w-5 h-5 text-indigo-600" />
+                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border-l-4 border-red-500 shadow-lg">
+                  <div className="flex items-center mb-4">
+                    <div className="w-8 h-8 bg-red-500 rounded-lg flex items-center justify-center mr-3">
+                      <Heart className="w-4 h-4 text-white" />
                     </div>
-                    <h4 className="text-xl font-bold text-vet-gray-900">
+                    <h4 className="text-lg font-bold text-red-600">
                       ¿Qué hacer mientras llegas?
                     </h4>
                   </div>
