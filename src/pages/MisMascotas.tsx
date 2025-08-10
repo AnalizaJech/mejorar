@@ -414,7 +414,7 @@ export default function MisMascotas() {
                             value={newMascota.peso}
                             onChange={(e) => handlePesoChange(e.target.value)}
                             placeholder="5.2"
-                            className="pr-12"
+                            className="pr-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                           />
                           <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                             <span className="text-sm text-vet-gray-500">
