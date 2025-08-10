@@ -126,7 +126,7 @@ const navigationItems: NavItem[] = [
   {
     label: "Servicios",
     path: "/servicios",
-    icon: Settings,
+    icon: Briefcase,
     roles: ["admin"],
   },
   {
