@@ -727,27 +727,27 @@ export default function Index() {
                   </a>
                 </div>
 
-                {/* Emergency Steps - Clean Minimal Design */}
+                {/* Emergency Steps - Colorful Harmonious Design */}
                 <div className="flex flex-col h-full">
                   <h3 className="text-2xl font-bold text-vet-gray-900 mb-6">
                     ¿Qué hacer mientras llegas?
                   </h3>
 
                   <div className="relative flex-1">
-                    {/* Thick Connection Line */}
-                    <div className="absolute left-6 top-8 bottom-8 w-1 bg-gradient-to-b from-slate-300 via-slate-400 to-slate-500 rounded-full"></div>
+                    {/* Connection Line - stops at last circle */}
+                    <div className="absolute left-6 top-4 h-32 w-1 bg-gradient-to-b from-blue-400 via-emerald-400 to-amber-400 rounded-full"></div>
 
                     <div className="space-y-8">
                       {/* Step 1 */}
                       <div className="relative flex items-center space-x-6">
-                        <div className="relative z-10 w-12 h-12 bg-slate-600 rounded-full flex items-center justify-center">
+                        <div className="relative z-10 w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-lg">
                           <span className="text-white font-bold text-lg">1</span>
                         </div>
                         <div className="flex-1 pl-2">
-                          <h5 className="font-bold text-gray-900 text-lg mb-1">
+                          <h5 className="font-bold text-blue-700 text-lg mb-1">
                             Mantén la calma
                           </h5>
-                          <p className="text-gray-600">
+                          <p className="text-blue-600">
                             Tu mascota puede sentir tu ansiedad
                           </p>
                         </div>
@@ -755,14 +755,14 @@ export default function Index() {
 
                       {/* Step 2 */}
                       <div className="relative flex items-center space-x-6">
-                        <div className="relative z-10 w-12 h-12 bg-slate-600 rounded-full flex items-center justify-center">
+                        <div className="relative z-10 w-12 h-12 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center shadow-lg">
                           <span className="text-white font-bold text-lg">2</span>
                         </div>
                         <div className="flex-1 pl-2">
-                          <h5 className="font-bold text-gray-900 text-lg mb-1">
+                          <h5 className="font-bold text-emerald-700 text-lg mb-1">
                             Observa los síntomas
                           </h5>
-                          <p className="text-gray-600">
+                          <p className="text-emerald-600">
                             Toma nota de lo que ves
                           </p>
                         </div>
@@ -770,14 +770,14 @@ export default function Index() {
 
                       {/* Step 3 */}
                       <div className="relative flex items-center space-x-6">
-                        <div className="relative z-10 w-12 h-12 bg-slate-600 rounded-full flex items-center justify-center">
+                        <div className="relative z-10 w-12 h-12 bg-gradient-to-br from-amber-500 to-amber-600 rounded-full flex items-center justify-center shadow-lg">
                           <span className="text-white font-bold text-lg">3</span>
                         </div>
                         <div className="flex-1 pl-2">
-                          <h5 className="font-bold text-gray-900 text-lg mb-1">
+                          <h5 className="font-bold text-amber-700 text-lg mb-1">
                             No mediques
                           </h5>
-                          <p className="text-gray-600">
+                          <p className="text-amber-600">
                             Espera instrucciones del veterinario
                           </p>
                         </div>
