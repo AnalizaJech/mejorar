@@ -1811,34 +1811,109 @@ export default function Configuracion() {
                     </div>
 
                     {/* Data Status */}
-                    <div className="bg-gray-50 p-4 rounded-lg">
-                      <h5 className="font-medium text-gray-900 mb-2">
-                        Estado de los Datos
+                    <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-xl border border-blue-100">
+                      <h5 className="font-semibold text-gray-900 mb-4 flex items-center space-x-2">
+                        <Database className="w-5 h-5 text-blue-600" />
+                        <span>Estado de los Datos del Sistema</span>
                       </h5>
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
-                        <div>
-                          <span className="text-gray-600">Mascotas:</span>
-                          <span className="ml-2 font-medium">
-                            {
-                              mascotas.filter((m) => m.clienteId === user?.id)
-                                .length
-                            }
-                          </span>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        {/* Total Mascotas */}
+                        <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
+                          <div className="flex items-center space-x-3">
+                            <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                              <span className="text-green-600 font-bold text-lg">🐾</span>
+                            </div>
+                            <div>
+                              <span className="text-xs font-medium text-gray-500 uppercase tracking-wide block">
+                                Total Mascotas
+                              </span>
+                              <span className="text-2xl font-bold text-gray-900">
+                                {mascotas.length}
+                              </span>
+                            </div>
+                          </div>
                         </div>
-                        <div>
-                          <span className="text-gray-600">Citas:</span>
-                          <span className="ml-2 font-medium">
-                            {
-                              citas.filter((c) => c.clienteId === user?.id)
-                                .length
-                            }
-                          </span>
+
+                        {/* Total Propietarios */}
+                        <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
+                          <div className="flex items-center space-x-3">
+                            <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                              <User className="w-5 h-5 text-blue-600" />
+                            </div>
+                            <div>
+                              <span className="text-xs font-medium text-gray-500 uppercase tracking-wide block">
+                                Total Propietarios
+                              </span>
+                              <span className="text-2xl font-bold text-gray-900">
+                                {usuarios.filter(u => u.rol === 'cliente').length}
+                              </span>
+                            </div>
+                          </div>
                         </div>
-                        <div>
-                          <span className="text-gray-600">Usuario:</span>
-                          <span className="ml-2 font-medium">
-                            {user ? "Conectado" : "Desconectado"}
-                          </span>
+
+                        {/* Total Citas */}
+                        <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
+                          <div className="flex items-center space-x-3">
+                            <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                              <span className="text-purple-600 font-bold text-lg">📅</span>
+                            </div>
+                            <div>
+                              <span className="text-xs font-medium text-gray-500 uppercase tracking-wide block">
+                                Total Citas
+                              </span>
+                              <span className="text-2xl font-bold text-gray-900">
+                                {citas.length}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Veterinarios */}
+                        <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
+                          <div className="flex items-center space-x-3">
+                            <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+                              <Stethoscope className="w-5 h-5 text-orange-600" />
+                            </div>
+                            <div>
+                              <span className="text-xs font-medium text-gray-500 uppercase tracking-wide block">
+                                Veterinarios
+                              </span>
+                              <span className="text-2xl font-bold text-gray-900">
+                                {usuarios.filter(u => u.rol === 'veterinario').length}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Estado detallado de citas */}
+                      <div className="mt-6 pt-4 border-t border-blue-200">
+                        <h6 className="font-medium text-gray-700 mb-3">Estado de Citas</h6>
+                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm">
+                          <div className="bg-yellow-50 rounded-lg p-3 text-center">
+                            <div className="font-semibold text-yellow-700">
+                              {citas.filter(c => c.estado === 'pendiente_pago').length}
+                            </div>
+                            <div className="text-yellow-600 text-xs">Pendientes</div>
+                          </div>
+                          <div className="bg-green-50 rounded-lg p-3 text-center">
+                            <div className="font-semibold text-green-700">
+                              {citas.filter(c => c.estado === 'aceptada').length}
+                            </div>
+                            <div className="text-green-600 text-xs">Aceptadas</div>
+                          </div>
+                          <div className="bg-blue-50 rounded-lg p-3 text-center">
+                            <div className="font-semibold text-blue-700">
+                              {citas.filter(c => c.estado === 'atendida').length}
+                            </div>
+                            <div className="text-blue-600 text-xs">Atendidas</div>
+                          </div>
+                          <div className="bg-red-50 rounded-lg p-3 text-center">
+                            <div className="font-semibold text-red-700">
+                              {citas.filter(c => c.estado === 'cancelada').length}
+                            </div>
+                            <div className="text-red-600 text-xs">Canceladas</div>
+                          </div>
                         </div>
                       </div>
                     </div>
