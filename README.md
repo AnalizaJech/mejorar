@@ -47,7 +47,7 @@ Transformar la experiencia veterinaria tradicional mediante tecnología que:
 
 - **Sistema de Citas Inteligente**: Agendamiento con validación automática de pagos
 - **Historial Clínico Digital**: Registro completo de consultas veterinarias
-- **Dashboard Personalizado**: Métricas específicas por rol de usuario
+- **Dashboard Personalizado**: M��tricas específicas por rol de usuario
 - **Gestión de Pagos**: Validación digital de comprobantes
 - **Sistema de Notificaciones**: Comunicación en tiempo real
 
@@ -113,7 +113,7 @@ src/
 │   ├── utils.ts            # Utilidades generales (cn, formatters)
 │   ├── citaUtils.ts        # Utilidades específicas de citas
 │   └── imageUtils.ts       # Compresión automática de imágenes
-├── pages/                  # Páginas de la aplicación (28 páginas)
+├── pages/                  # P��ginas de la aplicación (28 páginas)
 │   ├── Index.tsx           # Landing page pública
 │   ├── Login.tsx           # Autenticación
 │   ├── Dashboard.tsx       # Dashboard universal por roles
@@ -130,7 +130,7 @@ src/
 │   ├── MisPacientes.tsx    # Gestión de pacientes asignados
 │   ├── HistorialClinicoVeterinario.tsx # Historial completo
 │   │
-│   ├─�� # PÁGINAS DEL ADMINISTRADOR
+│   ├── # PÁGINAS DEL ADMINISTRADOR
 │   ├── PreCitas.tsx        # Gestión de solicitudes públicas
 │   ├── GestionCitas.tsx    # Gestión completa de citas
 │   ├── GestionCitasPago.tsx # Validación de pagos
@@ -226,7 +226,7 @@ graph TD
 
 ## 🔄 Flujos Principales
 
-### 🎯 Flujo Completo del Cliente
+### �� Flujo Completo del Cliente
 
 ```mermaid
 graph TD
@@ -566,6 +566,22 @@ npm run format.fix       # Formatear código con Prettier
 - **Veterinario**: Citas del día, pacientes asignados, estadísticas personales
 - **Admin**: Métricas globales, citas pendientes, gestión de usuarios
 
+### 🌆 Características Destacadas Recientes
+
+**Sistema de Contacto Integrado:**
+
+- 📱 **WhatsApp**: Mensajes pre-formateados automáticos
+- 💬 **SMS**: Integración nativa del dispositivo
+- 📧 **Email**: Asunto y cuerpo pre-completados
+- 📞 **Llamadas**: Marcado directo con prefijo +51
+
+**Sistema de Verificación Visual:**
+
+- 🟢 **Verde**: Estados verificados y completos
+- 🟡 **Amarillo**: Estados pendientes de acción
+- 🔴 **Rojo**: Estados con problemas o faltantes
+- 🔵 **Azul**: Información y estados neutrales
+
 ---
 
 ## 📱 Responsive Design
@@ -696,7 +712,7 @@ src/lib/utils.spec.ts    # Tests de utilidades generales
   // Archivos y comprobantes
   comprobante_[citaId]: ComprobanteData,
 
-  // Configuración
+  // Configuraci��n
   veterinary_services: Servicio[],
   newsletter_subscribers: SuscriptorNewsletter[],
   newsletter_emails: NewsletterEmail[]
