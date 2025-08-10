@@ -90,6 +90,37 @@ export default function MisMascotas() {
       return; // Don't submit without sex
     }
 
+    // Check for duplicate pets (same name, species, breed, and sex)
+    if (!editingMascota) {
+      const isDuplicate = mascotas.some(mascota =>
+        mascota.clienteId === user?.id &&
+        mascota.nombre.toLowerCase().trim() === newMascota.nombre.toLowerCase().trim() &&
+        mascota.especie.toLowerCase() === newMascota.especie.toLowerCase() &&
+        mascota.raza.toLowerCase().trim() === newMascota.raza.toLowerCase().trim() &&
+        mascota.sexo?.toLowerCase() === newMascota.sexo.toLowerCase()
+      );
+
+      if (isDuplicate) {
+        alert("Ya tienes una mascota registrada con el mismo nombre, especie, raza y sexo. Por favor verifica los datos.");
+        return;
+      }
+    } else {
+      // When editing, exclude the current pet from duplicate check
+      const isDuplicate = mascotas.some(mascota =>
+        mascota.id !== editingMascota.id &&
+        mascota.clienteId === user?.id &&
+        mascota.nombre.toLowerCase().trim() === newMascota.nombre.toLowerCase().trim() &&
+        mascota.especie.toLowerCase() === newMascota.especie.toLowerCase() &&
+        mascota.raza.toLowerCase().trim() === newMascota.raza.toLowerCase().trim() &&
+        mascota.sexo?.toLowerCase() === newMascota.sexo.toLowerCase()
+      );
+
+      if (isDuplicate) {
+        alert("Ya tienes una mascota registrada con el mismo nombre, especie, raza y sexo. Por favor verifica los datos.");
+        return;
+      }
+    }
+
     if (editingMascota) {
       // Edit existing mascota
       updateMascota(editingMascota.id, {
