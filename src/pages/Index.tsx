@@ -222,7 +222,7 @@ export default function Index() {
               </div>
 
               {/* Floating stats cards */}
-              <div className="absolute -top-4 -left-4 bg-white rounded-xl shadow-lg p-4 z-10">
+              <div className="absolute -top-4 -left-4 bg-white rounded-xl shadow-lg p-4 z-10 transform hover:scale-105 transition-all duration-300">
                 <div className="flex items-center space-x-3">
                   <div className="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center">
                     <Star className="w-5 h-5 text-amber-600" />
@@ -234,7 +234,7 @@ export default function Index() {
                 </div>
               </div>
 
-              <div className="absolute -bottom-4 -right-4 bg-white rounded-xl shadow-lg p-4 z-10">
+              <div className="absolute -bottom-4 -right-4 bg-white rounded-xl shadow-lg p-4 z-10 transform hover:scale-105 transition-all duration-300">
                 <div className="flex items-center space-x-3">
                   <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
                     <Users className="w-5 h-5 text-emerald-600" />
