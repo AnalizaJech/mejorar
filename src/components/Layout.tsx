@@ -36,6 +36,7 @@ import {
   Shield,
   X,
   ChevronUp,
+  Briefcase,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { UserRole } from "@/lib/types";
@@ -125,7 +126,13 @@ const navigationItems: NavItem[] = [
   {
     label: "Servicios",
     path: "/servicios",
-    icon: FileText,
+    icon: Briefcase,
+    roles: ["admin"],
+  },
+  {
+    label: "Configuración",
+    path: "/configuracion",
+    icon: Settings,
     roles: ["admin"],
   },
 ];
@@ -321,6 +328,18 @@ export default function Layout({
                       >
                         <Stethoscope className="w-4 h-4" />
                         <span>Veterinarios</span>
+                      </Link>
+                      <Link
+                        to="/servicios"
+                        className={cn(
+                          "flex items-center space-x-2 px-3 py-2 text-sm font-medium transition-colors relative",
+                          location.pathname === "/servicios"
+                            ? "text-vet-primary border-b-2 border-vet-primary"
+                            : "text-vet-gray-600 hover:text-vet-primary",
+                        )}
+                      >
+                        <Briefcase className="w-4 h-4" />
+                        <span>Servicios</span>
                       </Link>
                     </>
                   ) : user.rol === "veterinario" ? (

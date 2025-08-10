@@ -800,16 +800,20 @@ export default function NuevaCita() {
 
                   <div>
                     <Label htmlFor="notas">Notas adicionales</Label>
-                    <Textarea
-                      id="notas"
-                      value={citaData.notas}
-                      onChange={(e) =>
-                        setCitaData({ ...citaData, notas: e.target.value })
-                      }
-                      placeholder="Información adicional que el veterinario deba saber..."
-                      className="mt-2"
-                      rows={3}
-                    />
+                    <div className="mt-2">
+                      <Textarea
+                        id="notas"
+                        value={citaData.notas}
+                        onChange={(e) =>
+                          setCitaData({ ...citaData, notas: e.target.value })
+                        }
+                        placeholder="Información adicional que el veterinario deba saber..."
+                        className="w-full min-h-[120px] max-h-[120px] resize-none overflow-y-auto px-3 py-2 border border-vet-gray-300 rounded-lg focus:ring-2 focus:ring-vet-primary focus:border-vet-primary transition-all duration-200"
+                      />
+                      <p className="text-xs text-vet-gray-500 mt-1">
+                        📝 Información adicional relevante para el veterinario
+                      </p>
+                    </div>
                   </div>
                 </div>
               )}

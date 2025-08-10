@@ -80,43 +80,43 @@ const iconos = [
   { id: "Stethoscope", nombre: "Estetoscopio", component: Stethoscope },
   { id: "Syringe", nombre: "Jeringa", component: Syringe },
   { id: "Thermometer", nombre: "Termómetro", component: Thermometer },
-  { id: "Eye", nombre: "Microscopio", component: Eye },
-  { id: "Search", nombre: "Radiografía", component: Search },
-  { id: "FileText", nombre: "Laboratorio", component: FileText },
-  { id: "Heart", nombre: "Vendaje", component: Heart },
+  { id: "Eye_Microscopio", nombre: "Microscopio", component: Eye },
+  { id: "Search_Radiografia", nombre: "Radiografía", component: Search },
+  { id: "FileText_Laboratorio", nombre: "Laboratorio", component: FileText },
+  { id: "Heart_Vendaje", nombre: "Vendaje", component: Heart },
   { id: "CrossIcon", nombre: "Cruz Médica", component: CrossIcon },
 
   // Procedimientos y servicios
-  { id: "Activity", nombre: "Cirugía", component: Activity },
+  { id: "Activity_Cirugia", nombre: "Cirugía", component: Activity },
   { id: "Scissors", nombre: "Grooming", component: Scissors },
-  { id: "Eye", nombre: "Examen", component: Eye },
-  { id: "Search", nombre: "Diagnóstico", component: Search },
-  { id: "Heart", nombre: "Medicamento", component: Heart },
+  { id: "Eye_Examen", nombre: "Examen", component: Eye },
+  { id: "Search_Diagnostico", nombre: "Diagnóstico", component: Search },
+  { id: "Heart_Medicamento", nombre: "Medicamento", component: Heart },
   { id: "Shield", nombre: "Prevención", component: Shield },
-  { id: "Heart", nombre: "Cardiología", component: Heart },
-  { id: "Activity", nombre: "Ultrasonido", component: Activity },
-  { id: "Star", nombre: "Genética", component: Star },
+  { id: "Heart_Cardiologia", nombre: "Cardiología", component: Heart },
+  { id: "Activity_Ultrasonido", nombre: "Ultrasonido", component: Activity },
+  { id: "Star_Genetica", nombre: "Genética", component: Star },
   { id: "Target", nombre: "Tratamiento", component: Target },
 
   // Estados y urgencias
   { id: "AlertCircle", nombre: "Emergencia", component: AlertCircle },
   { id: "Zap", nombre: "Urgente", component: Zap },
-  { id: "Heart", nombre: "Cuidado", component: Heart },
+  { id: "Heart_Cuidado", nombre: "Cuidado", component: Heart },
   { id: "CheckCircle", nombre: "Control", component: CheckCircle },
-  { id: "FileText", nombre: "Revisión", component: FileText },
+  { id: "FileText_Revision", nombre: "Revisión", component: FileText },
 
   // Tipos de animales/pacientes
   { id: "PawPrint", nombre: "Mascota", component: PawPrint },
-  { id: "Activity", nombre: "Ortopedia", component: Activity },
-  { id: "Heart", nombre: "Pediatría", component: Heart },
-  { id: "Star", nombre: "Premium", component: Star },
+  { id: "Activity_Ortopedia", nombre: "Ortopedia", component: Activity },
+  { id: "Heart_Pediatria", nombre: "Pediatría", component: Heart },
+  { id: "Star_Premium", nombre: "Premium", component: Star },
 
   // Servicios especiales
   { id: "Droplets", nombre: "Hidratación", component: Droplets },
   { id: "Snowflake", nombre: "Criocirugía", component: Snowflake },
   { id: "Sun", nombre: "Fototerapia", component: Sun },
   { id: "Sparkles", nombre: "Estética", component: Sparkles },
-  { id: "Star", nombre: "Especialidad", component: Star },
+  { id: "Star_Especialidad", nombre: "Especialidad", component: Star },
 
   // Logística y ubicación
   { id: "Clock", nombre: "Programado", component: Clock },
@@ -524,29 +524,72 @@ export default function Servicios() {
 
                 <div className="space-y-2">
                   <Label htmlFor="icono">Icono</Label>
-                  <Select
-                    value={formData.icono}
-                    onValueChange={(value) =>
-                      setFormData({ ...formData, icono: value })
-                    }
-                  >
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {iconos.map((icono) => {
-                        const IconComponent = icono.component;
-                        return (
-                          <SelectItem key={icono.id} value={icono.id}>
-                            <div className="flex items-center space-x-2">
-                              <IconComponent className="w-4 h-4" />
-                              <span>{icono.nombre}</span>
-                            </div>
-                          </SelectItem>
+                  <div className="space-y-3">
+                    {/* Icono seleccionado actualmente */}
+                    <div className="flex items-center space-x-3 p-3 border border-vet-gray-300 rounded-lg bg-vet-gray-50">
+                      {(() => {
+                        const selectedIcon = iconos.find(
+                          (i) => i.id === formData.icono,
                         );
-                      })}
-                    </SelectContent>
-                  </Select>
+                        if (selectedIcon) {
+                          const IconComponent = selectedIcon.component;
+                          return (
+                            <>
+                              <div className="w-8 h-8 bg-vet-primary/10 rounded-lg flex items-center justify-center">
+                                <IconComponent className="w-5 h-5 text-vet-primary" />
+                              </div>
+                              <span className="font-medium text-vet-gray-900">
+                                {selectedIcon.nombre}
+                              </span>
+                            </>
+                          );
+                        }
+                        return (
+                          <span className="text-vet-gray-500">
+                            Selecciona un icono
+                          </span>
+                        );
+                      })()}
+                    </div>
+
+                    {/* Grid de iconos scrolleable */}
+                    <div className="border border-vet-gray-300 rounded-lg p-4 bg-white">
+                      <p className="text-sm text-vet-gray-600 mb-3">
+                        Selecciona un icono:
+                      </p>
+                      <div className="max-h-48 overflow-y-auto pr-2">
+                        <div className="grid grid-cols-4 gap-2">
+                          {iconos.map((icono) => {
+                            const IconComponent = icono.component;
+                            const isSelected = formData.icono === icono.id;
+                            return (
+                              <button
+                                key={icono.id}
+                                type="button"
+                                onClick={() =>
+                                  setFormData({ ...formData, icono: icono.id })
+                                }
+                                className={`
+                                  flex flex-col items-center justify-center p-3 rounded-lg border-2 transition-all hover:shadow-md
+                                  ${
+                                    isSelected
+                                      ? "border-vet-primary bg-vet-primary/10 text-vet-primary"
+                                      : "border-vet-gray-200 hover:border-vet-primary/50 text-vet-gray-600 hover:text-vet-primary"
+                                  }
+                                `}
+                                title={icono.nombre}
+                              >
+                                <IconComponent className="w-5 h-5 mb-1" />
+                                <span className="text-xs text-center leading-tight">
+                                  {icono.nombre}
+                                </span>
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
                 <div className="space-y-2">
