@@ -1190,6 +1190,115 @@ export default function GestionCitas() {
                                   </div>
                                 )}
 
+                                {/* Estado de verificación de email */}
+                                <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
+                                  <div className="flex items-center space-x-3">
+                                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${propietario.emailVerificado ? 'bg-green-100' : 'bg-yellow-100'}`}>
+                                      <span className={`font-bold text-sm ${propietario.emailVerificado ? 'text-green-600' : 'text-yellow-600'}`}>
+                                        {propietario.emailVerificado ? '✓' : '⚠️'}
+                                      </span>
+                                    </div>
+                                    <div>
+                                      <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
+                                        Estado del Email
+                                      </span>
+                                      <p className={`text-sm font-medium ${propietario.emailVerificado ? 'text-green-700' : 'text-yellow-700'}`}>
+                                        {propietario.emailVerificado ? 'Verificado' : 'No verificado'}
+                                      </p>
+                                      <p className="text-xs text-vet-gray-500">
+                                        {propietario.emailVerificado ? 'Email confirmado por el cliente' : 'Email pendiente de confirmación'}
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                {/* Preferencias de comunicación */}
+                                {(() => {
+                                  try {
+                                    const notifications = localStorage.getItem('petla_notifications');
+                                    if (notifications) {
+                                      const prefs = JSON.parse(notifications);
+                                      return (
+                                        <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
+                                          <div className="flex items-start space-x-3">
+                                            <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
+                                              <span className="text-purple-600 font-bold text-sm">🔔</span>
+                                            </div>
+                                            <div className="flex-1">
+                                              <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block mb-2">
+                                                Preferencias de Comunicación
+                                              </span>
+                                              <div className="grid grid-cols-2 gap-2 text-xs">
+                                                <div className={`flex items-center space-x-1 ${prefs.emailNotifications ? 'text-green-700' : 'text-gray-500'}`}>
+                                                  <span>{prefs.emailNotifications ? '✓' : '✗'}</span>
+                                                  <span>Email</span>
+                                                </div>
+                                                <div className={`flex items-center space-x-1 ${prefs.smsNotifications ? 'text-green-700' : 'text-gray-500'}`}>
+                                                  <span>{prefs.smsNotifications ? '✓' : '✗'}</span>
+                                                  <span>SMS</span>
+                                                </div>
+                                                <div className={`flex items-center space-x-1 ${prefs.appointmentReminders ? 'text-green-700' : 'text-gray-500'}`}>
+                                                  <span>{prefs.appointmentReminders ? '✓' : '✗'}</span>
+                                                  <span>Recordatorios</span>
+                                                </div>
+                                                <div className={`flex items-center space-x-1 ${prefs.vaccineReminders ? 'text-green-700' : 'text-gray-500'}`}>
+                                                  <span>{prefs.vaccineReminders ? '✓' : '✗'}</span>
+                                                  <span>Vacunas</span>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      );
+                                    }
+                                  } catch (e) {
+                                    console.error('Error loading notification preferences:', e);
+                                  }
+                                  return null;
+                                })()}
+
+                                {/* Información de contacto adicional */}
+                                {(() => {
+                                  const hasContactInfo = propietario.telefono || propietario.email;
+                                  if (hasContactInfo) {
+                                    return (
+                                      <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
+                                        <div className="flex items-start space-x-3">
+                                          <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                                            <span className="text-blue-600 font-bold text-sm">📞</span>
+                                          </div>
+                                          <div className="flex-1">
+                                            <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block mb-2">
+                                              Métodos de Contacto Disponibles
+                                            </span>
+                                            <div className="space-y-1 text-xs">
+                                              {propietario.telefono && (
+                                                <div className="flex items-center space-x-1 text-green-700">
+                                                  <span>✓</span>
+                                                  <span>Llamadas y WhatsApp disponibles</span>
+                                                </div>
+                                              )}
+                                              {propietario.email && (
+                                                <div className="flex items-center space-x-1 text-green-700">
+                                                  <span>✓</span>
+                                                  <span>Email disponible</span>
+                                                </div>
+                                              )}
+                                              {propietario.direccion && (
+                                                <div className="flex items-center space-x-1 text-green-700">
+                                                  <span>✓</span>
+                                                  <span>Dirección registrada para domicilio</span>
+                                                </div>
+                                              )}
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    );
+                                  }
+                                  return null;
+                                })()}
+
                                 {/* Dirección - ancho completo */}
                                 {propietario.direccion && (
                                   <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100 md:col-span-2 lg:col-span-3">
