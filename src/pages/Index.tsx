@@ -188,8 +188,8 @@ export default function Index() {
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <div className="aspect-[4/3] relative">
                   <img
-                    src="https://images.pexels.com/photos/28704691/pexels-photo-28704691.jpeg"
-                    alt="Mascota feliz y saludable"
+                    src="https://cdn.builder.io/api/v1/image/assets%2F57411090bc0e48948af33d6d1a530fae%2Fac7b3abc548e4017b79d5b96586a0d7f?format=webp&width=800"
+                    alt="Veterinario cuidando mascotas"
                     className="w-full h-full object-cover"
                   />
                   {/* Gradient overlay for text readability */}
