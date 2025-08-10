@@ -360,16 +360,16 @@ export default function CitaDetailModal({
 
                   {/* Username */}
                   {selectedCita.propietario?.username && (
-                    <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl p-4 shadow-sm border border-slate-200 hover:shadow-lg transition-all duration-300 hover:scale-105">
                       <div className="flex items-center space-x-3">
-                        <div className="w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center">
-                          <span className="text-slate-600 font-bold text-lg">@</span>
+                        <div className="w-12 h-12 bg-gradient-to-r from-slate-500 to-slate-600 rounded-xl flex items-center justify-center shadow-lg">
+                          <span className="text-white font-bold text-xl">@</span>
                         </div>
                         <div className="flex-1">
-                          <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block mb-1">
+                          <span className="text-xs font-bold text-slate-700 uppercase tracking-wide block mb-1">
                             Usuario
                           </span>
-                          <p className="text-sm font-semibold text-vet-gray-900">
+                          <p className="text-lg font-bold text-slate-900">
                             @{selectedCita.propietario.username}
                           </p>
                         </div>
