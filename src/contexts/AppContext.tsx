@@ -888,7 +888,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     // Don't clear mascotas or citas from localStorage as they are system-wide data
     // The UI will filter them based on the logged-in user
     // Don't modify the mascotas state or localStorage - let them persist
-    // Note: citas, preCitas, mascotas are global system data and should persist in localStorage
+    // Note: citas, mascotas are global system data and should persist in localStorage
   };
 
   // Function to refresh data from localStorage - useful when data seems lost
