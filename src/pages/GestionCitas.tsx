@@ -1301,13 +1301,10 @@ export default function GestionCitas() {
                                     </div>
                                     <div className="text-center">
                                       <div className="text-2xl font-bold text-yellow-600">
-                                        {(() => {
-                                          const citasPendientes = citas.filter(c =>
-                                            c.clienteId === propietario.id &&
-                                            ['pendiente_pago', 'aceptada'].includes(c.estado)
-                                          );
-                                          return citasPendientes.length;
-                                        })()}
+                                        {citas.filter(c =>
+                                          c.clienteId === propietario.id &&
+                                          ['pendiente_pago', 'aceptada'].includes(c.estado)
+                                        ).length}
                                       </div>
                                       <div className="text-xs text-vet-gray-600">Citas Pendientes</div>
                                     </div>
