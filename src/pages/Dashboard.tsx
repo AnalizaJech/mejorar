@@ -372,7 +372,7 @@ function AdminDashboard({
 }: {
   setShowServicesModal: (show: boolean) => void;
 }) {
-  const { usuarios, citas, preCitas, suscriptoresNewsletter } = useAppContext();
+  const { usuarios, citas } = useAppContext();
 
   const adminStats = {
     totalUsuarios: usuarios.length,
