@@ -355,7 +355,7 @@ export default function Layout({
                 // Public navigation - landing page sections in order
                 <>
                   <a
-                    href="#estadisticas"
+                    href="#nosotros"
                     className="px-3 py-2 text-sm font-medium text-vet-gray-600 hover:text-vet-primary transition-colors"
                     onClick={(e) => {
                       e.preventDefault();
@@ -363,17 +363,17 @@ export default function Layout({
                         navigate("/");
                         setTimeout(() => {
                           document
-                            .getElementById("estadisticas")
+                            .getElementById("nosotros")
                             ?.scrollIntoView({ behavior: "smooth" });
                         }, 100);
                       } else {
                         document
-                          .getElementById("estadisticas")
+                          .getElementById("nosotros")
                           ?.scrollIntoView({ behavior: "smooth" });
                       }
                     }}
                   >
-                    Estadísticas
+                    Nosotros
                   </a>
                   <a
                     href="#servicios"
