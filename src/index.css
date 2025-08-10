@@ -165,18 +165,18 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: hsl(var(--muted));
+    background: #f1f5f9;
     border-radius: 4px;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: hsl(var(--primary));
+    background: #94a3b8;
     border-radius: 4px;
     transition: background-color 0.2s ease;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: hsl(var(--primary) / 0.8);
+    background: #64748b;
   }
 
   ::-webkit-scrollbar-corner {
@@ -186,7 +186,7 @@
   /* Firefox */
   * {
     scrollbar-width: thin;
-    scrollbar-color: hsl(var(--primary)) hsl(var(--muted));
+    scrollbar-color: #94a3b8 #f1f5f9;
   }
 }
 
