@@ -1579,41 +1579,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
     return new Date(dateInput);
   };
 
-  // Pre-cita functions
-  const addPreCita = (
-    preCitaData: Omit<PreCita, "id" | "estado" | "fechaCreacion">,
-  ) => {
-    const newPreCita: PreCita = {
-      ...preCitaData,
-      id: Date.now().toString(),
-      estado: "pendiente",
-      fechaCreacion: new Date(),
-      fechaPreferida: createSafeDate(preCitaData.fechaPreferida),
-    };
-    setPreCitas((prev) => [...prev, newPreCita]);
-  };
-
-  const updatePreCita = (id: string, updates: Partial<PreCita>) => {
-    const processedUpdates = {
-      ...updates,
-      ...(updates.fechaPreferida && {
-        fechaPreferida: createSafeDate(updates.fechaPreferida),
-      }),
-      ...(updates.fechaNueva && { fechaNueva: new Date(updates.fechaNueva) }),
-      ...(updates.fechaCreacion && {
-        fechaCreacion: new Date(updates.fechaCreacion),
-      }),
-    };
-    setPreCitas((prev) =>
-      prev.map((preCita) =>
-        preCita.id === id ? { ...preCita, ...processedUpdates } : preCita,
-      ),
-    );
-  };
-
-  const deletePreCita = (id: string) => {
-    setPreCitas((prev) => prev.filter((preCita) => preCita.id !== id));
-  };
 
   // Historial Clinico functions
   const addHistorialEntry = (entryData: Omit<HistorialClinico, "id">) => {
@@ -1688,82 +1653,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
       );
   };
 
-  // Newsletter functions
-  const addSuscriptorNewsletter = async (email: string): Promise<boolean> => {
-    const emailLower = email.toLowerCase();
-
-    // Check if email already exists (case insensitive)
-    const existingSuscriptor = suscriptoresNewsletter.find(
-      (s) => s.email.toLowerCase() === emailLower,
-    );
-
-    if (existingSuscriptor) {
-      if (existingSuscriptor.activo) {
-        return false; // Already subscribed and active
-      } else {
-        // Reactivate inactive subscription
-        updateSuscriptorNewsletter(existingSuscriptor.id, {
-          activo: true,
-          fechaSuscripcion: new Date(), // Update subscription date
-        });
-        return true;
-      }
-    }
-
-    // Create new subscription
-    const newSuscriptor: SuscriptorNewsletter = {
-      id: Date.now().toString(),
-      email,
-      fechaSuscripcion: new Date(),
-      activo: true,
-    };
-
-    setSuscriptoresNewsletter((prev) => [...prev, newSuscriptor]);
-    return true;
-  };
-
-  const updateSuscriptorNewsletter = (
-    id: string,
-    updates: Partial<SuscriptorNewsletter>,
-  ) => {
-    setSuscriptoresNewsletter((prev) =>
-      prev.map((suscriptor) =>
-        suscriptor.id === id ? { ...suscriptor, ...updates } : suscriptor,
-      ),
-    );
-  };
-
-  const deleteSuscriptorNewsletter = (id: string) => {
-    setSuscriptoresNewsletter((prev) => prev.filter((s) => s.id !== id));
-  };
-
-  const addNewsletterEmail = (emailData: Omit<NewsletterEmail, "id">) => {
-    const newEmail: NewsletterEmail = {
-      ...emailData,
-      id: Date.now().toString(),
-      fechaEnvio: new Date(emailData.fechaEnvio),
-    };
-    setNewsletterEmails((prev) => [...prev, newEmail]);
-  };
-
-  const updateNewsletterEmail = (
-    id: string,
-    updates: Partial<NewsletterEmail>,
-  ) => {
-    const processedUpdates = {
-      ...updates,
-      ...(updates.fechaEnvio && { fechaEnvio: new Date(updates.fechaEnvio) }),
-    };
-    setNewsletterEmails((prev) =>
-      prev.map((email) =>
-        email.id === id ? { ...email, ...processedUpdates } : email,
-      ),
-    );
-  };
-
-  const deleteNewsletterEmail = (id: string) => {
-    setNewsletterEmails((prev) => prev.filter((email) => email.id !== id));
-  };
 
   // Funciones de notificaciones
   const addNotificacion = (
