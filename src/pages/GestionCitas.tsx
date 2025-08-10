@@ -1669,9 +1669,13 @@ export default function GestionCitas() {
                               /\D/g,
                               "",
                             );
+                            // Validar si ya tiene código de país (+51)
+                            const finalNumber = phoneNumber.startsWith('51') && phoneNumber.length === 11
+                              ? `+${phoneNumber}`
+                              : `+51${phoneNumber}`;
                             const message = `Hola ${propietario.nombre}, me comunico de la clínica veterinaria respecto a la cita de ${selectedContactCita.mascota}.`;
                             window.open(
-                              `sms:+51${phoneNumber}?body=${encodeURIComponent(message)}`,
+                              `sms:${finalNumber}?body=${encodeURIComponent(message)}`,
                               "_self",
                             );
                             setShowContactModal(false);
@@ -1681,7 +1685,12 @@ export default function GestionCitas() {
                           <div className="text-left">
                             <p className="font-medium text-purple-700">SMS</p>
                             <p className="text-sm text-purple-600">
-                              Mensaje de texto
+                              {(() => {
+                                const phoneNumber = propietario.telefono.replace(/\D/g, "");
+                                return phoneNumber.startsWith('51') && phoneNumber.length === 11
+                                  ? `+${phoneNumber}`
+                                  : `+51${phoneNumber}`;
+                              })()}
                             </p>
                           </div>
                         </Button>
