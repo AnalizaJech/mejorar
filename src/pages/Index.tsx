@@ -193,9 +193,9 @@ export default function Index() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
 
                   {/* Floating badge */}
-                  <div className="absolute bottom-4 left-4 bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg">
+                  <div className="absolute bottom-4 left-4 bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg transform hover:scale-105 transition-all duration-300">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
+                      <div className="w-10 h-10 bg-vet-primary rounded-full flex items-center justify-center">
                         <Stethoscope className="w-5 h-5 text-white" />
                       </div>
                       <div>
@@ -210,11 +210,11 @@ export default function Index() {
                   </div>
 
                   {/* Quality badge */}
-                  <div className="absolute top-4 right-4 bg-vet-primary backdrop-blur-sm rounded-lg px-4 py-2 shadow-lg border border-white/20 transform hover:scale-105 transition-all duration-300">
+                  <div className="absolute top-4 right-4 bg-emerald-600 backdrop-blur-sm rounded-lg px-4 py-2 shadow-lg border border-white/20 transform hover:scale-105 transition-all duration-300">
                     <div className="flex items-center gap-2">
-                      <Shield className="w-6 h-6 text-white" />
+                      <Bell className="w-5 h-5 text-white" />
                       <span className="text-white text-sm font-semibold">
-                        Certificado
+                        Recordatorios
                       </span>
                     </div>
                   </div>
