@@ -51,60 +51,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 
 export default function Dashboard() {
   const { user, getStats } = useAppContext();
-  const [isLoading, setIsLoading] = useState(false);
-  const [savedMessage, setSavedMessage] = useState("");
 
-  // Services state
-  const [services, setServices] = useState([
-    {
-      id: "consulta_general",
-      nombre: "Consulta General",
-      precio: 80,
-      icono: "Stethoscope",
-      descripcion: "Examen médico rutinario y evaluación de salud general",
-      activo: true,
-    },
-    {
-      id: "vacunacion",
-      nombre: "Vacunación",
-      precio: 65,
-      icono: "Syringe",
-      descripcion: "Aplicación de vacunas preventivas y refuerzos",
-      activo: true,
-    },
-    {
-      id: "emergencia",
-      nombre: "Emergencia",
-      precio: 150,
-      icono: "AlertCircle",
-      descripcion: "Atención médica urgente las 24 horas",
-      activo: true,
-    },
-    {
-      id: "grooming",
-      nombre: "Grooming",
-      precio: 45,
-      icono: "Heart",
-      descripcion: "Baño, corte de pelo, limpieza de oídos y uñas",
-      activo: true,
-    },
-    {
-      id: "cirugia",
-      nombre: "Cirugía",
-      precio: 250,
-      icono: "Activity",
-      descripcion: "Procedimientos quirúrgicos especializados",
-      activo: true,
-    },
-    {
-      id: "diagnostico",
-      nombre: "Diagnóstico",
-      precio: 120,
-      icono: "Search",
-      descripcion: "Exámenes y análisis para determinar diagnósticos",
-      activo: true,
-    },
-  ]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -117,44 +64,6 @@ export default function Dashboard() {
 
   const stats = getStats();
 
-  // Handle service updates
-  const handleServiceUpdate = (
-    serviceId: string,
-    field: string,
-    value: any,
-  ) => {
-    setServices((prev) =>
-      prev.map((service) =>
-        service.id === serviceId ? { ...service, [field]: value } : service,
-      ),
-    );
-  };
-
-  const handleSaveServices = async () => {
-    setIsLoading(true);
-    setSavedMessage("");
-
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      // Save to localStorage
-      localStorage.setItem("veterinary_services", JSON.stringify(services));
-
-      // Dispatch custom event to notify other components
-      window.dispatchEvent(
-        new CustomEvent("servicesUpdated", { detail: services }),
-      );
-
-      setSavedMessage("Configuración de servicios actualizada correctamente");
-      setTimeout(() => {
-        setSavedMessage("");
-      }, 2000);
-    } catch (error) {
-      console.error("Error al actualizar los servicios:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   return (
     <Layout>
