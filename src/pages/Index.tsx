@@ -73,39 +73,6 @@ export default function Index() {
 
 
 
-  if (isSubmitted) {
-    return (
-      <Layout>
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-vet-primary/5 to-vet-secondary/5">
-          <Card className="max-w-md w-full mx-4">
-            <CardContent className="pt-6">
-              <div className="text-center">
-                <div className="mx-auto flex items-center justify-center w-12 h-12 rounded-full bg-green-100 mb-4">
-                  <CheckCircle className="w-6 h-6 text-green-600" />
-                </div>
-                <h3 className="text-lg font-semibold text-vet-gray-900 mb-2">
-                  ¡Pre-cita enviada exitosamente!
-                </h3>
-                <p className="text-vet-gray-600 mb-6">
-                  Hemos recibido tu solicitud. Te contactaremos pronto para
-                  confirmar tu cita.
-                </p>
-                <Button
-                  onClick={() => {
-                    setIsSubmitted(false);
-                    window.scrollTo({ top: 0, behavior: "smooth" });
-                  }}
-                  className="w-full bg-vet-primary hover:bg-vet-primary-dark"
-                >
-                  Volver al Inicio
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </Layout>
-    );
-  }
 
   return (
     <Layout>
