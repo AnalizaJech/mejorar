@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useAppContext } from "@/contexts/AppContext";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
@@ -173,6 +173,7 @@ const getServiceIcon = (iconName) => {
 
 export default function NuevaCita() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { user, mascotas, usuarios, citas, addCita, fixOrphanedPets } =
     useAppContext();
   const [tiposConsulta, setTiposConsulta] = useState(getTiposConsulta());
@@ -192,6 +193,16 @@ export default function NuevaCita() {
     ubicacion: "Clínica Principal",
     notas: "",
   });
+
+  // Handle preselected service from landing page
+  useEffect(() => {
+    const preselectedService = location.state?.preselectedService;
+    if (preselectedService) {
+      setCitaData(prev => ({ ...prev, tipoConsulta: preselectedService }));
+      // Clear the state to prevent it from persisting on refresh
+      window.history.replaceState({}, document.title);
+    }
+  }, [location.state]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
