@@ -249,20 +249,20 @@ export default function Login() {
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-3">
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex items-center space-x-2 shrink-0">
                     <input
                       type="checkbox"
                       id="remember"
                       className="w-4 h-4 rounded border-vet-gray-300 text-vet-primary focus:ring-vet-primary/20 focus:ring-2"
                     />
-                    <Label htmlFor="remember" className="text-sm">
+                    <Label htmlFor="remember" className="text-sm whitespace-nowrap">
                       Recordarme
                     </Label>
                   </div>
                   <Link
                     to="/forgot-password"
-                    className="text-sm text-vet-primary hover:text-vet-primary-dark ml-auto"
+                    className="text-sm text-vet-primary hover:text-vet-primary-dark whitespace-nowrap"
                   >
                     ¿Olvidaste tu contraseña?
                   </Link>
