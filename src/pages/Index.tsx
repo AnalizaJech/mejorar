@@ -211,12 +211,15 @@ export default function Index() {
                   </div>
 
                   {/* Quality badge */}
-                  <div className="absolute top-4 right-4 bg-purple-600 backdrop-blur-sm rounded-lg px-4 py-2 shadow-lg border border-white/20 transform hover:scale-105 transition-all duration-300">
-                    <div className="flex items-center gap-2">
-                      <FileText className="w-5 h-5 text-white" />
-                      <span className="text-white text-sm font-semibold">
-                        Historial Digital
-                      </span>
+                  <div className="absolute top-4 right-4 bg-white rounded-xl shadow-lg p-4 z-10 transform hover:scale-105 transition-all duration-300">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center">
+                        <CheckCircle className="w-5 h-5 text-indigo-600" />
+                      </div>
+                      <div>
+                        <p className="text-lg font-bold text-vet-gray-900">24/7</p>
+                        <p className="text-sm text-vet-gray-600">Disponible</p>
+                      </div>
                     </div>
                   </div>
                 </div>
