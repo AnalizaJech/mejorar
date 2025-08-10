@@ -689,54 +689,50 @@ export default function MisMascotas() {
                     <li>• Buena iluminación natural</li>
                     <li>• Enfoque del rostro</li>
                     <li>• Fondo simple</li>
-                    <li>• Máximo 5MB</li>
+                    <li>��� Máximo 5MB</li>
                   </ul>
                 </div>
               </div>
             </div>
           </div>
 
-          <DialogFooter className="flex-shrink-0 pt-4">
-            <div className="flex flex-col w-full gap-2">
-              <div className="flex gap-2">
-                <Button
-                  variant="outline"
-                  onClick={handleClosePhotoModal}
-                  className="flex-1 text-sm h-9"
-                >
-                  <X className="w-4 h-4 mr-1" />
-                  Cancelar
-                </Button>
+          <DialogFooter className="flex flex-col sm:flex-row gap-2 pt-4">
+            <Button
+              variant="outline"
+              onClick={handleClosePhotoModal}
+              className="w-full sm:w-auto"
+            >
+              <X className="w-4 h-4 mr-2" />
+              Cancelar
+            </Button>
 
-                {selectedMascotaPhoto?.foto && !photoFile && (
-                  <Button
-                    variant="outline"
-                    onClick={handleRemovePhoto}
-                    className="flex-1 text-red-600 hover:text-red-700 text-sm h-9"
-                  >
-                    <Trash2 className="w-4 h-4 mr-1" />
-                    Eliminar
-                  </Button>
-                )}
-              </div>
-
+            {selectedMascotaPhoto?.foto && !photoFile && (
               <Button
-                onClick={photoFile ? handleConfirmPhoto : handlePhotoUpload}
-                className="w-full bg-vet-primary hover:bg-vet-primary-dark text-sm h-9"
+                variant="outline"
+                onClick={handleRemovePhoto}
+                className="w-full sm:w-auto text-red-600 hover:text-red-700"
               >
-                {photoFile ? (
-                  <>
-                    <Upload className="w-4 h-4 mr-1" />
-                    Confirmar
-                  </>
-                ) : (
-                  <>
-                    <Camera className="w-4 h-4 mr-1" />
-                    {selectedMascotaPhoto?.foto ? "Cambiar" : "Seleccionar"}
-                  </>
-                )}
+                <Trash2 className="w-4 h-4 mr-2" />
+                Eliminar
               </Button>
-            </div>
+            )}
+
+            <Button
+              onClick={photoFile ? handleConfirmPhoto : handlePhotoUpload}
+              className="w-full sm:w-auto bg-vet-primary hover:bg-vet-primary-dark"
+            >
+              {photoFile ? (
+                <>
+                  <Upload className="w-4 h-4 mr-2" />
+                  Confirmar
+                </>
+              ) : (
+                <>
+                  <Camera className="w-4 h-4 mr-2" />
+                  {selectedMascotaPhoto?.foto ? "Cambiar" : "Seleccionar"}
+                </>
+              )}
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
