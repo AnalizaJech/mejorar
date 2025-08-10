@@ -1263,7 +1263,7 @@ export default function Configuracion() {
                               : "Información adicional..."
                       }
                       rows={4}
-                      className="border-vet-gray-300 focus:border-vet-primary focus:ring-vet-primary"
+                      className="border-vet-gray-300 focus:border-vet-primary focus:ring-vet-primary resize-none overflow-y-auto min-h-[100px] max-h-[120px]"
                     />
                   </div>
 
