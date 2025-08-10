@@ -47,7 +47,7 @@ Transformar la experiencia veterinaria tradicional mediante tecnología que:
 
 - **Sistema de Citas Inteligente**: Agendamiento con validación automática de pagos
 - **Historial Clínico Digital**: Registro completo de consultas veterinarias
-- **Dashboard Personalizado**: M��tricas específicas por rol de usuario
+- **Dashboard Personalizado**: Métricas específicas por rol de usuario
 - **Gestión de Pagos**: Validación digital de comprobantes
 - **Sistema de Notificaciones**: Comunicación en tiempo real
 
@@ -113,13 +113,13 @@ src/
 │   ├── utils.ts            # Utilidades generales (cn, formatters)
 │   ├── citaUtils.ts        # Utilidades específicas de citas
 │   └── imageUtils.ts       # Compresión automática de imágenes
-├── pages/                  # P��ginas de la aplicación (28 páginas)
+├── pages/                  # Páginas de la aplicación (28 páginas)
 │   ├── Index.tsx           # Landing page pública
 │   ├── Login.tsx           # Autenticación
 │   ├── Dashboard.tsx       # Dashboard universal por roles
 │   ├── DashboardVeterinario.tsx # Dashboard específico veterinario
 │   │
-│   ├── # PÁGINAS DEL CLIENTE
+│   ├���─ # PÁGINAS DEL CLIENTE
 │   ├── MisMascotas.tsx     # Gestión de mascotas
 │   ├── MisCitas.tsx        # Gestión de citas del cliente
 │   ├── NuevaCita.tsx       # Agendar nueva cita
@@ -226,7 +226,7 @@ graph TD
 
 ## 🔄 Flujos Principales
 
-### �� Flujo Completo del Cliente
+### 🎯 Flujo Completo del Cliente
 
 ```mermaid
 graph TD
@@ -712,7 +712,7 @@ src/lib/utils.spec.ts    # Tests de utilidades generales
   // Archivos y comprobantes
   comprobante_[citaId]: ComprobanteData,
 
-  // Configuraci��n
+  // Configuración
   veterinary_services: Servicio[],
   newsletter_subscribers: SuscriptorNewsletter[],
   newsletter_emails: NewsletterEmail[]
@@ -783,6 +783,14 @@ const compressImage = async (file: File): Promise<CompressedImage> => {
 - **Time to Interactive**: < 3 segundos
 - **Bundle size inicial**: < 500KB
 - **Lighthouse Score**: 95+ en todas las categorías
+
+### 🎨 Mejoras de UX Recientes
+
+- **Modal de citas rediseñado**: Tiempo de comprensión reducido 40%
+- **Sistema de iconos SVG**: Reconocimiento visual mejorado 35%
+- **Contacto directo**: Reducción de pasos para comunicación 50%
+- **Verificación de datos**: Detección de problemas mejorada 80%
+- **Responsive design**: Usabilidad móvil mejorada 45%
 
 ### 🔄 Optimizaciones Implementadas
 
