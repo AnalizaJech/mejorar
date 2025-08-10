@@ -1289,10 +1289,7 @@ export default function GestionCitas() {
                                     </div>
                                     <div className="text-center">
                                       <div className="text-2xl font-bold text-green-600">
-                                        {(() => {
-                                          const clienteCitas = citas.filter(c => c.clienteId === propietario.id);
-                                          return clienteCitas.length;
-                                        })()}
+                                        {citas.filter(c => c.clienteId === propietario.id).length}
                                       </div>
                                       <div className="text-xs text-vet-gray-600">Total Citas</div>
                                     </div>
@@ -1485,7 +1482,7 @@ export default function GestionCitas() {
                             ) : (
                               <>
                                 <XCircle className="w-4 h-4 mr-2" />
-                                No Asisti��
+                                No Asistió
                               </>
                             )}
                           </Button>
