@@ -256,7 +256,10 @@ export default function Login() {
                       id="remember"
                       className="w-4 h-4 rounded border-vet-gray-300 text-vet-primary focus:ring-vet-primary/20 focus:ring-2"
                     />
-                    <Label htmlFor="remember" className="text-sm whitespace-nowrap">
+                    <Label
+                      htmlFor="remember"
+                      className="text-sm whitespace-nowrap"
+                    >
                       Recordarme
                     </Label>
                   </div>
