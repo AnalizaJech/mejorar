@@ -262,7 +262,7 @@ export default function Login() {
                   </div>
                   <Link
                     to="/forgot-password"
-                    className="text-sm text-vet-primary hover:text-vet-primary-dark"
+                    className="text-sm text-vet-primary hover:text-vet-primary-dark ml-auto"
                   >
                     ¿Olvidaste tu contraseña?
                   </Link>
