@@ -468,8 +468,8 @@ export default function Servicios() {
 
           {/* Create/Edit Modal */}
           <Dialog open={showModal} onOpenChange={setShowModal}>
-            <DialogContent className="sm:max-w-[500px]">
-              <DialogHeader>
+            <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-hidden flex flex-col">
+              <DialogHeader className="flex-shrink-0">
                 <DialogTitle>
                   {editingService ? "Editar Servicio" : "Nuevo Servicio"}
                 </DialogTitle>
@@ -480,168 +480,179 @@ export default function Servicios() {
                 </DialogDescription>
               </DialogHeader>
 
-              <form onSubmit={handleSubmit} className="space-y-4">
-                {error && (
-                  <Alert className="border-red-200 bg-red-50">
-                    <AlertCircle className="w-4 h-4 text-red-600" />
-                    <AlertDescription className="text-red-800">
-                      {error}
-                    </AlertDescription>
-                  </Alert>
-                )}
+              <div className="flex-1 overflow-y-auto px-1">
+                <form onSubmit={handleSubmit} className="space-y-4 py-2">
+                  {error && (
+                    <Alert className="border-red-200 bg-red-50">
+                      <AlertCircle className="w-4 h-4 text-red-600" />
+                      <AlertDescription className="text-red-800">
+                        {error}
+                      </AlertDescription>
+                    </Alert>
+                  )}
 
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="nombre">Nombre del servicio *</Label>
-                    <Input
-                      id="nombre"
-                      value={formData.nombre}
-                      onChange={(e) =>
-                        setFormData({ ...formData, nombre: e.target.value })
-                      }
-                      placeholder="Ej: Consulta General"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="precio">Precio (S/.) *</Label>
-                    <Input
-                      id="precio"
-                      type="number"
-                      min="0"
-                      step="0.01"
-                      value={formData.precio}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          precio: Number(e.target.value),
-                        })
-                      }
-                      placeholder="0.00"
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="icono">Icono</Label>
-                  <div className="space-y-3">
-                    {/* Icono seleccionado actualmente */}
-                    <div className="flex items-center space-x-3 p-3 border border-vet-gray-300 rounded-lg bg-vet-gray-50">
-                      {(() => {
-                        const selectedIcon = iconos.find(
-                          (i) => i.id === formData.icono,
-                        );
-                        if (selectedIcon) {
-                          const IconComponent = selectedIcon.component;
-                          return (
-                            <>
-                              <div className="w-8 h-8 bg-vet-primary/10 rounded-lg flex items-center justify-center">
-                                <IconComponent className="w-5 h-5 text-vet-primary" />
-                              </div>
-                              <span className="font-medium text-vet-gray-900">
-                                {selectedIcon.nombre}
-                              </span>
-                            </>
-                          );
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="nombre">Nombre del servicio *</Label>
+                      <Input
+                        id="nombre"
+                        value={formData.nombre}
+                        onChange={(e) =>
+                          setFormData({ ...formData, nombre: e.target.value })
                         }
-                        return (
-                          <span className="text-vet-gray-500">
-                            Selecciona un icono
-                          </span>
-                        );
-                      })()}
+                        placeholder="Ej: Consulta General"
+                      />
                     </div>
 
-                    {/* Grid de iconos scrolleable */}
-                    <div className="border border-vet-gray-300 rounded-lg p-4 bg-white">
-                      <p className="text-sm text-vet-gray-600 mb-3">
-                        Selecciona un icono:
-                      </p>
-                      <div className="max-h-48 overflow-y-auto pr-2">
-                        <div className="grid grid-cols-4 gap-2">
-                          {iconos.map((icono) => {
-                            const IconComponent = icono.component;
-                            const isSelected = formData.icono === icono.id;
+                    <div className="space-y-2">
+                      <Label htmlFor="precio">Precio (S/.) *</Label>
+                      <Input
+                        id="precio"
+                        type="number"
+                        min="0"
+                        step="0.01"
+                        value={formData.precio || ""}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            precio: Number(e.target.value) || 0,
+                          })
+                        }
+                        placeholder="Ingrese el precio"
+                        className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="icono">Icono</Label>
+                    <div className="space-y-3">
+                      {/* Icono seleccionado actualmente */}
+                      <div className="flex items-center space-x-3 p-3 border border-vet-gray-300 rounded-lg bg-vet-gray-50">
+                        {(() => {
+                          const selectedIcon = iconos.find(
+                            (i) => i.id === formData.icono,
+                          );
+                          if (selectedIcon) {
+                            const IconComponent = selectedIcon.component;
                             return (
-                              <button
-                                key={icono.id}
-                                type="button"
-                                onClick={() =>
-                                  setFormData({ ...formData, icono: icono.id })
-                                }
-                                className={`
-                                  flex flex-col items-center justify-center p-3 rounded-lg border-2 transition-all hover:shadow-md
+                              <>
+                                <div className="w-8 h-8 bg-vet-primary/10 rounded-lg flex items-center justify-center">
+                                  <IconComponent className="w-5 h-5 text-vet-primary" />
+                                </div>
+                                <span className="font-medium text-vet-gray-900">
+                                  {selectedIcon.nombre}
+                                </span>
+                              </>
+                            );
+                          }
+                          return (
+                            <span className="text-vet-gray-500">
+                              Selecciona un icono
+                            </span>
+                          );
+                        })()}
+                      </div>
+
+                      {/* Grid de iconos scrolleable mejorado para móvil */}
+                      <div className="border border-vet-gray-300 rounded-lg p-4 bg-white">
+                        <p className="text-sm text-vet-gray-600 mb-3">
+                          Selecciona un icono:
+                        </p>
+                        <div className="max-h-52 overflow-y-auto overscroll-contain scrollbar-hide touch-pan-y">
+                          <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 pr-2">
+                            {iconos.map((icono) => {
+                              const IconComponent = icono.component;
+                              const isSelected = formData.icono === icono.id;
+                              return (
+                                <button
+                                  key={icono.id}
+                                  type="button"
+                                  onClick={() =>
+                                    setFormData({
+                                      ...formData,
+                                      icono: icono.id,
+                                    })
+                                  }
+                                  className={`
+                                  flex flex-col items-center justify-center p-3 rounded-lg border-2 transition-all hover:shadow-md touch-manipulation
                                   ${
                                     isSelected
                                       ? "border-vet-primary bg-vet-primary/10 text-vet-primary"
                                       : "border-vet-gray-200 hover:border-vet-primary/50 text-vet-gray-600 hover:text-vet-primary"
                                   }
                                 `}
-                                title={icono.nombre}
-                              >
-                                <IconComponent className="w-5 h-5 mb-1" />
-                                <span className="text-xs text-center leading-tight">
-                                  {icono.nombre}
-                                </span>
-                              </button>
-                            );
-                          })}
+                                  title={icono.nombre}
+                                >
+                                  <IconComponent className="w-5 h-5 mb-1 flex-shrink-0" />
+                                  <span className="text-xs text-center leading-tight line-clamp-2">
+                                    {icono.nombre}
+                                  </span>
+                                </button>
+                              );
+                            })}
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="descripcion">Descripción *</Label>
-                  <Textarea
-                    id="descripcion"
-                    value={formData.descripcion}
-                    onChange={(e) =>
-                      setFormData({ ...formData, descripcion: e.target.value })
-                    }
-                    placeholder="Describe el servicio veterinario..."
-                    rows={3}
-                  />
-                </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="descripcion">Descripción *</Label>
+                    <Textarea
+                      id="descripcion"
+                      value={formData.descripcion}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          descripcion: e.target.value,
+                        })
+                      }
+                      placeholder="Describe el servicio veterinario..."
+                      rows={4}
+                      className="min-h-[100px] max-h-[150px] resize-none overflow-y-auto"
+                    />
+                  </div>
 
-                <div className="flex items-center space-x-2">
-                  <Switch
-                    checked={formData.activo}
-                    onCheckedChange={(checked) =>
-                      setFormData({ ...formData, activo: checked })
-                    }
-                  />
-                  <Label>Servicio activo</Label>
-                </div>
+                  <div className="flex items-center space-x-2">
+                    <Switch
+                      checked={formData.activo}
+                      onCheckedChange={(checked) =>
+                        setFormData({ ...formData, activo: checked })
+                      }
+                    />
+                    <Label>Servicio activo</Label>
+                  </div>
+                </form>
+              </div>
 
-                <DialogFooter>
-                  <Button
-                    type="button"
-                    variant="outline"
-                    onClick={handleCloseModal}
-                  >
-                    Cancelar
-                  </Button>
-                  <Button
-                    type="submit"
-                    disabled={isLoading}
-                    className="bg-vet-primary hover:bg-vet-primary-dark"
-                  >
-                    {isLoading ? (
-                      <>
-                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                        Guardando...
-                      </>
-                    ) : (
-                      <>
-                        <Save className="w-4 h-4 mr-2" />
-                        {editingService ? "Actualizar" : "Crear"}
-                      </>
-                    )}
-                  </Button>
-                </DialogFooter>
-              </form>
+              <DialogFooter className="flex-shrink-0 border-t pt-4 mt-4">
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={handleCloseModal}
+                >
+                  Cancelar
+                </Button>
+                <Button
+                  type="submit"
+                  disabled={isLoading}
+                  onClick={handleSubmit}
+                  className="bg-vet-primary hover:bg-vet-primary-dark"
+                >
+                  {isLoading ? (
+                    <>
+                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                      Guardando...
+                    </>
+                  ) : (
+                    <>
+                      <Save className="w-4 h-4 mr-2" />
+                      {editingService ? "Actualizar" : "Crear"}
+                    </>
+                  )}
+                </Button>
+              </DialogFooter>
             </DialogContent>
           </Dialog>
 

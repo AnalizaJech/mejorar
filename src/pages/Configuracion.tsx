@@ -101,6 +101,7 @@ export default function Configuracion() {
     refreshDataFromStorage,
     mascotas,
     citas,
+    usuarios,
   } = useAppContext();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
@@ -345,7 +346,7 @@ export default function Configuracion() {
       );
 
       if (!isValidationError) {
-        // Solo los errores que no son de validación se limpian automáticamente
+        // Solo los errores que no son de validaci��n se limpian automáticamente
         const timer = setTimeout(() => {
           setErrorMessage("");
         }, 6000); // Más tiempo para errores de sistema
@@ -1262,7 +1263,7 @@ export default function Configuracion() {
                               : "Información adicional..."
                       }
                       rows={4}
-                      className="border-vet-gray-300 focus:border-vet-primary focus:ring-vet-primary"
+                      className="border-vet-gray-300 focus:border-vet-primary focus:ring-vet-primary resize-none overflow-y-auto min-h-[100px] max-h-[120px]"
                     />
                   </div>
 
