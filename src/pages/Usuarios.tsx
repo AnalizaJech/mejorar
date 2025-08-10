@@ -263,21 +263,6 @@ export default function Usuarios() {
     setClienteToDelete(null);
   };
 
-  const createClientFromPreCita = (preCita: any) => {
-    const clienteData = {
-      nombre: preCita.nombreCliente,
-      email: preCita.email,
-      telefono: preCita.telefono,
-      password: "cliente123", // Default password
-      rol: "cliente" as const,
-      fechaRegistro: new Date(), // Mark as recently added
-    };
-
-    addUsuario(clienteData);
-    setSuccess(
-      `Cuenta creada para ${preCita.nombreCliente}. Contraseña por defecto: cliente123`,
-    );
-  };
 
   const resetForm = () => {
     setFormData({ nombre: "", email: "", telefono: "", password: "" });
@@ -323,7 +308,6 @@ export default function Usuarios() {
     recienAñadidos: clientes.filter(
       (c) => getAccountStatus(c) === "recien_añadido",
     ).length,
-    preCitasPendientes: preCitasPendientes.length,
     passwordReseteadas: clientes.filter(
       (c) => getAccountStatus(c) === "password_reseteada",
     ).length,
