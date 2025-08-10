@@ -54,23 +54,6 @@ interface Cita {
   notasAdmin?: string;
 }
 
-interface PreCita {
-  id: string;
-  nombreCliente: string;
-  telefono: string;
-  email: string;
-  nombreMascota: string;
-  tipoMascota: string;
-  motivoConsulta: string;
-  fechaPreferida: Date;
-  horaPreferida: string;
-  estado: "pendiente" | "aceptada" | "rechazada";
-  fechaCreacion: Date;
-  notasAdmin?: string;
-  veterinarioAsignado?: string;
-  fechaNueva?: Date;
-  horaNueva?: string;
-}
 
 interface Usuario {
   id: string;
@@ -149,12 +132,6 @@ interface HistorialClinico {
   }>;
 }
 
-interface SuscriptorNewsletter {
-  id: string;
-  email: string;
-  fechaSuscripcion: Date;
-  activo: boolean;
-}
 
 interface ArchivoGuardado {
   name: string;
@@ -163,18 +140,6 @@ interface ArchivoGuardado {
   type: string;
 }
 
-interface NewsletterEmail {
-  id: string;
-  asunto: string;
-  contenido: string;
-  fechaEnvio: Date;
-  destinatarios: string[];
-  estado: "enviado" | "programado" | "borrador";
-  colorTema?: string;
-  plantilla?: string;
-  imagenes?: ArchivoGuardado[];
-  archivos?: ArchivoGuardado[];
-}
 
 interface Notificacion {
   id: string;
