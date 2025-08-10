@@ -930,10 +930,12 @@ export default function GestionCitas() {
                         );
                         return enhancedCita?.propietarioInfo;
                       })() && (
-                        <div className="bg-blue-50 rounded-lg p-6">
-                          <div className="flex items-center space-x-2 mb-4">
-                            <User className="w-5 h-5 text-blue-600" />
-                            <h4 className="font-semibold text-vet-gray-900">
+                        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-100">
+                          <div className="flex items-center space-x-3 mb-6">
+                            <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
+                              <User className="w-5 h-5 text-blue-600" />
+                            </div>
+                            <h4 className="text-xl font-bold text-vet-gray-900">
                               Información del Propietario
                             </h4>
                           </div>
@@ -947,58 +949,83 @@ export default function GestionCitas() {
                             if (!propietario) return null;
 
                             return (
-                              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div className="space-y-1">
-                                  <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide">
-                                    Nombre Completo
-                                  </span>
-                                  <div className="flex items-center space-x-2">
-                                    <User className="w-4 h-4 text-blue-600" />
-                                    <p className="font-medium text-vet-gray-900">
-                                      {propietario.nombre}{" "}
-                                      {propietario.apellidos || ""}
-                                    </p>
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                {/* Nombre Completo */}
+                                <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
+                                  <div className="flex items-center space-x-3">
+                                    <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                                      <User className="w-4 h-4 text-blue-600" />
+                                    </div>
+                                    <div>
+                                      <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
+                                        Nombre Completo
+                                      </span>
+                                      <p className="text-lg font-semibold text-vet-gray-900">
+                                        {propietario.nombre}{" "}
+                                        {propietario.apellidos || ""}
+                                      </p>
+                                    </div>
                                   </div>
                                 </div>
 
+                                {/* Email */}
                                 {propietario.email && (
-                                  <div className="space-y-1">
-                                    <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide">
-                                      Correo Electrónico
-                                    </span>
-                                    <div className="flex items-center space-x-2">
-                                      <Mail className="w-4 h-4 text-green-600" />
-                                      <p className="font-medium text-vet-gray-900">
-                                        {propietario.email}
-                                      </p>
+                                  <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
+                                    <div className="flex items-center space-x-3">
+                                      <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
+                                        <Mail className="w-4 h-4 text-green-600" />
+                                      </div>
+                                      <div>
+                                        <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
+                                          Correo Electrónico
+                                        </span>
+                                        <p className="text-sm font-medium text-vet-gray-900 break-all">
+                                          {propietario.email}
+                                        </p>
+                                      </div>
                                     </div>
                                   </div>
                                 )}
 
+                                {/* Teléfono */}
                                 {propietario.telefono && (
-                                  <div className="space-y-1">
-                                    <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide">
-                                      Teléfono
-                                    </span>
-                                    <div className="flex items-center space-x-2">
-                                      <Phone className="w-4 h-4 text-purple-600" />
-                                      <p className="font-medium text-vet-gray-900">
-                                        {propietario.telefono}
-                                      </p>
+                                  <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
+                                    <div className="flex items-center space-x-3">
+                                      <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
+                                        <Phone className="w-4 h-4 text-purple-600" />
+                                      </div>
+                                      <div>
+                                        <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
+                                          Teléfono
+                                        </span>
+                                        <p className="text-lg font-semibold text-vet-gray-900">
+                                          {(() => {
+                                            const phoneNumber = propietario.telefono.replace(/\D/g, "");
+                                            return phoneNumber.startsWith('51') && phoneNumber.length === 11
+                                              ? `+${phoneNumber}`
+                                              : `+51${phoneNumber}`;
+                                          })()}
+                                        </p>
+                                      </div>
                                     </div>
                                   </div>
                                 )}
 
+                                {/* Dirección */}
                                 {propietario.direccion && (
-                                  <div className="space-y-1">
-                                    <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide">
-                                      Dirección
-                                    </span>
-                                    <div className="flex items-center space-x-2">
-                                      <MapPin className="w-4 h-4 text-orange-600" />
-                                      <p className="font-medium text-vet-gray-900">
-                                        {propietario.direccion}
-                                      </p>
+                                  <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100 md:col-span-2">
+                                    <div className="flex items-start space-x-3">
+                                      <div className="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center mt-1">
+                                        <MapPin className="w-4 h-4 text-orange-600" />
+                                      </div>
+                                      <div className="flex-1">
+                                        <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
+                                          Dirección
+                                        </span>
+                                        <p className="text-sm font-medium text-vet-gray-900 leading-relaxed">
+                                          {propietario.direccion}
+                                        </p>
+                                      </div>
                                     </div>
                                   </div>
                                 )}
@@ -1215,7 +1242,7 @@ export default function GestionCitas() {
         }}
         onConfirm={confirmDeleteCita}
         title="Eliminar cita"
-        description={`¿Estás seguro de que quieres eliminar la cita de ${citaToDelete?.mascota}? Esta acción no se puede deshacer.`}
+        description={`¿Est��s seguro de que quieres eliminar la cita de ${citaToDelete?.mascota}? Esta acción no se puede deshacer.`}
         confirmText="Eliminar"
         cancelText="Cancelar"
       />
