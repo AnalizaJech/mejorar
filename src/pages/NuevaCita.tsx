@@ -708,7 +708,7 @@ export default function NuevaCita() {
                       <Label htmlFor="fecha">Fecha preferida *</Label>
                       <DatePicker
                         date={
-                          citaData.fecha ? new Date(citaData.fecha) : undefined
+                          citaData.fecha ? new Date(citaData.fecha + 'T00:00:00') : undefined
                         }
                         onDateChange={(date) => {
                           if (date) {
