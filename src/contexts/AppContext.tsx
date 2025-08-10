@@ -145,7 +145,9 @@ interface Notificacion {
     | "cita_aceptada"
     | "bienvenida_cliente"
     | "consulta_registrada"
-    | "sistema";
+    | "sistema"
+    | "nuevo_cliente"
+    | "nueva_cita";
   titulo: string;
   mensaje: string;
   fechaCreacion: Date;
