@@ -72,7 +72,7 @@ interface ClientFormData {
 }
 
 export default function Usuarios() {
-  const { usuarios, addUsuario, updateUsuario, deleteUsuario, user, preCitas } =
+  const { usuarios, addUsuario, updateUsuario, deleteUsuario, user } =
     useAppContext();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedAccountStatus, setSelectedAccountStatus] =
@@ -147,12 +147,6 @@ export default function Usuarios() {
     return matchesSearch && matchesStatus;
   });
 
-  // Get pre-citas that could become client accounts
-  const preCitasPendientes = preCitas.filter(
-    (preCita) =>
-      preCita.estado === "pendiente" &&
-      !usuarios.find((u) => u.email === preCita.email),
-  );
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
