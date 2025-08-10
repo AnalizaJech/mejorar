@@ -103,7 +103,11 @@ export default function MisMascotas() {
       );
 
       if (isDuplicate) {
-        alert("Ya tienes una mascota registrada con el mismo nombre, especie, raza y sexo. Por favor verifica los datos.");
+        toast({
+          title: "Mascota duplicada",
+          description: "Ya tienes una mascota registrada con el mismo nombre, especie, raza y sexo. Por favor verifica los datos.",
+          variant: "destructive",
+        });
         return;
       }
     } else {
@@ -118,7 +122,11 @@ export default function MisMascotas() {
       );
 
       if (isDuplicate) {
-        alert("Ya tienes una mascota registrada con el mismo nombre, especie, raza y sexo. Por favor verifica los datos.");
+        toast({
+          title: "Mascota duplicada",
+          description: "Ya tienes una mascota registrada con el mismo nombre, especie, raza y sexo. Por favor verifica los datos.",
+          variant: "destructive",
+        });
         return;
       }
     }
