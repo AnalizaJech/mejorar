@@ -1318,6 +1318,117 @@ export default function GestionCitas() {
                                   </div>
                                 )}
 
+                                {/* Mascotas del Propietario */}
+                                {(() => {
+                                  const clienteMascotas = mascotas.filter(m => m.clienteId === propietario.id);
+                                  if (clienteMascotas.length > 0) {
+                                    return (
+                                      <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-4 shadow-sm border border-green-100 md:col-span-2 lg:col-span-3">
+                                        <div className="flex items-center space-x-3 mb-4">
+                                          <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
+                                            <span className="text-green-600 font-bold text-sm">🐾</span>
+                                          </div>
+                                          <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide">
+                                            Mascotas del Cliente ({clienteMascotas.length})
+                                          </span>
+                                        </div>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                                          {clienteMascotas.slice(0, 6).map((mascota) => (
+                                            <div key={mascota.id} className="bg-white rounded-lg p-3 border border-green-100">
+                                              <div className="flex items-center space-x-2">
+                                                <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center overflow-hidden">
+                                                  {mascota.foto ? (
+                                                    <img
+                                                      src={mascota.foto}
+                                                      alt={`Foto de ${mascota.nombre}`}
+                                                      className="w-full h-full object-cover"
+                                                    />
+                                                  ) : (
+                                                    <span className="text-green-600 text-xs">🐾</span>
+                                                  )}
+                                                </div>
+                                                <div className="flex-1 min-w-0">
+                                                  <p className="text-sm font-medium text-vet-gray-900 truncate">
+                                                    {mascota.nombre}
+                                                  </p>
+                                                  <p className="text-xs text-vet-gray-500">
+                                                    {mascota.especie} • {mascota.raza}
+                                                  </p>
+                                                  {mascota.peso && (
+                                                    <p className="text-xs text-vet-gray-400">
+                                                      {mascota.peso} kg
+                                                    </p>
+                                                  )}
+                                                </div>
+                                              </div>
+                                            </div>
+                                          ))}
+                                          {clienteMascotas.length > 6 && (
+                                            <div className="bg-white rounded-lg p-3 border border-green-100 flex items-center justify-center">
+                                              <span className="text-xs text-vet-gray-500">
+                                                +{clienteMascotas.length - 6} más
+                                              </span>
+                                            </div>
+                                          )}
+                                        </div>
+                                      </div>
+                                    );
+                                  }
+                                  return null;
+                                })()}
+
+                                {/* Historial de Pagos Reciente */}
+                                {(() => {
+                                  const citasPagadas = citas.filter(c =>
+                                    c.clienteId === propietario.id &&
+                                    (c.estado === 'atendida' || c.estado === 'aceptada')
+                                  ).slice(0, 5);
+
+                                  if (citasPagadas.length > 0) {
+                                    const totalGastado = citasPagadas.reduce((sum, cita) => sum + (cita.precio || 0), 0);
+                                    return (
+                                      <div className="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-lg p-4 shadow-sm border border-yellow-100 md:col-span-2 lg:col-span-3">
+                                        <div className="flex items-center space-x-3 mb-4">
+                                          <div className="w-8 h-8 bg-yellow-100 rounded-lg flex items-center justify-center">
+                                            <span className="text-yellow-600 font-bold text-sm">💰</span>
+                                          </div>
+                                          <div className="flex-1">
+                                            <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
+                                              Historial de Pagos
+                                            </span>
+                                            <span className="text-sm font-semibold text-vet-gray-900">
+                                              Total gastado: S/. {totalGastado.toLocaleString()}
+                                            </span>
+                                          </div>
+                                        </div>
+                                        <div className="space-y-2">
+                                          {citasPagadas.map((cita) => (
+                                            <div key={cita.id} className="bg-white rounded-lg p-2 border border-yellow-100 flex justify-between items-center">
+                                              <div>
+                                                <p className="text-sm font-medium text-vet-gray-900">
+                                                  {cita.tipoConsulta}
+                                                </p>
+                                                <p className="text-xs text-vet-gray-500">
+                                                  {new Date(cita.fecha).toLocaleDateString('es-ES')} • {cita.mascota}
+                                                </p>
+                                              </div>
+                                              <div className="text-right">
+                                                <p className="text-sm font-semibold text-vet-gray-900">
+                                                  S/. {cita.precio?.toLocaleString() || '0'}
+                                                </p>
+                                                <p className={`text-xs ${cita.estado === 'atendida' ? 'text-green-600' : 'text-blue-600'}`}>
+                                                  {cita.estado === 'atendida' ? 'Completada' : 'Pagada'}
+                                                </p>
+                                              </div>
+                                            </div>
+                                          ))}
+                                        </div>
+                                      </div>
+                                    );
+                                  }
+                                  return null;
+                                })()}
+
                                 {/* Estadísticas del Cliente */}
                                 <div className="bg-gradient-to-r from-vet-primary/5 to-blue-50 rounded-lg p-4 shadow-sm border border-blue-100 md:col-span-2 lg:col-span-3">
                                   <div className="flex items-center space-x-3 mb-4">
