@@ -198,6 +198,21 @@ export default function CitaAttendModal({
         console.log("Creating clinical history entry:", historialEntry);
         await addHistorialEntry(historialEntry);
 
+        // Update pet weight if peso was recorded in vital signs
+        if (
+          formData.peso &&
+          formData.peso.trim() !== "" &&
+          selectedCita.mascota?.id
+        ) {
+          console.log("Updating pet weight:", {
+            mascotaId: selectedCita.mascota.id,
+            newWeight: formData.peso,
+          });
+          await updateMascota(selectedCita.mascota.id, {
+            peso: formData.peso.trim(),
+          });
+        }
+
         // Log success for debugging
         console.log("Clinical history entry created successfully for:", {
           mascotaId,

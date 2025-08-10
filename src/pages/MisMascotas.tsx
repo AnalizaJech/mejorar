@@ -43,10 +43,12 @@ import {
 } from "lucide-react";
 import ConfirmationModal from "@/components/ConfirmationModal";
 import { DatePicker } from "@/components/ui/date-picker";
+import { useToast } from "@/hooks/use-toast";
 
 export default function MisMascotas() {
   const { user, mascotas, addMascota, updateMascota, deleteMascota } =
     useAppContext();
+  const { toast } = useToast();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingMascota, setEditingMascota] = useState(null);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
@@ -85,6 +87,113 @@ export default function MisMascotas() {
     e.preventDefault();
     if (!newMascota.fechaNacimiento) {
       return; // Don't submit without date
+    }
+    if (!newMascota.sexo) {
+      return; // Don't submit without sex
+    }
+
+    // Function to calculate similarity between two strings
+    const calculateStringSimilarity = (str1: string, str2: string): number => {
+      const s1 = str1.toLowerCase().trim();
+      const s2 = str2.toLowerCase().trim();
+
+      if (s1 === s2) return 1.0;
+      if (s1.length === 0 || s2.length === 0) return 0.0;
+
+      // Simple similarity based on common characters and length
+      const longer = s1.length > s2.length ? s1 : s2;
+      const shorter = s1.length > s2.length ? s2 : s1;
+
+      let matches = 0;
+      for (let i = 0; i < shorter.length; i++) {
+        if (longer.includes(shorter[i])) {
+          matches++;
+        }
+      }
+
+      return matches / longer.length;
+    };
+
+    // Function to calculate overall similarity between pets
+    const calculatePetSimilarity = (pet1: any, pet2: any): number => {
+      let score = 0;
+      let factors = 0;
+
+      // Name similarity (weight: 30%)
+      const nameSimilarity = calculateStringSimilarity(
+        pet1.nombre,
+        pet2.nombre,
+      );
+      score += nameSimilarity * 0.3;
+      factors += 0.3;
+
+      // Species exact match (weight: 25%)
+      if (pet1.especie.toLowerCase() === pet2.especie.toLowerCase()) {
+        score += 0.25;
+      }
+      factors += 0.25;
+
+      // Breed similarity (weight: 25%)
+      const breedSimilarity = calculateStringSimilarity(pet1.raza, pet2.raza);
+      score += breedSimilarity * 0.25;
+      factors += 0.25;
+
+      // Sex exact match (weight: 20%)
+      if (pet1.sexo?.toLowerCase() === pet2.sexo?.toLowerCase()) {
+        score += 0.2;
+      }
+      factors += 0.2;
+
+      return score / factors;
+    };
+
+    // Check for duplicate and similar pets
+    const userPets = mascotas.filter(
+      (mascota) =>
+        mascota.clienteId === user?.id &&
+        (!editingMascota || mascota.id !== editingMascota.id),
+    );
+
+    // Check for exact duplicates first
+    const isDuplicate = userPets.some(
+      (mascota) =>
+        mascota.nombre.toLowerCase().trim() ===
+          newMascota.nombre.toLowerCase().trim() &&
+        mascota.especie.toLowerCase() === newMascota.especie.toLowerCase() &&
+        mascota.raza.toLowerCase().trim() ===
+          newMascota.raza.toLowerCase().trim() &&
+        mascota.sexo?.toLowerCase() === newMascota.sexo.toLowerCase(),
+    );
+
+    if (isDuplicate) {
+      toast({
+        title: "Mascota duplicada",
+        description:
+          "Ya tienes una mascota registrada con el mismo nombre, especie, raza y sexo. Por favor verifica los datos.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Check for high similarity (75% or more)
+    const similarPets = userPets.filter((mascota) => {
+      const similarity = calculatePetSimilarity(newMascota, mascota);
+      return similarity >= 0.75;
+    });
+
+    if (similarPets.length > 0) {
+      const mostSimilar = similarPets[0];
+      const similarity = Math.round(
+        calculatePetSimilarity(newMascota, mostSimilar) * 100,
+      );
+
+      toast({
+        title: "Mascota similar encontrada",
+        description: `Tienes una mascota muy similar: "${mostSimilar.nombre}" (${mostSimilar.especie}, ${mostSimilar.raza}). Similitud: ${similarity}%. ¿Estás seguro de que son mascotas diferentes?`,
+        variant: "default",
+      });
+
+      // Don't return here - let the user continue if they want
     }
 
     if (editingMascota) {
@@ -239,11 +348,13 @@ export default function MisMascotas() {
   };
 
   const handlePesoChange = (value: string) => {
-    // Store just the numeric value without "kg"
-    setNewMascota({
-      ...newMascota,
-      peso: value,
-    });
+    // Only allow numeric values (including decimals)
+    if (value === "" || /^\d*\.?\d*$/.test(value)) {
+      setNewMascota({
+        ...newMascota,
+        peso: value,
+      });
+    }
   };
 
   const displayPeso = (peso: string) => {
@@ -414,7 +525,7 @@ export default function MisMascotas() {
                             value={newMascota.peso}
                             onChange={(e) => handlePesoChange(e.target.value)}
                             placeholder="5.2"
-                            className="pr-12"
+                            className="pr-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                           />
                           <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                             <span className="text-sm text-vet-gray-500">
@@ -425,7 +536,7 @@ export default function MisMascotas() {
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="sexo">Sexo</Label>
+                        <Label htmlFor="sexo">Sexo *</Label>
                         <Select
                           value={newMascota.sexo}
                           onValueChange={(value) =>
@@ -436,7 +547,7 @@ export default function MisMascotas() {
                           }
                         >
                           <SelectTrigger>
-                            <SelectValue placeholder="Selecciona el sexo" />
+                            <SelectValue placeholder="Selecciona el sexo *" />
                           </SelectTrigger>
                           <SelectContent>
                             <SelectItem value="Macho">Macho</SelectItem>
@@ -622,7 +733,7 @@ export default function MisMascotas() {
 
       {/* Photo Management Modal */}
       <Dialog open={showPhotoModal} onOpenChange={setShowPhotoModal}>
-        <DialogContent className="max-w-sm w-full mx-4 max-h-[85vh] overflow-hidden flex flex-col">
+        <DialogContent className="max-w-2xl max-h-[95vh] overflow-y-auto">
           <DialogHeader className="flex-shrink-0">
             <DialogTitle className="flex items-center space-x-2 text-base">
               <Camera className="w-4 h-4 text-vet-primary flex-shrink-0" />
@@ -638,107 +749,101 @@ export default function MisMascotas() {
             </DialogDescription>
           </DialogHeader>
 
-          <div className="flex-1 overflow-y-auto">
-            <div className="space-y-3 py-2">
-              {/* Current or preview photo */}
-              <div className="flex justify-center">
-                <div className="w-24 h-24 rounded-full overflow-hidden bg-vet-gray-100 flex items-center justify-center flex-shrink-0">
-                  {photoPreviewURL ? (
-                    <img
-                      src={photoPreviewURL}
-                      alt="Vista previa"
-                      className="w-full h-full object-cover"
-                    />
-                  ) : selectedMascotaPhoto?.foto ? (
-                    <img
-                      src={selectedMascotaPhoto.foto}
-                      alt={`Foto actual de ${selectedMascotaPhoto.nombre}`}
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <PawPrint className="w-12 h-12 text-vet-gray-400" />
-                  )}
+          <div className="space-y-4">
+            {/* Current or preview photo */}
+            <div className="flex justify-center">
+              <div className="w-32 h-32 rounded-full overflow-hidden bg-vet-gray-100 flex items-center justify-center flex-shrink-0">
+                {photoPreviewURL ? (
+                  <img
+                    src={photoPreviewURL}
+                    alt="Vista previa"
+                    className="w-full h-full object-cover"
+                  />
+                ) : selectedMascotaPhoto?.foto ? (
+                  <img
+                    src={selectedMascotaPhoto.foto}
+                    alt={`Foto actual de ${selectedMascotaPhoto.nombre}`}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <PawPrint className="w-16 h-16 text-vet-gray-400" />
+                )}
+              </div>
+            </div>
+
+            {/* Photo info */}
+            {photoFile && (
+              <div className="bg-vet-gray-50 rounded-lg p-3">
+                <div className="flex items-center space-x-2">
+                  <ImageIcon className="w-5 h-5 text-vet-primary flex-shrink-0" />
+                  <div className="min-w-0">
+                    <p className="text-sm font-medium text-vet-gray-900 truncate">
+                      {photoFile.name}
+                    </p>
+                    <p className="text-xs text-vet-gray-500">
+                      {(photoFile.size / 1024 / 1024).toFixed(2)} MB
+                    </p>
+                  </div>
                 </div>
               </div>
+            )}
 
-              {/* Photo info */}
-              {photoFile && (
-                <div className="bg-vet-gray-50 rounded-lg p-2">
-                  <div className="flex items-center space-x-2">
-                    <ImageIcon className="w-4 h-4 text-vet-primary flex-shrink-0" />
-                    <div className="min-w-0">
-                      <p className="text-sm font-medium text-vet-gray-900 truncate">
-                        {photoFile.name}
-                      </p>
-                      <p className="text-xs text-vet-gray-500">
-                        {(photoFile.size / 1024 / 1024).toFixed(2)} MB
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* Instructions */}
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-2">
-                <div className="flex items-start space-x-2">
-                  <Camera className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
-                  <div className="min-w-0">
-                    <p className="text-sm text-blue-700 font-medium">
-                      Consejos para una buena foto:
-                    </p>
-                    <ul className="text-xs text-blue-600 mt-1 space-y-0.5">
-                      <li>• Buena iluminación natural</li>
-                      <li>• Enfoque del rostro</li>
-                      <li>• Fondo simple</li>
-                      <li>• Máximo 5MB</li>
-                    </ul>
-                  </div>
+            {/* Instructions */}
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+              <div className="flex items-start space-x-2">
+                <Camera className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+                <div className="min-w-0">
+                  <p className="text-sm text-blue-700 font-medium">
+                    Consejos para una buena foto:
+                  </p>
+                  <ul className="text-xs text-blue-600 mt-1 space-y-0.5">
+                    <li>• Buena iluminación natural</li>
+                    <li>• Enfoque del rostro</li>
+                    <li>• Fondo simple</li>
+                    <li>��� Máximo 5MB</li>
+                  </ul>
                 </div>
               </div>
             </div>
           </div>
 
-          <DialogFooter className="flex-shrink-0 pt-4">
-            <div className="flex flex-col w-full gap-2">
-              <div className="flex gap-2">
-                <Button
-                  variant="outline"
-                  onClick={handleClosePhotoModal}
-                  className="flex-1 text-sm h-9"
-                >
-                  <X className="w-4 h-4 mr-1" />
-                  Cancelar
-                </Button>
+          <DialogFooter className="flex flex-col sm:flex-row gap-2 pt-4">
+            <Button
+              variant="outline"
+              onClick={handleClosePhotoModal}
+              className="w-full sm:w-auto"
+            >
+              <X className="w-4 h-4 mr-2" />
+              Cancelar
+            </Button>
 
-                {selectedMascotaPhoto?.foto && !photoFile && (
-                  <Button
-                    variant="outline"
-                    onClick={handleRemovePhoto}
-                    className="flex-1 text-red-600 hover:text-red-700 text-sm h-9"
-                  >
-                    <Trash2 className="w-4 h-4 mr-1" />
-                    Eliminar
-                  </Button>
-                )}
-              </div>
-
+            {selectedMascotaPhoto?.foto && !photoFile && (
               <Button
-                onClick={photoFile ? handleConfirmPhoto : handlePhotoUpload}
-                className="w-full bg-vet-primary hover:bg-vet-primary-dark text-sm h-9"
+                variant="outline"
+                onClick={handleRemovePhoto}
+                className="w-full sm:w-auto text-red-600 hover:text-red-700"
               >
-                {photoFile ? (
-                  <>
-                    <Upload className="w-4 h-4 mr-1" />
-                    Confirmar
-                  </>
-                ) : (
-                  <>
-                    <Camera className="w-4 h-4 mr-1" />
-                    {selectedMascotaPhoto?.foto ? "Cambiar" : "Seleccionar"}
-                  </>
-                )}
+                <Trash2 className="w-4 h-4 mr-2" />
+                Eliminar
               </Button>
-            </div>
+            )}
+
+            <Button
+              onClick={photoFile ? handleConfirmPhoto : handlePhotoUpload}
+              className="w-full sm:w-auto bg-vet-primary hover:bg-vet-primary-dark"
+            >
+              {photoFile ? (
+                <>
+                  <Upload className="w-4 h-4 mr-2" />
+                  Confirmar
+                </>
+              ) : (
+                <>
+                  <Camera className="w-4 h-4 mr-2" />
+                  {selectedMascotaPhoto?.foto ? "Cambiar" : "Seleccionar"}
+                </>
+              )}
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
