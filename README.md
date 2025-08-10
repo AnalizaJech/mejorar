@@ -95,7 +95,7 @@ src/
 │   │   ├── card.tsx        # Cards y containers
 │   │   ├── dialog.tsx      # Modales y dialogs
 │   │   ├── table.tsx       # Tablas responsivas
-│   │   └── ...             # Más componentes
+│   │   └── ...             # M��s componentes
 │   ├── Layout.tsx          # Layout principal con navegación
 │   ├── AuthLayout.tsx      # Layout para autenticación
 │   ├── ProtectedRoute.tsx  # Protección de rutas por rol
@@ -119,7 +119,7 @@ src/
 │   ├── Dashboard.tsx       # Dashboard universal por roles
 │   ├── DashboardVeterinario.tsx # Dashboard específico veterinario
 │   │
-│   ├���─ # PÁGINAS DEL CLIENTE
+│   ├── # PÁGINAS DEL CLIENTE
 │   ├── MisMascotas.tsx     # Gestión de mascotas
 │   ├── MisCitas.tsx        # Gestión de citas del cliente
 │   ├── NuevaCita.tsx       # Agendar nueva cita
@@ -677,10 +677,17 @@ src/lib/utils.spec.ts    # Tests de utilidades generales
 
 ### 📚 Documentos Técnicos
 
-- **[FLUJOS_SISTEMA.md](FLUJOS_SISTEMA.md)** - Documentación completa de flujos (1400+ líneas)
+- **[FLUJOS_SISTEMA.md](FLUJOS_SISTEMA.md)** - Documentación completa de flujos (1500+ líneas)
 - **[CLAUDE.md](CLAUDE.md)** - Guía técnica del framework y convenciones
 - **[package.json](package.json)** - Configuración completa del proyecto
 - **[tailwind.config.ts](tailwind.config.ts)** - Sistema de diseño personalizado
+
+### 🎨 Componentes Actualizados
+
+- **CitaDetailModal.tsx** - Modal rediseñado con nueva UI (956 líneas)
+- **Configuracion.tsx** - Bio textarea optimizada
+- **Servicios.tsx** - Modal de servicios mejorado
+- **Sistema de iconos** - Migración completa a Lucide React
 
 ### 🔧 Archivos de Configuración
 
@@ -1127,7 +1134,7 @@ src/
 │   ├── layout/              # Layout components
 │   │   ├── header/          # Header navegación
 │   │   ├── sidebar/         # Sidebar navegación
-│   │   └── footer/          # Footer
+│   │   └─��� footer/          # Footer
 │   └── assets/              # Recursos estáticos
 ```
 
