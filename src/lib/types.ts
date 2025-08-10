@@ -36,20 +36,6 @@ export interface Mascota {
   fechaCreacion?: Date;
 }
 
-// Pre-appointment states
-export type EstadoPreCita = "pendiente" | "rechazada";
-
-// Pre-appointment entity (public form submissions)
-export interface PreCita {
-  id: string;
-  nombreCliente: string;
-  telefono: string;
-  email: string;
-  fechaSolicitada: Date;
-  estado: EstadoPreCita;
-  motivoConsulta?: string;
-  fechaCreacion: Date;
-}
 
 // Appointment states
 export type EstadoCita =
@@ -134,17 +120,6 @@ export interface Notificacion {
   fechaCreacion: Date;
 }
 
-// Form data types
-export interface PreCitaFormData {
-  nombreMascota: string;
-  tipoMascota: string;
-  nombreDueno: string;
-  telefono: string;
-  email: string;
-  motivoConsulta: string;
-  fechaPreferida: string;
-  horaPreferida: string;
-}
 
 export interface LoginFormData {
   identifier: string; // email, phone, or username
