@@ -379,9 +379,6 @@ function AdminDashboard({
     clientes: usuarios.filter((u) => u.rol === "cliente").length,
     veterinarios: usuarios.filter((u) => u.rol === "veterinario").length,
     totalCitas: citas.length,
-    preCitasPendientes: preCitas.filter((p) => p.estado === "pendiente").length,
-    suscriptoresNewsletter: suscriptoresNewsletter.filter((s) => s.activo)
-      .length,
     citasPendientes: citas.filter(
       (c) => c.estado === "pendiente_pago" || c.estado === "en_validacion",
     ).length,
