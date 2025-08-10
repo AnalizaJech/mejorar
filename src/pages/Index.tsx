@@ -586,18 +586,18 @@ export default function Index() {
 
           {/* Emergency Header */}
           <div className="text-center mb-20">
-            <div className="inline-flex items-center px-8 py-4 bg-vet-secondary/10 rounded-full mb-8 backdrop-blur-sm border border-vet-secondary/20">
-              <div className="w-8 h-8 bg-vet-secondary rounded-full flex items-center justify-center mr-4 animate-pulse">
-                <Dog className="w-4 h-4 text-white fill-current" />
+            <div className="inline-flex items-center px-8 py-4 bg-red-100 rounded-full mb-8 backdrop-blur-sm border border-red-200">
+              <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center mr-4 animate-pulse">
+                <Zap className="w-4 h-4 text-white" />
               </div>
-              <span className="text-vet-secondary font-bold text-lg">
+              <span className="text-red-600 font-bold text-lg">
                 EMERGENCIAS VETERINARIAS
               </span>
             </div>
 
             <h2 className="text-5xl lg:text-6xl font-bold text-vet-gray-900 mb-8 leading-tight">
               ¿Tu mascota está en
-              <span className="text-vet-secondary block lg:inline lg:ml-4">
+              <span className="text-red-600 block lg:inline lg:ml-4">
                 peligro?
               </span>
             </h2>
