@@ -48,6 +48,7 @@ import { useToast } from "@/hooks/use-toast";
 export default function MisMascotas() {
   const { user, mascotas, addMascota, updateMascota, deleteMascota } =
     useAppContext();
+  const { toast } = useToast();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingMascota, setEditingMascota] = useState(null);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
