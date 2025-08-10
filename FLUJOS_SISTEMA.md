@@ -830,31 +830,31 @@ graph TD
 interface OwnerInfoSection {
   // Características implementadas
   features: {
-    modernLayout: "Diseño de cards con gradientes",
-    iconSystem: "Iconos SVG (Lucide React) reemplazando emojis",
-    dataValidation: "Indicadores dinámicos de verificación",
-    responsiveDesign: "Layout adaptativo mobile-first",
-    colorCoding: "Sistema de colores semánticos",
-    actionButtons: "Botones de contacto directo (WhatsApp, SMS, Email, Llamada)"
-  },
+    modernLayout: "Diseño de cards con gradientes";
+    iconSystem: "Iconos SVG (Lucide React) reemplazando emojis";
+    dataValidation: "Indicadores dinámicos de verificación";
+    responsiveDesign: "Layout adaptativo mobile-first";
+    colorCoding: "Sistema de colores semánticos";
+    actionButtons: "Botones de contacto directo (WhatsApp, SMS, Email, Llamada)";
+  };
 
   // Separación de campos mejorada
   fieldsStructure: {
-    nombres: "Campo independiente para nombres",
-    apellidos: "Campo independiente para apellidos",
-    username: "Nombre de usuario con @",
-    email: "Con estado de verificación dinámico",
-    telefono: "Con indicadores de métodos de contacto",
-    documento: "Con tipo de documento y validación"
-  },
+    nombres: "Campo independiente para nombres";
+    apellidos: "Campo independiente para apellidos";
+    username: "Nombre de usuario con @";
+    email: "Con estado de verificación dinámico";
+    telefono: "Con indicadores de métodos de contacto";
+    documento: "Con tipo de documento y validación";
+  };
 
   // Sistema de verificación implementado
   verificationSystem: {
-    emailStatus: "Registrado/Sin email con badges",
-    phoneStatus: "Verificado/Pendiente/No registrado",
-    documentStatus: "Completo/Pendiente con tipos (DNI, Pasaporte, etc.)",
-    visualIndicators: "Iconos de estado y colores semánticos"
-  }
+    emailStatus: "Registrado/Sin email con badges";
+    phoneStatus: "Verificado/Pendiente/No registrado";
+    documentStatus: "Completo/Pendiente con tipos (DNI, Pasaporte, etc.)";
+    visualIndicators: "Iconos de estado y colores semánticos";
+  };
 }
 ```
 
@@ -1540,6 +1540,7 @@ graph TD
 **Mejoras Implementadas Recientemente:**
 
 1. **🎨 Rediseño Modal de Citas**:
+
    - Información del propietario con diseño moderno
    - Iconos SVG en lugar de emojis
    - Separación de nombres y apellidos
@@ -1547,11 +1548,13 @@ graph TD
    - Botones de contacto directo integrados
 
 2. **💰 Mejoras en Precio**:
+
    - Icono de monedas amarillo para identificación visual
    - Formato mejorado de moneda peruana
    - Integración visual en información del servicio
 
 3. **📱 Optimizaciones de UX**:
+
    - Modales de servicios con scroll mejorado
    - Inputs de precio sin valores por defecto
    - Textareas redimensionables y scrollables

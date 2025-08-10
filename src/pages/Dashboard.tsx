@@ -155,7 +155,7 @@ function AdminDashboard() {
       );
       activities.push({
         type: "client",
-        message: `Nuevo cliente registrado: ${client.nombre}${client.apellidos ? ` ${client.apellidos}` : ''}`,
+        message: `Nuevo cliente registrado: ${client.nombre}${client.apellidos ? ` ${client.apellidos}` : ""}`,
         time:
           hoursAgo < 24
             ? `Hace ${hoursAgo} horas`

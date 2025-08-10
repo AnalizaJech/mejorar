@@ -1479,7 +1479,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     const admins = usuarios.filter((u) => u.rol === "admin");
     const cliente = usuarios.find((u) => u.id === newCita.clienteId);
     const clienteNombreCompleto = cliente
-      ? `${cliente.nombre}${cliente.apellidos ? ` ${cliente.apellidos}` : ''}`
+      ? `${cliente.nombre}${cliente.apellidos ? ` ${cliente.apellidos}` : ""}`
       : newCita.clienteNombre || "Cliente";
 
     admins.forEach((admin) => {

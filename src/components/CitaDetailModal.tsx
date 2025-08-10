@@ -203,10 +203,14 @@ export default function CitaDetailModal({
                       <User className="w-5 h-5 text-white" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-vet-gray-900">Información del Propietario</h3>
+                      <h3 className="text-xl font-bold text-vet-gray-900">
+                        Información del Propietario
+                      </h3>
                       <div className="flex items-center space-x-2 mt-1">
                         <span className="w-2 h-2 bg-green-400 rounded-full"></span>
-                        <span className="text-sm text-vet-gray-600">Cliente activo</span>
+                        <span className="text-sm text-vet-gray-600">
+                          Cliente activo
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -337,8 +341,12 @@ export default function CitaDetailModal({
                         <User className="w-6 h-6 text-white" />
                       </div>
                       <div>
-                        <h4 className="text-lg font-bold text-blue-900">Identidad</h4>
-                        <p className="text-sm text-blue-600">Datos personales del cliente</p>
+                        <h4 className="text-lg font-bold text-blue-900">
+                          Identidad
+                        </h4>
+                        <p className="text-sm text-blue-600">
+                          Datos personales del cliente
+                        </p>
                       </div>
                     </div>
                     <div className="space-y-3">
@@ -355,7 +363,8 @@ export default function CitaDetailModal({
                           Apellidos
                         </span>
                         <p className="text-lg font-bold text-blue-900">
-                          {selectedCita.propietario?.apellidos || "No registrado"}
+                          {selectedCita.propietario?.apellidos ||
+                            "No registrado"}
                         </p>
                       </div>
                       {selectedCita.propietario?.username && (
@@ -378,26 +387,36 @@ export default function CitaDetailModal({
                         <Shield className="w-6 h-6 text-white" />
                       </div>
                       <div>
-                        <h4 className="text-lg font-bold text-green-900">Verificación</h4>
-                        <p className="text-sm text-green-600">Estado de validación</p>
+                        <h4 className="text-lg font-bold text-green-900">
+                          Verificación
+                        </h4>
+                        <p className="text-sm text-green-600">
+                          Estado de validación
+                        </p>
                       </div>
                     </div>
                     <div className="space-y-3">
                       <div className="flex items-center justify-between p-3 bg-white rounded-lg border border-green-200">
                         <div className="flex items-center space-x-2">
                           <Mail className="w-4 h-4 text-green-600" />
-                          <span className="text-sm font-medium text-green-800">Email</span>
+                          <span className="text-sm font-medium text-green-800">
+                            Email
+                          </span>
                         </div>
                         <div className="flex items-center space-x-2">
                           {selectedCita.propietario?.email ? (
                             <>
                               <CheckCircle className="w-4 h-4 text-green-600" />
-                              <span className="text-xs font-medium text-green-700">Registrado</span>
+                              <span className="text-xs font-medium text-green-700">
+                                Registrado
+                              </span>
                             </>
                           ) : (
                             <>
                               <AlertTriangle className="w-4 h-4 text-yellow-600" />
-                              <span className="text-xs font-medium text-yellow-700">No verificado</span>
+                              <span className="text-xs font-medium text-yellow-700">
+                                No verificado
+                              </span>
                             </>
                           )}
                         </div>
@@ -405,18 +424,24 @@ export default function CitaDetailModal({
                       <div className="flex items-center justify-between p-3 bg-white rounded-lg border border-green-200">
                         <div className="flex items-center space-x-2">
                           <Phone className="w-4 h-4 text-green-600" />
-                          <span className="text-sm font-medium text-green-800">Teléfono</span>
+                          <span className="text-sm font-medium text-green-800">
+                            Teléfono
+                          </span>
                         </div>
                         <div className="flex items-center space-x-2">
                           {selectedCita.propietario?.telefono ? (
                             <>
                               <CheckCircle className="w-4 h-4 text-green-600" />
-                              <span className="text-xs font-medium text-green-700">Verificado</span>
+                              <span className="text-xs font-medium text-green-700">
+                                Verificado
+                              </span>
                             </>
                           ) : (
                             <>
                               <XCircle className="w-4 h-4 text-red-600" />
-                              <span className="text-xs font-medium text-red-700">No registrado</span>
+                              <span className="text-xs font-medium text-red-700">
+                                No registrado
+                              </span>
                             </>
                           )}
                         </div>
@@ -424,18 +449,24 @@ export default function CitaDetailModal({
                       <div className="flex items-center justify-between p-3 bg-white rounded-lg border border-green-200">
                         <div className="flex items-center space-x-2">
                           <IdCard className="w-4 h-4 text-green-600" />
-                          <span className="text-sm font-medium text-green-800">Documento</span>
+                          <span className="text-sm font-medium text-green-800">
+                            Documento
+                          </span>
                         </div>
                         <div className="flex items-center space-x-2">
                           {selectedCita.propietario?.documento ? (
                             <>
                               <CheckCircle className="w-4 h-4 text-green-600" />
-                              <span className="text-xs font-medium text-green-700">Completo</span>
+                              <span className="text-xs font-medium text-green-700">
+                                Completo
+                              </span>
                             </>
                           ) : (
                             <>
                               <AlertTriangle className="w-4 h-4 text-yellow-600" />
-                              <span className="text-xs font-medium text-yellow-700">Pendiente</span>
+                              <span className="text-xs font-medium text-yellow-700">
+                                Pendiente
+                              </span>
                             </>
                           )}
                         </div>
@@ -500,10 +531,18 @@ export default function CitaDetailModal({
                       </p>
                       {selectedCita.propietario?.telefono && (
                         <div className="flex items-center space-x-2 mt-2">
-                          <span className="text-xs text-gray-500">Disponible vía:</span>
+                          <span className="text-xs text-gray-500">
+                            Disponible vía:
+                          </span>
                           <div className="flex space-x-1">
-                            <MessageCircle className="w-3 h-3 text-green-600" title="WhatsApp" />
-                            <MessageSquare className="w-3 h-3 text-blue-600" title="SMS" />
+                            <MessageCircle
+                              className="w-3 h-3 text-green-600"
+                              title="WhatsApp"
+                            />
+                            <MessageSquare
+                              className="w-3 h-3 text-blue-600"
+                              title="SMS"
+                            />
                           </div>
                         </div>
                       )}
@@ -524,10 +563,14 @@ export default function CitaDetailModal({
                         </span>
                         {selectedCita.propietario?.documento ? (
                           <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full font-medium">
-                            {selectedCita.propietario?.tipoDocumento === "dni" && "DNI"}
-                            {selectedCita.propietario?.tipoDocumento === "pasaporte" && "Pasaporte"}
-                            {selectedCita.propietario?.tipoDocumento === "carnet_extranjeria" && "Carnet"}
-                            {selectedCita.propietario?.tipoDocumento === "cedula" && "Cédula"}
+                            {selectedCita.propietario?.tipoDocumento ===
+                              "dni" && "DNI"}
+                            {selectedCita.propietario?.tipoDocumento ===
+                              "pasaporte" && "Pasaporte"}
+                            {selectedCita.propietario?.tipoDocumento ===
+                              "carnet_extranjeria" && "Carnet"}
+                            {selectedCita.propietario?.tipoDocumento ===
+                              "cedula" && "Cédula"}
                             {!selectedCita.propietario?.tipoDocumento && "DNI"}
                           </span>
                         ) : (
@@ -573,7 +616,8 @@ export default function CitaDetailModal({
                           APELLIDOS
                         </span>
                         <p className="text-base font-semibold text-gray-900">
-                          {selectedCita.propietario?.apellidos || "No registrado"}
+                          {selectedCita.propietario?.apellidos ||
+                            "No registrado"}
                         </p>
                       </div>
                     </div>
@@ -583,14 +627,18 @@ export default function CitaDetailModal({
                   <div className="bg-gray-100 rounded-2xl p-4 shadow-sm">
                     <div className="flex items-center space-x-3">
                       <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
-                        <span className="text-blue-600 font-bold text-lg">@</span>
+                        <span className="text-blue-600 font-bold text-lg">
+                          @
+                        </span>
                       </div>
                       <div className="flex-1">
                         <span className="text-xs font-medium text-gray-500 uppercase tracking-wide block mb-1">
                           NOMBRE DE USUARIO
                         </span>
                         <p className="text-base font-semibold text-gray-900">
-                          {selectedCita.propietario?.username ? `@${selectedCita.propietario.username}` : "No registrado"}
+                          {selectedCita.propietario?.username
+                            ? `@${selectedCita.propietario.username}`
+                            : "No registrado"}
                         </p>
                       </div>
                     </div>
@@ -624,7 +672,8 @@ export default function CitaDetailModal({
                           TELÉFONO
                         </span>
                         <p className="text-base font-semibold text-gray-900 font-mono">
-                          {selectedCita.propietario?.telefono || "No registrado"}
+                          {selectedCita.propietario?.telefono ||
+                            "No registrado"}
                         </p>
                       </div>
                     </div>
@@ -641,12 +690,16 @@ export default function CitaDetailModal({
                           DOCUMENTO DE IDENTIDAD
                         </span>
                         <p className="text-base font-semibold text-gray-900">
-                          {selectedCita.propietario?.tipoDocumento === "dni" && "DNI"}
-                          {selectedCita.propietario?.tipoDocumento === "pasaporte" && "Pasaporte"}
-                          {selectedCita.propietario?.tipoDocumento === "carnet_extranjeria" && "Carnet de Extranjería"}
-                          {selectedCita.propietario?.tipoDocumento === "cedula" && "Cédula"}
-                          {!selectedCita.propietario?.tipoDocumento && "DNI"}
-                          : {selectedCita.propietario?.documento || "73126518"}
+                          {selectedCita.propietario?.tipoDocumento === "dni" &&
+                            "DNI"}
+                          {selectedCita.propietario?.tipoDocumento ===
+                            "pasaporte" && "Pasaporte"}
+                          {selectedCita.propietario?.tipoDocumento ===
+                            "carnet_extranjeria" && "Carnet de Extranjería"}
+                          {selectedCita.propietario?.tipoDocumento ===
+                            "cedula" && "Cédula"}
+                          {!selectedCita.propietario?.tipoDocumento && "DNI"}:{" "}
+                          {selectedCita.propietario?.documento || "73126518"}
                         </p>
                       </div>
                     </div>
@@ -664,11 +717,21 @@ export default function CitaDetailModal({
                             Género
                           </span>
                           <p className="text-base font-semibold text-gray-900 capitalize">
-                            {selectedCita.propietario.genero === 'masculino' && 'Masculino'}
-                            {selectedCita.propietario.genero === 'femenino' && 'Femenino'}
-                            {selectedCita.propietario.genero === 'otro' && 'Otro'}
-                            {selectedCita.propietario.genero === 'prefiero_no_decir' && 'Prefiero no decir'}
-                            {!['masculino', 'femenino', 'otro', 'prefiero_no_decir'].includes(selectedCita.propietario.genero) && selectedCita.propietario.genero}
+                            {selectedCita.propietario.genero === "masculino" &&
+                              "Masculino"}
+                            {selectedCita.propietario.genero === "femenino" &&
+                              "Femenino"}
+                            {selectedCita.propietario.genero === "otro" &&
+                              "Otro"}
+                            {selectedCita.propietario.genero ===
+                              "prefiero_no_decir" && "Prefiero no decir"}
+                            {![
+                              "masculino",
+                              "femenino",
+                              "otro",
+                              "prefiero_no_decir",
+                            ].includes(selectedCita.propietario.genero) &&
+                              selectedCita.propietario.genero}
                           </p>
                         </div>
                       </div>
@@ -687,14 +750,23 @@ export default function CitaDetailModal({
                             Fecha de Nacimiento
                           </span>
                           <p className="text-base font-semibold text-gray-900">
-                            {new Date(selectedCita.propietario.fechaNacimiento).toLocaleDateString("es-ES", {
+                            {new Date(
+                              selectedCita.propietario.fechaNacimiento,
+                            ).toLocaleDateString("es-ES", {
                               day: "numeric",
                               month: "long",
                               year: "numeric",
                             })}
                           </p>
                           <span className="text-xs text-gray-500">
-                            {Math.floor((new Date().getTime() - new Date(selectedCita.propietario.fechaNacimiento).getTime()) / (365.25 * 24 * 60 * 60 * 1000))} años
+                            {Math.floor(
+                              (new Date().getTime() -
+                                new Date(
+                                  selectedCita.propietario.fechaNacimiento,
+                                ).getTime()) /
+                                (365.25 * 24 * 60 * 60 * 1000),
+                            )}{" "}
+                            años
                           </span>
                         </div>
                       </div>
@@ -733,7 +805,9 @@ export default function CitaDetailModal({
                           Cliente desde
                         </span>
                         <p className="text-lg font-bold text-vet-gray-900">
-                          {new Date(selectedCita.propietario.fechaCreacion).toLocaleDateString("es-ES", {
+                          {new Date(
+                            selectedCita.propietario.fechaCreacion,
+                          ).toLocaleDateString("es-ES", {
                             year: "numeric",
                             month: "long",
                             day: "numeric",
