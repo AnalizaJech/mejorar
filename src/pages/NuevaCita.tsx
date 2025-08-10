@@ -499,8 +499,87 @@ export default function NuevaCita() {
           {/* Step Content */}
           <Card>
             <CardContent className="p-8">
-              {/* Step 1: Select Pet */}
+              {/* Step 1: Select Service Type */}
               {currentStep === 1 && (
+                <div className="space-y-6">
+                  <div>
+                    <h2 className="text-2xl font-bold text-vet-gray-900 mb-2">
+                      Servicios Veterinarios
+                    </h2>
+                    <p className="text-vet-gray-600">
+                      Elige el servicio que mejor se adapte a las necesidades de tu mascota
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {tiposConsulta.map((tipo) => (
+                      <Card
+                        key={tipo.id}
+                        className={`cursor-pointer transition-all ${
+                          citaData.tipoConsulta === tipo.id
+                            ? "ring-2 ring-vet-primary bg-vet-primary/5"
+                            : "hover:shadow-md"
+                        }`}
+                        onClick={() =>
+                          setCitaData({ ...citaData, tipoConsulta: tipo.id })
+                        }
+                      >
+                        <CardContent className="p-4">
+                          <div className="flex items-start justify-between">
+                            <div className="flex items-start space-x-3">
+                              <div
+                                className={`p-2 rounded-lg ${
+                                  citaData.tipoConsulta === tipo.id
+                                    ? "bg-vet-primary text-white"
+                                    : "bg-vet-primary/10 text-vet-primary"
+                                }`}
+                              >
+                                {getServiceIcon(tipo.icono)}
+                              </div>
+                              <div className="flex-1">
+                                <h4 className="font-semibold text-vet-gray-900 mb-1">
+                                  {tipo.nombre}
+                                </h4>
+                                <p className="text-sm text-vet-gray-600 mb-2 leading-tight">
+                                  {tipo.descripcion}
+                                </p>
+                                <Badge className="bg-vet-primary/10 text-vet-primary font-semibold">
+                                  S/. {tipo.precio.toLocaleString()}
+                                </Badge>
+                              </div>
+                            </div>
+                            {citaData.tipoConsulta === tipo.id && (
+                              <CheckCircle className="w-5 h-5 text-vet-primary flex-shrink-0 mt-1" />
+                            )}
+                          </div>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+
+                  <div>
+                    <Label htmlFor="motivo">Motivo de la consulta *</Label>
+                    <div className="mt-2">
+                      <Textarea
+                        id="motivo"
+                        value={citaData.motivo}
+                        onChange={(e) =>
+                          setCitaData({ ...citaData, motivo: e.target.value })
+                        }
+                        placeholder="Describe los síntomas o el motivo de la consulta..."
+                        className="w-full min-h-[120px] max-h-[120px] resize-none overflow-y-auto px-3 py-2 border border-vet-gray-300 rounded-lg focus:ring-2 focus:ring-vet-primary focus:border-vet-primary transition-all duration-200"
+                      />
+                      <p className="text-xs text-vet-gray-500 mt-1">
+                        💬 Describe síntomas, comportamientos o motivos
+                        específicos para una mejor atención
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Step 2: Select Pet */}
+              {currentStep === 2 && (
                 <div className="space-y-6">
                   <div>
                     <h2 className="text-2xl font-bold text-vet-gray-900 mb-2">
@@ -577,108 +656,26 @@ export default function NuevaCita() {
                       ))}
                     </div>
                   )}
-                </div>
-              )}
 
-              {/* Step 2: Select Service Type */}
-              {currentStep === 2 && (
-                <div className="space-y-6">
                   <div>
-                    <h2 className="text-2xl font-bold text-vet-gray-900 mb-2">
-                      Servicios Veterinarios
-                    </h2>
-                    <p className="text-vet-gray-600">
-                      Elige el servicio que mejor se adapte a las necesidades de
-                      tu mascota
-                    </p>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {tiposConsulta.map((tipo) => (
-                      <Card
-                        key={tipo.id}
-                        className={`cursor-pointer transition-all ${
-                          citaData.tipoConsulta === tipo.id
-                            ? "ring-2 ring-vet-primary bg-vet-primary/5"
-                            : "hover:shadow-md"
-                        }`}
-                        onClick={() =>
-                          setCitaData({ ...citaData, tipoConsulta: tipo.id })
-                        }
-                      >
-                        <CardContent className="p-4">
-                          <div className="flex items-start justify-between">
-                            <div className="flex items-start space-x-3">
-                              <div
-                                className={`p-2 rounded-lg ${
-                                  citaData.tipoConsulta === tipo.id
-                                    ? "bg-vet-primary text-white"
-                                    : "bg-vet-primary/10 text-vet-primary"
-                                }`}
-                              >
-                                {getServiceIcon(tipo.icono)}
-                              </div>
-                              <div className="flex-1">
-                                <h4 className="font-semibold text-vet-gray-900 mb-1">
-                                  {tipo.nombre}
-                                </h4>
-                                <p className="text-sm text-vet-gray-600 mb-2 leading-tight">
-                                  {tipo.descripcion}
-                                </p>
-                                <Badge className="bg-vet-primary/10 text-vet-primary font-semibold">
-                                  S/. {tipo.precio.toLocaleString()}
-                                </Badge>
-                              </div>
-                            </div>
-                            {citaData.tipoConsulta === tipo.id && (
-                              <CheckCircle className="w-5 h-5 text-vet-primary flex-shrink-0 mt-1" />
-                            )}
-                          </div>
-                        </CardContent>
-                      </Card>
-                    ))}
-                  </div>
-
-                  <div className="space-y-4">
-                    <div>
-                      <Label htmlFor="motivo">Motivo de la consulta *</Label>
-                      <div className="mt-2">
-                        <Textarea
-                          id="motivo"
-                          value={citaData.motivo}
-                          onChange={(e) =>
-                            setCitaData({ ...citaData, motivo: e.target.value })
-                          }
-                          placeholder="Describe los síntomas o el motivo de la consulta..."
-                          className="w-full min-h-[120px] max-h-[120px] resize-none overflow-y-auto px-3 py-2 border border-vet-gray-300 rounded-lg focus:ring-2 focus:ring-vet-primary focus:border-vet-primary transition-all duration-200"
-                        />
-                        <p className="text-xs text-vet-gray-500 mt-1">
-                          💬 Describe síntomas, comportamientos o motivos
-                          específicos para una mejor atención
-                        </p>
-                      </div>
-                    </div>
-
-                    <div>
-                      <Label htmlFor="ubicacion">Ubicación</Label>
-                      <Select
-                        value={citaData.ubicacion}
-                        onValueChange={(value) =>
-                          setCitaData({ ...citaData, ubicacion: value })
-                        }
-                      >
-                        <SelectTrigger className="mt-2">
-                          <SelectValue placeholder="Selecciona ubicación" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {ubicaciones.map((ubicacion) => (
-                            <SelectItem key={ubicacion} value={ubicacion}>
-                              {ubicacion}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
+                    <Label htmlFor="ubicacion">Ubicación</Label>
+                    <Select
+                      value={citaData.ubicacion}
+                      onValueChange={(value) =>
+                        setCitaData({ ...citaData, ubicacion: value })
+                      }
+                    >
+                      <SelectTrigger className="mt-2">
+                        <SelectValue placeholder="Selecciona ubicación" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {ubicaciones.map((ubicacion) => (
+                          <SelectItem key={ubicacion} value={ubicacion}>
+                            {ubicacion}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                   </div>
                 </div>
               )}
@@ -962,9 +959,8 @@ export default function NuevaCita() {
                   <Button
                     onClick={nextStep}
                     disabled={
-                      (currentStep === 1 && !citaData.mascotaId) ||
-                      (currentStep === 2 &&
-                        (!citaData.tipoConsulta || !citaData.motivo.trim())) ||
+                      (currentStep === 1 && (!citaData.tipoConsulta || !citaData.motivo.trim())) ||
+                      (currentStep === 2 && !citaData.mascotaId) ||
                       (currentStep === 3 && (!citaData.fecha || !citaData.hora))
                     }
                     className="bg-vet-primary hover:bg-vet-primary-dark flex items-center"
