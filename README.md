@@ -136,7 +136,6 @@ src/
 │   ├── GestionCitasPago.tsx # Validación de pagos
 │   ├── Usuarios.tsx        # Gestión de usuarios
 │   ├── Veterinarios.tsx    # Gestión de veterinarios
-│   ├���─ GestionNewsletter.tsx # Sistema de newsletter
 │   │
 │   ├── # PÁGINAS COMUNES
 │   ├── Configuracion.tsx   # Configuración de cuenta
