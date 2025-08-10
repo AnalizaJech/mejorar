@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { animateCounters } from "@/lib/counter";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -53,7 +53,19 @@ import {
 
 export default function Index() {
   const location = useLocation();
+  const navigate = useNavigate();
   const { isAuthenticated, user } = useAppContext();
+
+  // Function to handle service selection
+  const handleServiceClick = (serviceId: string) => {
+    if (isAuthenticated && user?.rol === "cliente") {
+      // User is logged in as client, go directly to Nueva Cita with preselected service
+      navigate("/nueva-cita", { state: { preselectedService: serviceId } });
+    } else {
+      // User is not logged in or not a client, redirect to login with return URL
+      navigate("/login", { state: { returnTo: "/nueva-cita", preselectedService: serviceId } });
+    }
+  };
 
   // Handle hash routing for anchor links
   useEffect(() => {
@@ -440,7 +452,13 @@ export default function Index() {
                       </span>
                     </div>
                   </div>
-                  <div className="w-12 h-12 bg-vet-primary/10 rounded-full flex items-center justify-center group-hover:bg-vet-primary group-hover:text-white transition-all duration-300">
+                  <div
+                    className="w-12 h-12 bg-vet-primary/10 rounded-full flex items-center justify-center group-hover:bg-vet-primary group-hover:text-white transition-all duration-300 cursor-pointer"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleServiceClick("consulta_general");
+                    }}
+                  >
                     <ArrowRight className="w-5 h-5" />
                   </div>
                 </div>
@@ -473,7 +491,13 @@ export default function Index() {
                       </span>
                     </div>
                   </div>
-                  <div className="w-12 h-12 bg-green-500/10 rounded-full flex items-center justify-center group-hover:bg-green-500 group-hover:text-white transition-all duration-300">
+                  <div
+                    className="w-12 h-12 bg-green-500/10 rounded-full flex items-center justify-center group-hover:bg-green-500 group-hover:text-white transition-all duration-300 cursor-pointer"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleServiceClick("vacunacion");
+                    }}
+                  >
                     <ArrowRight className="w-5 h-5" />
                   </div>
                 </div>
@@ -506,7 +530,13 @@ export default function Index() {
                       </span>
                     </div>
                   </div>
-                  <div className="w-12 h-12 bg-red-500/10 rounded-full flex items-center justify-center group-hover:bg-red-500 group-hover:text-white transition-all duration-300">
+                  <div
+                    className="w-12 h-12 bg-red-500/10 rounded-full flex items-center justify-center group-hover:bg-red-500 group-hover:text-white transition-all duration-300 cursor-pointer"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleServiceClick("emergencia");
+                    }}
+                  >
                     <ArrowRight className="w-5 h-5" />
                   </div>
                 </div>
@@ -539,7 +569,13 @@ export default function Index() {
                       </span>
                     </div>
                   </div>
-                  <div className="w-12 h-12 bg-vet-secondary/10 rounded-full flex items-center justify-center group-hover:bg-vet-secondary group-hover:text-white transition-all duration-300">
+                  <div
+                    className="w-12 h-12 bg-vet-secondary/10 rounded-full flex items-center justify-center group-hover:bg-vet-secondary group-hover:text-white transition-all duration-300 cursor-pointer"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleServiceClick("grooming");
+                    }}
+                  >
                     <ArrowRight className="w-5 h-5" />
                   </div>
                 </div>
@@ -572,7 +608,13 @@ export default function Index() {
                       </span>
                     </div>
                   </div>
-                  <div className="w-12 h-12 bg-purple-500/10 rounded-full flex items-center justify-center group-hover:bg-purple-500 group-hover:text-white transition-all duration-300">
+                  <div
+                    className="w-12 h-12 bg-purple-500/10 rounded-full flex items-center justify-center group-hover:bg-purple-500 group-hover:text-white transition-all duration-300 cursor-pointer"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleServiceClick("cirugia");
+                    }}
+                  >
                     <ArrowRight className="w-5 h-5" />
                   </div>
                 </div>
@@ -605,7 +647,13 @@ export default function Index() {
                       </span>
                     </div>
                   </div>
-                  <div className="w-12 h-12 bg-blue-500/10 rounded-full flex items-center justify-center group-hover:bg-blue-500 group-hover:text-white transition-all duration-300">
+                  <div
+                    className="w-12 h-12 bg-blue-500/10 rounded-full flex items-center justify-center group-hover:bg-blue-500 group-hover:text-white transition-all duration-300 cursor-pointer"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleServiceClick("diagnostico");
+                    }}
+                  >
                     <ArrowRight className="w-5 h-5" />
                   </div>
                 </div>
