@@ -239,11 +239,13 @@ export default function MisMascotas() {
   };
 
   const handlePesoChange = (value: string) => {
-    // Store just the numeric value without "kg"
-    setNewMascota({
-      ...newMascota,
-      peso: value,
-    });
+    // Only allow numeric values (including decimals)
+    if (value === "" || /^\d*\.?\d*$/.test(value)) {
+      setNewMascota({
+        ...newMascota,
+        peso: value,
+      });
+    }
   };
 
   const displayPeso = (peso: string) => {
