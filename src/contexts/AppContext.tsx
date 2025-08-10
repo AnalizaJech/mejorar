@@ -431,25 +431,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }
   });
 
-  const [preCitas, setPreCitas] = useState<PreCita[]>(() => {
-    try {
-      const preCitasStr = localStorage.getItem("preCitas");
-      if (preCitasStr) {
-        const parsedPreCitas = JSON.parse(preCitasStr);
-        return parsedPreCitas.map((preCita: any) => ({
-          ...preCita,
-          fechaPreferida: createSafeDate(preCita.fechaPreferida),
-          fechaCreacion: new Date(preCita.fechaCreacion),
-          ...(preCita.fechaNueva && {
-            fechaNueva: new Date(preCita.fechaNueva),
-          }),
-        }));
-      }
-      return [];
-    } catch {
-      return [];
-    }
-  });
 
   const [historialClinico, setHistorialClinico] = useState<HistorialClinico[]>(
     () => {
@@ -478,41 +459,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     },
   );
 
-  const [suscriptoresNewsletter, setSuscriptoresNewsletter] = useState<
-    SuscriptorNewsletter[]
-  >(() => {
-    try {
-      const suscriptoresStr = localStorage.getItem("suscriptoresNewsletter");
-      if (suscriptoresStr) {
-        const parsedSuscriptores = JSON.parse(suscriptoresStr);
-        return parsedSuscriptores.map((suscriptor: any) => ({
-          ...suscriptor,
-          fechaSuscripcion: new Date(suscriptor.fechaSuscripcion),
-        }));
-      }
-      return [];
-    } catch {
-      return [];
-    }
-  });
 
-  const [newsletterEmails, setNewsletterEmails] = useState<NewsletterEmail[]>(
-    () => {
-      try {
-        const emailsStr = localStorage.getItem("newsletterEmails");
-        if (emailsStr) {
-          const parsedEmails = JSON.parse(emailsStr);
-          return parsedEmails.map((email: any) => ({
-            ...email,
-            fechaEnvio: new Date(email.fechaEnvio),
-          }));
-        }
-        return [];
-      } catch {
-        return [];
-      }
-    },
-  );
 
   const [notificaciones, setNotificaciones] = useState<Notificacion[]>(() => {
     try {
