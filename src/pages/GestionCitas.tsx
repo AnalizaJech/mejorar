@@ -1283,10 +1283,7 @@ export default function GestionCitas() {
                                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                                     <div className="text-center">
                                       <div className="text-2xl font-bold text-vet-primary">
-                                        {(() => {
-                                          const clienteMascotas = mascotas.filter(m => m.clienteId === propietario.id);
-                                          return clienteMascotas.length;
-                                        })()}
+                                        {mascotas.filter(m => m.clienteId === propietario.id).length}
                                       </div>
                                       <div className="text-xs text-vet-gray-600">Mascotas</div>
                                     </div>
@@ -1488,7 +1485,7 @@ export default function GestionCitas() {
                             ) : (
                               <>
                                 <XCircle className="w-4 h-4 mr-2" />
-                                No Asistió
+                                No Asisti��
                               </>
                             )}
                           </Button>
