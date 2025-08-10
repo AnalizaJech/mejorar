@@ -533,7 +533,7 @@ export default function Servicios() {
                     <SelectTrigger>
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="max-h-60 overflow-y-auto">
                       {iconos.map((icono) => {
                         const IconComponent = icono.component;
                         return (
