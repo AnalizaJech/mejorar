@@ -194,21 +194,21 @@ export default function Index() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
 
                   {/* Floating badge */}
-              <div className="absolute bottom-2 left-2 md:bottom-4 md:left-4 bg-white/95 backdrop-blur-sm rounded-xl p-2 md:p-4 shadow-lg transform hover:scale-105 transition-all duration-300">
-                <div className="flex items-center space-x-2 md:space-x-3">
-                  <div className="w-8 h-8 md:w-10 md:h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                    <Stethoscope className="w-4 h-4 md:w-5 md:h-5 text-blue-600" />
+                  <div className="absolute bottom-2 left-2 md:bottom-4 md:left-4 bg-white/95 backdrop-blur-sm rounded-xl p-2 md:p-4 shadow-lg transform hover:scale-105 transition-all duration-300">
+                    <div className="flex items-center space-x-2 md:space-x-3">
+                      <div className="w-8 h-8 md:w-10 md:h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                        <Stethoscope className="w-4 h-4 md:w-5 md:h-5 text-blue-600" />
+                      </div>
+                      <div>
+                        <p className="text-xs md:text-sm font-bold text-vet-gray-900">
+                          Mascota Feliz
+                        </p>
+                        <p className="text-xs text-vet-gray-600">
+                          Cuidado Profesional
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-xs md:text-sm font-bold text-vet-gray-900">
-                      Mascota Feliz
-                    </p>
-                    <p className="text-xs text-vet-gray-600">
-                      Cuidado Profesional
-                    </p>
-                  </div>
-                </div>
-              </div>
 
                   {/* Quality badge */}
                   <div className="hidden md:block absolute top-2 right-2 md:top-4 md:right-4 bg-white rounded-xl shadow-lg p-2 md:p-4 z-10 transform hover:scale-105 transition-all duration-300">
@@ -220,7 +220,9 @@ export default function Index() {
                         <p className="text-sm md:text-lg font-bold text-vet-gray-900">
                           24/7
                         </p>
-                        <p className="text-xs md:text-sm text-vet-gray-600">Disponible</p>
+                        <p className="text-xs md:text-sm text-vet-gray-600">
+                          Disponible
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -629,7 +631,9 @@ export default function Index() {
           {/* Floating Emergency Badge */}
           <div className="hidden md:block absolute top-4 left-4 md:top-8 md:left-8 animate-bounce z-20">
             <div className="bg-red-100 rounded-full p-3 md:p-4 shadow-lg border border-red-200">
-              <div className="text-lg md:text-2xl font-bold text-red-600">24/7</div>
+              <div className="text-lg md:text-2xl font-bold text-red-600">
+                24/7
+              </div>
             </div>
           </div>
 
