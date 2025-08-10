@@ -203,9 +203,51 @@
   }
 }
 
-/* Smooth scrolling */
+/* Smooth scrolling and scroll enhancements */
 html {
   scroll-behavior: smooth;
+  /* Ensure full height for proper scrolling */
+  height: 100%;
+}
+
+body {
+  /* Ensure body takes full height */
+  min-height: 100vh;
+  /* Better scroll padding for anchor links */
+  scroll-padding-top: 80px;
+}
+
+/* Scroll indicator for long pages */
+@media (min-width: 768px) {
+  .scroll-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background: linear-gradient(
+      90deg,
+      hsl(var(--primary)),
+      hsl(var(--secondary))
+    );
+    z-index: 9999;
+    transform-origin: left;
+    animation: scroll-progress linear;
+    animation-timeline: scroll(root);
+  }
+
+  @supports (animation-timeline: scroll()) {
+    .scroll-indicator {
+      transform: scaleX(0);
+      animation: scroll-progress linear;
+      animation-timeline: scroll(root);
+    }
+
+    @keyframes scroll-progress {
+      to {
+        transform: scaleX(1);
+      }
+    }
+  }
 }
 
 /* Focus styles for accessibility */
