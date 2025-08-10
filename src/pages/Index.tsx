@@ -24,7 +24,6 @@ import {
 import { DatePicker } from "@/components/ui/date-picker";
 import Layout from "@/components/Layout";
 import FeaturesCarousel from "@/components/FeaturesCarousel";
-import NewsletterSection from "@/components/NewsletterSection";
 import { useAppContext } from "@/contexts/AppContext";
 import {
   Dog,
@@ -505,9 +504,6 @@ export default function Index() {
       </div>
 
       {/* Newsletter Section */}
-      <div id="newsletter">
-        <NewsletterSection />
-      </div>
       {/* Pre-Cita Form Section */}
       <section id="pre-cita-form" className="py-20 bg-vet-gray-50">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
