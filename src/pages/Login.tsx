@@ -195,7 +195,7 @@ export default function Login() {
               <form onSubmit={handleLogin} className="space-y-5">
                 <div className="space-y-2">
                   <Label htmlFor="login-identifier">
-                    Correo / Teléfono / Usuario
+                    Correo / Teléfono / Nombre de Usuario
                   </Label>
                   <div className="relative">
                     <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-vet-gray-400" />
@@ -249,20 +249,23 @@ export default function Login() {
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-3">
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex items-center space-x-2 shrink-0">
                     <input
                       type="checkbox"
                       id="remember"
                       className="w-4 h-4 rounded border-vet-gray-300 text-vet-primary focus:ring-vet-primary/20 focus:ring-2"
                     />
-                    <Label htmlFor="remember" className="text-sm">
+                    <Label
+                      htmlFor="remember"
+                      className="text-sm whitespace-nowrap"
+                    >
                       Recordarme
                     </Label>
                   </div>
                   <Link
                     to="/forgot-password"
-                    className="text-sm text-vet-primary hover:text-vet-primary-dark"
+                    className="text-sm text-vet-primary hover:text-vet-primary-dark whitespace-nowrap"
                   >
                     ¿Olvidaste tu contraseña?
                   </Link>
