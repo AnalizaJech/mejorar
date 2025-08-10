@@ -287,17 +287,11 @@ export default function Notificaciones() {
 
           {/* Filters */}
           <Tabs value={selectedFilter} onValueChange={setSelectedFilter}>
-            <TabsList className="grid w-full grid-cols-3 lg:grid-cols-6 mb-6">
+            <TabsList className="grid w-full grid-cols-2 lg:grid-cols-4 mb-6">
               <TabsTrigger value="todas">Todas</TabsTrigger>
               <TabsTrigger value="no_leidas">No leídas</TabsTrigger>
               <TabsTrigger value="cita">Citas</TabsTrigger>
-              <TabsTrigger value="historial">Consultas</TabsTrigger>
               <TabsTrigger value="sistema">Sistema</TabsTrigger>
-              {(user.rol === "admin" || user.rol === "veterinario") && (
-                <>
-                  <TabsTrigger value="recordatorio">Recordatorios</TabsTrigger>
-                </>
-              )}
             </TabsList>
 
             <TabsContent value={selectedFilter} className="space-y-4">
