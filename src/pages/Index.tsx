@@ -217,7 +217,9 @@ export default function Index() {
                         <CheckCircle className="w-5 h-5 text-indigo-600" />
                       </div>
                       <div>
-                        <p className="text-lg font-bold text-vet-gray-900">24/7</p>
+                        <p className="text-lg font-bold text-vet-gray-900">
+                          24/7
+                        </p>
                         <p className="text-sm text-vet-gray-600">Disponible</p>
                       </div>
                     </div>
