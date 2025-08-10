@@ -48,6 +48,7 @@ import {
   Scissors,
   Syringe,
   Zap,
+  Bell,
 } from "lucide-react";
 
 export default function Index() {
@@ -185,18 +186,18 @@ export default function Index() {
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <div className="aspect-[4/3] relative">
                   <img
-                    src="https://images.pexels.com/photos/7470753/pexels-photo-7470753.jpeg"
-                    alt="Veterinario y equipo cuidando la salud de mascota"
-                    className="w-full h-full object-cover"
+                    src="https://images.pexels.com/photos/7465697/pexels-photo-7465697.jpeg"
+                    alt="Equipo veterinario profesional en clínica moderna con ambiente colaborativo"
+                    className="w-full h-full object-cover scale-110"
                   />
                   {/* Gradient overlay for text readability */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
 
                   {/* Floating badge */}
-                  <div className="absolute bottom-4 left-4 bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
-                        <Stethoscope className="w-5 h-5 text-white" />
+                  <div className="absolute bottom-4 left-4 bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg transform hover:scale-105 transition-all duration-300">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                        <Stethoscope className="w-5 h-5 text-blue-600" />
                       </div>
                       <div>
                         <p className="text-sm font-bold text-vet-gray-900">
@@ -210,21 +211,24 @@ export default function Index() {
                   </div>
 
                   {/* Quality badge */}
-                  <div className="absolute top-4 right-4 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 backdrop-blur-sm rounded-2xl px-6 py-4 shadow-2xl border-2 border-white/30 transform hover:scale-105 transition-all duration-300">
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 bg-white/25 rounded-xl flex items-center justify-center backdrop-blur-sm">
-                        <Shield className="w-5 h-5 text-white" />
+                  <div className="absolute top-4 right-4 bg-white rounded-xl shadow-lg p-4 z-10 transform hover:scale-105 transition-all duration-300">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center">
+                        <CheckCircle className="w-5 h-5 text-indigo-600" />
                       </div>
-                      <span className="text-white text-base font-black tracking-wider drop-shadow-lg">
-                        Premium
-                      </span>
+                      <div>
+                        <p className="text-lg font-bold text-vet-gray-900">
+                          24/7
+                        </p>
+                        <p className="text-sm text-vet-gray-600">Disponible</p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Floating stats cards */}
-              <div className="absolute -top-4 -left-4 bg-white rounded-xl shadow-lg p-4 z-10">
+              <div className="absolute -top-4 -left-4 bg-white rounded-xl shadow-lg p-4 z-10 transform hover:scale-105 transition-all duration-300">
                 <div className="flex items-center space-x-3">
                   <div className="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center">
                     <Star className="w-5 h-5 text-amber-600" />
@@ -236,7 +240,7 @@ export default function Index() {
                 </div>
               </div>
 
-              <div className="absolute -bottom-4 -right-4 bg-white rounded-xl shadow-lg p-4 z-10">
+              <div className="absolute -bottom-4 -right-4 bg-white rounded-xl shadow-lg p-4 z-10 transform hover:scale-105 transition-all duration-300">
                 <div className="flex items-center space-x-3">
                   <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
                     <Users className="w-5 h-5 text-emerald-600" />
@@ -624,8 +628,8 @@ export default function Index() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Floating Emergency Badge */}
           <div className="absolute top-8 right-8 animate-bounce">
-            <div className="bg-vet-secondary rounded-full p-4 shadow-lg">
-              <div className="text-2xl font-bold text-white">24/7</div>
+            <div className="bg-red-100 rounded-full p-4 shadow-lg border border-red-200">
+              <div className="text-2xl font-bold text-red-600">24/7</div>
             </div>
           </div>
 
@@ -724,46 +728,56 @@ export default function Index() {
                 </div>
 
                 {/* Emergency Info */}
-                <div className="bg-vet-gray-50 rounded-2xl p-6 border border-vet-gray-200">
-                  <h4 className="text-xl font-bold text-vet-gray-900 mb-6">
-                    ¿Qué hacer mientras llegas?
-                  </h4>
+                <div className="bg-gradient-to-br from-red-50 to-white rounded-2xl p-6 border border-red-100 shadow-lg relative overflow-hidden">
+                  {/* Header */}
+                  <div className="flex items-center mb-6">
+                    <div className="w-10 h-10 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center mr-3 shadow-lg">
+                      <Heart className="w-5 h-5 text-white" />
+                    </div>
+                    <h4 className="text-xl font-bold text-gray-900">
+                      ¿Qué hacer mientras llegas?
+                    </h4>
+                  </div>
+
+                  {/* Steps */}
                   <div className="space-y-4">
-                    <div className="flex items-start space-x-3">
-                      <div className="w-8 h-8 bg-vet-secondary rounded-full flex items-center justify-center mt-1">
+                    <div className="flex items-start space-x-3 bg-white/60 backdrop-blur-sm rounded-xl p-4 border border-red-100/50">
+                      <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
                         <span className="text-white font-bold text-sm">1</span>
                       </div>
-                      <div>
-                        <p className="text-vet-gray-900 font-medium">
+                      <div className="flex-1">
+                        <h5 className="font-bold text-gray-900 mb-1">
                           Mantén la calma
-                        </p>
-                        <p className="text-vet-gray-600 text-sm">
+                        </h5>
+                        <p className="text-gray-600 text-sm">
                           Tu mascota puede sentir tu ansiedad
                         </p>
                       </div>
                     </div>
-                    <div className="flex items-start space-x-3">
-                      <div className="w-8 h-8 bg-vet-secondary rounded-full flex items-center justify-center mt-1">
+
+                    <div className="flex items-start space-x-3 bg-white/60 backdrop-blur-sm rounded-xl p-4 border border-red-100/50">
+                      <div className="w-8 h-8 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-lg flex items-center justify-center flex-shrink-0">
                         <span className="text-white font-bold text-sm">2</span>
                       </div>
-                      <div>
-                        <p className="text-vet-gray-900 font-medium">
+                      <div className="flex-1">
+                        <h5 className="font-bold text-gray-900 mb-1">
                           Observa los síntomas
-                        </p>
-                        <p className="text-vet-gray-600 text-sm">
+                        </h5>
+                        <p className="text-gray-600 text-sm">
                           Toma nota de lo que ves
                         </p>
                       </div>
                     </div>
-                    <div className="flex items-start space-x-3">
-                      <div className="w-8 h-8 bg-vet-secondary rounded-full flex items-center justify-center mt-1">
+
+                    <div className="flex items-start space-x-3 bg-white/60 backdrop-blur-sm rounded-xl p-4 border border-red-100/50">
+                      <div className="w-8 h-8 bg-gradient-to-br from-amber-500 to-amber-600 rounded-lg flex items-center justify-center flex-shrink-0">
                         <span className="text-white font-bold text-sm">3</span>
                       </div>
-                      <div>
-                        <p className="text-vet-gray-900 font-medium">
+                      <div className="flex-1">
+                        <h5 className="font-bold text-gray-900 mb-1">
                           No mediques
-                        </p>
-                        <p className="text-vet-gray-600 text-sm">
+                        </h5>
+                        <p className="text-gray-600 text-sm">
                           Espera instrucciones del veterinario
                         </p>
                       </div>
