@@ -931,14 +931,61 @@ export default function GestionCitas() {
                         return enhancedCita?.propietarioInfo;
                       })() && (
                         <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-100">
-                          <div className="flex items-center space-x-3 mb-6">
-                            <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
-                              <User className="w-5 h-5 text-blue-600" />
+                          {/* Header con foto de perfil */}
+                          <div className="flex items-center space-x-4 mb-6">
+                            {/* Foto de perfil */}
+                            <div className="w-16 h-16 rounded-full overflow-hidden bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center flex-shrink-0 border-3 border-white shadow-lg">
+                              {propietario.foto ? (
+                                <img
+                                  src={propietario.foto}
+                                  alt={`Foto de ${propietario.nombre}`}
+                                  className="w-full h-full object-cover"
+                                />
+                              ) : (
+                                <User className="w-8 h-8 text-blue-600" />
+                              )}
                             </div>
-                            <h4 className="text-xl font-bold text-vet-gray-900">
-                              Información del Propietario
-                            </h4>
+
+                            <div className="flex-1">
+                              <h4 className="text-xl font-bold text-vet-gray-900 mb-1">
+                                Información del Propietario
+                              </h4>
+                              <div className="flex items-center space-x-2">
+                                <span className="w-2 h-2 bg-green-400 rounded-full"></span>
+                                <span className="text-sm text-vet-gray-600">Cliente activo</span>
+                              </div>
+                            </div>
                           </div>
+
+                          {/* Bio/Descripción personal si está disponible */}
+                          {(() => {
+                            try {
+                              const bio = localStorage.getItem('petla_user_bio');
+                              if (bio && bio !== '""' && bio !== 'null') {
+                                const bioText = JSON.parse(bio);
+                                if (bioText && bioText.trim()) {
+                                  return (
+                                    <div className="mb-6 p-4 bg-white/60 rounded-lg border border-blue-100">
+                                      <div className="flex items-start space-x-2">
+                                        <span className="text-blue-600 text-lg">💬</span>
+                                        <div>
+                                          <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block mb-1">
+                                            Acerca de mí
+                                          </span>
+                                          <p className="text-sm text-vet-gray-700 italic leading-relaxed">
+                                            "{bioText}"
+                                          </p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  );
+                                }
+                              }
+                            } catch (e) {
+                              console.error('Error loading bio:', e);
+                            }
+                            return null;
+                          })()}
 
                           {(() => {
                             const enhancedCita = enhancedCitas.find(
