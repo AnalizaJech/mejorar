@@ -1175,25 +1175,40 @@ export default function GestionCitas() {
                                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                                     <div className="text-center">
                                       <div className="text-2xl font-bold text-vet-primary">
-                                        {mascotas.filter(m => m.clienteId === propietario.id).length}
+                                        {(() => {
+                                          const clienteMascotas = mascotas.filter(m => m.clienteId === propietario.id);
+                                          return clienteMascotas.length;
+                                        })()}
                                       </div>
                                       <div className="text-xs text-vet-gray-600">Mascotas</div>
                                     </div>
                                     <div className="text-center">
                                       <div className="text-2xl font-bold text-green-600">
-                                        {citas.filter(c => c.clienteId === propietario.id).length}
+                                        {(() => {
+                                          const clienteCitas = citas.filter(c => c.clienteId === propietario.id);
+                                          return clienteCitas.length;
+                                        })()}
                                       </div>
                                       <div className="text-xs text-vet-gray-600">Total Citas</div>
                                     </div>
                                     <div className="text-center">
                                       <div className="text-2xl font-bold text-blue-600">
-                                        {citas.filter(c => c.clienteId === propietario.id && c.estado === 'atendida').length}
+                                        {(() => {
+                                          const citasAtendidas = citas.filter(c => c.clienteId === propietario.id && c.estado === 'atendida');
+                                          return citasAtendidas.length;
+                                        })()}
                                       </div>
                                       <div className="text-xs text-vet-gray-600">Citas Atendidas</div>
                                     </div>
                                     <div className="text-center">
                                       <div className="text-2xl font-bold text-yellow-600">
-                                        {citas.filter(c => c.clienteId === propietario.id && ['pendiente_pago', 'aceptada'].includes(c.estado)).length}
+                                        {(() => {
+                                          const citasPendientes = citas.filter(c =>
+                                            c.clienteId === propietario.id &&
+                                            ['pendiente_pago', 'aceptada'].includes(c.estado)
+                                          );
+                                          return citasPendientes.length;
+                                        })()}
                                       </div>
                                       <div className="text-xs text-vet-gray-600">Citas Pendientes</div>
                                     </div>
