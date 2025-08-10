@@ -51,7 +51,6 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 
 export default function Dashboard() {
   const { user, getStats } = useAppContext();
-  const [showServicesModal, setShowServicesModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [savedMessage, setSavedMessage] = useState("");
 
@@ -149,7 +148,6 @@ export default function Dashboard() {
       setSavedMessage("Configuración de servicios actualizada correctamente");
       setTimeout(() => {
         setSavedMessage("");
-        setShowServicesModal(false);
       }, 2000);
     } catch (error) {
       console.error("Error al actualizar los servicios:", error);
@@ -187,9 +185,7 @@ export default function Dashboard() {
           </div>
 
           {/* Admin Dashboard */}
-          {user?.rol === "admin" && (
-            <AdminDashboard setShowServicesModal={setShowServicesModal} />
-          )}
+          {user?.rol === "admin" && <AdminDashboard />}
 
           {/* Client Dashboard */}
           {user?.rol === "cliente" && (
@@ -200,178 +196,11 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Services Configuration Modal */}
-      <Dialog open={showServicesModal} onOpenChange={setShowServicesModal}>
-        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle className="flex items-center space-x-2">
-              <Stethoscope className="w-5 h-5 text-vet-primary" />
-              <span>Configuración de Servicios Veterinarios</span>
-            </DialogTitle>
-            <DialogDescription>
-              Gestiona los 6 servicios veterinarios principales: precios,
-              descripciones y disponibilidad
-            </DialogDescription>
-          </DialogHeader>
-
-          {savedMessage && (
-            <Alert className="bg-green-50 border-green-200 mb-4">
-              <CheckCircle className="w-4 h-4 text-green-600" />
-              <AlertDescription className="text-green-800">
-                {savedMessage}
-              </AlertDescription>
-            </Alert>
-          )}
-
-          <div className="space-y-6">
-            <div className="grid gap-6">
-              {services.map((service) => (
-                <Card
-                  key={service.id}
-                  className="border-l-4 border-l-vet-primary"
-                >
-                  <CardContent className="p-6">
-                    <div className="space-y-4">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-3">
-                          <div className="w-10 h-10 bg-vet-primary/10 rounded-lg flex items-center justify-center">
-                            <Stethoscope className="w-5 h-5 text-vet-primary" />
-                          </div>
-                          <div>
-                            <h3 className="font-semibold text-vet-gray-900">
-                              {service.nombre}
-                            </h3>
-                            <p className="text-sm text-vet-gray-600">
-                              {service.id}
-                            </p>
-                          </div>
-                        </div>
-                        <Switch
-                          checked={service.activo}
-                          onCheckedChange={(checked) =>
-                            handleServiceUpdate(service.id, "activo", checked)
-                          }
-                        />
-                      </div>
-
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                          <Label htmlFor={`precio-${service.id}`}>
-                            Precio (S/)
-                          </Label>
-                          <div className="relative">
-                            <DollarSign className="absolute left-3 top-3 h-4 w-4 text-vet-gray-400" />
-                            <Input
-                              id={`precio-${service.id}`}
-                              type="number"
-                              min="0"
-                              step="0.01"
-                              className="pl-10"
-                              value={service.precio}
-                              onChange={(e) =>
-                                handleServiceUpdate(
-                                  service.id,
-                                  "precio",
-                                  parseFloat(e.target.value) || 0,
-                                )
-                              }
-                              placeholder="0.00"
-                            />
-                          </div>
-                        </div>
-
-                        <div className="space-y-2">
-                          <Label htmlFor={`nombre-${service.id}`}>
-                            Nombre del servicio
-                          </Label>
-                          <Input
-                            id={`nombre-${service.id}`}
-                            value={service.nombre}
-                            onChange={(e) =>
-                              handleServiceUpdate(
-                                service.id,
-                                "nombre",
-                                e.target.value,
-                              )
-                            }
-                            placeholder="Nombre del servicio"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor={`descripcion-${service.id}`}>
-                          Descripción
-                        </Label>
-                        <Textarea
-                          id={`descripcion-${service.id}`}
-                          value={service.descripcion}
-                          onChange={(e) =>
-                            handleServiceUpdate(
-                              service.id,
-                              "descripcion",
-                              e.target.value,
-                            )
-                          }
-                          placeholder="Descripción del servicio..."
-                          rows={2}
-                        />
-                      </div>
-
-                      {!service.activo && (
-                        <Alert className="border-yellow-200 bg-yellow-50">
-                          <AlertTriangle className="w-4 h-4 text-yellow-600" />
-                          <AlertDescription className="text-yellow-800">
-                            Este servicio está desactivado y no aparecerá en las
-                            opciones de citas
-                          </AlertDescription>
-                        </Alert>
-                      )}
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-
-            <div className="pt-4 border-t border-vet-gray-200">
-              <div className="flex justify-between items-center">
-                <div className="text-sm text-vet-gray-600">
-                  <p>
-                    Los cambios se aplicarán inmediatamente en toda la
-                    plataforma
-                  </p>
-                </div>
-                <Button
-                  onClick={handleSaveServices}
-                  disabled={isLoading}
-                  className="bg-vet-primary hover:bg-vet-primary-dark"
-                >
-                  {isLoading ? (
-                    <>
-                      <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent mr-2" />
-                      Guardando...
-                    </>
-                  ) : (
-                    <>
-                      <Save className="mr-2 w-4 h-4" />
-                      Guardar configuración
-                    </>
-                  )}
-                </Button>
-              </div>
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
     </Layout>
   );
 }
 
-function AdminDashboard({
-  setShowServicesModal,
-}: {
-  setShowServicesModal: (show: boolean) => void;
-}) {
+function AdminDashboard() {
   const { usuarios, citas } = useAppContext();
 
   const adminStats = {
