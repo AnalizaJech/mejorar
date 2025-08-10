@@ -42,6 +42,38 @@ import {
   Heart,
   Activity,
   Search,
+  Scissors,
+  Zap,
+  Eye,
+  Pill,
+  ShieldCheck,
+  Thermometer,
+  Bone,
+  PawPrint,
+  Microscope,
+  ClipboardList,
+  Bandage,
+  Cross,
+  FlaskConical,
+  Dna,
+  HeartPulse,
+  Waves,
+  XRay,
+  Target,
+  Droplets,
+  Snowflake,
+  Sun,
+  Moon,
+  Clock,
+  Calendar,
+  MapPin,
+  Car,
+  Home,
+  Building,
+  Sparkles,
+  Star,
+  Baby,
+  Crown,
 } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { useToast } from "@/hooks/use-toast";
@@ -56,12 +88,55 @@ interface Servicio {
 }
 
 const iconos = [
+  // Equipos médicos veterinarios
   { id: "Stethoscope", nombre: "Estetoscopio", component: Stethoscope },
   { id: "Syringe", nombre: "Jeringa", component: Syringe },
-  { id: "AlertCircle", nombre: "Alerta", component: AlertCircle },
-  { id: "Heart", nombre: "Corazón", component: Heart },
-  { id: "Activity", nombre: "Actividad", component: Activity },
-  { id: "Search", nombre: "Búsqueda", component: Search },
+  { id: "Thermometer", nombre: "Termómetro", component: Thermometer },
+  { id: "Microscope", nombre: "Microscopio", component: Microscope },
+  { id: "XRay", nombre: "Radiografía", component: XRay },
+  { id: "FlaskConical", nombre: "Laboratorio", component: FlaskConical },
+  { id: "Bandage", nombre: "Vendaje", component: Bandage },
+  { id: "Cross", nombre: "Cruz Médica", component: Cross },
+
+  // Procedimientos y servicios
+  { id: "Activity", nombre: "Cirugía", component: Activity },
+  { id: "Scissors", nombre: "Grooming", component: Scissors },
+  { id: "Eye", nombre: "Examen", component: Eye },
+  { id: "Search", nombre: "Diagnóstico", component: Search },
+  { id: "Pill", nombre: "Medicamento", component: Pill },
+  { id: "ShieldCheck", nombre: "Prevención", component: ShieldCheck },
+  { id: "HeartPulse", nombre: "Cardiología", component: HeartPulse },
+  { id: "Waves", nombre: "Ultrasonido", component: Waves },
+  { id: "Dna", nombre: "Genética", component: Dna },
+  { id: "Target", nombre: "Tratamiento", component: Target },
+
+  // Estados y urgencias
+  { id: "AlertCircle", nombre: "Emergencia", component: AlertCircle },
+  { id: "Zap", nombre: "Urgente", component: Zap },
+  { id: "Heart", nombre: "Cuidado", component: Heart },
+  { id: "CheckCircle", nombre: "Control", component: CheckCircle },
+  { id: "ClipboardList", nombre: "Revisión", component: ClipboardList },
+
+  // Tipos de animales/pacientes
+  { id: "PawPrint", nombre: "Mascota", component: PawPrint },
+  { id: "Bone", nombre: "Ortopedia", component: Bone },
+  { id: "Baby", nombre: "Pediatría", component: Baby },
+  { id: "Crown", nombre: "Premium", component: Crown },
+
+  // Servicios especiales
+  { id: "Droplets", nombre: "Hidratación", component: Droplets },
+  { id: "Snowflake", nombre: "Criocirugía", component: Snowflake },
+  { id: "Sun", nombre: "Fototerapia", component: Sun },
+  { id: "Sparkles", nombre: "Estética", component: Sparkles },
+  { id: "Star", nombre: "Especialidad", component: Star },
+
+  // Logística y ubicación
+  { id: "Clock", nombre: "Programado", component: Clock },
+  { id: "Calendar", nombre: "Cita", component: Calendar },
+  { id: "MapPin", nombre: "Ubicación", component: MapPin },
+  { id: "Car", nombre: "Móvil", component: Car },
+  { id: "Home", nombre: "Domicilio", component: Home },
+  { id: "Building", nombre: "Clínica", component: Building },
 ];
 
 // Default services
@@ -309,7 +384,10 @@ export default function Servicios() {
                 </p>
               </div>
               <Button
-                onClick={() => setShowModal(true)}
+                onClick={() => {
+                  handleCloseModal(); // Limpiar estado del modal
+                  setShowModal(true);
+                }}
                 className="bg-vet-primary hover:bg-vet-primary-dark"
               >
                 <Plus className="w-4 h-4 mr-2" />
