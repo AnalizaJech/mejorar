@@ -452,45 +452,6 @@ function AdminDashboard({
       });
     });
 
-    // Add pre-cita activities
-    recentPreCitas.forEach((preCita) => {
-      const timestamp = new Date(preCita.fechaCreacion || now).getTime();
-      const hoursAgo = Math.max(
-        1,
-        Math.floor((now.getTime() - timestamp) / (1000 * 60 * 60)),
-      );
-      activities.push({
-        type: "precita",
-        message: `Nueva pre-cita de ${preCita.nombreCliente}`,
-        time:
-          hoursAgo < 24
-            ? `Hace ${hoursAgo} horas`
-            : `Hace ${Math.floor(hoursAgo / 24)} días`,
-        icon: "AlertCircle",
-        color: "yellow",
-        timestamp: timestamp,
-      });
-    });
-
-    // Add newsletter subscription activities
-    recentNewsletterSubs.forEach((subscription) => {
-      const timestamp = new Date(subscription.fechaSuscripcion).getTime();
-      const hoursAgo = Math.max(
-        1,
-        Math.floor((now.getTime() - timestamp) / (1000 * 60 * 60)),
-      );
-      activities.push({
-        type: "newsletter",
-        message: `Nueva suscripción al newsletter: ${subscription.email}`,
-        time:
-          hoursAgo < 24
-            ? `Hace ${hoursAgo} horas`
-            : `Hace ${Math.floor(hoursAgo / 24)} días`,
-        icon: "Mail",
-        color: "purple",
-        timestamp: timestamp,
-      });
-    });
 
     // Sort by timestamp (most recent first) and limit to 3
     return activities.sort((a, b) => b.timestamp - a.timestamp).slice(0, 3);
