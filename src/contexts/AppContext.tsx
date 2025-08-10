@@ -317,10 +317,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     // if (!shouldClearData) {
     //   localStorage.removeItem("mascotas");
     //   localStorage.removeItem("citas");
-    //   localStorage.removeItem("preCitas");
     //   localStorage.removeItem("historialClinico");
-    //   localStorage.removeItem("suscriptoresNewsletter");
-    //   localStorage.removeItem("newsletterEmails");
     //   localStorage.setItem("fictional_data_cleared", "true");
     // }
 
