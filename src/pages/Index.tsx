@@ -71,71 +71,7 @@ export default function Index() {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setShowValidationErrors(true);
 
-    // Validar campos obligatorios
-    if (!formData.fechaPreferida) {
-      alert("Por favor selecciona una fecha preferida");
-      setIsLoading(false);
-      return;
-    }
-
-    if (!formData.horaPreferida) {
-      alert("Por favor selecciona una hora preferida");
-      setIsLoading(false);
-      return;
-    }
-
-    if (!formData.motivoConsulta.trim()) {
-      alert("Por favor describe el motivo de la consulta");
-      setIsLoading(false);
-      return;
-    }
-
-    try {
-      // Create pre-cita using context
-      addPreCita({
-        nombreCliente: formData.nombreDueno,
-        telefono: formData.telefono,
-        email: formData.email,
-        nombreMascota: formData.nombreMascota,
-        tipoMascota: formData.tipoMascota,
-        motivoConsulta: formData.motivoConsulta,
-        fechaPreferida: (() => {
-          const [year, month, day] = formData.fechaPreferida
-            .split("-")
-            .map(Number);
-          return new Date(year, month - 1, day);
-        })(),
-        horaPreferida: formData.horaPreferida,
-      });
-
-      // Simulate API call delay
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      setIsLoading(false);
-      setIsSubmitted(true);
-      // Scroll to top to show success message
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    } catch (error) {
-      setIsLoading(false);
-      alert("Error al enviar la pre-cita. Intenta nuevamente.");
-    }
-  };
-
-  const handleInputChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >,
-  ) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
 
   if (isSubmitted) {
     return (
