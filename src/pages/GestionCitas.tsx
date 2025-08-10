@@ -1249,47 +1249,6 @@ export default function GestionCitas() {
                                   return null;
                                 })()}
 
-                                {/* Información de contacto adicional */}
-                                {(() => {
-                                  const hasContactInfo = propietario.telefono || propietario.email;
-                                  if (hasContactInfo) {
-                                    return (
-                                      <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
-                                        <div className="flex items-start space-x-3">
-                                          <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
-                                            <span className="text-blue-600 font-bold text-sm">📞</span>
-                                          </div>
-                                          <div className="flex-1">
-                                            <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block mb-2">
-                                              Métodos de Contacto Disponibles
-                                            </span>
-                                            <div className="space-y-1 text-xs">
-                                              {propietario.telefono && (
-                                                <div className="flex items-center space-x-1 text-green-700">
-                                                  <span>✓</span>
-                                                  <span>Llamadas y WhatsApp disponibles</span>
-                                                </div>
-                                              )}
-                                              {propietario.email && (
-                                                <div className="flex items-center space-x-1 text-green-700">
-                                                  <span>✓</span>
-                                                  <span>Email disponible</span>
-                                                </div>
-                                              )}
-                                              {propietario.direccion && (
-                                                <div className="flex items-center space-x-1 text-green-700">
-                                                  <span>✓</span>
-                                                  <span>Dirección registrada para domicilio</span>
-                                                </div>
-                                              )}
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    );
-                                  }
-                                  return null;
-                                })()}
 
                                 {/* Dirección - ancho completo */}
                                 {propietario.direccion && (
