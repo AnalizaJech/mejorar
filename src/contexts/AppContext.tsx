@@ -937,23 +937,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
         );
       }
 
-      // Reload other data...
-      const preCitasStr = localStorage.getItem("preCitas");
-      if (preCitasStr) {
-        const parsedPreCitas = JSON.parse(preCitasStr);
-        const formattedPreCitas = parsedPreCitas.map((preCita: any) => ({
-          ...preCita,
-          fechaPreferida: new Date(preCita.fechaPreferida),
-          fechaCreacion: new Date(preCita.fechaCreacion),
-          fechaNueva: preCita.fechaNueva
-            ? new Date(preCita.fechaNueva)
-            : undefined,
-        }));
-        setPreCitas(formattedPreCitas);
-        console.log(
-          `✅ Loaded ${formattedPreCitas.length} pre-appointments from localStorage`,
-        );
-      }
 
       console.log("✅ Data refresh completed");
       return true;
