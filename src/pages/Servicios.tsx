@@ -468,8 +468,8 @@ export default function Servicios() {
 
           {/* Create/Edit Modal */}
           <Dialog open={showModal} onOpenChange={setShowModal}>
-            <DialogContent className="sm:max-w-[500px]">
-              <DialogHeader>
+            <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-hidden flex flex-col">
+              <DialogHeader className="flex-shrink-0">
                 <DialogTitle>
                   {editingService ? "Editar Servicio" : "Nuevo Servicio"}
                 </DialogTitle>
@@ -480,7 +480,8 @@ export default function Servicios() {
                 </DialogDescription>
               </DialogHeader>
 
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="flex-1 overflow-y-auto px-1">
+                <form onSubmit={handleSubmit} className="space-y-4 py-2">
                 {error && (
                   <Alert className="border-red-200 bg-red-50">
                     <AlertCircle className="w-4 h-4 text-red-600" />
@@ -510,14 +511,15 @@ export default function Servicios() {
                       type="number"
                       min="0"
                       step="0.01"
-                      value={formData.precio}
+                      value={formData.precio || ""}
                       onChange={(e) =>
                         setFormData({
                           ...formData,
-                          precio: Number(e.target.value),
+                          precio: Number(e.target.value) || 0,
                         })
                       }
-                      placeholder="0.00"
+                      placeholder="Ingrese el precio"
+                      className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                     />
                   </div>
                 </div>
@@ -552,13 +554,13 @@ export default function Servicios() {
                       })()}
                     </div>
 
-                    {/* Grid de iconos scrolleable */}
+                    {/* Grid de iconos scrolleable mejorado para móvil */}
                     <div className="border border-vet-gray-300 rounded-lg p-4 bg-white">
                       <p className="text-sm text-vet-gray-600 mb-3">
                         Selecciona un icono:
                       </p>
-                      <div className="max-h-48 overflow-y-auto pr-2">
-                        <div className="grid grid-cols-4 gap-2">
+                      <div className="max-h-52 overflow-y-auto overscroll-contain scrollbar-hide touch-pan-y">
+                        <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 pr-2">
                           {iconos.map((icono) => {
                             const IconComponent = icono.component;
                             const isSelected = formData.icono === icono.id;
@@ -570,7 +572,7 @@ export default function Servicios() {
                                   setFormData({ ...formData, icono: icono.id })
                                 }
                                 className={`
-                                  flex flex-col items-center justify-center p-3 rounded-lg border-2 transition-all hover:shadow-md
+                                  flex flex-col items-center justify-center p-3 rounded-lg border-2 transition-all hover:shadow-md touch-manipulation
                                   ${
                                     isSelected
                                       ? "border-vet-primary bg-vet-primary/10 text-vet-primary"
@@ -579,8 +581,8 @@ export default function Servicios() {
                                 `}
                                 title={icono.nombre}
                               >
-                                <IconComponent className="w-5 h-5 mb-1" />
-                                <span className="text-xs text-center leading-tight">
+                                <IconComponent className="w-5 h-5 mb-1 flex-shrink-0" />
+                                <span className="text-xs text-center leading-tight line-clamp-2">
                                   {icono.nombre}
                                 </span>
                               </button>
@@ -601,7 +603,8 @@ export default function Servicios() {
                       setFormData({ ...formData, descripcion: e.target.value })
                     }
                     placeholder="Describe el servicio veterinario..."
-                    rows={3}
+                    rows={4}
+                    className="min-h-[100px] max-h-[150px] resize-none overflow-y-auto"
                   />
                 </div>
 
@@ -615,33 +618,36 @@ export default function Servicios() {
                   <Label>Servicio activo</Label>
                 </div>
 
-                <DialogFooter>
-                  <Button
-                    type="button"
-                    variant="outline"
-                    onClick={handleCloseModal}
-                  >
-                    Cancelar
-                  </Button>
-                  <Button
-                    type="submit"
-                    disabled={isLoading}
-                    className="bg-vet-primary hover:bg-vet-primary-dark"
-                  >
-                    {isLoading ? (
-                      <>
-                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                        Guardando...
-                      </>
-                    ) : (
-                      <>
-                        <Save className="w-4 h-4 mr-2" />
-                        {editingService ? "Actualizar" : "Crear"}
-                      </>
-                    )}
-                  </Button>
-                </DialogFooter>
-              </form>
+                </form>
+              </div>
+
+              <DialogFooter className="flex-shrink-0 border-t pt-4 mt-4">
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={handleCloseModal}
+                >
+                  Cancelar
+                </Button>
+                <Button
+                  type="submit"
+                  disabled={isLoading}
+                  onClick={handleSubmit}
+                  className="bg-vet-primary hover:bg-vet-primary-dark"
+                >
+                  {isLoading ? (
+                    <>
+                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                      Guardando...
+                    </>
+                  ) : (
+                    <>
+                      <Save className="w-4 h-4 mr-2" />
+                      {editingService ? "Actualizar" : "Crear"}
+                    </>
+                  )}
+                </Button>
+              </DialogFooter>
             </DialogContent>
           </Dialog>
 
