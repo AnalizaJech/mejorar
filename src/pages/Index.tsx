@@ -198,8 +198,8 @@ export default function Index() {
                   {/* Floating badge */}
                   <div className="absolute bottom-4 left-4 bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-vet-primary rounded-full flex items-center justify-center">
-                        <Heart className="w-5 h-5 text-white" />
+                      <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
+                        <Stethoscope className="w-5 h-5 text-white" />
                       </div>
                       <div>
                         <p className="text-sm font-bold text-vet-gray-900">Mascota Feliz</p>
@@ -221,8 +221,8 @@ export default function Index() {
               {/* Floating stats cards */}
               <div className="absolute -top-4 -left-4 bg-white rounded-xl shadow-lg p-4 z-10">
                 <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                    <Heart className="w-5 h-5 text-green-600" />
+                  <div className="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center">
+                    <Star className="w-5 h-5 text-amber-600" />
                   </div>
                   <div>
                     <p className="text-lg font-bold text-vet-gray-900">98%</p>
@@ -233,8 +233,8 @@ export default function Index() {
 
               <div className="absolute -bottom-4 -right-4 bg-white rounded-xl shadow-lg p-4 z-10">
                 <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-vet-primary/10 rounded-full flex items-center justify-center">
-                    <PawPrint className="w-5 h-5 text-vet-primary" />
+                  <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
+                    <Users className="w-5 h-5 text-emerald-600" />
                   </div>
                   <div>
                     <p className="text-lg font-bold text-vet-gray-900">1000+</p>
