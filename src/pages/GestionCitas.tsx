@@ -53,6 +53,8 @@ import {
   Clock,
   Phone,
   Mail,
+  MessageCircle,
+  MessageSquare,
   PawPrint,
   AlertCircle,
   User,
@@ -619,6 +621,78 @@ export default function GestionCitas() {
                                 <Eye className="w-4 h-4 mr-2 text-vet-gray-600" />
                                 Ver detalles
                               </DropdownMenuItem>
+
+                              {/* Contact Actions */}
+                              {(() => {
+                                const propietario = usuarios.find(u => u.id === cita.clienteId);
+                                if (!propietario) return null;
+
+                                return (
+                                  <>
+                                    <DropdownMenuSeparator />
+                                    <DropdownMenuLabel className="text-vet-gray-700 text-xs">
+                                      Contactar Propietario
+                                    </DropdownMenuLabel>
+
+                                    {propietario.telefono && (
+                                      <>
+                                        <DropdownMenuItem
+                                          onClick={(e) => {
+                                            e.stopPropagation();
+                                            const phoneNumber = propietario.telefono.replace(/\D/g, '');
+                                            window.open(`tel:+51${phoneNumber}`, '_self');
+                                          }}
+                                          className="flex items-center cursor-pointer hover:bg-green-50"
+                                        >
+                                          <Phone className="w-4 h-4 mr-2 text-green-600" />
+                                          Llamar
+                                        </DropdownMenuItem>
+
+                                        <DropdownMenuItem
+                                          onClick={(e) => {
+                                            e.stopPropagation();
+                                            const phoneNumber = propietario.telefono.replace(/\D/g, '');
+                                            const message = `Hola ${propietario.nombre}, me comunico de la clínica veterinaria respecto a la cita de ${cita.mascota} programada para el ${new Date(cita.fecha).toLocaleDateString('es-ES')}.`;
+                                            window.open(`https://wa.me/51${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+                                          }}
+                                          className="flex items-center cursor-pointer hover:bg-green-50"
+                                        >
+                                          <MessageCircle className="w-4 h-4 mr-2 text-green-700" />
+                                          WhatsApp
+                                        </DropdownMenuItem>
+
+                                        <DropdownMenuItem
+                                          onClick={(e) => {
+                                            e.stopPropagation();
+                                            const phoneNumber = propietario.telefono.replace(/\D/g, '');
+                                            const message = `Hola ${propietario.nombre}, me comunico de la clínica veterinaria respecto a la cita de ${cita.mascota}.`;
+                                            window.open(`sms:+51${phoneNumber}?body=${encodeURIComponent(message)}`, '_self');
+                                          }}
+                                          className="flex items-center cursor-pointer hover:bg-purple-50"
+                                        >
+                                          <MessageSquare className="w-4 h-4 mr-2 text-purple-600" />
+                                          SMS
+                                        </DropdownMenuItem>
+                                      </>
+                                    )}
+
+                                    {propietario.email && (
+                                      <DropdownMenuItem
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          const subject = `Cita veterinaria - ${cita.mascota}`;
+                                          const body = `Estimado/a ${propietario.nombre},\n\nMe comunico respecto a la cita programada para ${cita.mascota} el ${new Date(cita.fecha).toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} a las ${new Date(cita.fecha).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}.\n\nSaludos,\nClínica Veterinaria`;
+                                          window.open(`mailto:${propietario.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`, '_self');
+                                        }}
+                                        className="flex items-center cursor-pointer hover:bg-blue-50"
+                                      >
+                                        <Mail className="w-4 h-4 mr-2 text-blue-600" />
+                                        Email
+                                      </DropdownMenuItem>
+                                    )}
+                                  </>
+                                );
+                              })()}
 
                               {/* Voucher related options for admin */}
                               {user?.rol === "admin" &&
