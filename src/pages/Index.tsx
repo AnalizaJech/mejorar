@@ -44,24 +44,10 @@ import {
   FileText,
   ChevronDown,
 } from "lucide-react";
-import { PreCitaFormData } from "@/lib/types";
 
 export default function Index() {
   const location = useLocation();
-  const { isAuthenticated, user, addPreCita } = useAppContext();
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [showValidationErrors, setShowValidationErrors] = useState(false);
-  const [formData, setFormData] = useState<PreCitaFormData>({
-    nombreMascota: "",
-    tipoMascota: "perro",
-    nombreDueno: "",
-    telefono: "",
-    email: "",
-    motivoConsulta: "",
-    fechaPreferida: "",
-    horaPreferida: "",
-  });
+  const { isAuthenticated, user } = useAppContext();
 
   // Handle hash routing for anchor links
   useEffect(() => {
