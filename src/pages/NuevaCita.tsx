@@ -703,12 +703,20 @@ export default function NuevaCita() {
                           citaData.fecha ? new Date(citaData.fecha) : undefined
                         }
                         onDateChange={(date) => {
-                          if (date && date >= new Date()) {
-                            setCitaData({
-                              ...citaData,
-                              fecha: date.toISOString().split("T")[0],
-                            });
-                          } else if (!date) {
+                          if (date) {
+                            // Compare only the date part, not time
+                            const today = new Date();
+                            today.setHours(0, 0, 0, 0);
+                            const selectedDate = new Date(date);
+                            selectedDate.setHours(0, 0, 0, 0);
+
+                            if (selectedDate >= today) {
+                              setCitaData({
+                                ...citaData,
+                                fecha: date.toISOString().split("T")[0],
+                              });
+                            }
+                          } else {
                             setCitaData({
                               ...citaData,
                               fecha: "",
