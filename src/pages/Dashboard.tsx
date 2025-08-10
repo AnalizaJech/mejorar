@@ -913,7 +913,7 @@ function ClientDashboard({ stats }: { stats: any }) {
               className="w-full h-20 flex flex-col items-center justify-center space-y-2"
               onClick={() =>
                 document
-                  .getElementById("pre-cita-form")
+                  .getElementById("servicios")
                   ?.scrollIntoView({ behavior: "smooth" })
               }
             >
