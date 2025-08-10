@@ -949,7 +949,7 @@ export default function GestionCitas() {
                             if (!propietario) return null;
 
                             return (
-                              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                 {/* Nombre Completo */}
                                 <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
                                   <div className="flex items-center space-x-3">
@@ -967,6 +967,25 @@ export default function GestionCitas() {
                                     </div>
                                   </div>
                                 </div>
+
+                                {/* Username */}
+                                {propietario.username && (
+                                  <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
+                                    <div className="flex items-center space-x-3">
+                                      <div className="w-8 h-8 bg-slate-100 rounded-lg flex items-center justify-center">
+                                        <span className="text-slate-600 font-bold text-sm">@</span>
+                                      </div>
+                                      <div>
+                                        <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
+                                          Nombre de Usuario
+                                        </span>
+                                        <p className="text-sm font-medium text-vet-gray-900">
+                                          @{propietario.username}
+                                        </p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                )}
 
                                 {/* Email */}
                                 {propietario.email && (
@@ -1011,9 +1030,122 @@ export default function GestionCitas() {
                                   </div>
                                 )}
 
-                                {/* Dirección */}
+                                {/* Documento de Identidad */}
+                                {(propietario.documento || propietario.tipoDocumento) && (
+                                  <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
+                                    <div className="flex items-center space-x-3">
+                                      <div className="w-8 h-8 bg-yellow-100 rounded-lg flex items-center justify-center">
+                                        <span className="text-yellow-600 font-bold text-sm">🆔</span>
+                                      </div>
+                                      <div>
+                                        <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
+                                          Documento de Identidad
+                                        </span>
+                                        <p className="text-sm font-medium text-vet-gray-900">
+                                          {propietario.tipoDocumento?.toUpperCase() || 'DOC'}: {propietario.documento || 'No especificado'}
+                                        </p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                )}
+
+                                {/* Fecha de Nacimiento */}
+                                {propietario.fechaNacimiento && (
+                                  <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
+                                    <div className="flex items-center space-x-3">
+                                      <div className="w-8 h-8 bg-pink-100 rounded-lg flex items-center justify-center">
+                                        <span className="text-pink-600 font-bold text-sm">🎂</span>
+                                      </div>
+                                      <div>
+                                        <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
+                                          Fecha de Nacimiento
+                                        </span>
+                                        <p className="text-sm font-medium text-vet-gray-900">
+                                          {new Date(propietario.fechaNacimiento).toLocaleDateString('es-ES', {
+                                            year: 'numeric',
+                                            month: 'long',
+                                            day: 'numeric'
+                                          })}
+                                        </p>
+                                        <p className="text-xs text-vet-gray-500">
+                                          {(() => {
+                                            const today = new Date();
+                                            const birthDate = new Date(propietario.fechaNacimiento);
+                                            let age = today.getFullYear() - birthDate.getFullYear();
+                                            const monthDiff = today.getMonth() - birthDate.getMonth();
+                                            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                                              age--;
+                                            }
+                                            return `${age} años`;
+                                          })()}
+                                        </p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                )}
+
+                                {/* Género */}
+                                {propietario.genero && (
+                                  <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
+                                    <div className="flex items-center space-x-3">
+                                      <div className="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center">
+                                        <span className="text-indigo-600 font-bold text-sm">
+                                          {propietario.genero === 'masculino' ? '♂️' : propietario.genero === 'femenino' ? '♀️' : '⚧️'}
+                                        </span>
+                                      </div>
+                                      <div>
+                                        <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
+                                          Género
+                                        </span>
+                                        <p className="text-sm font-medium text-vet-gray-900 capitalize">
+                                          {propietario.genero}
+                                        </p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                )}
+
+                                {/* Fecha de Registro */}
+                                {propietario.fechaCreacion && (
+                                  <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
+                                    <div className="flex items-center space-x-3">
+                                      <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
+                                        <span className="text-gray-600 font-bold text-sm">📅</span>
+                                      </div>
+                                      <div>
+                                        <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
+                                          Cliente desde
+                                        </span>
+                                        <p className="text-sm font-medium text-vet-gray-900">
+                                          {new Date(propietario.fechaCreacion).toLocaleDateString('es-ES', {
+                                            year: 'numeric',
+                                            month: 'long',
+                                            day: 'numeric'
+                                          })}
+                                        </p>
+                                        <p className="text-xs text-vet-gray-500">
+                                          {(() => {
+                                            const today = new Date();
+                                            const createdDate = new Date(propietario.fechaCreacion);
+                                            const diffTime = Math.abs(today - createdDate);
+                                            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                                            if (diffDays < 30) {
+                                              return `${diffDays} días`;
+                                            } else if (diffDays < 365) {
+                                              return `${Math.floor(diffDays / 30)} meses`;
+                                            } else {
+                                              return `${Math.floor(diffDays / 365)} años`;
+                                            }
+                                          })()}
+                                        </p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                )}
+
+                                {/* Dirección - ancho completo */}
                                 {propietario.direccion && (
-                                  <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100 md:col-span-2">
+                                  <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100 md:col-span-2 lg:col-span-3">
                                     <div className="flex items-start space-x-3">
                                       <div className="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center mt-1">
                                         <MapPin className="w-4 h-4 text-orange-600" />
@@ -1029,6 +1161,44 @@ export default function GestionCitas() {
                                     </div>
                                   </div>
                                 )}
+
+                                {/* Estadísticas del Cliente */}
+                                <div className="bg-gradient-to-r from-vet-primary/5 to-blue-50 rounded-lg p-4 shadow-sm border border-blue-100 md:col-span-2 lg:col-span-3">
+                                  <div className="flex items-center space-x-3 mb-4">
+                                    <div className="w-8 h-8 bg-vet-primary/20 rounded-lg flex items-center justify-center">
+                                      <span className="text-vet-primary font-bold text-sm">📊</span>
+                                    </div>
+                                    <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide">
+                                      Estadísticas del Cliente
+                                    </span>
+                                  </div>
+                                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                    <div className="text-center">
+                                      <div className="text-2xl font-bold text-vet-primary">
+                                        {mascotas.filter(m => m.clienteId === propietario.id).length}
+                                      </div>
+                                      <div className="text-xs text-vet-gray-600">Mascotas</div>
+                                    </div>
+                                    <div className="text-center">
+                                      <div className="text-2xl font-bold text-green-600">
+                                        {citas.filter(c => c.clienteId === propietario.id).length}
+                                      </div>
+                                      <div className="text-xs text-vet-gray-600">Total Citas</div>
+                                    </div>
+                                    <div className="text-center">
+                                      <div className="text-2xl font-bold text-blue-600">
+                                        {citas.filter(c => c.clienteId === propietario.id && c.estado === 'atendida').length}
+                                      </div>
+                                      <div className="text-xs text-vet-gray-600">Citas Atendidas</div>
+                                    </div>
+                                    <div className="text-center">
+                                      <div className="text-2xl font-bold text-yellow-600">
+                                        {citas.filter(c => c.clienteId === propietario.id && ['pendiente_pago', 'aceptada'].includes(c.estado)).length}
+                                      </div>
+                                      <div className="text-xs text-vet-gray-600">Citas Pendientes</div>
+                                    </div>
+                                  </div>
+                                </div>
                               </div>
                             );
                           })()}
