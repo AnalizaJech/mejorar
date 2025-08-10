@@ -379,16 +379,16 @@ export default function CitaDetailModal({
 
                   {/* Email */}
                   {selectedCita.propietario?.email && (
-                    <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div className="bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-xl p-4 shadow-sm border border-emerald-200 hover:shadow-lg transition-all duration-300 hover:scale-105">
                       <div className="flex items-center space-x-3">
-                        <div className="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center">
-                          <Mail className="w-5 h-5 text-green-600" />
+                        <div className="w-12 h-12 bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg">
+                          <Mail className="w-6 h-6 text-white" />
                         </div>
                         <div className="flex-1">
-                          <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block mb-1">
-                            Email
+                          <span className="text-xs font-bold text-emerald-700 uppercase tracking-wide block mb-1">
+                            Correo Electrónico
                           </span>
-                          <p className="text-sm font-semibold text-vet-gray-900 break-all">
+                          <p className="text-sm font-bold text-emerald-900 break-all">
                             {selectedCita.propietario.email}
                           </p>
                         </div>
