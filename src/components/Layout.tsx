@@ -122,6 +122,12 @@ const navigationItems: NavItem[] = [
     icon: Stethoscope,
     roles: ["admin"],
   },
+  {
+    label: "Servicios",
+    path: "/servicios",
+    icon: FileText,
+    roles: ["admin"],
+  },
 ];
 
 export default function Layout({

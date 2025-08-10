@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { animateCounters } from "@/lib/counter";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -51,9 +51,165 @@ import {
   Bell,
 } from "lucide-react";
 
+// Default services configuration
+const defaultServices = [
+  {
+    id: "consulta_general",
+    nombre: "Consulta General",
+    precio: 80,
+    icono: "Stethoscope",
+    descripcion:
+      "Evaluaciones médicas completas con diagnóstico preciso y plan de tratamiento personalizado.",
+    activo: true,
+    color: "vet-primary",
+    colorBg: "vet-primary/10",
+    colorHover: "vet-primary/30",
+  },
+  {
+    id: "vacunacion",
+    nombre: "Vacunación",
+    precio: 65,
+    icono: "Syringe",
+    descripcion:
+      "Esquemas de vacunación completos adaptados a la edad, especie y necesidades de tu mascota.",
+    activo: true,
+    color: "green-600",
+    colorBg: "green-500/10",
+    colorHover: "green-500/30",
+  },
+  {
+    id: "emergencia",
+    nombre: "Emergencias",
+    precio: 150,
+    icono: "AlertCircle",
+    descripcion:
+      "Atención médica urgente 24/7 para situaciones críticas con respuesta inmediata.",
+    activo: true,
+    color: "red-600",
+    colorBg: "red-500/10",
+    colorHover: "red-500/30",
+  },
+  {
+    id: "grooming",
+    nombre: "Grooming",
+    precio: 45,
+    icono: "Heart",
+    descripcion:
+      "Servicios completos de higiene y estética para mantener a tu mascota bella y saludable.",
+    activo: true,
+    color: "vet-secondary",
+    colorBg: "vet-secondary/10",
+    colorHover: "vet-secondary/30",
+  },
+  {
+    id: "cirugia",
+    nombre: "Cirugía",
+    precio: 250,
+    icono: "Activity",
+    descripcion:
+      "Procedimientos quirúrgicos especializados con anestesia segura y recuperación monitoreada.",
+    activo: true,
+    color: "purple-600",
+    colorBg: "purple-500/10",
+    colorHover: "purple-500/30",
+  },
+  {
+    id: "diagnostico",
+    nombre: "Diagnóstico",
+    precio: 120,
+    icono: "Search",
+    descripcion:
+      "Análisis clínicos, radiografías y estudios especializados para diagnósticos precisos.",
+    activo: true,
+    color: "blue-600",
+    colorBg: "blue-500/10",
+    colorHover: "blue-500/30",
+  },
+];
+
+// Function to get services from localStorage or default
+const getServicios = () => {
+  try {
+    const savedServices = localStorage.getItem("veterinary_services");
+    if (savedServices) {
+      const services = JSON.parse(savedServices);
+      // Only return active services and add display colors
+      return services
+        .filter((service: any) => service.activo)
+        .map((service: any, index: number) => {
+          const defaultService =
+            defaultServices[index % defaultServices.length];
+          return {
+            ...service,
+            color: defaultService.color,
+            colorBg: defaultService.colorBg,
+            colorHover: defaultService.colorHover,
+          };
+        });
+    }
+  } catch (error) {
+    console.error("Error loading services from localStorage:", error);
+  }
+  // Return default services if localStorage is empty or error
+  return defaultServices;
+};
+
+// Function to get service icon
+const getServiceIcon = (iconName: string) => {
+  const iconProps = { className: "w-10 h-10 text-white" };
+  switch (iconName) {
+    case "Stethoscope":
+      return <Stethoscope {...iconProps} />;
+    case "Syringe":
+      return <Syringe {...iconProps} />;
+    case "AlertCircle":
+      return <Zap {...iconProps} />;
+    case "Heart":
+      return <Scissors {...iconProps} />;
+    case "Activity":
+      return <Activity {...iconProps} />;
+    case "Search":
+      return <FileText {...iconProps} />;
+    default:
+      return <Stethoscope {...iconProps} />;
+  }
+};
+
 export default function Index() {
   const location = useLocation();
+  const navigate = useNavigate();
   const { isAuthenticated, user } = useAppContext();
+  const [servicios, setServicios] = useState(getServicios());
+
+  // Listen for service updates
+  useEffect(() => {
+    const updateServices = () => {
+      setServicios(getServicios());
+    };
+
+    // Listen for storage changes (when admin updates services)
+    window.addEventListener("storage", updateServices);
+    // Listen for custom event when services are updated
+    window.addEventListener("servicesUpdated", updateServices);
+
+    return () => {
+      window.removeEventListener("storage", updateServices);
+      window.removeEventListener("servicesUpdated", updateServices);
+    };
+  }, []);
+
+  // Function to handle service selection
+  const handleServiceClick = (serviceId: string) => {
+    if (isAuthenticated && user?.rol === "cliente") {
+      // User is logged in as client, go directly to Nueva Cita with preselected service
+      navigate("/nueva-cita", { state: { preselectedService: serviceId } });
+    } else {
+      // User is not logged in or not a client, redirect to login with return URL
+      navigate("/login", {
+        state: { returnTo: "/nueva-cita", preselectedService: serviceId },
+      });
+    }
+  };
 
   // Handle hash routing for anchor links
   useEffect(() => {
@@ -414,203 +570,108 @@ export default function Index() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
-            {/* Consulta General */}
-            <div className="group relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 border border-vet-gray-100 hover:border-vet-primary/30 hover:-translate-y-2">
-              <div className="absolute inset-0 bg-gradient-to-br from-vet-primary/5 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative">
-                <div className="w-20 h-20 bg-gradient-to-br from-vet-primary to-vet-primary-dark rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                  <Stethoscope className="w-10 h-10 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-vet-gray-900 mb-4">
-                  Consulta General
-                </h3>
-                <p className="text-vet-gray-600 mb-6 leading-relaxed">
-                  Evaluaciones médicas completas con diagnóstico preciso y plan
-                  de tratamiento personalizado.
-                </p>
-                <div className="flex items-center justify-between pt-6 border-t border-vet-gray-100">
-                  <div>
-                    <span className="text-3xl font-bold text-vet-primary">
-                      S/. 80
-                    </span>
-                    <div className="flex items-center gap-2 mt-1">
-                      <Clock className="w-4 h-4 text-vet-gray-400" />
-                      <span className="text-sm text-vet-gray-500">
-                        30-45 min
-                      </span>
-                    </div>
-                  </div>
-                  <div className="w-12 h-12 bg-vet-primary/10 rounded-full flex items-center justify-center group-hover:bg-vet-primary group-hover:text-white transition-all duration-300">
-                    <ArrowRight className="w-5 h-5" />
-                  </div>
-                </div>
-              </div>
-            </div>
+            {servicios.map((servicio) => {
+              const colorClasses = {
+                "vet-primary": {
+                  gradient: "from-vet-primary to-vet-primary-dark",
+                  text: "text-vet-primary",
+                  bg: "bg-vet-primary/10",
+                  hover: "hover:bg-vet-primary",
+                  border: "hover:border-vet-primary/30",
+                  bgGradient: "from-vet-primary/5",
+                },
+                "green-600": {
+                  gradient: "from-green-500 to-green-600",
+                  text: "text-green-600",
+                  bg: "bg-green-500/10",
+                  hover: "hover:bg-green-500",
+                  border: "hover:border-green-500/30",
+                  bgGradient: "from-green-500/5",
+                },
+                "red-600": {
+                  gradient: "from-red-500 to-red-600",
+                  text: "text-red-600",
+                  bg: "bg-red-500/10",
+                  hover: "hover:bg-red-500",
+                  border: "hover:border-red-500/30",
+                  bgGradient: "from-red-500/5",
+                },
+                "vet-secondary": {
+                  gradient: "from-vet-secondary to-vet-secondary-dark",
+                  text: "text-vet-secondary",
+                  bg: "bg-vet-secondary/10",
+                  hover: "hover:bg-vet-secondary",
+                  border: "hover:border-vet-secondary/30",
+                  bgGradient: "from-vet-secondary/5",
+                },
+                "purple-600": {
+                  gradient: "from-purple-500 to-purple-600",
+                  text: "text-purple-600",
+                  bg: "bg-purple-500/10",
+                  hover: "hover:bg-purple-500",
+                  border: "hover:border-purple-500/30",
+                  bgGradient: "from-purple-500/5",
+                },
+                "blue-600": {
+                  gradient: "from-blue-500 to-blue-600",
+                  text: "text-blue-600",
+                  bg: "bg-blue-500/10",
+                  hover: "hover:bg-blue-500",
+                  border: "hover:border-blue-500/30",
+                  bgGradient: "from-blue-500/5",
+                },
+              };
 
-            {/* Vacunación */}
-            <div className="group relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 border border-vet-gray-100 hover:border-green-500/30 hover:-translate-y-2">
-              <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative">
-                <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                  <Syringe className="w-10 h-10 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-vet-gray-900 mb-4">
-                  Vacunación
-                </h3>
-                <p className="text-vet-gray-600 mb-6 leading-relaxed">
-                  Esquemas de vacunación completos adaptados a la edad, especie
-                  y necesidades de tu mascota.
-                </p>
-                <div className="flex items-center justify-between pt-6 border-t border-vet-gray-100">
-                  <div>
-                    <span className="text-3xl font-bold text-green-600">
-                      S/. 65
-                    </span>
-                    <div className="flex items-center gap-2 mt-1">
-                      <Clock className="w-4 h-4 text-vet-gray-400" />
-                      <span className="text-sm text-vet-gray-500">
-                        15-20 min
-                      </span>
-                    </div>
-                  </div>
-                  <div className="w-12 h-12 bg-green-500/10 rounded-full flex items-center justify-center group-hover:bg-green-500 group-hover:text-white transition-all duration-300">
-                    <ArrowRight className="w-5 h-5" />
-                  </div>
-                </div>
-              </div>
-            </div>
+              const colors =
+                colorClasses[servicio.color as keyof typeof colorClasses] ||
+                colorClasses["vet-primary"];
 
-            {/* Emergencias */}
-            <div className="group relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 border border-vet-gray-100 hover:border-red-500/30 hover:-translate-y-2">
-              <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative">
-                <div className="w-20 h-20 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                  <Zap className="w-10 h-10 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-vet-gray-900 mb-4">
-                  Emergencias
-                </h3>
-                <p className="text-vet-gray-600 mb-6 leading-relaxed">
-                  Atención médica urgente 24/7 para situaciones críticas con
-                  respuesta inmediata.
-                </p>
-                <div className="flex items-center justify-between pt-6 border-t border-vet-gray-100">
-                  <div>
-                    <span className="text-3xl font-bold text-red-600">
-                      S/. 150
-                    </span>
-                    <div className="flex items-center gap-2 mt-1">
-                      <Clock className="w-4 h-4 text-vet-gray-400" />
-                      <span className="text-sm text-vet-gray-500">
-                        45-90 min
-                      </span>
+              return (
+                <div
+                  key={servicio.id}
+                  className={`group relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 border border-vet-gray-100 ${colors.border} hover:-translate-y-2`}
+                >
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-br ${colors.bgGradient} to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+                  ></div>
+                  <div className="relative">
+                    <div
+                      className={`w-20 h-20 bg-gradient-to-br ${colors.gradient} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}
+                    >
+                      {getServiceIcon(servicio.icono)}
+                    </div>
+                    <h3 className="text-2xl font-bold text-vet-gray-900 mb-4">
+                      {servicio.nombre}
+                    </h3>
+                    <p className="text-vet-gray-600 mb-6 leading-relaxed">
+                      {servicio.descripcion}
+                    </p>
+                    <div className="flex items-center justify-between pt-6 border-t border-vet-gray-100">
+                      <div>
+                        <span className={`text-3xl font-bold ${colors.text}`}>
+                          S/. {servicio.precio}
+                        </span>
+                        <div className="flex items-center gap-2 mt-1">
+                          <Clock className="w-4 h-4 text-vet-gray-400" />
+                          <span className="text-sm text-vet-gray-500">
+                            30-45 min
+                          </span>
+                        </div>
+                      </div>
+                      <div
+                        className={`w-12 h-12 ${colors.bg} rounded-full flex items-center justify-center ${colors.hover} group-hover:text-white transition-all duration-300 cursor-pointer`}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleServiceClick(servicio.id);
+                        }}
+                      >
+                        <ArrowRight className="w-5 h-5" />
+                      </div>
                     </div>
                   </div>
-                  <div className="w-12 h-12 bg-red-500/10 rounded-full flex items-center justify-center group-hover:bg-red-500 group-hover:text-white transition-all duration-300">
-                    <ArrowRight className="w-5 h-5" />
-                  </div>
                 </div>
-              </div>
-            </div>
-
-            {/* Grooming */}
-            <div className="group relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 border border-vet-gray-100 hover:border-vet-secondary/30 hover:-translate-y-2">
-              <div className="absolute inset-0 bg-gradient-to-br from-vet-secondary/5 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative">
-                <div className="w-20 h-20 bg-gradient-to-br from-vet-secondary to-vet-secondary-dark rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                  <Scissors className="w-10 h-10 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-vet-gray-900 mb-4">
-                  Grooming
-                </h3>
-                <p className="text-vet-gray-600 mb-6 leading-relaxed">
-                  Servicios completos de higiene y estética para mantener a tu
-                  mascota bella y saludable.
-                </p>
-                <div className="flex items-center justify-between pt-6 border-t border-vet-gray-100">
-                  <div>
-                    <span className="text-3xl font-bold text-vet-secondary">
-                      S/. 45
-                    </span>
-                    <div className="flex items-center gap-2 mt-1">
-                      <Clock className="w-4 h-4 text-vet-gray-400" />
-                      <span className="text-sm text-vet-gray-500">
-                        60-120 min
-                      </span>
-                    </div>
-                  </div>
-                  <div className="w-12 h-12 bg-vet-secondary/10 rounded-full flex items-center justify-center group-hover:bg-vet-secondary group-hover:text-white transition-all duration-300">
-                    <ArrowRight className="w-5 h-5" />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Cirugía */}
-            <div className="group relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 border border-vet-gray-100 hover:border-purple-500/30 hover:-translate-y-2">
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative">
-                <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                  <Activity className="w-10 h-10 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-vet-gray-900 mb-4">
-                  Cirugía
-                </h3>
-                <p className="text-vet-gray-600 mb-6 leading-relaxed">
-                  Procedimientos quirúrgicos especializados con anestesia segura
-                  y recuperación monitoreada.
-                </p>
-                <div className="flex items-center justify-between pt-6 border-t border-vet-gray-100">
-                  <div>
-                    <span className="text-3xl font-bold text-purple-600">
-                      S/. 250
-                    </span>
-                    <div className="flex items-center gap-2 mt-1">
-                      <Clock className="w-4 h-4 text-vet-gray-400" />
-                      <span className="text-sm text-vet-gray-500">
-                        90-180 min
-                      </span>
-                    </div>
-                  </div>
-                  <div className="w-12 h-12 bg-purple-500/10 rounded-full flex items-center justify-center group-hover:bg-purple-500 group-hover:text-white transition-all duration-300">
-                    <ArrowRight className="w-5 h-5" />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Diagnóstico */}
-            <div className="group relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 border border-vet-gray-100 hover:border-blue-500/30 hover:-translate-y-2">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative">
-                <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                  <FileText className="w-10 h-10 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-vet-gray-900 mb-4">
-                  Diagnóstico
-                </h3>
-                <p className="text-vet-gray-600 mb-6 leading-relaxed">
-                  Análisis clínicos, radiografías y estudios especializados para
-                  diagnósticos precisos.
-                </p>
-                <div className="flex items-center justify-between pt-6 border-t border-vet-gray-100">
-                  <div>
-                    <span className="text-3xl font-bold text-blue-600">
-                      S/. 120
-                    </span>
-                    <div className="flex items-center gap-2 mt-1">
-                      <Clock className="w-4 h-4 text-vet-gray-400" />
-                      <span className="text-sm text-vet-gray-500">
-                        30-45 min
-                      </span>
-                    </div>
-                  </div>
-                  <div className="w-12 h-12 bg-blue-500/10 rounded-full flex items-center justify-center group-hover:bg-blue-500 group-hover:text-white transition-all duration-300">
-                    <ArrowRight className="w-5 h-5" />
-                  </div>
-                </div>
-              </div>
-            </div>
+              );
+            })}
           </div>
         </div>
       </section>
