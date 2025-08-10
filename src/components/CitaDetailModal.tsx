@@ -321,42 +321,40 @@ export default function CitaDetailModal({
                   return null;
                 })()}
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-                  {/* Nombres */}
-                  <div className="bg-gray-50 rounded-xl p-4 border border-gray-200 hover:bg-gray-100 transition-colors">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {/* NOMBRES */}
+                  <div className="bg-gray-100 rounded-2xl p-4 shadow-sm">
                     <div className="flex items-center space-x-3">
-                      <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
-                        <User className="w-4 h-4 text-blue-600" />
+                      <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
+                        <User className="w-5 h-5 text-blue-600" />
                       </div>
                       <div className="flex-1">
                         <span className="text-xs font-medium text-gray-500 uppercase tracking-wide block mb-1">
-                          Nombres
+                          NOMBRES
                         </span>
-                        <p className="text-sm font-semibold text-gray-900">
+                        <p className="text-base font-semibold text-gray-900">
                           {selectedCita.propietario?.nombre || "Sin asignar"}
                         </p>
                       </div>
                     </div>
                   </div>
 
-                  {/* Apellidos */}
-                  {selectedCita.propietario?.apellidos && (
-                    <div className="bg-gray-50 rounded-xl p-4 border border-gray-200 hover:bg-gray-100 transition-colors">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center">
-                          <Users className="w-4 h-4 text-indigo-600" />
-                        </div>
-                        <div className="flex-1">
-                          <span className="text-xs font-medium text-gray-500 uppercase tracking-wide block mb-1">
-                            Apellidos
-                          </span>
-                          <p className="text-sm font-semibold text-gray-900">
-                            {selectedCita.propietario.apellidos}
-                          </p>
-                        </div>
+                  {/* APELLIDOS */}
+                  <div className="bg-gray-100 rounded-2xl p-4 shadow-sm">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
+                        <Users className="w-5 h-5 text-blue-600" />
+                      </div>
+                      <div className="flex-1">
+                        <span className="text-xs font-medium text-gray-500 uppercase tracking-wide block mb-1">
+                          APELLIDOS
+                        </span>
+                        <p className="text-base font-semibold text-gray-900">
+                          {selectedCita.propietario?.apellidos || "No registrado"}
+                        </p>
                       </div>
                     </div>
-                  )}
+                  </div>
 
                   {/* Username */}
                   {selectedCita.propietario?.username && (
