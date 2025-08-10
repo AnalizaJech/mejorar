@@ -440,7 +440,7 @@ export default function MisMascotas() {
                             })
                           }
                         >
-                          <SelectTrigger className={!newMascota.sexo ? "border-red-300" : ""}>
+                          <SelectTrigger>
                             <SelectValue placeholder="Selecciona el sexo *" />
                           </SelectTrigger>
                           <SelectContent>
