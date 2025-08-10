@@ -188,8 +188,8 @@ export default function Index() {
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <div className="aspect-[4/3] relative">
                   <img
-                    src="https://images.pexels.com/photos/6234633/pexels-photo-6234633.jpeg"
-                    alt="Veterinario realizando chequeo médico a mascota"
+                    src="https://images.pexels.com/photos/1350591/pexels-photo-1350591.jpeg"
+                    alt="Veterinario cuidando profesionalmente a mascota"
                     className="w-full h-full object-cover"
                   />
                   {/* Gradient overlay for text readability */}
@@ -244,10 +244,6 @@ export default function Index() {
               </div>
 
               {/* Small floating images */}
-              {/* Single distinctive floating icon */}
-              <div className="absolute -top-4 -right-4 w-20 h-20 bg-vet-primary rounded-full flex items-center justify-center shadow-xl animate-bounce">
-                <Stethoscope className="w-10 h-10 text-white" />
-              </div>
             </div>
           </div>
         </div>
