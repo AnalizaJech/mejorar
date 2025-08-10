@@ -35,6 +35,7 @@ import {
   MapPin,
   Shield,
   X,
+  ChevronUp,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { UserRole } from "@/lib/types";
@@ -212,6 +213,17 @@ export default function Layout({
           className="fixed top-0 left-0 h-1 bg-gradient-to-r from-vet-primary to-vet-secondary z-50 transition-all duration-150 ease-out"
           style={{ width: `${scrollProgress}%` }}
         ></div>
+      )}
+
+      {/* Back to Top Button - Only on homepage when scrolled */}
+      {location.pathname === "/" && scrollProgress > 10 && (
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          className="fixed bottom-6 right-6 w-12 h-12 bg-vet-primary hover:bg-vet-primary-dark text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 z-40 flex items-center justify-center group"
+          aria-label="Volver arriba"
+        >
+          <ChevronUp className="w-6 h-6 transform group-hover:-translate-y-0.5 transition-transform duration-200" />
+        </button>
       )}
       {/* Header */}
       <header className="bg-white border-b border-vet-gray-200 sticky top-0 z-50">
