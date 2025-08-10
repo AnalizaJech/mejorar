@@ -36,7 +36,6 @@ export interface Mascota {
   fechaCreacion?: Date;
 }
 
-
 // Appointment states
 export type EstadoCita =
   | "pendiente_pago"
@@ -119,7 +118,6 @@ export interface Notificacion {
   leida: boolean;
   fechaCreacion: Date;
 }
-
 
 export interface LoginFormData {
   identifier: string; // email, phone, or username

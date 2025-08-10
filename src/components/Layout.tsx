@@ -159,13 +159,16 @@ export default function Layout({
   useEffect(() => {
     const updateScrollProgress = () => {
       const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const docHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
       const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
       setScrollProgress(Math.min(Math.max(progress, 0), 100));
     };
 
     if (location.pathname === "/") {
-      window.addEventListener("scroll", updateScrollProgress, { passive: true });
+      window.addEventListener("scroll", updateScrollProgress, {
+        passive: true,
+      });
       updateScrollProgress(); // Initial calculation
     }
 

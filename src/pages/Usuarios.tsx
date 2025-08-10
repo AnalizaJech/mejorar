@@ -147,7 +147,6 @@ export default function Usuarios() {
     return matchesSearch && matchesStatus;
   });
 
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -262,7 +261,6 @@ export default function Usuarios() {
     setShowDeleteConfirm(false);
     setClienteToDelete(null);
   };
-
 
   const resetForm = () => {
     setFormData({ nombre: "", email: "", telefono: "", password: "" });
@@ -427,7 +425,6 @@ export default function Usuarios() {
               </CardContent>
             </Card>
           </div>
-
 
           {/* Controls */}
           <Card className="mb-8">

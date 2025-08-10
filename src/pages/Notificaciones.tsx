@@ -136,7 +136,6 @@ export default function Notificaciones() {
 
     // For admins and vets: pending pre-appointments
     if (user.rol === "admin" || user.rol === "veterinario") {
-
       // Upcoming appointments for today
       const todaysCitas = citas.filter((cita) => {
         const citaDate = new Date(cita.fecha);

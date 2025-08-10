@@ -411,7 +411,6 @@ function AdminDashboard({
       );
     });
 
-
     // Add client activities
     recentClients.forEach((client) => {
       const timestamp = new Date(client.fechaRegistro).getTime();
@@ -451,7 +450,6 @@ function AdminDashboard({
         timestamp: timestamp,
       });
     });
-
 
     // Sort by timestamp (most recent first) and limit to 3
     return activities.sort((a, b) => b.timestamp - a.timestamp).slice(0, 3);
@@ -515,7 +513,6 @@ function AdminDashboard({
           </CardContent>
         </Card>
 
-
         <Card className="border-l-4 border-l-vet-primary">
           <CardContent className="p-4 sm:p-6">
             <div className="flex items-center space-x-3">
@@ -566,7 +563,6 @@ function AdminDashboard({
             </CardDescription>
           </CardHeader>
           <CardContent className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-
             <Link to="/gestion-citas">
               <Button
                 variant="outline"

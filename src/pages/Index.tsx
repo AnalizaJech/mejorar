@@ -76,9 +76,6 @@ export default function Index() {
     return () => clearTimeout(timer);
   }, []);
 
-
-
-
   return (
     <Layout>
       {/* Hero Section */}
@@ -202,8 +199,12 @@ export default function Index() {
                         <Stethoscope className="w-5 h-5 text-white" />
                       </div>
                       <div>
-                        <p className="text-sm font-bold text-vet-gray-900">Mascota Feliz</p>
-                        <p className="text-xs text-vet-gray-600">Cuidado Profesional</p>
+                        <p className="text-sm font-bold text-vet-gray-900">
+                          Mascota Feliz
+                        </p>
+                        <p className="text-xs text-vet-gray-600">
+                          Cuidado Profesional
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -214,7 +215,9 @@ export default function Index() {
                       <div className="w-8 h-8 bg-white/25 rounded-xl flex items-center justify-center backdrop-blur-sm">
                         <Shield className="w-5 h-5 text-white" />
                       </div>
-                      <span className="text-white text-base font-black tracking-wider drop-shadow-lg">Premium</span>
+                      <span className="text-white text-base font-black tracking-wider drop-shadow-lg">
+                        Premium
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -392,12 +395,15 @@ export default function Index() {
               SERVICIOS VETERINARIOS
             </div>
             <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-              <span className="text-vet-gray-900">¿Buscas el mejor cuidado para</span>
+              <span className="text-vet-gray-900">
+                ¿Buscas el mejor cuidado para
+              </span>
               <span className="block text-emerald-600">tu mascota?</span>
             </h2>
             <p className="text-xl text-vet-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Ofrecemos servicios veterinarios especializados con tecnología de vanguardia
-              y el cuidado más humano para garantizar la salud y bienestar de tu mascota.
+              Ofrecemos servicios veterinarios especializados con tecnología de
+              vanguardia y el cuidado más humano para garantizar la salud y
+              bienestar de tu mascota.
             </p>
           </div>
 
@@ -409,16 +415,23 @@ export default function Index() {
                 <div className="w-20 h-20 bg-gradient-to-br from-vet-primary to-vet-primary-dark rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                   <Stethoscope className="w-10 h-10 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-vet-gray-900 mb-4">Consulta General</h3>
+                <h3 className="text-2xl font-bold text-vet-gray-900 mb-4">
+                  Consulta General
+                </h3>
                 <p className="text-vet-gray-600 mb-6 leading-relaxed">
-                  Evaluaciones médicas completas con diagnóstico preciso y plan de tratamiento personalizado.
+                  Evaluaciones médicas completas con diagnóstico preciso y plan
+                  de tratamiento personalizado.
                 </p>
                 <div className="flex items-center justify-between pt-6 border-t border-vet-gray-100">
                   <div>
-                    <span className="text-3xl font-bold text-vet-primary">S/. 80</span>
+                    <span className="text-3xl font-bold text-vet-primary">
+                      S/. 80
+                    </span>
                     <div className="flex items-center gap-2 mt-1">
                       <Clock className="w-4 h-4 text-vet-gray-400" />
-                      <span className="text-sm text-vet-gray-500">30-45 min</span>
+                      <span className="text-sm text-vet-gray-500">
+                        30-45 min
+                      </span>
                     </div>
                   </div>
                   <div className="w-12 h-12 bg-vet-primary/10 rounded-full flex items-center justify-center group-hover:bg-vet-primary group-hover:text-white transition-all duration-300">
@@ -435,16 +448,23 @@ export default function Index() {
                 <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                   <Syringe className="w-10 h-10 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-vet-gray-900 mb-4">Vacunación</h3>
+                <h3 className="text-2xl font-bold text-vet-gray-900 mb-4">
+                  Vacunación
+                </h3>
                 <p className="text-vet-gray-600 mb-6 leading-relaxed">
-                  Esquemas de vacunación completos adaptados a la edad, especie y necesidades de tu mascota.
+                  Esquemas de vacunación completos adaptados a la edad, especie
+                  y necesidades de tu mascota.
                 </p>
                 <div className="flex items-center justify-between pt-6 border-t border-vet-gray-100">
                   <div>
-                    <span className="text-3xl font-bold text-green-600">S/. 65</span>
+                    <span className="text-3xl font-bold text-green-600">
+                      S/. 65
+                    </span>
                     <div className="flex items-center gap-2 mt-1">
                       <Clock className="w-4 h-4 text-vet-gray-400" />
-                      <span className="text-sm text-vet-gray-500">15-20 min</span>
+                      <span className="text-sm text-vet-gray-500">
+                        15-20 min
+                      </span>
                     </div>
                   </div>
                   <div className="w-12 h-12 bg-green-500/10 rounded-full flex items-center justify-center group-hover:bg-green-500 group-hover:text-white transition-all duration-300">
@@ -461,16 +481,23 @@ export default function Index() {
                 <div className="w-20 h-20 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                   <Zap className="w-10 h-10 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-vet-gray-900 mb-4">Emergencias</h3>
+                <h3 className="text-2xl font-bold text-vet-gray-900 mb-4">
+                  Emergencias
+                </h3>
                 <p className="text-vet-gray-600 mb-6 leading-relaxed">
-                  Atención médica urgente 24/7 para situaciones críticas con respuesta inmediata.
+                  Atención médica urgente 24/7 para situaciones críticas con
+                  respuesta inmediata.
                 </p>
                 <div className="flex items-center justify-between pt-6 border-t border-vet-gray-100">
                   <div>
-                    <span className="text-3xl font-bold text-red-600">S/. 150</span>
+                    <span className="text-3xl font-bold text-red-600">
+                      S/. 150
+                    </span>
                     <div className="flex items-center gap-2 mt-1">
                       <Clock className="w-4 h-4 text-vet-gray-400" />
-                      <span className="text-sm text-vet-gray-500">45-90 min</span>
+                      <span className="text-sm text-vet-gray-500">
+                        45-90 min
+                      </span>
                     </div>
                   </div>
                   <div className="w-12 h-12 bg-red-500/10 rounded-full flex items-center justify-center group-hover:bg-red-500 group-hover:text-white transition-all duration-300">
@@ -487,16 +514,23 @@ export default function Index() {
                 <div className="w-20 h-20 bg-gradient-to-br from-vet-secondary to-vet-secondary-dark rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                   <Scissors className="w-10 h-10 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-vet-gray-900 mb-4">Grooming</h3>
+                <h3 className="text-2xl font-bold text-vet-gray-900 mb-4">
+                  Grooming
+                </h3>
                 <p className="text-vet-gray-600 mb-6 leading-relaxed">
-                  Servicios completos de higiene y estética para mantener a tu mascota bella y saludable.
+                  Servicios completos de higiene y estética para mantener a tu
+                  mascota bella y saludable.
                 </p>
                 <div className="flex items-center justify-between pt-6 border-t border-vet-gray-100">
                   <div>
-                    <span className="text-3xl font-bold text-vet-secondary">S/. 45</span>
+                    <span className="text-3xl font-bold text-vet-secondary">
+                      S/. 45
+                    </span>
                     <div className="flex items-center gap-2 mt-1">
                       <Clock className="w-4 h-4 text-vet-gray-400" />
-                      <span className="text-sm text-vet-gray-500">60-120 min</span>
+                      <span className="text-sm text-vet-gray-500">
+                        60-120 min
+                      </span>
                     </div>
                   </div>
                   <div className="w-12 h-12 bg-vet-secondary/10 rounded-full flex items-center justify-center group-hover:bg-vet-secondary group-hover:text-white transition-all duration-300">
@@ -513,16 +547,23 @@ export default function Index() {
                 <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                   <Activity className="w-10 h-10 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-vet-gray-900 mb-4">Cirugía</h3>
+                <h3 className="text-2xl font-bold text-vet-gray-900 mb-4">
+                  Cirugía
+                </h3>
                 <p className="text-vet-gray-600 mb-6 leading-relaxed">
-                  Procedimientos quirúrgicos especializados con anestesia segura y recuperación monitoreada.
+                  Procedimientos quirúrgicos especializados con anestesia segura
+                  y recuperación monitoreada.
                 </p>
                 <div className="flex items-center justify-between pt-6 border-t border-vet-gray-100">
                   <div>
-                    <span className="text-3xl font-bold text-purple-600">S/. 250</span>
+                    <span className="text-3xl font-bold text-purple-600">
+                      S/. 250
+                    </span>
                     <div className="flex items-center gap-2 mt-1">
                       <Clock className="w-4 h-4 text-vet-gray-400" />
-                      <span className="text-sm text-vet-gray-500">90-180 min</span>
+                      <span className="text-sm text-vet-gray-500">
+                        90-180 min
+                      </span>
                     </div>
                   </div>
                   <div className="w-12 h-12 bg-purple-500/10 rounded-full flex items-center justify-center group-hover:bg-purple-500 group-hover:text-white transition-all duration-300">
@@ -539,16 +580,23 @@ export default function Index() {
                 <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                   <FileText className="w-10 h-10 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-vet-gray-900 mb-4">Diagnóstico</h3>
+                <h3 className="text-2xl font-bold text-vet-gray-900 mb-4">
+                  Diagnóstico
+                </h3>
                 <p className="text-vet-gray-600 mb-6 leading-relaxed">
-                  Análisis clínicos, radiografías y estudios especializados para diagnósticos precisos.
+                  Análisis clínicos, radiografías y estudios especializados para
+                  diagnósticos precisos.
                 </p>
                 <div className="flex items-center justify-between pt-6 border-t border-vet-gray-100">
                   <div>
-                    <span className="text-3xl font-bold text-blue-600">S/. 120</span>
+                    <span className="text-3xl font-bold text-blue-600">
+                      S/. 120
+                    </span>
                     <div className="flex items-center gap-2 mt-1">
                       <Clock className="w-4 h-4 text-vet-gray-400" />
-                      <span className="text-sm text-vet-gray-500">30-45 min</span>
+                      <span className="text-sm text-vet-gray-500">
+                        30-45 min
+                      </span>
                     </div>
                   </div>
                   <div className="w-12 h-12 bg-blue-500/10 rounded-full flex items-center justify-center group-hover:bg-blue-500 group-hover:text-white transition-all duration-300">
@@ -558,7 +606,6 @@ export default function Index() {
               </div>
             </div>
           </div>
-
         </div>
       </section>
 

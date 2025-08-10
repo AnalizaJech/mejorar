@@ -54,7 +54,6 @@ interface Cita {
   notasAdmin?: string;
 }
 
-
 interface Usuario {
   id: string;
   nombre: string;
@@ -132,14 +131,12 @@ interface HistorialClinico {
   }>;
 }
 
-
 interface ArchivoGuardado {
   name: string;
   data: string; // base64
   size: number;
   type: string;
 }
-
 
 interface Notificacion {
   id: string;
@@ -203,7 +200,6 @@ interface AppContextType {
   updateCita: (id: string, updates: Partial<Cita>) => void;
   deleteCita: (id: string) => void;
 
-
   // Historial Clinico state
   historialClinico: HistorialClinico[];
   addHistorialEntry: (entry: Omit<HistorialClinico, "id">) => void;
@@ -213,7 +209,6 @@ interface AppContextType {
   ) => void;
   deleteHistorialEntry: (id: string) => void;
   getHistorialByMascota: (mascotaId: string) => HistorialClinico[];
-
 
   // Notificaciones state
   notificaciones: Notificacion[];
@@ -428,7 +423,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }
   });
 
-
   const [historialClinico, setHistorialClinico] = useState<HistorialClinico[]>(
     () => {
       try {
@@ -455,8 +449,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
       }
     },
   );
-
-
 
   const [notificaciones, setNotificaciones] = useState<Notificacion[]>(() => {
     try {
@@ -607,12 +599,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }
   }, [citas]);
 
-
   useEffect(() => {
     localStorage.setItem("historialClinico", JSON.stringify(historialClinico));
   }, [historialClinico]);
-
-
 
   useEffect(() => {
     localStorage.setItem("notificaciones", JSON.stringify(notificaciones));
@@ -933,7 +922,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
           `✅ Loaded ${formattedCitas.length} appointments from localStorage`,
         );
       }
-
 
       console.log("✅ Data refresh completed");
       return true;
@@ -1559,7 +1547,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
     return new Date(dateInput);
   };
 
-
   // Historial Clinico functions
   const addHistorialEntry = (entryData: Omit<HistorialClinico, "id">) => {
     const newEntry: HistorialClinico = {
@@ -1632,7 +1619,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
         (a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime(),
       );
   };
-
 
   // Funciones de notificaciones
   const addNotificacion = (
