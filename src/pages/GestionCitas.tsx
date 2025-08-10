@@ -1633,9 +1633,13 @@ export default function GestionCitas() {
                               /\D/g,
                               "",
                             );
+                            // Validar si ya tiene código de país (+51)
+                            const finalNumber = phoneNumber.startsWith('51') && phoneNumber.length === 11
+                              ? phoneNumber
+                              : `51${phoneNumber}`;
                             const message = `Hola ${propietario.nombre}, me comunico de la clínica veterinaria respecto a la cita de ${selectedContactCita.mascota} programada para el ${new Date(selectedContactCita.fecha).toLocaleDateString("es-ES")}.`;
                             window.open(
-                              `https://wa.me/51${phoneNumber}?text=${encodeURIComponent(message)}`,
+                              `https://wa.me/${finalNumber}?text=${encodeURIComponent(message)}`,
                               "_blank",
                             );
                             setShowContactModal(false);
@@ -1647,7 +1651,12 @@ export default function GestionCitas() {
                               WhatsApp
                             </p>
                             <p className="text-sm text-green-600">
-                              Enviar mensaje
+                              {(() => {
+                                const phoneNumber = propietario.telefono.replace(/\D/g, "");
+                                return phoneNumber.startsWith('51') && phoneNumber.length === 11
+                                  ? `+${phoneNumber}`
+                                  : `+51${phoneNumber}`;
+                              })()}
                             </p>
                           </div>
                         </Button>
