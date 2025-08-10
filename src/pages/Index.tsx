@@ -210,13 +210,11 @@ export default function Index() {
                   </div>
 
                   {/* Quality badge */}
-                  <div className="absolute top-4 right-4 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 backdrop-blur-sm rounded-2xl px-6 py-4 shadow-2xl border-2 border-white/30 transform hover:scale-105 transition-all duration-300">
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 bg-white/25 rounded-xl flex items-center justify-center backdrop-blur-sm">
-                        <Shield className="w-5 h-5 text-white" />
-                      </div>
-                      <span className="text-white text-base font-black tracking-wider drop-shadow-lg">
-                        Premium
+                  <div className="absolute top-4 right-4 bg-vet-primary backdrop-blur-sm rounded-lg px-4 py-2 shadow-lg border border-white/20 transform hover:scale-105 transition-all duration-300">
+                    <div className="flex items-center gap-2">
+                      <Shield className="w-6 h-6 text-white" />
+                      <span className="text-white text-sm font-semibold">
+                        Certificado
                       </span>
                     </div>
                   </div>
