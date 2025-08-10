@@ -58,7 +58,6 @@ import {
   User,
   PawPrint,
   AlertCircle,
-  User,
   Stethoscope,
   Coins,
   Edit,
