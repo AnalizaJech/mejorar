@@ -32,6 +32,8 @@ import {
   AlertTriangle,
   Bell,
   XCircle,
+  Shield,
+  Coins,
 } from "lucide-react";
 import type { CitaRelationData } from "@/lib/citaUtils";
 
@@ -859,8 +861,9 @@ export default function CitaDetailModal({
                   </p>
                 </div>
                 <div>
-                  <Label className="text-sm font-medium text-vet-gray-600">
-                    Precio del Servicio
+                  <Label className="text-sm font-medium text-vet-gray-600 flex items-center space-x-2">
+                    <Coins className="w-4 h-4 text-yellow-600" />
+                    <span>Precio del Servicio</span>
                   </Label>
                   <p className="text-vet-gray-900 font-semibold text-lg">
                     S/.{" "}
