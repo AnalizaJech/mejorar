@@ -356,62 +356,56 @@ export default function CitaDetailModal({
                     </div>
                   </div>
 
-                  {/* Username */}
-                  {selectedCita.propietario?.username && (
-                    <div className="bg-gray-50 rounded-xl p-4 border border-gray-200 hover:bg-gray-100 transition-colors">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
-                          <span className="text-gray-600 font-semibold text-sm">@</span>
-                        </div>
-                        <div className="flex-1">
-                          <span className="text-xs font-medium text-gray-500 uppercase tracking-wide block mb-1">
-                            Nombre de Usuario
-                          </span>
-                          <p className="text-sm font-semibold text-gray-900">
-                            @{selectedCita.propietario.username}
-                          </p>
-                        </div>
+                  {/* NOMBRE DE USUARIO */}
+                  <div className="bg-gray-100 rounded-2xl p-4 shadow-sm">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
+                        <span className="text-blue-600 font-bold text-lg">@</span>
+                      </div>
+                      <div className="flex-1">
+                        <span className="text-xs font-medium text-gray-500 uppercase tracking-wide block mb-1">
+                          NOMBRE DE USUARIO
+                        </span>
+                        <p className="text-base font-semibold text-gray-900">
+                          {selectedCita.propietario?.username ? `@${selectedCita.propietario.username}` : "No registrado"}
+                        </p>
                       </div>
                     </div>
-                  )}
+                  </div>
 
-                  {/* Email */}
-                  {selectedCita.propietario?.email && (
-                    <div className="bg-gray-50 rounded-xl p-4 border border-gray-200 hover:bg-gray-100 transition-colors">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
-                          <Mail className="w-4 h-4 text-green-600" />
-                        </div>
-                        <div className="flex-1">
-                          <span className="text-xs font-medium text-gray-500 uppercase tracking-wide block mb-1">
-                            Correo Electrónico
-                          </span>
-                          <p className="text-sm font-semibold text-gray-900 break-all">
-                            {selectedCita.propietario.email}
-                          </p>
-                        </div>
+                  {/* CORREO ELECTRÓNICO */}
+                  <div className="bg-gray-100 rounded-2xl p-4 shadow-sm">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center">
+                        <Mail className="w-5 h-5 text-green-600" />
+                      </div>
+                      <div className="flex-1">
+                        <span className="text-xs font-medium text-gray-500 uppercase tracking-wide block mb-1">
+                          CORREO ELECTRÓNICO
+                        </span>
+                        <p className="text-base font-semibold text-gray-900 break-all">
+                          {selectedCita.propietario?.email || "No registrado"}
+                        </p>
                       </div>
                     </div>
-                  )}
+                  </div>
 
-                  {/* Teléfono */}
-                  {selectedCita.propietario?.telefono && (
-                    <div className="bg-gray-50 rounded-xl p-4 border border-gray-200 hover:bg-gray-100 transition-colors">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
-                          <Phone className="w-4 h-4 text-purple-600" />
-                        </div>
-                        <div className="flex-1">
-                          <span className="text-xs font-medium text-gray-500 uppercase tracking-wide block mb-1">
-                            Teléfono
-                          </span>
-                          <p className="text-sm font-semibold text-gray-900 font-mono">
-                            {selectedCita.propietario.telefono}
-                          </p>
-                        </div>
+                  {/* TELÉFONO */}
+                  <div className="bg-gray-100 rounded-2xl p-4 shadow-sm">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center">
+                        <Phone className="w-5 h-5 text-purple-600" />
+                      </div>
+                      <div className="flex-1">
+                        <span className="text-xs font-medium text-gray-500 uppercase tracking-wide block mb-1">
+                          TELÉFONO
+                        </span>
+                        <p className="text-base font-semibold text-gray-900 font-mono">
+                          {selectedCita.propietario?.telefono || "No registrado"}
+                        </p>
                       </div>
                     </div>
-                  )}
+                  </div>
 
                   {/* Documento */}
                   {selectedCita.propietario?.documento && (
