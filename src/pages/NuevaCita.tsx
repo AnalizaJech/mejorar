@@ -198,7 +198,7 @@ export default function NuevaCita() {
   useEffect(() => {
     const preselectedService = location.state?.preselectedService;
     if (preselectedService) {
-      setCitaData(prev => ({ ...prev, tipoConsulta: preselectedService }));
+      setCitaData((prev) => ({ ...prev, tipoConsulta: preselectedService }));
       // Clear the state to prevent it from persisting on refresh
       window.history.replaceState({}, document.title);
     }
@@ -518,7 +518,8 @@ export default function NuevaCita() {
                       Servicios Veterinarios
                     </h2>
                     <p className="text-vet-gray-600">
-                      Elige el servicio que mejor se adapte a las necesidades de tu mascota
+                      Elige el servicio que mejor se adapte a las necesidades de
+                      tu mascota
                     </p>
                   </div>
 
@@ -708,7 +709,9 @@ export default function NuevaCita() {
                       <Label htmlFor="fecha">Fecha preferida *</Label>
                       <DatePicker
                         date={
-                          citaData.fecha ? new Date(citaData.fecha + 'T00:00:00') : undefined
+                          citaData.fecha
+                            ? new Date(citaData.fecha + "T00:00:00")
+                            : undefined
                         }
                         onDateChange={(date) => {
                           if (date) {
@@ -970,7 +973,8 @@ export default function NuevaCita() {
                   <Button
                     onClick={nextStep}
                     disabled={
-                      (currentStep === 1 && (!citaData.tipoConsulta || !citaData.motivo.trim())) ||
+                      (currentStep === 1 &&
+                        (!citaData.tipoConsulta || !citaData.motivo.trim())) ||
                       (currentStep === 2 && !citaData.mascotaId) ||
                       (currentStep === 3 && (!citaData.fecha || !citaData.hora))
                     }

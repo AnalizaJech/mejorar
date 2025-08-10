@@ -209,7 +209,10 @@ export default function Servicios() {
         } else {
           // Initialize with default services
           setServicios(defaultServices);
-          localStorage.setItem("veterinary_services", JSON.stringify(defaultServices));
+          localStorage.setItem(
+            "veterinary_services",
+            JSON.stringify(defaultServices),
+          );
         }
       } catch (error) {
         console.error("Error loading services:", error);
@@ -224,10 +227,10 @@ export default function Servicios() {
     try {
       localStorage.setItem("veterinary_services", JSON.stringify(newServices));
       setServicios(newServices);
-      
+
       // Dispatch custom event to notify other components
       window.dispatchEvent(new Event("servicesUpdated"));
-      
+
       toast({
         title: "Servicios actualizados",
         description: "Los cambios se han guardado correctamente.",
@@ -271,8 +274,10 @@ export default function Servicios() {
 
       if (editingService) {
         // Update existing service
-        updatedServices = servicios.map(s => 
-          s.id === editingService.id ? { ...formData, id: editingService.id } : s
+        updatedServices = servicios.map((s) =>
+          s.id === editingService.id
+            ? { ...formData, id: editingService.id }
+            : s,
         );
       } else {
         // Add new service
@@ -303,7 +308,9 @@ export default function Servicios() {
 
   const confirmDelete = () => {
     if (deletingService) {
-      const updatedServices = servicios.filter(s => s.id !== deletingService.id);
+      const updatedServices = servicios.filter(
+        (s) => s.id !== deletingService.id,
+      );
       saveServices(updatedServices);
       setShowDeleteModal(false);
       setDeletingService(null);
@@ -311,8 +318,8 @@ export default function Servicios() {
   };
 
   const handleToggleActive = (service: Servicio) => {
-    const updatedServices = servicios.map(s =>
-      s.id === service.id ? { ...s, activo: !s.activo } : s
+    const updatedServices = servicios.map((s) =>
+      s.id === service.id ? { ...s, activo: !s.activo } : s,
     );
     saveServices(updatedServices);
   };
@@ -332,7 +339,7 @@ export default function Servicios() {
   };
 
   const getIconComponent = (iconName: string) => {
-    const icon = iconos.find(i => i.id === iconName);
+    const icon = iconos.find((i) => i.id === iconName);
     return icon ? icon.component : Stethoscope;
   };
 
@@ -402,12 +409,18 @@ export default function Servicios() {
                           <IconComponent className="w-6 h-6 text-vet-primary" />
                         </div>
                         <div>
-                          <CardTitle className="text-lg">{servicio.nombre}</CardTitle>
+                          <CardTitle className="text-lg">
+                            {servicio.nombre}
+                          </CardTitle>
                           <div className="flex items-center space-x-2 mt-1">
                             <Badge className="bg-vet-primary/10 text-vet-primary">
                               S/. {servicio.precio}
                             </Badge>
-                            <Badge variant={servicio.activo ? "default" : "secondary"}>
+                            <Badge
+                              variant={
+                                servicio.activo ? "default" : "secondary"
+                              }
+                            >
                               {servicio.activo ? "Activo" : "Inactivo"}
                             </Badge>
                           </div>
@@ -421,7 +434,9 @@ export default function Servicios() {
                     </p>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-2">
-                        <span className="text-sm text-vet-gray-500">Estado:</span>
+                        <span className="text-sm text-vet-gray-500">
+                          Estado:
+                        </span>
                         <Switch
                           checked={servicio.activo}
                           onCheckedChange={() => handleToggleActive(servicio)}
@@ -497,7 +512,10 @@ export default function Servicios() {
                       step="0.01"
                       value={formData.precio}
                       onChange={(e) =>
-                        setFormData({ ...formData, precio: Number(e.target.value) })
+                        setFormData({
+                          ...formData,
+                          precio: Number(e.target.value),
+                        })
                       }
                       placeholder="0.00"
                     />
@@ -590,8 +608,8 @@ export default function Servicios() {
               <DialogHeader>
                 <DialogTitle>Confirmar eliminación</DialogTitle>
                 <DialogDescription>
-                  ¿Estás seguro que deseas eliminar el servicio "{deletingService?.nombre}"?
-                  Esta acción no se puede deshacer.
+                  ¿Estás seguro que deseas eliminar el servicio "
+                  {deletingService?.nombre}"? Esta acción no se puede deshacer.
                 </DialogDescription>
               </DialogHeader>
               <DialogFooter>
@@ -601,10 +619,7 @@ export default function Servicios() {
                 >
                   Cancelar
                 </Button>
-                <Button
-                  variant="destructive"
-                  onClick={confirmDelete}
-                >
+                <Button variant="destructive" onClick={confirmDelete}>
                   Eliminar
                 </Button>
               </DialogFooter>

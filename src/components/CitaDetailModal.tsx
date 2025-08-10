@@ -206,8 +206,12 @@ export default function CitaDetailModal({
                           variant="outline"
                           className="h-8 w-8 p-0 border-green-500 text-green-600 hover:bg-green-50"
                           onClick={() => {
-                            const phoneNumber = selectedCita.propietario.telefono.replace(/\D/g, '');
-                            window.open(`tel:+51${phoneNumber}`, '_self');
+                            const phoneNumber =
+                              selectedCita.propietario.telefono.replace(
+                                /\D/g,
+                                "",
+                              );
+                            window.open(`tel:+51${phoneNumber}`, "_self");
                           }}
                           title="Llamar"
                         >
@@ -218,9 +222,16 @@ export default function CitaDetailModal({
                           variant="outline"
                           className="h-8 w-8 p-0 border-green-600 text-green-700 hover:bg-green-50"
                           onClick={() => {
-                            const phoneNumber = selectedCita.propietario.telefono.replace(/\D/g, '');
-                            const message = `Hola ${selectedCita.propietario.nombre}, me comunico de la clínica veterinaria respecto a la cita de ${selectedCita.cita.mascota} programada para el ${new Date(selectedCita.cita.fecha).toLocaleDateString('es-ES')}.`;
-                            window.open(`https://wa.me/51${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+                            const phoneNumber =
+                              selectedCita.propietario.telefono.replace(
+                                /\D/g,
+                                "",
+                              );
+                            const message = `Hola ${selectedCita.propietario.nombre}, me comunico de la clínica veterinaria respecto a la cita de ${selectedCita.cita.mascota} programada para el ${new Date(selectedCita.cita.fecha).toLocaleDateString("es-ES")}.`;
+                            window.open(
+                              `https://wa.me/51${phoneNumber}?text=${encodeURIComponent(message)}`,
+                              "_blank",
+                            );
                           }}
                           title="WhatsApp"
                         >
@@ -231,9 +242,16 @@ export default function CitaDetailModal({
                           variant="outline"
                           className="h-8 w-8 p-0 border-purple-500 text-purple-600 hover:bg-purple-50"
                           onClick={() => {
-                            const phoneNumber = selectedCita.propietario.telefono.replace(/\D/g, '');
+                            const phoneNumber =
+                              selectedCita.propietario.telefono.replace(
+                                /\D/g,
+                                "",
+                              );
                             const message = `Hola ${selectedCita.propietario.nombre}, me comunico de la clínica veterinaria respecto a la cita de ${selectedCita.cita.mascota}.`;
-                            window.open(`sms:+51${phoneNumber}?body=${encodeURIComponent(message)}`, '_self');
+                            window.open(
+                              `sms:+51${phoneNumber}?body=${encodeURIComponent(message)}`,
+                              "_self",
+                            );
                           }}
                           title="SMS"
                         >
@@ -248,8 +266,11 @@ export default function CitaDetailModal({
                         className="h-8 w-8 p-0 border-blue-500 text-blue-600 hover:bg-blue-50"
                         onClick={() => {
                           const subject = `Cita veterinaria - ${selectedCita.cita.mascota}`;
-                          const body = `Estimado/a ${selectedCita.propietario.nombre},\n\nMe comunico respecto a la cita programada para ${selectedCita.cita.mascota} el ${new Date(selectedCita.cita.fecha).toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} a las ${new Date(selectedCita.cita.fecha).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}.\n\nSaludos,\nClínica Veterinaria`;
-                          window.open(`mailto:${selectedCita.propietario.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`, '_self');
+                          const body = `Estimado/a ${selectedCita.propietario.nombre},\n\nMe comunico respecto a la cita programada para ${selectedCita.cita.mascota} el ${new Date(selectedCita.cita.fecha).toLocaleDateString("es-ES", { weekday: "long", year: "numeric", month: "long", day: "numeric" })} a las ${new Date(selectedCita.cita.fecha).toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" })}.\n\nSaludos,\nClínica Veterinaria`;
+                          window.open(
+                            `mailto:${selectedCita.propietario.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`,
+                            "_self",
+                          );
                         }}
                         title="Email"
                       >
@@ -267,7 +288,8 @@ export default function CitaDetailModal({
                     </Label>
                     <p className="font-semibold text-vet-gray-900">
                       {selectedCita.propietario?.nombre || "Sin asignar"}
-                      {selectedCita.propietario?.apellidos && ` ${selectedCita.propietario.apellidos}`}
+                      {selectedCita.propietario?.apellidos &&
+                        ` ${selectedCita.propietario.apellidos}`}
                     </p>
                   </div>
                   {selectedCita.propietario?.username && (
@@ -289,11 +311,16 @@ export default function CitaDetailModal({
                         <div className="flex items-center space-x-1">
                           <IdCard className="w-3 h-3" />
                           <span>
-                            {selectedCita.propietario?.tipoDocumento === 'dni' && 'DNI'}
-                            {selectedCita.propietario?.tipoDocumento === 'pasaporte' && 'Pasaporte'}
-                            {selectedCita.propietario?.tipoDocumento === 'carnet_extranjeria' && 'Carnet de Extranjería'}
-                            {selectedCita.propietario?.tipoDocumento === 'cedula' && 'Cédula'}
-                            {!selectedCita.propietario?.tipoDocumento && 'Documento'}
+                            {selectedCita.propietario?.tipoDocumento ===
+                              "dni" && "DNI"}
+                            {selectedCita.propietario?.tipoDocumento ===
+                              "pasaporte" && "Pasaporte"}
+                            {selectedCita.propietario?.tipoDocumento ===
+                              "carnet_extranjeria" && "Carnet de Extranjería"}
+                            {selectedCita.propietario?.tipoDocumento ===
+                              "cedula" && "Cédula"}
+                            {!selectedCita.propietario?.tipoDocumento &&
+                              "Documento"}
                           </span>
                         </div>
                       </Label>
@@ -355,13 +382,23 @@ export default function CitaDetailModal({
                       </div>
                     </Label>
                     <p className="text-vet-gray-900">
-                      {new Date(selectedCita.propietario.fechaNacimiento).toLocaleDateString('es-ES', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
+                      {new Date(
+                        selectedCita.propietario.fechaNacimiento,
+                      ).toLocaleDateString("es-ES", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
                       })}
                       <span className="text-sm text-vet-gray-500 ml-2">
-                        ({Math.floor((new Date().getTime() - new Date(selectedCita.propietario.fechaNacimiento).getTime()) / (365.25 * 24 * 60 * 60 * 1000))} años)
+                        (
+                        {Math.floor(
+                          (new Date().getTime() -
+                            new Date(
+                              selectedCita.propietario.fechaNacimiento,
+                            ).getTime()) /
+                            (365.25 * 24 * 60 * 60 * 1000),
+                        )}{" "}
+                        años)
                       </span>
                     </p>
                   </div>
@@ -387,10 +424,12 @@ export default function CitaDetailModal({
                       Cliente desde
                     </Label>
                     <p className="text-vet-gray-900 text-sm">
-                      {new Date(selectedCita.propietario.fechaCreacion).toLocaleDateString('es-ES', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
+                      {new Date(
+                        selectedCita.propietario.fechaCreacion,
+                      ).toLocaleDateString("es-ES", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
                       })}
                     </p>
                   </div>

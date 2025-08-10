@@ -1040,13 +1040,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
       });
 
       // Notificar a todos los administradores sobre el nuevo registro
-      const admins = usuarios.filter(u => u.rol === "admin");
-      admins.forEach(admin => {
+      const admins = usuarios.filter((u) => u.rol === "admin");
+      admins.forEach((admin) => {
         addNotificacion({
           usuarioId: admin.id,
           tipo: "nuevo_cliente",
           titulo: "Nuevo cliente registrado",
-          mensaje: `${newUser.nombre} ${newUser.apellidos || ''} se ha registrado como nuevo cliente en la plataforma.`,
+          mensaje: `${newUser.nombre} ${newUser.apellidos || ""} se ha registrado como nuevo cliente en la plataforma.`,
           leida: false,
         });
       });
@@ -1476,14 +1476,17 @@ export function AppProvider({ children }: { children: ReactNode }) {
     );
 
     // Notificar a todos los administradores sobre la nueva cita
-    const admins = usuarios.filter(u => u.rol === "admin");
-    const clienteNombre = newCita.clienteNombre || usuarios.find(u => u.id === newCita.clienteId)?.nombre || "Cliente";
-    admins.forEach(admin => {
+    const admins = usuarios.filter((u) => u.rol === "admin");
+    const clienteNombre =
+      newCita.clienteNombre ||
+      usuarios.find((u) => u.id === newCita.clienteId)?.nombre ||
+      "Cliente";
+    admins.forEach((admin) => {
       addNotificacion({
         usuarioId: admin.id,
         tipo: "nueva_cita",
         titulo: "Nueva cita programada",
-        mensaje: `${clienteNombre} ha programado una cita para ${newCita.mascota} el ${new Date(newCita.fecha).toLocaleDateString('es-ES')} - ${newCita.tipoConsulta}`,
+        mensaje: `${clienteNombre} ha programado una cita para ${newCita.mascota} el ${new Date(newCita.fecha).toLocaleDateString("es-ES")} - ${newCita.tipoConsulta}`,
         leida: false,
       });
     });

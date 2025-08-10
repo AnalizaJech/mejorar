@@ -58,7 +58,8 @@ const defaultServices = [
     nombre: "Consulta General",
     precio: 80,
     icono: "Stethoscope",
-    descripcion: "Evaluaciones médicas completas con diagnóstico preciso y plan de tratamiento personalizado.",
+    descripcion:
+      "Evaluaciones médicas completas con diagnóstico preciso y plan de tratamiento personalizado.",
     activo: true,
     color: "vet-primary",
     colorBg: "vet-primary/10",
@@ -69,7 +70,8 @@ const defaultServices = [
     nombre: "Vacunación",
     precio: 65,
     icono: "Syringe",
-    descripcion: "Esquemas de vacunación completos adaptados a la edad, especie y necesidades de tu mascota.",
+    descripcion:
+      "Esquemas de vacunación completos adaptados a la edad, especie y necesidades de tu mascota.",
     activo: true,
     color: "green-600",
     colorBg: "green-500/10",
@@ -80,7 +82,8 @@ const defaultServices = [
     nombre: "Emergencias",
     precio: 150,
     icono: "AlertCircle",
-    descripcion: "Atención médica urgente 24/7 para situaciones críticas con respuesta inmediata.",
+    descripcion:
+      "Atención médica urgente 24/7 para situaciones críticas con respuesta inmediata.",
     activo: true,
     color: "red-600",
     colorBg: "red-500/10",
@@ -91,7 +94,8 @@ const defaultServices = [
     nombre: "Grooming",
     precio: 45,
     icono: "Heart",
-    descripcion: "Servicios completos de higiene y estética para mantener a tu mascota bella y saludable.",
+    descripcion:
+      "Servicios completos de higiene y estética para mantener a tu mascota bella y saludable.",
     activo: true,
     color: "vet-secondary",
     colorBg: "vet-secondary/10",
@@ -102,7 +106,8 @@ const defaultServices = [
     nombre: "Cirugía",
     precio: 250,
     icono: "Activity",
-    descripcion: "Procedimientos quirúrgicos especializados con anestesia segura y recuperación monitoreada.",
+    descripcion:
+      "Procedimientos quirúrgicos especializados con anestesia segura y recuperación monitoreada.",
     activo: true,
     color: "purple-600",
     colorBg: "purple-500/10",
@@ -113,7 +118,8 @@ const defaultServices = [
     nombre: "Diagnóstico",
     precio: 120,
     icono: "Search",
-    descripcion: "Análisis clínicos, radiografías y estudios especializados para diagnósticos precisos.",
+    descripcion:
+      "Análisis clínicos, radiografías y estudios especializados para diagnósticos precisos.",
     activo: true,
     color: "blue-600",
     colorBg: "blue-500/10",
@@ -131,7 +137,8 @@ const getServicios = () => {
       return services
         .filter((service: any) => service.activo)
         .map((service: any, index: number) => {
-          const defaultService = defaultServices[index % defaultServices.length];
+          const defaultService =
+            defaultServices[index % defaultServices.length];
           return {
             ...service,
             color: defaultService.color,
@@ -198,7 +205,9 @@ export default function Index() {
       navigate("/nueva-cita", { state: { preselectedService: serviceId } });
     } else {
       // User is not logged in or not a client, redirect to login with return URL
-      navigate("/login", { state: { returnTo: "/nueva-cita", preselectedService: serviceId } });
+      navigate("/login", {
+        state: { returnTo: "/nueva-cita", preselectedService: serviceId },
+      });
     }
   };
 
@@ -569,7 +578,7 @@ export default function Index() {
                   bg: "bg-vet-primary/10",
                   hover: "hover:bg-vet-primary",
                   border: "hover:border-vet-primary/30",
-                  bgGradient: "from-vet-primary/5"
+                  bgGradient: "from-vet-primary/5",
                 },
                 "green-600": {
                   gradient: "from-green-500 to-green-600",
@@ -577,7 +586,7 @@ export default function Index() {
                   bg: "bg-green-500/10",
                   hover: "hover:bg-green-500",
                   border: "hover:border-green-500/30",
-                  bgGradient: "from-green-500/5"
+                  bgGradient: "from-green-500/5",
                 },
                 "red-600": {
                   gradient: "from-red-500 to-red-600",
@@ -585,7 +594,7 @@ export default function Index() {
                   bg: "bg-red-500/10",
                   hover: "hover:bg-red-500",
                   border: "hover:border-red-500/30",
-                  bgGradient: "from-red-500/5"
+                  bgGradient: "from-red-500/5",
                 },
                 "vet-secondary": {
                   gradient: "from-vet-secondary to-vet-secondary-dark",
@@ -593,7 +602,7 @@ export default function Index() {
                   bg: "bg-vet-secondary/10",
                   hover: "hover:bg-vet-secondary",
                   border: "hover:border-vet-secondary/30",
-                  bgGradient: "from-vet-secondary/5"
+                  bgGradient: "from-vet-secondary/5",
                 },
                 "purple-600": {
                   gradient: "from-purple-500 to-purple-600",
@@ -601,7 +610,7 @@ export default function Index() {
                   bg: "bg-purple-500/10",
                   hover: "hover:bg-purple-500",
                   border: "hover:border-purple-500/30",
-                  bgGradient: "from-purple-500/5"
+                  bgGradient: "from-purple-500/5",
                 },
                 "blue-600": {
                   gradient: "from-blue-500 to-blue-600",
@@ -609,20 +618,26 @@ export default function Index() {
                   bg: "bg-blue-500/10",
                   hover: "hover:bg-blue-500",
                   border: "hover:border-blue-500/30",
-                  bgGradient: "from-blue-500/5"
-                }
+                  bgGradient: "from-blue-500/5",
+                },
               };
 
-              const colors = colorClasses[servicio.color as keyof typeof colorClasses] || colorClasses["vet-primary"];
+              const colors =
+                colorClasses[servicio.color as keyof typeof colorClasses] ||
+                colorClasses["vet-primary"];
 
               return (
                 <div
                   key={servicio.id}
                   className={`group relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 border border-vet-gray-100 ${colors.border} hover:-translate-y-2`}
                 >
-                  <div className={`absolute inset-0 bg-gradient-to-br ${colors.bgGradient} to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-br ${colors.bgGradient} to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+                  ></div>
                   <div className="relative">
-                    <div className={`w-20 h-20 bg-gradient-to-br ${colors.gradient} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                    <div
+                      className={`w-20 h-20 bg-gradient-to-br ${colors.gradient} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}
+                    >
                       {getServiceIcon(servicio.icono)}
                     </div>
                     <h3 className="text-2xl font-bold text-vet-gray-900 mb-4">

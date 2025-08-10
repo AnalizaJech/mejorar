@@ -52,7 +52,6 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 export default function Dashboard() {
   const { user, getStats } = useAppContext();
 
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -63,7 +62,6 @@ export default function Dashboard() {
   }
 
   const stats = getStats();
-
 
   return (
     <Layout>
@@ -104,7 +102,6 @@ export default function Dashboard() {
           )}
         </div>
       </div>
-
     </Layout>
   );
 }
@@ -268,7 +265,6 @@ function AdminDashboard() {
             </div>
           </CardContent>
         </Card>
-
       </div>
 
       {/* Quick Actions for Admin */}
@@ -293,7 +289,6 @@ function AdminDashboard() {
                 <span className="text-sm">Gestión Citas</span>
               </Button>
             </Link>
-
 
             <Link to="/usuarios">
               <Button
