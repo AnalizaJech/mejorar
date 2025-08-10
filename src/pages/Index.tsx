@@ -253,10 +253,10 @@ export default function Index() {
 
               {/* Small floating images */}
               <div className="absolute top-1/4 -left-8 w-16 h-16 bg-vet-secondary/20 rounded-full flex items-center justify-center">
-                <span className="text-2xl">🐕</span>
+                <Dog className="w-8 h-8 text-vet-secondary" />
               </div>
               <div className="absolute bottom-1/4 -right-8 w-16 h-16 bg-vet-primary/20 rounded-full flex items-center justify-center">
-                <span className="text-2xl">🐱</span>
+                <Cat className="w-8 h-8 text-vet-primary" />
               </div>
             </div>
           </div>
