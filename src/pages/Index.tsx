@@ -48,6 +48,7 @@ import {
   Scissors,
   Syringe,
   Zap,
+  Bell,
 } from "lucide-react";
 
 export default function Index() {
