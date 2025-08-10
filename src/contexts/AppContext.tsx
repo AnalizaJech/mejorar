@@ -1036,6 +1036,18 @@ export function AppProvider({ children }: { children: ReactNode }) {
         mensaje: `Hola ${newUser.nombre}, nos alegra tenerte en nuestra familia. Aquí podrás gestionar el cuidado de tus mascotas de manera fácil y segura.`,
         leida: false,
       });
+
+      // Notificar a todos los administradores sobre el nuevo registro
+      const admins = usuarios.filter(u => u.rol === "admin");
+      admins.forEach(admin => {
+        addNotificacion({
+          usuarioId: admin.id,
+          tipo: "nuevo_cliente",
+          titulo: "Nuevo cliente registrado",
+          mensaje: `${newUser.nombre} ${newUser.apellidos || ''} se ha registrado como nuevo cliente en la plataforma.`,
+          leida: false,
+        });
+      });
     }
 
     return newUser;
@@ -1460,6 +1472,19 @@ export function AppProvider({ children }: { children: ReactNode }) {
     console.log(
       `[CREATED] Nueva cita creada: ${newCita.mascota} - ${newCita.veterinario}`,
     );
+
+    // Notificar a todos los administradores sobre la nueva cita
+    const admins = usuarios.filter(u => u.rol === "admin");
+    const clienteNombre = newCita.clienteNombre || usuarios.find(u => u.id === newCita.clienteId)?.nombre || "Cliente";
+    admins.forEach(admin => {
+      addNotificacion({
+        usuarioId: admin.id,
+        tipo: "nueva_cita",
+        titulo: "Nueva cita programada",
+        mensaje: `${clienteNombre} ha programado una cita para ${newCita.mascota} el ${new Date(newCita.fecha).toLocaleDateString('es-ES')} - ${newCita.tipoConsulta}`,
+        leida: false,
+      });
+    });
 
     // Update mascota's proximaCita if it's a future appointment
     if (new Date(citaData.fecha) > new Date() && mascota) {
