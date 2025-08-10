@@ -186,8 +186,8 @@ export default function Index() {
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <div className="aspect-[4/3] relative">
                   <img
-                    src="https://images.pexels.com/photos/7465697/pexels-photo-7465697.jpeg"
-                    alt="Veterinario profesional con equipo de enfermería en clínica especializada"
+                    src="https://images.pexels.com/photos/6235653/pexels-photo-6235653.jpeg"
+                    alt="Equipo veterinario feliz examinando mascota tranquila en clínica profesional"
                     className="w-full h-full object-cover"
                   />
                   {/* Gradient overlay for text readability */}
@@ -586,7 +586,7 @@ export default function Index() {
                   Diagnóstico
                 </h3>
                 <p className="text-vet-gray-600 mb-6 leading-relaxed">
-                  An��lisis clínicos, radiografías y estudios especializados para
+                  Análisis clínicos, radiografías y estudios especializados para
                   diagnósticos precisos.
                 </p>
                 <div className="flex items-center justify-between pt-6 border-t border-vet-gray-100">
