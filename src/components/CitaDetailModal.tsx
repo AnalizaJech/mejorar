@@ -29,6 +29,9 @@ import {
   Calendar,
   IdCard,
   Users,
+  AlertTriangle,
+  Bell,
+  XCircle,
 } from "lucide-react";
 import type { CitaRelationData } from "@/lib/citaUtils";
 
