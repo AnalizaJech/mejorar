@@ -442,8 +442,107 @@ export default function CitaDetailModal({
                   </div>
                 </div>
 
-                {/* Datos de Contacto Detallados */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {/* Información de Contacto y Documentación Modernizada */}
+
+                {/* Email con Estado Dinámico */}
+                <div className="bg-white rounded-xl p-4 border border-gray-200 hover:shadow-md transition-all mb-4">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
+                      <Mail className="w-5 h-5 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center space-x-2 mb-1">
+                        <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">
+                          Correo Electrónico
+                        </span>
+                        {selectedCita.propietario?.email ? (
+                          <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">
+                            Registrado
+                          </span>
+                        ) : (
+                          <span className="text-xs bg-red-100 text-red-700 px-2 py-1 rounded-full font-medium">
+                            Sin email
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-sm font-semibold text-gray-900 break-all">
+                        {selectedCita.propietario?.email || "No registrado"}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Teléfono con Opciones de Contacto */}
+                <div className="bg-white rounded-xl p-4 border border-gray-200 hover:shadow-md transition-all mb-4">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-green-600 rounded-xl flex items-center justify-center">
+                      <Phone className="w-5 h-5 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center space-x-2 mb-1">
+                        <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">
+                          Teléfono
+                        </span>
+                        {selectedCita.propietario?.telefono ? (
+                          <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">
+                            Verificado
+                          </span>
+                        ) : (
+                          <span className="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full font-medium">
+                            Pendiente
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-sm font-semibold text-gray-900 font-mono">
+                        {selectedCita.propietario?.telefono || "No registrado"}
+                      </p>
+                      {selectedCita.propietario?.telefono && (
+                        <div className="flex items-center space-x-2 mt-2">
+                          <span className="text-xs text-gray-500">Disponible vía:</span>
+                          <div className="flex space-x-1">
+                            <MessageCircle className="w-3 h-3 text-green-600" title="WhatsApp" />
+                            <MessageSquare className="w-3 h-3 text-blue-600" title="SMS" />
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Documento con Validación */}
+                <div className="bg-white rounded-xl p-4 border border-gray-200 hover:shadow-md transition-all mb-4">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-10 h-10 bg-gradient-to-r from-amber-500 to-amber-600 rounded-xl flex items-center justify-center">
+                      <IdCard className="w-5 h-5 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center space-x-2 mb-1">
+                        <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">
+                          Documento de Identidad
+                        </span>
+                        {selectedCita.propietario?.documento ? (
+                          <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full font-medium">
+                            {selectedCita.propietario?.tipoDocumento === "dni" && "DNI"}
+                            {selectedCita.propietario?.tipoDocumento === "pasaporte" && "Pasaporte"}
+                            {selectedCita.propietario?.tipoDocumento === "carnet_extranjeria" && "Carnet"}
+                            {selectedCita.propietario?.tipoDocumento === "cedula" && "Cédula"}
+                            {!selectedCita.propietario?.tipoDocumento && "DNI"}
+                          </span>
+                        ) : (
+                          <span className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full font-medium">
+                            No registrado
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-sm font-semibold text-gray-900 font-mono">
+                        {selectedCita.propietario?.documento || "No registrado"}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Informaci��n Personal y Dirección */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {/* NOMBRES */}
                   <div className="bg-gray-100 rounded-2xl p-4 shadow-sm">
                     <div className="flex items-center space-x-3">
