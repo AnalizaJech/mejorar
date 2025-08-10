@@ -195,7 +195,7 @@ export default function Login() {
               <form onSubmit={handleLogin} className="space-y-5">
                 <div className="space-y-2">
                   <Label htmlFor="login-identifier">
-                    Correo / Teléfono / Usuario
+                    Correo / Teléfono / Nombre de Usuario
                   </Label>
                   <div className="relative">
                     <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-vet-gray-400" />
@@ -249,7 +249,7 @@ export default function Login() {
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                   <div className="flex items-center space-x-3">
                     <input
                       type="checkbox"
