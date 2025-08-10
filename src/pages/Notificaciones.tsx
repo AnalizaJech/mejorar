@@ -28,7 +28,6 @@ export default function Notificaciones() {
   const {
     user,
     citas,
-    preCitas,
     mascotas,
     getNotificacionesByUser,
     markNotificacionAsRead,
@@ -137,31 +136,6 @@ export default function Notificaciones() {
 
     // For admins and vets: pending pre-appointments
     if (user.rol === "admin" || user.rol === "veterinario") {
-      const pendingPreCitas = preCitas.filter(
-        (preCita) => preCita.estado === "pendiente",
-      );
-
-      pendingPreCitas.forEach((preCita) => {
-        const hoursAgo = Math.floor(
-          (new Date().getTime() - new Date(preCita.fechaCreacion).getTime()) /
-            (1000 * 60 * 60),
-        );
-        realNotifications.push({
-          id: `precita-${preCita.id}`,
-          type: "pre-cita",
-          title: "Nueva solicitud de cita",
-          message: `${preCita.nombreMascota} - ${preCita.motivoConsulta}`,
-          time:
-            hoursAgo === 0
-              ? "Hace menos de 1 hora"
-              : `Hace ${hoursAgo} hora${hoursAgo > 1 ? "s" : ""}`,
-          read: false,
-          priority: "high",
-          icon: Clock,
-          color: "vet-primary",
-        });
-      });
-
       // Upcoming appointments for today
       const todaysCitas = citas.filter((cita) => {
         const citaDate = new Date(cita.fecha);
@@ -191,7 +165,7 @@ export default function Notificaciones() {
     }
 
     setNotifications(realNotifications);
-  }, [user, citas, preCitas, mascotas, getNotificacionesByUser]);
+  }, [user, citas, mascotas, getNotificacionesByUser]);
 
   const filteredNotifications = notifications.filter((notification) => {
     if (selectedFilter === "todas") return true;
@@ -321,7 +295,6 @@ export default function Notificaciones() {
               <TabsTrigger value="sistema">Sistema</TabsTrigger>
               {(user.rol === "admin" || user.rol === "veterinario") && (
                 <>
-                  <TabsTrigger value="pre-cita">Pre-citas</TabsTrigger>
                   <TabsTrigger value="recordatorio">Recordatorios</TabsTrigger>
                 </>
               )}

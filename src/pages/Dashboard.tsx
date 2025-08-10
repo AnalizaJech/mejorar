@@ -372,16 +372,13 @@ function AdminDashboard({
 }: {
   setShowServicesModal: (show: boolean) => void;
 }) {
-  const { usuarios, citas, preCitas, suscriptoresNewsletter } = useAppContext();
+  const { usuarios, citas } = useAppContext();
 
   const adminStats = {
     totalUsuarios: usuarios.length,
     clientes: usuarios.filter((u) => u.rol === "cliente").length,
     veterinarios: usuarios.filter((u) => u.rol === "veterinario").length,
     totalCitas: citas.length,
-    preCitasPendientes: preCitas.filter((p) => p.estado === "pendiente").length,
-    suscriptoresNewsletter: suscriptoresNewsletter.filter((s) => s.activo)
-      .length,
     citasPendientes: citas.filter(
       (c) => c.estado === "pendiente_pago" || c.estado === "en_validacion",
     ).length,
@@ -412,24 +409,6 @@ function AdminDashboard({
       return (
         daysSince <= 7 && (c.estado === "aceptada" || c.estado === "atendida")
       );
-    });
-
-    // Recent pre-citas (last 7 days)
-    const recentPreCitas = preCitas.filter((p) => {
-      if (!p.fechaCreacion) return false;
-      const daysSince =
-        (now.getTime() - new Date(p.fechaCreacion).getTime()) /
-        (1000 * 60 * 60 * 24);
-      return daysSince <= 7;
-    });
-
-    // Recent newsletter subscriptions (last 7 days)
-    const recentNewsletterSubs = suscriptoresNewsletter.filter((s) => {
-      if (!s.fechaSuscripcion) return false;
-      const daysSince =
-        (now.getTime() - new Date(s.fechaSuscripcion).getTime()) /
-        (1000 * 60 * 60 * 24);
-      return daysSince <= 7 && s.activo;
     });
 
     // Add client activities
@@ -468,46 +447,6 @@ function AdminDashboard({
             : `Hace ${Math.floor(hoursAgo / 24)} días`,
         icon: "Calendar",
         color: "blue",
-        timestamp: timestamp,
-      });
-    });
-
-    // Add pre-cita activities
-    recentPreCitas.forEach((preCita) => {
-      const timestamp = new Date(preCita.fechaCreacion || now).getTime();
-      const hoursAgo = Math.max(
-        1,
-        Math.floor((now.getTime() - timestamp) / (1000 * 60 * 60)),
-      );
-      activities.push({
-        type: "precita",
-        message: `Nueva pre-cita de ${preCita.nombreCliente}`,
-        time:
-          hoursAgo < 24
-            ? `Hace ${hoursAgo} horas`
-            : `Hace ${Math.floor(hoursAgo / 24)} días`,
-        icon: "AlertCircle",
-        color: "yellow",
-        timestamp: timestamp,
-      });
-    });
-
-    // Add newsletter subscription activities
-    recentNewsletterSubs.forEach((subscription) => {
-      const timestamp = new Date(subscription.fechaSuscripcion).getTime();
-      const hoursAgo = Math.max(
-        1,
-        Math.floor((now.getTime() - timestamp) / (1000 * 60 * 60)),
-      );
-      activities.push({
-        type: "newsletter",
-        message: `Nueva suscripción al newsletter: ${subscription.email}`,
-        time:
-          hoursAgo < 24
-            ? `Hace ${hoursAgo} horas`
-            : `Hace ${Math.floor(hoursAgo / 24)} días`,
-        icon: "Mail",
-        color: "purple",
         timestamp: timestamp,
       });
     });
@@ -574,24 +513,6 @@ function AdminDashboard({
           </CardContent>
         </Card>
 
-        <Card className="border-l-4 border-l-yellow-500">
-          <CardContent className="p-4 sm:p-6">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-yellow-100 rounded-xl flex items-center justify-center">
-                <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-600" />
-              </div>
-              <div>
-                <p className="text-xs sm:text-sm text-vet-gray-600">
-                  Pre-Citas
-                </p>
-                <p className="text-2xl sm:text-3xl font-bold text-yellow-600">
-                  {adminStats.preCitasPendientes}
-                </p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
         <Card className="border-l-4 border-l-vet-primary">
           <CardContent className="p-4 sm:p-6">
             <div className="flex items-center space-x-3">
@@ -642,21 +563,6 @@ function AdminDashboard({
             </CardDescription>
           </CardHeader>
           <CardContent className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-            <Link to="/pre-citas">
-              <Button
-                variant="outline"
-                className="w-full h-20 flex flex-col items-center justify-center space-y-2"
-              >
-                <Clock className="w-6 h-6 text-vet-primary" />
-                <span className="text-sm">Pre-Citas</span>
-                {adminStats.preCitasPendientes > 0 && (
-                  <Badge className="bg-yellow-100 text-yellow-800">
-                    {adminStats.preCitasPendientes}
-                  </Badge>
-                )}
-              </Button>
-            </Link>
-
             <Link to="/gestion-citas">
               <Button
                 variant="outline"
@@ -1003,7 +909,7 @@ function ClientDashboard({ stats }: { stats: any }) {
               className="w-full h-20 flex flex-col items-center justify-center space-y-2"
               onClick={() =>
                 document
-                  .getElementById("pre-cita-form")
+                  .getElementById("servicios")
                   ?.scrollIntoView({ behavior: "smooth" })
               }
             >

@@ -11,7 +11,6 @@ import NotFound from "./pages/NotFound";
 import Privacidad from "./pages/Privacidad";
 import Terminos from "./pages/Terminos";
 import Cookies from "./pages/Cookies";
-import NewsletterInfo from "./pages/NewsletterInfo";
 import ForgotPassword from "./pages/ForgotPassword";
 import Configuracion from "./pages/Configuracion";
 import Notificaciones from "./pages/Notificaciones";
@@ -20,10 +19,8 @@ import MisCitas from "./pages/MisCitas";
 import NuevaCita from "./pages/NuevaCita";
 import HistorialClinico from "./pages/HistorialClinico";
 import Usuarios from "./pages/Usuarios";
-import PreCitas from "./pages/PreCitas";
 import GestionCitas from "./pages/GestionCitas";
 import GestionCitasPago from "./pages/GestionCitasPago";
-import GestionNewsletter from "./pages/GestionNewsletter";
 import Veterinarios from "./pages/Veterinarios";
 import Calendario from "./pages/Calendario";
 import MisPacientes from "./pages/MisPacientes";
@@ -87,7 +84,6 @@ const App = () => (
           <Route path="/privacidad" element={<Privacidad />} />
           <Route path="/terminos" element={<Terminos />} />
           <Route path="/cookies" element={<Cookies />} />
-          <Route path="/newsletter-info" element={<NewsletterInfo />} />
 
           <Route
             path="/servicios"
@@ -190,14 +186,6 @@ const App = () => (
 
           {/* Admin routes */}
           <Route
-            path="/pre-citas"
-            element={
-              <ProtectedRoute allowedRoles={["admin"]}>
-                <PreCitas />
-              </ProtectedRoute>
-            }
-          />
-          <Route
             path="/gestion-citas"
             element={
               <ProtectedRoute allowedRoles={["admin"]}>
@@ -226,14 +214,6 @@ const App = () => (
             element={
               <ProtectedRoute allowedRoles={["admin"]}>
                 <Veterinarios />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/gestion-newsletter"
-            element={
-              <ProtectedRoute allowedRoles={["admin"]}>
-                <GestionNewsletter />
               </ProtectedRoute>
             }
           />

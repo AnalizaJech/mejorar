@@ -72,7 +72,7 @@ interface ClientFormData {
 }
 
 export default function Usuarios() {
-  const { usuarios, addUsuario, updateUsuario, deleteUsuario, user, preCitas } =
+  const { usuarios, addUsuario, updateUsuario, deleteUsuario, user } =
     useAppContext();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedAccountStatus, setSelectedAccountStatus] =
@@ -146,13 +146,6 @@ export default function Usuarios() {
 
     return matchesSearch && matchesStatus;
   });
-
-  // Get pre-citas that could become client accounts
-  const preCitasPendientes = preCitas.filter(
-    (preCita) =>
-      preCita.estado === "pendiente" &&
-      !usuarios.find((u) => u.email === preCita.email),
-  );
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -269,22 +262,6 @@ export default function Usuarios() {
     setClienteToDelete(null);
   };
 
-  const createClientFromPreCita = (preCita: any) => {
-    const clienteData = {
-      nombre: preCita.nombreCliente,
-      email: preCita.email,
-      telefono: preCita.telefono,
-      password: "cliente123", // Default password
-      rol: "cliente" as const,
-      fechaRegistro: new Date(), // Mark as recently added
-    };
-
-    addUsuario(clienteData);
-    setSuccess(
-      `Cuenta creada para ${preCita.nombreCliente}. Contraseña por defecto: cliente123`,
-    );
-  };
-
   const resetForm = () => {
     setFormData({ nombre: "", email: "", telefono: "", password: "" });
     setEditingUser(null);
@@ -329,7 +306,6 @@ export default function Usuarios() {
     recienAñadidos: clientes.filter(
       (c) => getAccountStatus(c) === "recien_añadido",
     ).length,
-    preCitasPendientes: preCitasPendientes.length,
     passwordReseteadas: clientes.filter(
       (c) => getAccountStatus(c) === "password_reseteada",
     ).length,
@@ -350,8 +326,7 @@ export default function Usuarios() {
                   Gestión de Clientes
                 </h1>
                 <p className="text-vet-gray-600">
-                  Administra las cuentas de clientes y crea nuevas desde
-                  pre-citas
+                  Administra las cuentas de clientes y usuarios del sistema
                 </p>
               </div>
             </div>
@@ -450,66 +425,6 @@ export default function Usuarios() {
               </CardContent>
             </Card>
           </div>
-
-          {/* Pre-Citas que pueden convertirse en cuentas */}
-          {preCitasPendientes.length > 0 && (
-            <Card className="mb-8">
-              <CardHeader>
-                <CardTitle className="flex items-center space-x-2">
-                  <Clock className="w-5 h-5 text-yellow-600" />
-                  <span>
-                    Pre-Citas Sin Cuenta ({preCitasPendientes.length})
-                  </span>
-                </CardTitle>
-                <CardDescription>
-                  Estas personas enviaron pre-citas pero no tienen cuenta de
-                  cliente. Puedes crearles una cuenta.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid gap-4">
-                  {preCitasPendientes.slice(0, 5).map((preCita) => (
-                    <div
-                      key={preCita.id}
-                      className="flex items-center justify-between p-4 border border-vet-gray-200 rounded-lg bg-yellow-50"
-                    >
-                      <div className="flex-1">
-                        <div className="flex items-center space-x-4">
-                          <div>
-                            <p className="font-medium text-vet-gray-900">
-                              {preCita.nombreCliente}
-                            </p>
-                            <p className="text-sm text-vet-gray-600">
-                              {preCita.email}
-                            </p>
-                            <p className="text-xs text-vet-gray-500">
-                              Mascota: {preCita.nombreMascota} •{" "}
-                              {preCita.motivoConsulta}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <Button
-                          size="sm"
-                          onClick={() => createClientFromPreCita(preCita)}
-                          className="bg-vet-primary hover:bg-vet-primary-dark"
-                        >
-                          <UserPlus className="w-4 h-4 mr-2" />
-                          Crear Cuenta
-                        </Button>
-                      </div>
-                    </div>
-                  ))}
-                  {preCitasPendientes.length > 5 && (
-                    <p className="text-sm text-vet-gray-500 text-center">
-                      Y {preCitasPendientes.length - 5} pre-citas más...
-                    </p>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
-          )}
 
           {/* Controls */}
           <Card className="mb-8">

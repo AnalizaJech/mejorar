@@ -36,21 +36,6 @@ export interface Mascota {
   fechaCreacion?: Date;
 }
 
-// Pre-appointment states
-export type EstadoPreCita = "pendiente" | "rechazada";
-
-// Pre-appointment entity (public form submissions)
-export interface PreCita {
-  id: string;
-  nombreCliente: string;
-  telefono: string;
-  email: string;
-  fechaSolicitada: Date;
-  estado: EstadoPreCita;
-  motivoConsulta?: string;
-  fechaCreacion: Date;
-}
-
 // Appointment states
 export type EstadoCita =
   | "pendiente_pago"
@@ -134,18 +119,6 @@ export interface Notificacion {
   fechaCreacion: Date;
 }
 
-// Form data types
-export interface PreCitaFormData {
-  nombreMascota: string;
-  tipoMascota: string;
-  nombreDueno: string;
-  telefono: string;
-  email: string;
-  motivoConsulta: string;
-  fechaPreferida: string;
-  horaPreferida: string;
-}
-
 export interface LoginFormData {
   identifier: string; // email, phone, or username
   password: string;
@@ -172,32 +145,4 @@ export interface RegistroMascotaFormData {
   raza: string;
   fechaNacimiento: string;
   imagen?: File;
-}
-
-// Newsletter subscription types
-export interface SuscriptorNewsletter {
-  id: string;
-  email: string;
-  fechaSuscripcion: Date;
-  activo: boolean;
-}
-
-interface ArchivoGuardado {
-  name: string;
-  data: string; // base64
-  size: number;
-  type: string;
-}
-
-export interface NewsletterEmail {
-  id: string;
-  asunto: string;
-  contenido: string;
-  fechaEnvio: Date;
-  destinatarios: string[];
-  estado: "enviado" | "programado" | "borrador";
-  colorTema?: string;
-  plantilla?: string;
-  imagenes?: ArchivoGuardado[];
-  archivos?: ArchivoGuardado[];
 }

@@ -54,24 +54,6 @@ interface Cita {
   notasAdmin?: string;
 }
 
-interface PreCita {
-  id: string;
-  nombreCliente: string;
-  telefono: string;
-  email: string;
-  nombreMascota: string;
-  tipoMascota: string;
-  motivoConsulta: string;
-  fechaPreferida: Date;
-  horaPreferida: string;
-  estado: "pendiente" | "aceptada" | "rechazada";
-  fechaCreacion: Date;
-  notasAdmin?: string;
-  veterinarioAsignado?: string;
-  fechaNueva?: Date;
-  horaNueva?: string;
-}
-
 interface Usuario {
   id: string;
   nombre: string;
@@ -149,31 +131,11 @@ interface HistorialClinico {
   }>;
 }
 
-interface SuscriptorNewsletter {
-  id: string;
-  email: string;
-  fechaSuscripcion: Date;
-  activo: boolean;
-}
-
 interface ArchivoGuardado {
   name: string;
   data: string; // base64
   size: number;
   type: string;
-}
-
-interface NewsletterEmail {
-  id: string;
-  asunto: string;
-  contenido: string;
-  fechaEnvio: Date;
-  destinatarios: string[];
-  estado: "enviado" | "programado" | "borrador";
-  colorTema?: string;
-  plantilla?: string;
-  imagenes?: ArchivoGuardado[];
-  archivos?: ArchivoGuardado[];
 }
 
 interface Notificacion {
@@ -238,14 +200,6 @@ interface AppContextType {
   updateCita: (id: string, updates: Partial<Cita>) => void;
   deleteCita: (id: string) => void;
 
-  // Pre-citas state
-  preCitas: PreCita[];
-  addPreCita: (
-    preCita: Omit<PreCita, "id" | "estado" | "fechaCreacion">,
-  ) => void;
-  updatePreCita: (id: string, updates: Partial<PreCita>) => void;
-  deletePreCita: (id: string) => void;
-
   // Historial Clinico state
   historialClinico: HistorialClinico[];
   addHistorialEntry: (entry: Omit<HistorialClinico, "id">) => void;
@@ -255,23 +209,6 @@ interface AppContextType {
   ) => void;
   deleteHistorialEntry: (id: string) => void;
   getHistorialByMascota: (mascotaId: string) => HistorialClinico[];
-
-  // Newsletter state
-  suscriptoresNewsletter: SuscriptorNewsletter[];
-  addSuscriptorNewsletter: (email: string) => Promise<boolean>;
-  updateSuscriptorNewsletter: (
-    id: string,
-    updates: Partial<SuscriptorNewsletter>,
-  ) => void;
-  deleteSuscriptorNewsletter: (id: string) => void;
-
-  newsletterEmails: NewsletterEmail[];
-  addNewsletterEmail: (email: Omit<NewsletterEmail, "id">) => void;
-  updateNewsletterEmail: (
-    id: string,
-    updates: Partial<NewsletterEmail>,
-  ) => void;
-  deleteNewsletterEmail: (id: string) => void;
 
   // Notificaciones state
   notificaciones: Notificacion[];
@@ -375,10 +312,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     // if (!shouldClearData) {
     //   localStorage.removeItem("mascotas");
     //   localStorage.removeItem("citas");
-    //   localStorage.removeItem("preCitas");
     //   localStorage.removeItem("historialClinico");
-    //   localStorage.removeItem("suscriptoresNewsletter");
-    //   localStorage.removeItem("newsletterEmails");
     //   localStorage.setItem("fictional_data_cleared", "true");
     // }
 
@@ -489,26 +423,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }
   });
 
-  const [preCitas, setPreCitas] = useState<PreCita[]>(() => {
-    try {
-      const preCitasStr = localStorage.getItem("preCitas");
-      if (preCitasStr) {
-        const parsedPreCitas = JSON.parse(preCitasStr);
-        return parsedPreCitas.map((preCita: any) => ({
-          ...preCita,
-          fechaPreferida: createSafeDate(preCita.fechaPreferida),
-          fechaCreacion: new Date(preCita.fechaCreacion),
-          ...(preCita.fechaNueva && {
-            fechaNueva: new Date(preCita.fechaNueva),
-          }),
-        }));
-      }
-      return [];
-    } catch {
-      return [];
-    }
-  });
-
   const [historialClinico, setHistorialClinico] = useState<HistorialClinico[]>(
     () => {
       try {
@@ -527,42 +441,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
                 proximaFecha: new Date(vacuna.proximaFecha),
               })),
             }),
-          }));
-        }
-        return [];
-      } catch {
-        return [];
-      }
-    },
-  );
-
-  const [suscriptoresNewsletter, setSuscriptoresNewsletter] = useState<
-    SuscriptorNewsletter[]
-  >(() => {
-    try {
-      const suscriptoresStr = localStorage.getItem("suscriptoresNewsletter");
-      if (suscriptoresStr) {
-        const parsedSuscriptores = JSON.parse(suscriptoresStr);
-        return parsedSuscriptores.map((suscriptor: any) => ({
-          ...suscriptor,
-          fechaSuscripcion: new Date(suscriptor.fechaSuscripcion),
-        }));
-      }
-      return [];
-    } catch {
-      return [];
-    }
-  });
-
-  const [newsletterEmails, setNewsletterEmails] = useState<NewsletterEmail[]>(
-    () => {
-      try {
-        const emailsStr = localStorage.getItem("newsletterEmails");
-        if (emailsStr) {
-          const parsedEmails = JSON.parse(emailsStr);
-          return parsedEmails.map((email: any) => ({
-            ...email,
-            fechaEnvio: new Date(email.fechaEnvio),
           }));
         }
         return [];
@@ -722,23 +600,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }, [citas]);
 
   useEffect(() => {
-    localStorage.setItem("preCitas", JSON.stringify(preCitas));
-  }, [preCitas]);
-
-  useEffect(() => {
     localStorage.setItem("historialClinico", JSON.stringify(historialClinico));
   }, [historialClinico]);
-
-  useEffect(() => {
-    localStorage.setItem(
-      "suscriptoresNewsletter",
-      JSON.stringify(suscriptoresNewsletter),
-    );
-  }, [suscriptoresNewsletter]);
-
-  useEffect(() => {
-    localStorage.setItem("newsletterEmails", JSON.stringify(newsletterEmails));
-  }, [newsletterEmails]);
 
   useEffect(() => {
     localStorage.setItem("notificaciones", JSON.stringify(notificaciones));
@@ -1014,7 +877,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     // Don't clear mascotas or citas from localStorage as they are system-wide data
     // The UI will filter them based on the logged-in user
     // Don't modify the mascotas state or localStorage - let them persist
-    // Note: citas, preCitas, mascotas are global system data and should persist in localStorage
+    // Note: citas, mascotas are global system data and should persist in localStorage
   };
 
   // Function to refresh data from localStorage - useful when data seems lost
@@ -1057,24 +920,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
         setCitas(formattedCitas);
         console.log(
           `✅ Loaded ${formattedCitas.length} appointments from localStorage`,
-        );
-      }
-
-      // Reload other data...
-      const preCitasStr = localStorage.getItem("preCitas");
-      if (preCitasStr) {
-        const parsedPreCitas = JSON.parse(preCitasStr);
-        const formattedPreCitas = parsedPreCitas.map((preCita: any) => ({
-          ...preCita,
-          fechaPreferida: new Date(preCita.fechaPreferida),
-          fechaCreacion: new Date(preCita.fechaCreacion),
-          fechaNueva: preCita.fechaNueva
-            ? new Date(preCita.fechaNueva)
-            : undefined,
-        }));
-        setPreCitas(formattedPreCitas);
-        console.log(
-          `✅ Loaded ${formattedPreCitas.length} pre-appointments from localStorage`,
         );
       }
 
@@ -1702,42 +1547,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
     return new Date(dateInput);
   };
 
-  // Pre-cita functions
-  const addPreCita = (
-    preCitaData: Omit<PreCita, "id" | "estado" | "fechaCreacion">,
-  ) => {
-    const newPreCita: PreCita = {
-      ...preCitaData,
-      id: Date.now().toString(),
-      estado: "pendiente",
-      fechaCreacion: new Date(),
-      fechaPreferida: createSafeDate(preCitaData.fechaPreferida),
-    };
-    setPreCitas((prev) => [...prev, newPreCita]);
-  };
-
-  const updatePreCita = (id: string, updates: Partial<PreCita>) => {
-    const processedUpdates = {
-      ...updates,
-      ...(updates.fechaPreferida && {
-        fechaPreferida: createSafeDate(updates.fechaPreferida),
-      }),
-      ...(updates.fechaNueva && { fechaNueva: new Date(updates.fechaNueva) }),
-      ...(updates.fechaCreacion && {
-        fechaCreacion: new Date(updates.fechaCreacion),
-      }),
-    };
-    setPreCitas((prev) =>
-      prev.map((preCita) =>
-        preCita.id === id ? { ...preCita, ...processedUpdates } : preCita,
-      ),
-    );
-  };
-
-  const deletePreCita = (id: string) => {
-    setPreCitas((prev) => prev.filter((preCita) => preCita.id !== id));
-  };
-
   // Historial Clinico functions
   const addHistorialEntry = (entryData: Omit<HistorialClinico, "id">) => {
     const newEntry: HistorialClinico = {
@@ -1809,83 +1618,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
       .sort(
         (a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime(),
       );
-  };
-
-  // Newsletter functions
-  const addSuscriptorNewsletter = async (email: string): Promise<boolean> => {
-    const emailLower = email.toLowerCase();
-
-    // Check if email already exists (case insensitive)
-    const existingSuscriptor = suscriptoresNewsletter.find(
-      (s) => s.email.toLowerCase() === emailLower,
-    );
-
-    if (existingSuscriptor) {
-      if (existingSuscriptor.activo) {
-        return false; // Already subscribed and active
-      } else {
-        // Reactivate inactive subscription
-        updateSuscriptorNewsletter(existingSuscriptor.id, {
-          activo: true,
-          fechaSuscripcion: new Date(), // Update subscription date
-        });
-        return true;
-      }
-    }
-
-    // Create new subscription
-    const newSuscriptor: SuscriptorNewsletter = {
-      id: Date.now().toString(),
-      email,
-      fechaSuscripcion: new Date(),
-      activo: true,
-    };
-
-    setSuscriptoresNewsletter((prev) => [...prev, newSuscriptor]);
-    return true;
-  };
-
-  const updateSuscriptorNewsletter = (
-    id: string,
-    updates: Partial<SuscriptorNewsletter>,
-  ) => {
-    setSuscriptoresNewsletter((prev) =>
-      prev.map((suscriptor) =>
-        suscriptor.id === id ? { ...suscriptor, ...updates } : suscriptor,
-      ),
-    );
-  };
-
-  const deleteSuscriptorNewsletter = (id: string) => {
-    setSuscriptoresNewsletter((prev) => prev.filter((s) => s.id !== id));
-  };
-
-  const addNewsletterEmail = (emailData: Omit<NewsletterEmail, "id">) => {
-    const newEmail: NewsletterEmail = {
-      ...emailData,
-      id: Date.now().toString(),
-      fechaEnvio: new Date(emailData.fechaEnvio),
-    };
-    setNewsletterEmails((prev) => [...prev, newEmail]);
-  };
-
-  const updateNewsletterEmail = (
-    id: string,
-    updates: Partial<NewsletterEmail>,
-  ) => {
-    const processedUpdates = {
-      ...updates,
-      ...(updates.fechaEnvio && { fechaEnvio: new Date(updates.fechaEnvio) }),
-    };
-    setNewsletterEmails((prev) =>
-      prev.map((email) =>
-        email.id === id ? { ...email, ...processedUpdates } : email,
-      ),
-    );
-  };
-
-  const deleteNewsletterEmail = (id: string) => {
-    setNewsletterEmails((prev) => prev.filter((email) => email.id !== id));
   };
 
   // Funciones de notificaciones
@@ -2062,23 +1794,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
     addCita,
     updateCita,
     deleteCita,
-    preCitas,
-    addPreCita,
-    updatePreCita,
-    deletePreCita,
     historialClinico,
     addHistorialEntry,
     updateHistorialEntry,
     deleteHistorialEntry,
     getHistorialByMascota,
-    suscriptoresNewsletter,
-    addSuscriptorNewsletter,
-    updateSuscriptorNewsletter,
-    deleteSuscriptorNewsletter,
-    newsletterEmails,
-    addNewsletterEmail,
-    updateNewsletterEmail,
-    deleteNewsletterEmail,
     notificaciones,
     addNotificacion,
     markNotificacionAsRead,

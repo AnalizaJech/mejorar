@@ -35,6 +35,7 @@ import {
   MapPin,
   Shield,
   X,
+  ChevronUp,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { UserRole } from "@/lib/types";
@@ -104,12 +105,6 @@ const navigationItems: NavItem[] = [
     roles: ["veterinario"],
   },
   {
-    label: "Pre-Citas",
-    path: "/pre-citas",
-    icon: Clock,
-    roles: ["admin"],
-  },
-  {
     label: "Gestión de Citas",
     path: "/gestion-citas",
     icon: Calendar,
@@ -125,12 +120,6 @@ const navigationItems: NavItem[] = [
     label: "Veterinarios",
     path: "/veterinarios",
     icon: Stethoscope,
-    roles: ["admin"],
-  },
-  {
-    label: "Newsletter",
-    path: "/gestion-newsletter",
-    icon: Mail,
     roles: ["admin"],
   },
 ];
@@ -150,6 +139,7 @@ export default function Layout({
   } = useAppContext();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   // Hook para mostrar notificaciones toast automáticamente
   useNotificationToast();
@@ -164,6 +154,28 @@ export default function Layout({
 
   // Explicitly check authentication state
   const isUserAuthenticated = isAuthenticated && !!user;
+
+  // Scroll progress tracking
+  useEffect(() => {
+    const updateScrollProgress = () => {
+      const scrollTop = window.scrollY;
+      const docHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      setScrollProgress(Math.min(Math.max(progress, 0), 100));
+    };
+
+    if (location.pathname === "/") {
+      window.addEventListener("scroll", updateScrollProgress, {
+        passive: true,
+      });
+      updateScrollProgress(); // Initial calculation
+    }
+
+    return () => {
+      window.removeEventListener("scroll", updateScrollProgress);
+    };
+  }, [location.pathname]);
 
   const handleLogout = () => {
     // Close mobile menu first if open, then show logout modal
@@ -198,6 +210,24 @@ export default function Layout({
 
   return (
     <div className="min-h-screen bg-vet-gray-50">
+      {/* Scroll Progress Indicator - Only on homepage */}
+      {location.pathname === "/" && (
+        <div
+          className="fixed top-0 left-0 h-1 bg-gradient-to-r from-vet-primary to-vet-secondary z-50 transition-all duration-150 ease-out"
+          style={{ width: `${scrollProgress}%` }}
+        ></div>
+      )}
+
+      {/* Back to Top Button - Only on homepage when scrolled */}
+      {location.pathname === "/" && scrollProgress > 10 && (
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          className="fixed bottom-6 right-6 w-12 h-12 bg-vet-primary hover:bg-vet-primary-dark text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 z-40 flex items-center justify-center group"
+          aria-label="Volver arriba"
+        >
+          <ChevronUp className="w-6 h-6 transform group-hover:-translate-y-0.5 transition-transform duration-200" />
+        </button>
+      )}
       {/* Header */}
       <header className="bg-white border-b border-vet-gray-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -244,18 +274,6 @@ export default function Layout({
                   {user.rol === "admin" ? (
                     // Admin navigation
                     <>
-                      <Link
-                        to="/pre-citas"
-                        className={cn(
-                          "flex items-center space-x-2 px-3 py-2 text-sm font-medium transition-colors relative",
-                          location.pathname === "/pre-citas"
-                            ? "text-vet-primary border-b-2 border-vet-primary"
-                            : "text-vet-gray-600 hover:text-vet-primary",
-                        )}
-                      >
-                        <Clock className="w-4 h-4" />
-                        <span>Pre-Citas</span>
-                      </Link>
                       <Link
                         to="/gestion-citas"
                         className={cn(
@@ -379,7 +397,7 @@ export default function Layout({
                 // Public navigation - landing page sections in order
                 <>
                   <a
-                    href="#estadisticas"
+                    href="#nosotros"
                     className="px-3 py-2 text-sm font-medium text-vet-gray-600 hover:text-vet-primary transition-colors"
                     onClick={(e) => {
                       e.preventDefault();
@@ -387,17 +405,17 @@ export default function Layout({
                         navigate("/");
                         setTimeout(() => {
                           document
-                            .getElementById("estadisticas")
+                            .getElementById("nosotros")
                             ?.scrollIntoView({ behavior: "smooth" });
                         }, 100);
                       } else {
                         document
-                          .getElementById("estadisticas")
+                          .getElementById("nosotros")
                           ?.scrollIntoView({ behavior: "smooth" });
                       }
                     }}
                   >
-                    Estadísticas
+                    Nosotros
                   </a>
                   <a
                     href="#servicios"
@@ -421,7 +439,7 @@ export default function Layout({
                     Servicios
                   </a>
                   <a
-                    href="#newsletter"
+                    href="#caracteristicas"
                     className="px-3 py-2 text-sm font-medium text-vet-gray-600 hover:text-vet-primary transition-colors"
                     onClick={(e) => {
                       e.preventDefault();
@@ -429,17 +447,17 @@ export default function Layout({
                         navigate("/");
                         setTimeout(() => {
                           document
-                            .getElementById("newsletter")
+                            .getElementById("caracteristicas")
                             ?.scrollIntoView({ behavior: "smooth" });
                         }, 100);
                       } else {
                         document
-                          .getElementById("newsletter")
+                          .getElementById("caracteristicas")
                           ?.scrollIntoView({ behavior: "smooth" });
                       }
                     }}
                   >
-                    Newsletter
+                    Características
                   </a>
                   <a
                     href="#emergencias"

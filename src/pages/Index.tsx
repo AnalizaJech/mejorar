@@ -24,10 +24,10 @@ import {
 import { DatePicker } from "@/components/ui/date-picker";
 import Layout from "@/components/Layout";
 import FeaturesCarousel from "@/components/FeaturesCarousel";
-import NewsletterSection from "@/components/NewsletterSection";
 import { useAppContext } from "@/contexts/AppContext";
 import {
   Dog,
+  Cat,
   Heart,
   Calendar,
   Shield,
@@ -44,25 +44,15 @@ import {
   TrendingUp,
   FileText,
   ChevronDown,
+  Activity,
+  Scissors,
+  Syringe,
+  Zap,
 } from "lucide-react";
-import { PreCitaFormData } from "@/lib/types";
 
 export default function Index() {
   const location = useLocation();
-  const { isAuthenticated, user, addPreCita } = useAppContext();
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [showValidationErrors, setShowValidationErrors] = useState(false);
-  const [formData, setFormData] = useState<PreCitaFormData>({
-    nombreMascota: "",
-    tipoMascota: "perro",
-    nombreDueno: "",
-    telefono: "",
-    email: "",
-    motivoConsulta: "",
-    fechaPreferida: "",
-    horaPreferida: "",
-  });
+  const { isAuthenticated, user } = useAppContext();
 
   // Handle hash routing for anchor links
   useEffect(() => {
@@ -85,106 +75,6 @@ export default function Index() {
 
     return () => clearTimeout(timer);
   }, []);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setShowValidationErrors(true);
-
-    // Validar campos obligatorios
-    if (!formData.fechaPreferida) {
-      alert("Por favor selecciona una fecha preferida");
-      setIsLoading(false);
-      return;
-    }
-
-    if (!formData.horaPreferida) {
-      alert("Por favor selecciona una hora preferida");
-      setIsLoading(false);
-      return;
-    }
-
-    if (!formData.motivoConsulta.trim()) {
-      alert("Por favor describe el motivo de la consulta");
-      setIsLoading(false);
-      return;
-    }
-
-    try {
-      // Create pre-cita using context
-      addPreCita({
-        nombreCliente: formData.nombreDueno,
-        telefono: formData.telefono,
-        email: formData.email,
-        nombreMascota: formData.nombreMascota,
-        tipoMascota: formData.tipoMascota,
-        motivoConsulta: formData.motivoConsulta,
-        fechaPreferida: (() => {
-          const [year, month, day] = formData.fechaPreferida
-            .split("-")
-            .map(Number);
-          return new Date(year, month - 1, day);
-        })(),
-        horaPreferida: formData.horaPreferida,
-      });
-
-      // Simulate API call delay
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      setIsLoading(false);
-      setIsSubmitted(true);
-      // Scroll to top to show success message
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    } catch (error) {
-      setIsLoading(false);
-      alert("Error al enviar la pre-cita. Intenta nuevamente.");
-    }
-  };
-
-  const handleInputChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >,
-  ) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
-  if (isSubmitted) {
-    return (
-      <Layout>
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-vet-primary/5 to-vet-secondary/5">
-          <Card className="max-w-md w-full mx-4">
-            <CardContent className="pt-6">
-              <div className="text-center">
-                <div className="mx-auto flex items-center justify-center w-12 h-12 rounded-full bg-green-100 mb-4">
-                  <CheckCircle className="w-6 h-6 text-green-600" />
-                </div>
-                <h3 className="text-lg font-semibold text-vet-gray-900 mb-2">
-                  ¡Pre-cita enviada exitosamente!
-                </h3>
-                <p className="text-vet-gray-600 mb-6">
-                  Hemos recibido tu solicitud. Te contactaremos pronto para
-                  confirmar tu cita.
-                </p>
-                <Button
-                  onClick={() => {
-                    setIsSubmitted(false);
-                    window.scrollTo({ top: 0, behavior: "smooth" });
-                  }}
-                  className="w-full bg-vet-primary hover:bg-vet-primary-dark"
-                >
-                  Volver al Inicio
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </Layout>
-    );
-  }
 
   return (
     <Layout>
@@ -252,11 +142,11 @@ export default function Index() {
                       className="bg-vet-primary hover:bg-vet-primary-dark text-white shadow-lg"
                       onClick={() =>
                         document
-                          .getElementById("pre-cita-form")
+                          .getElementById("servicios")
                           ?.scrollIntoView({ behavior: "smooth" })
                       }
                     >
-                      Solicitar Cita Gratis
+                      Ver Servicios
                       <ArrowRight className="ml-2 w-4 h-4" />
                     </Button>
                     <Link to="/login">
@@ -291,48 +181,43 @@ export default function Index() {
 
             {/* Right Column - Hero Images */}
             <div className="relative">
-              {/* Main hero image - Professional veterinary services */}
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-vet-primary/5 to-vet-primary/10">
-                <div className="aspect-[4/3] bg-white flex items-center justify-center relative">
-                  {/* Background pattern */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-vet-primary/5 via-transparent to-vet-primary/10"></div>
+              {/* Main hero image - Happy pet */}
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                <div className="aspect-[4/3] relative">
+                  <img
+                    src="https://images.pexels.com/photos/7470753/pexels-photo-7470753.jpeg"
+                    alt="Veterinario y equipo cuidando la salud de mascota"
+                    className="w-full h-full object-cover"
+                  />
+                  {/* Gradient overlay for text readability */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
 
-                  {/* Veterinary service illustration */}
-                  <div className="relative z-10 text-center p-8">
-                    <div className="relative mb-6">
-                      <div className="w-32 h-32 bg-vet-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 relative">
-                        <div className="w-24 h-24 bg-vet-primary rounded-full flex items-center justify-center">
-                          <Stethoscope className="w-12 h-12 text-white" />
-                        </div>
-                        {/* Floating hearts */}
-                        <div className="absolute -top-2 -right-2 w-8 h-8 bg-vet-secondary rounded-full flex items-center justify-center animate-bounce">
-                          <Dog className="w-4 h-4 text-white fill-current" />
-                        </div>
-                        <div className="absolute -bottom-2 -left-2 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center animate-pulse">
-                          <PawPrint className="w-3 h-3 text-white" />
-                        </div>
+                  {/* Floating badge */}
+                  <div className="absolute bottom-4 left-4 bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
+                        <Stethoscope className="w-5 h-5 text-white" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-bold text-vet-gray-900">
+                          Mascota Feliz
+                        </p>
+                        <p className="text-xs text-vet-gray-600">
+                          Cuidado Profesional
+                        </p>
                       </div>
                     </div>
+                  </div>
 
-                    <h3 className="text-xl font-bold text-vet-gray-900 mb-2">
-                      Cuidado Veterinario Profesional
-                    </h3>
-                    <p className="text-vet-gray-600 text-sm">
-                      Tecnología moderna • Equipo especializado • Amor por los
-                      animales
-                    </p>
-
-                    {/* Service icons */}
-                    <div className="flex justify-center space-x-4 mt-6">
-                      <div className="w-10 h-10 bg-vet-primary/10 rounded-lg flex items-center justify-center">
-                        <Calendar className="w-5 h-5 text-vet-primary" />
+                  {/* Quality badge */}
+                  <div className="absolute top-4 right-4 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 backdrop-blur-sm rounded-2xl px-6 py-4 shadow-2xl border-2 border-white/30 transform hover:scale-105 transition-all duration-300">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 bg-white/25 rounded-xl flex items-center justify-center backdrop-blur-sm">
+                        <Shield className="w-5 h-5 text-white" />
                       </div>
-                      <div className="w-10 h-10 bg-vet-primary/10 rounded-lg flex items-center justify-center">
-                        <Shield className="w-5 h-5 text-vet-primary" />
-                      </div>
-                      <div className="w-10 h-10 bg-vet-primary/10 rounded-lg flex items-center justify-center">
-                        <Clock className="w-5 h-5 text-vet-primary" />
-                      </div>
+                      <span className="text-white text-base font-black tracking-wider drop-shadow-lg">
+                        Premium
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -341,8 +226,8 @@ export default function Index() {
               {/* Floating stats cards */}
               <div className="absolute -top-4 -left-4 bg-white rounded-xl shadow-lg p-4 z-10">
                 <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                    <Heart className="w-5 h-5 text-green-600" />
+                  <div className="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center">
+                    <Star className="w-5 h-5 text-amber-600" />
                   </div>
                   <div>
                     <p className="text-lg font-bold text-vet-gray-900">98%</p>
@@ -353,8 +238,8 @@ export default function Index() {
 
               <div className="absolute -bottom-4 -right-4 bg-white rounded-xl shadow-lg p-4 z-10">
                 <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-vet-primary/10 rounded-full flex items-center justify-center">
-                    <PawPrint className="w-5 h-5 text-vet-primary" />
+                  <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
+                    <Users className="w-5 h-5 text-emerald-600" />
                   </div>
                   <div>
                     <p className="text-lg font-bold text-vet-gray-900">1000+</p>
@@ -364,12 +249,6 @@ export default function Index() {
               </div>
 
               {/* Small floating images */}
-              <div className="absolute top-1/4 -left-8 w-16 h-16 bg-vet-secondary/20 rounded-full flex items-center justify-center">
-                <span className="text-2xl">🐕</span>
-              </div>
-              <div className="absolute bottom-1/4 -right-8 w-16 h-16 bg-vet-primary/20 rounded-full flex items-center justify-center">
-                <span className="text-2xl">🐱</span>
-              </div>
             </div>
           </div>
         </div>
@@ -381,19 +260,20 @@ export default function Index() {
 
       {/* Animated Counter Section */}
       <section
-        id="estadisticas"
+        id="nosotros"
         className="py-20 bg-white relative overflow-hidden"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
-            <div className="inline-flex items-center px-4 py-2 bg-vet-primary/10 rounded-full mb-6">
-              <TrendingUp className="w-4 h-4 text-vet-primary mr-2" />
-              <span className="text-vet-primary font-semibold text-sm">
+            <div className="inline-flex items-center px-4 py-2 bg-purple-100 rounded-full mb-6">
+              <TrendingUp className="w-4 h-4 text-purple-600 mr-2" />
+              <span className="text-purple-600 font-semibold text-sm">
                 NUESTRO IMPACTO
               </span>
             </div>
-            <h2 className="text-3xl lg:text-4xl font-bold text-vet-gray-900 mb-4">
-              Resultados que hablan por sí solos
+            <h2 className="text-3xl lg:text-4xl font-bold mb-4">
+              <span className="text-vet-gray-900">¿Por qué eligen</span>
+              <span className="block text-purple-600">PetLA?</span>
             </h2>
             <p className="text-xl text-vet-gray-600 max-w-3xl mx-auto">
               Miles de familias han confiado en nosotros para cuidar la salud de
@@ -499,268 +379,242 @@ export default function Index() {
         <div className="absolute bottom-20 left-20 w-40 h-40 bg-vet-secondary/5 rounded-full animate-float delay-1000"></div>
       </section>
 
+      {/* Servicios Section */}
+      <section
+        id="servicios"
+        className="py-24 bg-gradient-to-br from-vet-gray-50 via-white to-vet-primary/5 relative overflow-hidden"
+      >
+        {/* Background decorations */}
+        <div className="absolute top-10 right-10 w-72 h-72 bg-vet-primary/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-10 left-10 w-96 h-96 bg-vet-secondary/5 rounded-full blur-3xl"></div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="text-center mb-20">
+            <div className="inline-flex items-center gap-2 bg-emerald-100 text-emerald-600 px-4 py-2 rounded-full text-sm font-semibold mb-6">
+              <Stethoscope className="w-4 h-4" />
+              SERVICIOS VETERINARIOS
+            </div>
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+              <span className="text-vet-gray-900">
+                ¿Buscas el mejor cuidado para
+              </span>
+              <span className="block text-emerald-600">tu mascota?</span>
+            </h2>
+            <p className="text-xl text-vet-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Ofrecemos servicios veterinarios especializados con tecnología de
+              vanguardia y el cuidado más humano para garantizar la salud y
+              bienestar de tu mascota.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+            {/* Consulta General */}
+            <div className="group relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 border border-vet-gray-100 hover:border-vet-primary/30 hover:-translate-y-2">
+              <div className="absolute inset-0 bg-gradient-to-br from-vet-primary/5 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative">
+                <div className="w-20 h-20 bg-gradient-to-br from-vet-primary to-vet-primary-dark rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                  <Stethoscope className="w-10 h-10 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-vet-gray-900 mb-4">
+                  Consulta General
+                </h3>
+                <p className="text-vet-gray-600 mb-6 leading-relaxed">
+                  Evaluaciones médicas completas con diagnóstico preciso y plan
+                  de tratamiento personalizado.
+                </p>
+                <div className="flex items-center justify-between pt-6 border-t border-vet-gray-100">
+                  <div>
+                    <span className="text-3xl font-bold text-vet-primary">
+                      S/. 80
+                    </span>
+                    <div className="flex items-center gap-2 mt-1">
+                      <Clock className="w-4 h-4 text-vet-gray-400" />
+                      <span className="text-sm text-vet-gray-500">
+                        30-45 min
+                      </span>
+                    </div>
+                  </div>
+                  <div className="w-12 h-12 bg-vet-primary/10 rounded-full flex items-center justify-center group-hover:bg-vet-primary group-hover:text-white transition-all duration-300">
+                    <ArrowRight className="w-5 h-5" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Vacunación */}
+            <div className="group relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 border border-vet-gray-100 hover:border-green-500/30 hover:-translate-y-2">
+              <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative">
+                <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                  <Syringe className="w-10 h-10 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-vet-gray-900 mb-4">
+                  Vacunación
+                </h3>
+                <p className="text-vet-gray-600 mb-6 leading-relaxed">
+                  Esquemas de vacunación completos adaptados a la edad, especie
+                  y necesidades de tu mascota.
+                </p>
+                <div className="flex items-center justify-between pt-6 border-t border-vet-gray-100">
+                  <div>
+                    <span className="text-3xl font-bold text-green-600">
+                      S/. 65
+                    </span>
+                    <div className="flex items-center gap-2 mt-1">
+                      <Clock className="w-4 h-4 text-vet-gray-400" />
+                      <span className="text-sm text-vet-gray-500">
+                        15-20 min
+                      </span>
+                    </div>
+                  </div>
+                  <div className="w-12 h-12 bg-green-500/10 rounded-full flex items-center justify-center group-hover:bg-green-500 group-hover:text-white transition-all duration-300">
+                    <ArrowRight className="w-5 h-5" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Emergencias */}
+            <div className="group relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 border border-vet-gray-100 hover:border-red-500/30 hover:-translate-y-2">
+              <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative">
+                <div className="w-20 h-20 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                  <Zap className="w-10 h-10 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-vet-gray-900 mb-4">
+                  Emergencias
+                </h3>
+                <p className="text-vet-gray-600 mb-6 leading-relaxed">
+                  Atención médica urgente 24/7 para situaciones críticas con
+                  respuesta inmediata.
+                </p>
+                <div className="flex items-center justify-between pt-6 border-t border-vet-gray-100">
+                  <div>
+                    <span className="text-3xl font-bold text-red-600">
+                      S/. 150
+                    </span>
+                    <div className="flex items-center gap-2 mt-1">
+                      <Clock className="w-4 h-4 text-vet-gray-400" />
+                      <span className="text-sm text-vet-gray-500">
+                        45-90 min
+                      </span>
+                    </div>
+                  </div>
+                  <div className="w-12 h-12 bg-red-500/10 rounded-full flex items-center justify-center group-hover:bg-red-500 group-hover:text-white transition-all duration-300">
+                    <ArrowRight className="w-5 h-5" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Grooming */}
+            <div className="group relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 border border-vet-gray-100 hover:border-vet-secondary/30 hover:-translate-y-2">
+              <div className="absolute inset-0 bg-gradient-to-br from-vet-secondary/5 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative">
+                <div className="w-20 h-20 bg-gradient-to-br from-vet-secondary to-vet-secondary-dark rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                  <Scissors className="w-10 h-10 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-vet-gray-900 mb-4">
+                  Grooming
+                </h3>
+                <p className="text-vet-gray-600 mb-6 leading-relaxed">
+                  Servicios completos de higiene y estética para mantener a tu
+                  mascota bella y saludable.
+                </p>
+                <div className="flex items-center justify-between pt-6 border-t border-vet-gray-100">
+                  <div>
+                    <span className="text-3xl font-bold text-vet-secondary">
+                      S/. 45
+                    </span>
+                    <div className="flex items-center gap-2 mt-1">
+                      <Clock className="w-4 h-4 text-vet-gray-400" />
+                      <span className="text-sm text-vet-gray-500">
+                        60-120 min
+                      </span>
+                    </div>
+                  </div>
+                  <div className="w-12 h-12 bg-vet-secondary/10 rounded-full flex items-center justify-center group-hover:bg-vet-secondary group-hover:text-white transition-all duration-300">
+                    <ArrowRight className="w-5 h-5" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Cirugía */}
+            <div className="group relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 border border-vet-gray-100 hover:border-purple-500/30 hover:-translate-y-2">
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative">
+                <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                  <Activity className="w-10 h-10 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-vet-gray-900 mb-4">
+                  Cirugía
+                </h3>
+                <p className="text-vet-gray-600 mb-6 leading-relaxed">
+                  Procedimientos quirúrgicos especializados con anestesia segura
+                  y recuperación monitoreada.
+                </p>
+                <div className="flex items-center justify-between pt-6 border-t border-vet-gray-100">
+                  <div>
+                    <span className="text-3xl font-bold text-purple-600">
+                      S/. 250
+                    </span>
+                    <div className="flex items-center gap-2 mt-1">
+                      <Clock className="w-4 h-4 text-vet-gray-400" />
+                      <span className="text-sm text-vet-gray-500">
+                        90-180 min
+                      </span>
+                    </div>
+                  </div>
+                  <div className="w-12 h-12 bg-purple-500/10 rounded-full flex items-center justify-center group-hover:bg-purple-500 group-hover:text-white transition-all duration-300">
+                    <ArrowRight className="w-5 h-5" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Diagnóstico */}
+            <div className="group relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 border border-vet-gray-100 hover:border-blue-500/30 hover:-translate-y-2">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative">
+                <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                  <FileText className="w-10 h-10 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-vet-gray-900 mb-4">
+                  Diagnóstico
+                </h3>
+                <p className="text-vet-gray-600 mb-6 leading-relaxed">
+                  Análisis clínicos, radiografías y estudios especializados para
+                  diagnósticos precisos.
+                </p>
+                <div className="flex items-center justify-between pt-6 border-t border-vet-gray-100">
+                  <div>
+                    <span className="text-3xl font-bold text-blue-600">
+                      S/. 120
+                    </span>
+                    <div className="flex items-center gap-2 mt-1">
+                      <Clock className="w-4 h-4 text-vet-gray-400" />
+                      <span className="text-sm text-vet-gray-500">
+                        30-45 min
+                      </span>
+                    </div>
+                  </div>
+                  <div className="w-12 h-12 bg-blue-500/10 rounded-full flex items-center justify-center group-hover:bg-blue-500 group-hover:text-white transition-all duration-300">
+                    <ArrowRight className="w-5 h-5" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Why Choose PetLA - Carousel Section */}
-      <div id="servicios">
+      <div id="caracteristicas">
         <FeaturesCarousel />
       </div>
 
       {/* Newsletter Section */}
-      <div id="newsletter">
-        <NewsletterSection />
-      </div>
-      {/* Pre-Cita Form Section */}
-      <section id="pre-cita-form" className="py-20 bg-vet-gray-50">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-vet-gray-900 mb-4">
-              Solicita tu Pre-Cita
-            </h2>
-            <p className="text-lg text-vet-gray-600">
-              Completa el formulario y nos pondremos en contacto contigo para
-              confirmar tu cita y asignar el veterinario más adecuado.
-            </p>
-          </div>
-
-          <Card className="p-8">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <Label htmlFor="nombreDueno">Nombre completo *</Label>
-                  <Input
-                    id="nombreDueno"
-                    name="nombreDueno"
-                    value={formData.nombreDueno}
-                    onChange={handleInputChange}
-                    placeholder="Tu nombre completo"
-                    required
-                    className="mt-1"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="telefono">Teléfono *</Label>
-                  <Input
-                    id="telefono"
-                    name="telefono"
-                    type="tel"
-                    value={formData.telefono}
-                    onChange={handleInputChange}
-                    placeholder="+1 234 567 8900"
-                    required
-                    className="mt-1"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <Label htmlFor="email">Correo electrónico *</Label>
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    placeholder="tu@email.com"
-                    required
-                    className="mt-1"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="nombreMascota">Nombre de la mascota *</Label>
-                  <Input
-                    id="nombreMascota"
-                    name="nombreMascota"
-                    value={formData.nombreMascota}
-                    onChange={handleInputChange}
-                    placeholder="Nombre de tu mascota"
-                    required
-                    className="mt-1"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="space-y-2">
-                  <Label htmlFor="tipoMascota">Tipo de mascota *</Label>
-                  <Select
-                    value={formData.tipoMascota}
-                    onValueChange={(value) =>
-                      setFormData({ ...formData, tipoMascota: value })
-                    }
-                    required
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Selecciona tipo de mascota" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="perro">Perro</SelectItem>
-                      <SelectItem value="gato">Gato</SelectItem>
-                      <SelectItem value="ave">Ave</SelectItem>
-                      <SelectItem value="roedor">Roedor</SelectItem>
-                      <SelectItem value="reptil">Reptil</SelectItem>
-                      <SelectItem value="otro">Otro</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="fechaPreferida">Fecha preferida *</Label>
-                  <DatePicker
-                    date={
-                      formData.fechaPreferida
-                        ? (() => {
-                            const [year, month, day] = formData.fechaPreferida
-                              .split("-")
-                              .map(Number);
-                            return new Date(year, month - 1, day);
-                          })()
-                        : undefined
-                    }
-                    onDateChange={(date) => {
-                      if (date) {
-                        // Crear fecha de hoy sin horas para comparación
-                        const today = new Date();
-                        today.setHours(0, 0, 0, 0);
-
-                        // Crear fecha seleccionada sin horas para comparación
-                        const selectedDate = new Date(date);
-                        selectedDate.setHours(0, 0, 0, 0);
-
-                        // Permitir fecha de hoy o fechas futuras
-                        if (selectedDate >= today) {
-                          // Formatear fecha directamente sin ajustes de zona horaria
-                          const year = date.getFullYear();
-                          const month = String(date.getMonth() + 1).padStart(
-                            2,
-                            "0",
-                          );
-                          const day = String(date.getDate()).padStart(2, "0");
-                          const formattedDate = `${year}-${month}-${day}`;
-
-                          setFormData({
-                            ...formData,
-                            fechaPreferida: formattedDate,
-                          });
-                        }
-                      } else {
-                        setFormData({
-                          ...formData,
-                          fechaPreferida: "",
-                        });
-                      }
-                    }}
-                    placeholder="Selecciona fecha *"
-                    fromYear={new Date().getFullYear()}
-                    toYear={new Date().getFullYear() + 1}
-                    minDate={new Date()}
-                    className={
-                      showValidationErrors && !formData.fechaPreferida
-                        ? "border-red-300"
-                        : ""
-                    }
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="horaPreferida">Hora preferida *</Label>
-                  <Select
-                    value={formData.horaPreferida}
-                    onValueChange={(value) =>
-                      setFormData({ ...formData, horaPreferida: value })
-                    }
-                    required
-                  >
-                    <SelectTrigger
-                      className={
-                        showValidationErrors && !formData.horaPreferida
-                          ? "border-red-300"
-                          : ""
-                      }
-                    >
-                      <SelectValue placeholder="Selecciona una hora *" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="09:00">09:00</SelectItem>
-                      <SelectItem value="09:30">09:30</SelectItem>
-                      <SelectItem value="10:00">10:00</SelectItem>
-                      <SelectItem value="10:30">10:30</SelectItem>
-                      <SelectItem value="11:00">11:00</SelectItem>
-                      <SelectItem value="11:30">11:30</SelectItem>
-                      <SelectItem value="12:00">12:00</SelectItem>
-                      <SelectItem value="12:30">12:30</SelectItem>
-                      <SelectItem value="14:00">14:00</SelectItem>
-                      <SelectItem value="14:30">14:30</SelectItem>
-                      <SelectItem value="15:00">15:00</SelectItem>
-                      <SelectItem value="15:30">15:30</SelectItem>
-                      <SelectItem value="16:00">16:00</SelectItem>
-                      <SelectItem value="16:30">16:30</SelectItem>
-                      <SelectItem value="17:00">17:00</SelectItem>
-                      <SelectItem value="17:30">17:30</SelectItem>
-                      <SelectItem value="18:00">18:00</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-
-              <div>
-                <Label htmlFor="motivoConsulta">Motivo de la consulta *</Label>
-                <div className="mt-1">
-                  <Textarea
-                    id="motivoConsulta"
-                    name="motivoConsulta"
-                    value={formData.motivoConsulta}
-                    onChange={handleInputChange}
-                    placeholder="Describe brevemente el motivo de la consulta veterinaria... *"
-                    required
-                    className={`w-full min-h-[100px] max-h-[100px] resize-none overflow-y-auto px-3 py-2 border rounded-lg focus:ring-2 focus:ring-vet-primary focus:border-vet-primary transition-all duration-200 ${
-                      showValidationErrors && !formData.motivoConsulta.trim()
-                        ? "border-red-300"
-                        : "border-vet-gray-300"
-                    }`}
-                  />
-                  <p className="text-xs text-vet-gray-500 mt-1">
-                    <span className="text-red-500">*Obligatorio</span> - Máximo
-                    500 caracteres. Describe síntomas, comportamientos o motivos
-                    de la consulta.
-                  </p>
-                </div>
-              </div>
-
-              <div className="bg-vet-primary/5 border border-vet-primary/20 rounded-lg p-4">
-                <div className="flex items-start space-x-3">
-                  <CheckCircle className="w-5 h-5 text-vet-primary mt-0.5 flex-shrink-0" />
-                  <div className="text-sm text-vet-gray-700">
-                    <p className="font-medium mb-1">Proceso de confirmación:</p>
-                    <ul className="space-y-1 text-vet-gray-600">
-                      <li>1. Revisaremos tu solicitud en 24 horas</li>
-                      <li>2. Te contactaremos para confirmar la cita</li>
-                      <li>3. Recibirás instrucciones de pago</li>
-                      <li>4. Tu cita quedará confirmada al validar el pago</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              <Button
-                type="submit"
-                size="lg"
-                className="w-full bg-vet-primary hover:bg-vet-primary-dark"
-                disabled={isLoading}
-              >
-                {isLoading ? (
-                  <>
-                    <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent mr-2" />
-                    Enviando solicitud...
-                  </>
-                ) : (
-                  <>
-                    Enviar Pre-Cita
-                    <ArrowRight className="ml-2 w-4 h-4" />
-                  </>
-                )}
-              </Button>
-            </form>
-          </Card>
-        </div>
-      </section>
 
       {/* Emergency Section - Harmonious Design */}
       <section
@@ -777,18 +631,18 @@ export default function Index() {
 
           {/* Emergency Header */}
           <div className="text-center mb-20">
-            <div className="inline-flex items-center px-8 py-4 bg-vet-secondary/10 rounded-full mb-8 backdrop-blur-sm border border-vet-secondary/20">
-              <div className="w-8 h-8 bg-vet-secondary rounded-full flex items-center justify-center mr-4 animate-pulse">
-                <Dog className="w-4 h-4 text-white fill-current" />
+            <div className="inline-flex items-center px-8 py-4 bg-red-100 rounded-full mb-8 backdrop-blur-sm border border-red-200">
+              <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center mr-4 animate-pulse">
+                <Zap className="w-4 h-4 text-white" />
               </div>
-              <span className="text-vet-secondary font-bold text-lg">
+              <span className="text-red-600 font-bold text-lg">
                 EMERGENCIAS VETERINARIAS
               </span>
             </div>
 
             <h2 className="text-5xl lg:text-6xl font-bold text-vet-gray-900 mb-8 leading-tight">
               ¿Tu mascota está en
-              <span className="text-vet-secondary block lg:inline lg:ml-4">
+              <span className="text-red-600 block lg:inline lg:ml-4">
                 peligro?
               </span>
             </h2>
