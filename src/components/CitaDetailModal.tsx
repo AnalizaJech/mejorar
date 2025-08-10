@@ -322,24 +322,41 @@ export default function CitaDetailModal({
                 })()}
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {/* Nombre Completo */}
-                  <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                  {/* Nombres */}
+                  <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-4 shadow-sm border border-blue-200 hover:shadow-lg transition-all duration-300 hover:scale-105">
                     <div className="flex items-center space-x-3">
-                      <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
-                        <User className="w-5 h-5 text-blue-600" />
+                      <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg">
+                        <User className="w-6 h-6 text-white" />
                       </div>
                       <div className="flex-1">
-                        <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block mb-1">
-                          Nombre Completo
+                        <span className="text-xs font-bold text-blue-700 uppercase tracking-wide block mb-1">
+                          Nombres
                         </span>
-                        <p className="text-lg font-bold text-vet-gray-900 leading-tight">
+                        <p className="text-xl font-bold text-blue-900 leading-tight">
                           {selectedCita.propietario?.nombre || "Sin asignar"}
-                          {selectedCita.propietario?.apellidos &&
-                            ` ${selectedCita.propietario.apellidos}`}
                         </p>
                       </div>
                     </div>
                   </div>
+
+                  {/* Apellidos */}
+                  {selectedCita.propietario?.apellidos && (
+                    <div className="bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-xl p-4 shadow-sm border border-indigo-200 hover:shadow-lg transition-all duration-300 hover:scale-105">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-12 h-12 bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg">
+                          <Users className="w-6 h-6 text-white" />
+                        </div>
+                        <div className="flex-1">
+                          <span className="text-xs font-bold text-indigo-700 uppercase tracking-wide block mb-1">
+                            Apellidos
+                          </span>
+                          <p className="text-xl font-bold text-indigo-900 leading-tight">
+                            {selectedCita.propietario.apellidos}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
 
                   {/* Username */}
                   {selectedCita.propietario?.username && (
