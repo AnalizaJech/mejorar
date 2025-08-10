@@ -82,7 +82,17 @@ export default function Login() {
       const user = await login(loginData.identifier, loginData.password);
 
       if (user) {
-        navigate("/dashboard");
+        // Check if there's a return URL with preselected service
+        const returnTo = location.state?.returnTo;
+        const preselectedService = location.state?.preselectedService;
+
+        if (returnTo && user.rol === "cliente") {
+          // Redirect to the return URL with the preselected service
+          navigate(returnTo, { state: { preselectedService } });
+        } else {
+          // Default redirect based on user role
+          navigate("/dashboard");
+        }
       } else {
         setError(
           "Credenciales inválidas. Verifica tu email/teléfono/usuario y contraseña.",
