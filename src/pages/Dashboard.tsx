@@ -198,7 +198,7 @@ function AdminDashboard() {
   return (
     <div className="space-y-8">
       {/* Admin Stats */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 sm:gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         <Card className="border-l-4 border-l-vet-primary">
           <CardContent className="p-4 sm:p-6">
             <div className="flex items-center space-x-3">
@@ -269,23 +269,6 @@ function AdminDashboard() {
           </CardContent>
         </Card>
 
-        <Card className="border-l-4 border-l-blue-500">
-          <CardContent className="p-4 sm:p-6">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                <Mail className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
-              </div>
-              <div>
-                <p className="text-xs sm:text-sm text-vet-gray-600">
-                  Suscriptores
-                </p>
-                <p className="text-2xl sm:text-3xl font-bold text-blue-600">
-                  {adminStats.suscriptoresNewsletter}
-                </p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
       </div>
 
       {/* Quick Actions for Admin */}
