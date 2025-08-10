@@ -209,10 +209,10 @@ export default function Index() {
                   </div>
 
                   {/* Quality badge */}
-                  <div className="absolute top-4 right-4 bg-vet-secondary/95 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg">
+                  <div className="absolute top-4 right-4 bg-green-600/95 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg">
                     <div className="flex items-center gap-2">
-                      <Star className="w-4 h-4 text-white fill-current" />
-                      <span className="text-white text-sm font-semibold">Calidad 5⭐</span>
+                      <Shield className="w-4 h-4 text-white" />
+                      <span className="text-white text-sm font-semibold">Certificado</span>
                     </div>
                   </div>
                 </div>
@@ -244,11 +244,9 @@ export default function Index() {
               </div>
 
               {/* Small floating images */}
-              <div className="absolute top-1/4 -left-8 w-16 h-16 bg-vet-secondary rounded-full flex items-center justify-center shadow-lg animate-pulse">
-                <PawPrint className="w-8 h-8 text-white" />
-              </div>
-              <div className="absolute bottom-1/4 -right-8 w-16 h-16 bg-vet-primary rounded-full flex items-center justify-center shadow-lg animate-pulse delay-1000">
-                <Heart className="w-8 h-8 text-white" />
+              {/* Single distinctive floating icon */}
+              <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-br from-vet-primary to-vet-secondary rounded-full flex items-center justify-center shadow-xl animate-bounce">
+                <Stethoscope className="w-10 h-10 text-white" />
               </div>
             </div>
           </div>
