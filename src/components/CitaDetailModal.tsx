@@ -321,18 +321,18 @@ export default function CitaDetailModal({
                   return null;
                 })()}
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                   {/* Nombres */}
-                  <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-4 shadow-sm border border-blue-200 hover:shadow-lg transition-all duration-300 hover:scale-105">
+                  <div className="bg-gray-50 rounded-xl p-4 border border-gray-200 hover:bg-gray-100 transition-colors">
                     <div className="flex items-center space-x-3">
-                      <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg">
-                        <User className="w-6 h-6 text-white" />
+                      <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                        <User className="w-4 h-4 text-blue-600" />
                       </div>
                       <div className="flex-1">
-                        <span className="text-xs font-bold text-blue-700 uppercase tracking-wide block mb-1">
+                        <span className="text-xs font-medium text-gray-500 uppercase tracking-wide block mb-1">
                           Nombres
                         </span>
-                        <p className="text-xl font-bold text-blue-900 leading-tight">
+                        <p className="text-sm font-semibold text-gray-900">
                           {selectedCita.propietario?.nombre || "Sin asignar"}
                         </p>
                       </div>
@@ -341,16 +341,16 @@ export default function CitaDetailModal({
 
                   {/* Apellidos */}
                   {selectedCita.propietario?.apellidos && (
-                    <div className="bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-xl p-4 shadow-sm border border-indigo-200 hover:shadow-lg transition-all duration-300 hover:scale-105">
+                    <div className="bg-gray-50 rounded-xl p-4 border border-gray-200 hover:bg-gray-100 transition-colors">
                       <div className="flex items-center space-x-3">
-                        <div className="w-12 h-12 bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg">
-                          <Users className="w-6 h-6 text-white" />
+                        <div className="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center">
+                          <Users className="w-4 h-4 text-indigo-600" />
                         </div>
                         <div className="flex-1">
-                          <span className="text-xs font-bold text-indigo-700 uppercase tracking-wide block mb-1">
+                          <span className="text-xs font-medium text-gray-500 uppercase tracking-wide block mb-1">
                             Apellidos
                           </span>
-                          <p className="text-xl font-bold text-indigo-900 leading-tight">
+                          <p className="text-sm font-semibold text-gray-900">
                             {selectedCita.propietario.apellidos}
                           </p>
                         </div>
