@@ -211,11 +211,11 @@ export default function Index() {
                   </div>
 
                   {/* Quality badge */}
-                  <div className="absolute top-4 right-4 bg-emerald-600 backdrop-blur-sm rounded-lg px-4 py-2 shadow-lg border border-white/20 transform hover:scale-105 transition-all duration-300">
+                  <div className="absolute top-4 right-4 bg-purple-600 backdrop-blur-sm rounded-lg px-4 py-2 shadow-lg border border-white/20 transform hover:scale-105 transition-all duration-300">
                     <div className="flex items-center gap-2">
-                      <Bell className="w-5 h-5 text-white" />
+                      <FileText className="w-5 h-5 text-white" />
                       <span className="text-white text-sm font-semibold">
-                        Recordatorios
+                        Historial Digital
                       </span>
                     </div>
                   </div>
