@@ -672,9 +672,9 @@ export default function Index() {
 
                   <a
                     href="tel:+5551234567"
-                    className="group block bg-vet-primary/5 border-2 border-vet-primary/20 rounded-2xl p-6 hover:bg-vet-primary/10 hover:border-vet-primary/40 transition-all duration-300 hover:scale-105"
+                    className="group block bg-vet-primary/5 border-2 border-vet-primary/20 rounded-2xl p-6 hover:bg-vet-primary/10 hover:border-vet-primary/40 transition-all duration-300 hover:scale-105 h-[108px]"
                   >
-                    <div className="flex items-center space-x-4">
+                    <div className="flex items-center space-x-4 h-full">
                       <div className="w-16 h-16 bg-vet-primary rounded-2xl flex items-center justify-center group-hover:bg-vet-primary-dark transition-colors">
                         <Phone className="w-8 h-8 text-white" />
                       </div>
@@ -697,9 +697,9 @@ export default function Index() {
 
                   <a
                     href="https://wa.me/5551234567"
-                    className="group block bg-green-50 border-2 border-green-200 rounded-2xl p-6 hover:bg-green-100 hover:border-green-300 transition-all duration-300 hover:scale-105"
+                    className="group block bg-green-50 border-2 border-green-200 rounded-2xl p-6 hover:bg-green-100 hover:border-green-300 transition-all duration-300 hover:scale-105 h-[108px]"
                   >
-                    <div className="flex items-center space-x-4">
+                    <div className="flex items-center space-x-4 h-full">
                       <div className="w-16 h-16 bg-green-500 rounded-2xl flex items-center justify-center group-hover:bg-green-600 transition-colors">
                         <svg
                           className="w-8 h-8 text-white"
