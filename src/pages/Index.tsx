@@ -394,11 +394,9 @@ export default function Index() {
               <Stethoscope className="w-4 h-4" />
               SERVICIOS VETERINARIOS
             </div>
-            <h2 className="text-4xl lg:text-5xl font-bold text-vet-gray-900 mb-6">
-              Cuidado Integral para
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-vet-primary to-vet-secondary">
-                tu Mejor Amigo
-              </span>
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+              <span className="text-vet-gray-900">¿Buscas el mejor cuidado para</span>
+              <span className="block text-vet-primary">tu mascota?</span>
             </h2>
             <p className="text-xl text-vet-gray-600 max-w-3xl mx-auto leading-relaxed">
               Ofrecemos servicios veterinarios especializados con tecnología de vanguardia
