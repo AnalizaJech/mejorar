@@ -728,14 +728,14 @@ export default function Index() {
                 </div>
 
                 {/* Emergency Steps - Colorful Harmonious Design */}
-                <div className="flex flex-col h-full">
+                <div className="flex flex-col h-[240px]">
                   <h3 className="text-2xl font-bold text-vet-gray-900 mb-6">
                     ¿Qué hacer mientras llegas?
                   </h3>
 
                   <div className="relative flex-1">
-                    {/* Connection Line - stops at last circle */}
-                    <div className="absolute left-6 top-4 h-32 w-1 bg-gradient-to-b from-blue-400 via-emerald-400 to-amber-400 rounded-full"></div>
+                    {/* Connection Line - connects all circles perfectly */}
+                    <div className="absolute left-6 top-6 h-[128px] w-1 bg-gradient-to-b from-blue-400 via-emerald-400 to-amber-400 rounded-full"></div>
 
                     <div className="space-y-8">
                       {/* Step 1 */}
