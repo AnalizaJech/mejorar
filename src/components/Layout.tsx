@@ -138,6 +138,7 @@ export default function Layout({
   } = useAppContext();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   // Hook para mostrar notificaciones toast automáticamente
   useNotificationToast();
@@ -152,6 +153,25 @@ export default function Layout({
 
   // Explicitly check authentication state
   const isUserAuthenticated = isAuthenticated && !!user;
+
+  // Scroll progress tracking
+  useEffect(() => {
+    const updateScrollProgress = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      setScrollProgress(Math.min(Math.max(progress, 0), 100));
+    };
+
+    if (location.pathname === "/") {
+      window.addEventListener("scroll", updateScrollProgress, { passive: true });
+      updateScrollProgress(); // Initial calculation
+    }
+
+    return () => {
+      window.removeEventListener("scroll", updateScrollProgress);
+    };
+  }, [location.pathname]);
 
   const handleLogout = () => {
     // Close mobile menu first if open, then show logout modal
