@@ -398,16 +398,16 @@ export default function CitaDetailModal({
 
                   {/* Teléfono */}
                   {selectedCita.propietario?.telefono && (
-                    <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div className="bg-gradient-to-br from-violet-50 to-violet-100 rounded-xl p-4 shadow-sm border border-violet-200 hover:shadow-lg transition-all duration-300 hover:scale-105">
                       <div className="flex items-center space-x-3">
-                        <div className="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center">
-                          <Phone className="w-5 h-5 text-purple-600" />
+                        <div className="w-12 h-12 bg-gradient-to-r from-violet-500 to-violet-600 rounded-xl flex items-center justify-center shadow-lg">
+                          <Phone className="w-6 h-6 text-white" />
                         </div>
                         <div className="flex-1">
-                          <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block mb-1">
+                          <span className="text-xs font-bold text-violet-700 uppercase tracking-wide block mb-1">
                             Teléfono
                           </span>
-                          <p className="text-lg font-bold text-vet-gray-900 font-mono">
+                          <p className="text-xl font-bold text-violet-900 font-mono">
                             {selectedCita.propietario.telefono}
                           </p>
                         </div>
