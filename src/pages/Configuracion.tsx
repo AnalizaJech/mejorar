@@ -2043,7 +2043,7 @@ export default function Configuracion() {
                         <span className="text-red-600 font-bold mt-0.5">•</span>
                         <span>
                           <strong>
-                            Se cancelar��n todas las citas pendientes
+                            Se cancelarán todas las citas pendientes
                           </strong>{" "}
                           automáticamente
                         </span>

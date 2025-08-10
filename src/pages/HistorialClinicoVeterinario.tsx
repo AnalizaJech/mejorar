@@ -987,7 +987,7 @@ export default function HistorialClinicoVeterinario() {
                       <SelectItem value="emergencia">Emergencia</SelectItem>
                       <SelectItem value="cirugia">Cirugía</SelectItem>
                       <SelectItem value="grooming">Grooming</SelectItem>
-                      <SelectItem value="diagnostico">Diagn��stico</SelectItem>
+                      <SelectItem value="diagnostico">Diagnóstico</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
