@@ -324,6 +324,125 @@ export default function CitaDetailModal({
                   return null;
                 })()}
 
+                {/* Sección de Información del Propietario Rediseñada */}
+
+                {/* Información Personal Principal */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                  {/* Datos de Identidad */}
+                  <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 border border-blue-100">
+                    <div className="flex items-center space-x-3 mb-4">
+                      <div className="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center shadow-lg">
+                        <User className="w-6 h-6 text-white" />
+                      </div>
+                      <div>
+                        <h4 className="text-lg font-bold text-blue-900">Identidad</h4>
+                        <p className="text-sm text-blue-600">Datos personales del cliente</p>
+                      </div>
+                    </div>
+                    <div className="space-y-3">
+                      <div>
+                        <span className="text-xs font-medium text-blue-600 uppercase tracking-wide block mb-1">
+                          Nombres
+                        </span>
+                        <p className="text-lg font-bold text-blue-900">
+                          {selectedCita.propietario?.nombre || "No registrado"}
+                        </p>
+                      </div>
+                      <div>
+                        <span className="text-xs font-medium text-blue-600 uppercase tracking-wide block mb-1">
+                          Apellidos
+                        </span>
+                        <p className="text-lg font-bold text-blue-900">
+                          {selectedCita.propietario?.apellidos || "No registrado"}
+                        </p>
+                      </div>
+                      {selectedCita.propietario?.username && (
+                        <div>
+                          <span className="text-xs font-medium text-blue-600 uppercase tracking-wide block mb-1">
+                            Usuario
+                          </span>
+                          <p className="text-sm font-semibold text-blue-800">
+                            @{selectedCita.propietario.username}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Estado de Verificación */}
+                  <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 border border-green-100">
+                    <div className="flex items-center space-x-3 mb-4">
+                      <div className="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center shadow-lg">
+                        <Shield className="w-6 h-6 text-white" />
+                      </div>
+                      <div>
+                        <h4 className="text-lg font-bold text-green-900">Verificación</h4>
+                        <p className="text-sm text-green-600">Estado de validación</p>
+                      </div>
+                    </div>
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between p-3 bg-white rounded-lg border border-green-200">
+                        <div className="flex items-center space-x-2">
+                          <Mail className="w-4 h-4 text-green-600" />
+                          <span className="text-sm font-medium text-green-800">Email</span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          {selectedCita.propietario?.email ? (
+                            <>
+                              <CheckCircle className="w-4 h-4 text-green-600" />
+                              <span className="text-xs font-medium text-green-700">Registrado</span>
+                            </>
+                          ) : (
+                            <>
+                              <AlertTriangle className="w-4 h-4 text-yellow-600" />
+                              <span className="text-xs font-medium text-yellow-700">No verificado</span>
+                            </>
+                          )}
+                        </div>
+                      </div>
+                      <div className="flex items-center justify-between p-3 bg-white rounded-lg border border-green-200">
+                        <div className="flex items-center space-x-2">
+                          <Phone className="w-4 h-4 text-green-600" />
+                          <span className="text-sm font-medium text-green-800">Teléfono</span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          {selectedCita.propietario?.telefono ? (
+                            <>
+                              <CheckCircle className="w-4 h-4 text-green-600" />
+                              <span className="text-xs font-medium text-green-700">Verificado</span>
+                            </>
+                          ) : (
+                            <>
+                              <XCircle className="w-4 h-4 text-red-600" />
+                              <span className="text-xs font-medium text-red-700">No registrado</span>
+                            </>
+                          )}
+                        </div>
+                      </div>
+                      <div className="flex items-center justify-between p-3 bg-white rounded-lg border border-green-200">
+                        <div className="flex items-center space-x-2">
+                          <IdCard className="w-4 h-4 text-green-600" />
+                          <span className="text-sm font-medium text-green-800">Documento</span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          {selectedCita.propietario?.documento ? (
+                            <>
+                              <CheckCircle className="w-4 h-4 text-green-600" />
+                              <span className="text-xs font-medium text-green-700">Completo</span>
+                            </>
+                          ) : (
+                            <>
+                              <AlertTriangle className="w-4 h-4 text-yellow-600" />
+                              <span className="text-xs font-medium text-yellow-700">Pendiente</span>
+                            </>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Datos de Contacto Detallados */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {/* NOMBRES */}
                   <div className="bg-gray-100 rounded-2xl p-4 shadow-sm">
