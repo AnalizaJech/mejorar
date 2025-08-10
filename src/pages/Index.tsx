@@ -194,33 +194,33 @@ export default function Index() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
 
                   {/* Floating badge */}
-                  <div className="absolute bottom-4 left-4 bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg transform hover:scale-105 transition-all duration-300">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                        <Stethoscope className="w-5 h-5 text-blue-600" />
-                      </div>
-                      <div>
-                        <p className="text-sm font-bold text-vet-gray-900">
-                          Mascota Feliz
-                        </p>
-                        <p className="text-xs text-vet-gray-600">
-                          Cuidado Profesional
-                        </p>
-                      </div>
-                    </div>
+              <div className="absolute bottom-2 left-2 md:bottom-4 md:left-4 bg-white/95 backdrop-blur-sm rounded-xl p-2 md:p-4 shadow-lg transform hover:scale-105 transition-all duration-300">
+                <div className="flex items-center space-x-2 md:space-x-3">
+                  <div className="w-8 h-8 md:w-10 md:h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                    <Stethoscope className="w-4 h-4 md:w-5 md:h-5 text-blue-600" />
                   </div>
+                  <div>
+                    <p className="text-xs md:text-sm font-bold text-vet-gray-900">
+                      Mascota Feliz
+                    </p>
+                    <p className="text-xs text-vet-gray-600">
+                      Cuidado Profesional
+                    </p>
+                  </div>
+                </div>
+              </div>
 
                   {/* Quality badge */}
-                  <div className="absolute top-4 right-4 bg-white rounded-xl shadow-lg p-4 z-10 transform hover:scale-105 transition-all duration-300">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center">
-                        <CheckCircle className="w-5 h-5 text-indigo-600" />
+                  <div className="absolute top-2 right-2 md:top-4 md:right-4 bg-white rounded-xl shadow-lg p-2 md:p-4 z-10 transform hover:scale-105 transition-all duration-300">
+                    <div className="flex items-center space-x-2 md:space-x-3">
+                      <div className="w-8 h-8 md:w-10 md:h-10 bg-indigo-100 rounded-full flex items-center justify-center">
+                        <CheckCircle className="w-4 h-4 md:w-5 md:h-5 text-indigo-600" />
                       </div>
                       <div>
-                        <p className="text-lg font-bold text-vet-gray-900">
+                        <p className="text-sm md:text-lg font-bold text-vet-gray-900">
                           24/7
                         </p>
-                        <p className="text-sm text-vet-gray-600">Disponible</p>
+                        <p className="text-xs md:text-sm text-vet-gray-600">Disponible</p>
                       </div>
                     </div>
                   </div>
@@ -228,7 +228,7 @@ export default function Index() {
               </div>
 
               {/* Floating stats cards */}
-              <div className="absolute -top-4 -left-4 bg-white rounded-xl shadow-lg p-4 z-10 transform hover:scale-105 transition-all duration-300">
+              <div className="hidden sm:block absolute -top-4 -left-4 bg-white rounded-xl shadow-lg p-4 z-10 transform hover:scale-105 transition-all duration-300">
                 <div className="flex items-center space-x-3">
                   <div className="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center">
                     <Star className="w-5 h-5 text-amber-600" />
@@ -240,7 +240,7 @@ export default function Index() {
                 </div>
               </div>
 
-              <div className="absolute -bottom-4 -right-4 bg-white rounded-xl shadow-lg p-4 z-10 transform hover:scale-105 transition-all duration-300">
+              <div className="hidden sm:block absolute -bottom-4 -right-4 bg-white rounded-xl shadow-lg p-4 z-10 transform hover:scale-105 transition-all duration-300">
                 <div className="flex items-center space-x-3">
                   <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
                     <Users className="w-5 h-5 text-emerald-600" />
@@ -672,24 +672,24 @@ export default function Index() {
 
                   <a
                     href="tel:+5551234567"
-                    className="group block bg-vet-primary/5 border-2 border-vet-primary/20 rounded-2xl p-6 hover:bg-vet-primary/10 hover:border-vet-primary/40 transition-all duration-300 hover:scale-105 h-[108px]"
+                    className="group block bg-vet-primary/5 border-2 border-vet-primary/20 rounded-2xl p-4 md:p-6 hover:bg-vet-primary/10 hover:border-vet-primary/40 transition-all duration-300 hover:scale-105 min-h-[92px] md:h-[108px]"
                   >
-                    <div className="flex items-center space-x-4 h-full">
-                      <div className="w-16 h-16 bg-vet-primary rounded-2xl flex items-center justify-center group-hover:bg-vet-primary-dark transition-colors">
-                        <Phone className="w-8 h-8 text-white" />
+                    <div className="flex items-center space-x-3 md:space-x-4 h-full">
+                      <div className="w-12 h-12 md:w-16 md:h-16 bg-vet-primary rounded-2xl flex items-center justify-center group-hover:bg-vet-primary-dark transition-colors">
+                        <Phone className="w-6 h-6 md:w-8 md:h-8 text-white" />
                       </div>
-                      <div className="flex-1">
-                        <h4 className="text-xl font-bold text-vet-gray-900">
+                      <div className="flex-1 min-w-0">
+                        <h4 className="text-lg md:text-xl font-bold text-vet-gray-900">
                           Llamar Ahora
                         </h4>
-                        <p className="text-2xl font-bold text-vet-primary">
+                        <p className="text-lg md:text-2xl font-bold text-vet-primary">
                           (555) 123-4567
                         </p>
-                        <p className="text-vet-gray-600">
+                        <p className="text-sm md:text-base text-vet-gray-600">
                           Respuesta inmediata garantizada
                         </p>
                       </div>
-                      <div className="text-vet-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="text-vet-primary opacity-0 group-hover:opacity-100 transition-opacity hidden md:block">
                         <ArrowRight className="w-6 h-6" />
                       </div>
                     </div>
@@ -697,30 +697,30 @@ export default function Index() {
 
                   <a
                     href="https://wa.me/5551234567"
-                    className="group block bg-green-50 border-2 border-green-200 rounded-2xl p-6 hover:bg-green-100 hover:border-green-300 transition-all duration-300 hover:scale-105 h-[108px]"
+                    className="group block bg-green-50 border-2 border-green-200 rounded-2xl p-4 md:p-6 hover:bg-green-100 hover:border-green-300 transition-all duration-300 hover:scale-105 min-h-[92px] md:h-[108px]"
                   >
-                    <div className="flex items-center space-x-4 h-full">
-                      <div className="w-16 h-16 bg-green-500 rounded-2xl flex items-center justify-center group-hover:bg-green-600 transition-colors">
+                    <div className="flex items-center space-x-3 md:space-x-4 h-full">
+                      <div className="w-12 h-12 md:w-16 md:h-16 bg-green-500 rounded-2xl flex items-center justify-center group-hover:bg-green-600 transition-colors">
                         <svg
-                          className="w-8 h-8 text-white"
+                          className="w-6 h-6 md:w-8 md:h-8 text-white"
                           viewBox="0 0 24 24"
                           fill="currentColor"
                         >
                           <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm.01 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31c-.82-1.31-1.26-2.83-1.26-4.38 0-4.54 3.7-8.24 8.24-8.24s8.24 3.7 8.24 8.24-3.69 8.24-8.23 8.24zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43-.14-.01-.31-.01-.47-.01-.17 0-.43.06-.66.31-.22.25-.86.84-.86 2.05 0 1.21.88 2.37 1 2.54.12.17 1.71 2.61 4.14 3.66.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.11-.23-.17-.48-.29z" />
                         </svg>
                       </div>
-                      <div className="flex-1">
-                        <h4 className="text-xl font-bold text-green-800">
+                      <div className="flex-1 min-w-0">
+                        <h4 className="text-lg md:text-xl font-bold text-green-800">
                           WhatsApp
                         </h4>
-                        <p className="text-lg font-semibold text-green-700">
+                        <p className="text-base md:text-lg font-semibold text-green-700">
                           Chat con veterinario
                         </p>
-                        <p className="text-green-600">
+                        <p className="text-sm md:text-base text-green-600">
                           Envío de fotos y videos
                         </p>
                       </div>
-                      <div className="text-green-600 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="text-green-600 opacity-0 group-hover:opacity-100 transition-opacity hidden md:block">
                         <ArrowRight className="w-6 h-6" />
                       </div>
                     </div>
@@ -729,7 +729,7 @@ export default function Index() {
 
                 {/* Emergency Steps - Colorful Harmonious Design */}
                 <div className="flex flex-col">
-                  <h3 className="text-2xl font-bold text-vet-gray-900 mb-6">
+                  <h3 className="text-xl md:text-2xl font-bold text-vet-gray-900 mb-6">
                     ¿Qué hacer mientras llegas?
                   </h3>
 
