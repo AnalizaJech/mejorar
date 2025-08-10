@@ -626,8 +626,8 @@ export default function Index() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Floating Emergency Badge */}
           <div className="absolute top-8 right-8 animate-bounce">
-            <div className="bg-vet-secondary rounded-full p-4 shadow-lg">
-              <div className="text-2xl font-bold text-white">24/7</div>
+            <div className="bg-indigo-100 rounded-full p-4 shadow-lg border border-indigo-200">
+              <div className="text-2xl font-bold text-indigo-600">24/7</div>
             </div>
           </div>
 
@@ -726,10 +726,15 @@ export default function Index() {
                 </div>
 
                 {/* Emergency Info */}
-                <div className="bg-vet-gray-50 rounded-2xl p-6 border border-vet-gray-200">
-                  <h4 className="text-xl font-bold text-vet-gray-900 mb-6">
-                    ¿Qué hacer mientras llegas?
-                  </h4>
+                <div className="bg-gradient-to-br from-indigo-50 to-white rounded-2xl p-8 border-2 border-indigo-100 shadow-lg">
+                  <div className="flex items-center mb-6">
+                    <div className="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center mr-3">
+                      <CheckCircle className="w-5 h-5 text-indigo-600" />
+                    </div>
+                    <h4 className="text-xl font-bold text-vet-gray-900">
+                      ¿Qué hacer mientras llegas?
+                    </h4>
+                  </div>
                   <div className="space-y-4">
                     <div className="flex items-start space-x-3">
                       <div className="w-8 h-8 bg-vet-secondary rounded-full flex items-center justify-center mt-1">
