@@ -610,24 +610,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }
   }, [citas]);
 
-  useEffect(() => {
-    localStorage.setItem("preCitas", JSON.stringify(preCitas));
-  }, [preCitas]);
 
   useEffect(() => {
     localStorage.setItem("historialClinico", JSON.stringify(historialClinico));
   }, [historialClinico]);
 
-  useEffect(() => {
-    localStorage.setItem(
-      "suscriptoresNewsletter",
-      JSON.stringify(suscriptoresNewsletter),
-    );
-  }, [suscriptoresNewsletter]);
 
-  useEffect(() => {
-    localStorage.setItem("newsletterEmails", JSON.stringify(newsletterEmails));
-  }, [newsletterEmails]);
 
   useEffect(() => {
     localStorage.setItem("notificaciones", JSON.stringify(notificaciones));
