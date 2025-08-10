@@ -55,6 +55,7 @@ import {
   Mail,
   MessageCircle,
   MessageSquare,
+  User,
   PawPrint,
   AlertCircle,
   User,
