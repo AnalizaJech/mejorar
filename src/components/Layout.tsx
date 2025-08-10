@@ -125,7 +125,13 @@ const navigationItems: NavItem[] = [
   {
     label: "Servicios",
     path: "/servicios",
-    icon: FileText,
+    icon: Settings,
+    roles: ["admin"],
+  },
+  {
+    label: "Configuración",
+    path: "/configuracion",
+    icon: Settings,
     roles: ["admin"],
   },
 ];
