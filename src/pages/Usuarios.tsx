@@ -670,40 +670,13 @@ export default function Usuarios() {
 
                   <div>
                     <Label htmlFor="direccion">Dirección</Label>
-                    <Textarea
+                    <Input
                       id="direccion"
                       value={formData.direccion}
                       onChange={(e) =>
                         setFormData({ ...formData, direccion: e.target.value })
                       }
                       placeholder="Dirección completa"
-                      rows={3}
-                    />
-                  </div>
-                </div>
-
-                {/* Seguridad */}
-                <div className="space-y-4">
-                  <h3 className="text-lg font-semibold text-vet-gray-900 border-b pb-2">
-                    Seguridad
-                  </h3>
-
-                  <div>
-                    <Label htmlFor="password">
-                      Contraseña (dejar en blanco para mantener actual)
-                    </Label>
-                    <Input
-                      id="password"
-                      type="password"
-                      value={formData.password}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          password: e.target.value,
-                        })
-                      }
-                      placeholder="Nueva contraseña (opcional)"
-                      minLength={6}
                     />
                   </div>
                 </div>
