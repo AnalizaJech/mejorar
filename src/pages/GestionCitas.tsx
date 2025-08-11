@@ -141,7 +141,7 @@ export default function GestionCitas() {
       return matchesSearch && matchesStatus && matchesDate;
     })
     .sort((a, b) => {
-      // Ordenar por fecha m��s reciente primero
+      // Ordenar por fecha m����s reciente primero
       const dateA = new Date(a.fecha);
       const dateB = new Date(b.fecha);
       return dateB.getTime() - dateA.getTime();
@@ -774,7 +774,7 @@ export default function GestionCitas() {
                 {selectedCita && (
                   <div className="space-y-6 pt-6">
                     {/* Información de la cita */}
-                    <div className="bg-vet-gray-50 rounded-lg p-6">
+                    <div className="bg-blue-50 rounded-lg p-6">
                       <div className="flex items-center space-x-2 mb-4">
                         <PawPrint className="w-5 h-5 text-vet-primary" />
                         <h4 className="font-semibold text-vet-gray-900">
