@@ -1033,9 +1033,7 @@ export default function GestionCitas() {
                                   <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
                                     <div className="flex items-center space-x-3">
                                       <div className="w-8 h-8 bg-slate-100 rounded-lg flex items-center justify-center">
-                                        <span className="text-slate-600 font-bold text-sm">
-                                          @
-                                        </span>
+                                        <User className="w-4 h-4 text-slate-600" />
                                       </div>
                                       <div>
                                         <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
@@ -1104,9 +1102,7 @@ export default function GestionCitas() {
                                   <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
                                     <div className="flex items-center space-x-3">
                                       <div className="w-8 h-8 bg-yellow-100 rounded-lg flex items-center justify-center">
-                                        <span className="text-yellow-600 font-bold text-sm">
-                                          🆔
-                                        </span>
+                                        <IdCard className="w-4 h-4 text-yellow-600" />
                                       </div>
                                       <div>
                                         <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
@@ -1129,9 +1125,7 @@ export default function GestionCitas() {
                                   <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
                                     <div className="flex items-center space-x-3">
                                       <div className="w-8 h-8 bg-pink-100 rounded-lg flex items-center justify-center">
-                                        <span className="text-pink-600 font-bold text-sm">
-                                          🎂
-                                        </span>
+                                        <Calendar className="w-4 h-4 text-pink-600" />
                                       </div>
                                       <div>
                                         <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
@@ -1179,13 +1173,7 @@ export default function GestionCitas() {
                                   <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
                                     <div className="flex items-center space-x-3">
                                       <div className="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center">
-                                        <span className="text-indigo-600 font-bold text-sm">
-                                          {propietario.genero === "masculino"
-                                            ? "♂️"
-                                            : propietario.genero === "femenino"
-                                              ? "♀️"
-                                              : "⚧️"}
-                                        </span>
+                                        <User className="w-4 h-4 text-indigo-600" />
                                       </div>
                                       <div>
                                         <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
@@ -1204,9 +1192,7 @@ export default function GestionCitas() {
                                   <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
                                     <div className="flex items-center space-x-3">
                                       <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
-                                        <span className="text-gray-600 font-bold text-sm">
-                                          📅
-                                        </span>
+                                        <Calendar className="w-4 h-4 text-gray-600" />
                                       </div>
                                       <div>
                                         <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
@@ -1253,13 +1239,11 @@ export default function GestionCitas() {
                                     <div
                                       className={`w-8 h-8 rounded-lg flex items-center justify-center ${propietario.emailVerificado ? "bg-green-100" : "bg-yellow-100"}`}
                                     >
-                                      <span
-                                        className={`font-bold text-sm ${propietario.emailVerificado ? "text-green-600" : "text-yellow-600"}`}
-                                      >
-                                        {propietario.emailVerificado
-                                          ? "✓"
-                                          : "⚠️"}
-                                      </span>
+                                      {propietario.emailVerificado ? (
+                                        <CheckCircle className="w-4 h-4 text-green-600" />
+                                      ) : (
+                                        <AlertCircle className="w-4 h-4 text-yellow-600" />
+                                      )}
                                     </div>
                                     <div>
                                       <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
@@ -1293,9 +1277,7 @@ export default function GestionCitas() {
                                         <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
                                           <div className="flex items-start space-x-3">
                                             <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
-                                              <span className="text-purple-600 font-bold text-sm">
-                                                🔔
-                                              </span>
+                                              <Bell className="w-4 h-4 text-purple-600" />
                                             </div>
                                             <div className="flex-1">
                                               <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block mb-2">
