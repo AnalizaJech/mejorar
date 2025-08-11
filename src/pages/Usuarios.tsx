@@ -208,7 +208,6 @@ export default function Usuarios() {
         genero: "",
         fechaNacimiento: "",
         direccion: "",
-        password: ""
       });
       setIsDialogOpen(false);
       setEditingUser(null);
