@@ -46,7 +46,7 @@ import { DatePicker } from "@/components/ui/date-picker";
 import { useToast } from "@/hooks/use-toast";
 
 export default function MisMascotas() {
-  const { user, mascotas, addMascota, updateMascota, deleteMascota } =
+  const { user, mascotas, addMascota, updateMascota, deleteMascota, addNotificacion } =
     useAppContext();
   const { toast } = useToast();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -208,6 +208,17 @@ export default function MisMascotas() {
         ...newMascota,
         fechaNacimiento: newMascota.fechaNacimiento,
       });
+
+      // Add notification for the user
+      if (user) {
+        addNotificacion({
+          usuarioId: user.id,
+          tipo: "sistema",
+          titulo: "Mascota registrada exitosamente",
+          mensaje: `Has registrado a tu mascota "${newMascota.nombre}" (${newMascota.especie}) en el sistema`,
+          leida: false,
+        });
+      }
     }
 
     // Reset form
