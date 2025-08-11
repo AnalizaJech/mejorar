@@ -91,6 +91,12 @@ export default function MisCitas() {
     window.scrollTo(0, 0);
   }, []);
 
+  // Forzar actualización cuando cambian las citas
+  useEffect(() => {
+    // Esto forzará un re-render cuando las citas cambien
+    setSelectedTab(selectedTab);
+  }, [citas.length]);
+
   const handleUploadProof = (citaId: string) => {
     setUploadingCitaId(citaId);
     setCurrentCitaId(citaId);
