@@ -147,7 +147,8 @@ interface Notificacion {
     | "consulta_registrada"
     | "sistema"
     | "nuevo_cliente"
-    | "nueva_cita";
+    | "nueva_cita"
+    | "nuevo_servicio";
   titulo: string;
   mensaje: string;
   fechaCreacion: Date;
