@@ -87,6 +87,12 @@ export default function Notificaciones() {
           priority = "normal";
           type = "sistema";
           break;
+        case "sistema":
+          icon = Bell;
+          color = "blue-500";
+          priority = "normal";
+          type = "sistema";
+          break;
       }
 
       const hoursAgo = Math.floor(
