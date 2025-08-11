@@ -295,15 +295,12 @@ export default function Notificaciones() {
           {/* Filters */}
           <Tabs value={selectedFilter} onValueChange={setSelectedFilter}>
             <TabsList
-              className={`grid w-full mb-6 ${user.rol === "admin" || user.rol === "veterinario" ? "grid-cols-2 sm:grid-cols-3 lg:grid-cols-5" : "grid-cols-2 sm:grid-cols-2 lg:grid-cols-4"}`}
+              className="grid w-full mb-6 grid-cols-2 sm:grid-cols-4"
             >
               <TabsTrigger value="todas" className="text-xs sm:text-sm">Todas</TabsTrigger>
               <TabsTrigger value="no_leidas" className="text-xs sm:text-sm">No leídas</TabsTrigger>
               <TabsTrigger value="cita" className="text-xs sm:text-sm">Citas</TabsTrigger>
               <TabsTrigger value="sistema" className="text-xs sm:text-sm">Sistema</TabsTrigger>
-              {(user.rol === "admin" || user.rol === "veterinario") && (
-                <TabsTrigger value="recordatorio" className="text-xs sm:text-sm">Recordatorios</TabsTrigger>
-              )}
             </TabsList>
 
             <TabsContent value={selectedFilter} className="space-y-4">
