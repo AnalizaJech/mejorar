@@ -520,7 +520,7 @@ export default function Usuarios() {
               if (!open) resetForm();
             }}
           >
-            <DialogContent className="sm:max-w-md">
+            <DialogContent className="sm:max-w-2xl max-h-[90vh] overflow-y-auto">
               <DialogHeader>
                 <DialogTitle>Editar Cliente</DialogTitle>
                 <DialogDescription>
