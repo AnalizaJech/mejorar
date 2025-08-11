@@ -261,7 +261,6 @@ export default function Usuarios() {
         ? new Date(cliente.fechaNacimiento).toISOString().split('T')[0]
         : "",
       direccion: cliente.direccion || "",
-      password: "", // Don't pre-fill password for security
     });
     setIsDialogOpen(true);
   };
