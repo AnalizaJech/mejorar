@@ -1486,16 +1486,22 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
     // Notificar al cliente sobre la confirmación de su cita
     if (user.rol === "cliente") {
-      const fechaFormateada = new Date(newCita.fecha).toLocaleDateString("es-ES", {
-        weekday: "long",
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      });
-      const horaFormateada = new Date(newCita.fecha).toLocaleTimeString("es-ES", {
-        hour: "2-digit",
-        minute: "2-digit",
-      });
+      const fechaFormateada = new Date(newCita.fecha).toLocaleDateString(
+        "es-ES",
+        {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        },
+      );
+      const horaFormateada = new Date(newCita.fecha).toLocaleTimeString(
+        "es-ES",
+        {
+          hour: "2-digit",
+          minute: "2-digit",
+        },
+      );
 
       addNotificacion({
         usuarioId: user.id,

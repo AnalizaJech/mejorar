@@ -245,7 +245,11 @@ export default function CitaDetailModal({
                             variant="outline"
                             className="h-8 w-8 p-0 border-green-500 text-green-600 hover:bg-green-50"
                             onClick={() => {
-                              const phoneNumber = selectedCita.propietario.telefono.replace(/\D/g, "");
+                              const phoneNumber =
+                                selectedCita.propietario.telefono.replace(
+                                  /\D/g,
+                                  "",
+                                );
                               window.open(`tel:+51${phoneNumber}`, "_self");
                             }}
                             title="Llamar"
@@ -257,9 +261,16 @@ export default function CitaDetailModal({
                             variant="outline"
                             className="h-8 w-8 p-0 border-green-600 text-green-700 hover:bg-green-50"
                             onClick={() => {
-                              const phoneNumber = selectedCita.propietario.telefono.replace(/\D/g, "");
+                              const phoneNumber =
+                                selectedCita.propietario.telefono.replace(
+                                  /\D/g,
+                                  "",
+                                );
                               const message = `Hola ${selectedCita.propietario.nombre}, me comunico de la clínica veterinaria respecto a la cita de ${selectedCita.cita.mascota}.`;
-                              window.open(`https://wa.me/51${phoneNumber}?text=${encodeURIComponent(message)}`, "_blank");
+                              window.open(
+                                `https://wa.me/51${phoneNumber}?text=${encodeURIComponent(message)}`,
+                                "_blank",
+                              );
                             }}
                             title="WhatsApp"
                           >
@@ -277,10 +288,14 @@ export default function CitaDetailModal({
                       <span>Documento</span>
                     </Label>
                     <p className="text-vet-gray-900 font-mono">
-                      {selectedCita.propietario?.tipoDocumento === "dni" && "DNI: "}
-                      {selectedCita.propietario?.tipoDocumento === "pasaporte" && "Pasaporte: "}
-                      {selectedCita.propietario?.tipoDocumento === "carnet_extranjeria" && "Carnet: "}
-                      {selectedCita.propietario?.tipoDocumento === "cedula" && "Cédula: "}
+                      {selectedCita.propietario?.tipoDocumento === "dni" &&
+                        "DNI: "}
+                      {selectedCita.propietario?.tipoDocumento ===
+                        "pasaporte" && "Pasaporte: "}
+                      {selectedCita.propietario?.tipoDocumento ===
+                        "carnet_extranjeria" && "Carnet: "}
+                      {selectedCita.propietario?.tipoDocumento === "cedula" &&
+                        "Cédula: "}
                       {!selectedCita.propietario?.tipoDocumento && "DNI: "}
                       {selectedCita.propietario?.documento || "No registrado"}
                     </p>
@@ -305,11 +320,20 @@ export default function CitaDetailModal({
                         Género
                       </Label>
                       <p className="text-vet-gray-900 capitalize">
-                        {selectedCita.propietario.genero === "masculino" && "Masculino"}
-                        {selectedCita.propietario.genero === "femenino" && "Femenino"}
+                        {selectedCita.propietario.genero === "masculino" &&
+                          "Masculino"}
+                        {selectedCita.propietario.genero === "femenino" &&
+                          "Femenino"}
                         {selectedCita.propietario.genero === "otro" && "Otro"}
-                        {selectedCita.propietario.genero === "prefiero_no_decir" && "Prefiero no decir"}
-                        {!["masculino", "femenino", "otro", "prefiero_no_decir"].includes(selectedCita.propietario.genero) && selectedCita.propietario.genero}
+                        {selectedCita.propietario.genero ===
+                          "prefiero_no_decir" && "Prefiero no decir"}
+                        {![
+                          "masculino",
+                          "femenino",
+                          "otro",
+                          "prefiero_no_decir",
+                        ].includes(selectedCita.propietario.genero) &&
+                          selectedCita.propietario.genero}
                       </p>
                     </div>
                   )}
@@ -322,11 +346,22 @@ export default function CitaDetailModal({
                         <span>Fecha de Nacimiento</span>
                       </Label>
                       <p className="text-vet-gray-900">
-                        {new Date(selectedCita.propietario.fechaNacimiento).toLocaleDateString("es-ES", {
+                        {new Date(
+                          selectedCita.propietario.fechaNacimiento,
+                        ).toLocaleDateString("es-ES", {
                           day: "numeric",
                           month: "long",
                           year: "numeric",
-                        })} ({Math.floor((new Date().getTime() - new Date(selectedCita.propietario.fechaNacimiento).getTime()) / (365.25 * 24 * 60 * 60 * 1000))} años)
+                        })}{" "}
+                        (
+                        {Math.floor(
+                          (new Date().getTime() -
+                            new Date(
+                              selectedCita.propietario.fechaNacimiento,
+                            ).getTime()) /
+                            (365.25 * 24 * 60 * 60 * 1000),
+                        )}{" "}
+                        años)
                       </p>
                     </div>
                   )}
@@ -353,7 +388,9 @@ export default function CitaDetailModal({
                       <span>Cliente desde</span>
                     </Label>
                     <p className="text-vet-gray-900 font-medium">
-                      {new Date(selectedCita.propietario.fechaRegistro).toLocaleDateString("es-ES", {
+                      {new Date(
+                        selectedCita.propietario.fechaRegistro,
+                      ).toLocaleDateString("es-ES", {
                         year: "numeric",
                         month: "long",
                         day: "numeric",

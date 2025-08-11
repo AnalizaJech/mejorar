@@ -158,13 +158,14 @@ export default function MisCitas() {
 
       try {
         const success = await saveComprobante(currentCitaId, previewFile);
-        const cita = citas.find(c => c.id === currentCitaId);
+        const cita = citas.find((c) => c.id === currentCitaId);
 
         if (success || cita) {
           // Mostrar toast de éxito inmediato
           toast({
             title: "¡Comprobante subido exitosamente!",
-            description: "Tu comprobante está siendo validado. Te notificaremos cuando sea aprobado.",
+            description:
+              "Tu comprobante está siendo validado. Te notificaremos cuando sea aprobado.",
             duration: 5000,
           });
 
@@ -185,11 +186,14 @@ export default function MisCitas() {
 
             // Notificar a todos los administradores sobre el comprobante subido
             const admins = usuarios.filter((u) => u.rol === "admin");
-            const fechaCitaFormateada = new Date(cita.fecha).toLocaleDateString("es-ES", {
-              weekday: "short",
-              month: "short",
-              day: "numeric",
-            });
+            const fechaCitaFormateada = new Date(cita.fecha).toLocaleDateString(
+              "es-ES",
+              {
+                weekday: "short",
+                month: "short",
+                day: "numeric",
+              },
+            );
 
             admins.forEach((admin) => {
               addNotificacion({
@@ -213,7 +217,8 @@ export default function MisCitas() {
           console.error("[ERROR] Error al subir comprobante");
           toast({
             title: "Error al subir comprobante",
-            description: "Hubo un problema al subir tu comprobante. Por favor, inténtalo nuevamente.",
+            description:
+              "Hubo un problema al subir tu comprobante. Por favor, inténtalo nuevamente.",
             variant: "destructive",
             duration: 5000,
           });
@@ -229,7 +234,8 @@ export default function MisCitas() {
         console.error("[ERROR] Error durante la subida:", error);
         toast({
           title: "Error al subir comprobante",
-          description: "Hubo un problema técnico. Por favor, inténtalo nuevamente.",
+          description:
+            "Hubo un problema técnico. Por favor, inténtalo nuevamente.",
           variant: "destructive",
           duration: 5000,
         });
@@ -314,7 +320,9 @@ export default function MisCitas() {
         );
         break;
       case "pendientes":
-        filteredCitas = userCitas.filter((cita) => cita.estado === "pendiente_pago");
+        filteredCitas = userCitas.filter(
+          (cita) => cita.estado === "pendiente_pago",
+        );
         break;
       case "completadas":
         filteredCitas = userCitas.filter((cita) => cita.estado === "atendida");
@@ -328,8 +336,8 @@ export default function MisCitas() {
     // Ordenar todas las citas: primero por ID (más reciente = mayor timestamp en ID) y luego por fecha
     return filteredCitas.sort((a, b) => {
       // Extraer timestamp del ID de la cita (formato: cita-{timestamp}-{random})
-      const timestampA = parseInt(a.id.split('-')[1]) || 0;
-      const timestampB = parseInt(b.id.split('-')[1]) || 0;
+      const timestampA = parseInt(a.id.split("-")[1]) || 0;
+      const timestampB = parseInt(b.id.split("-")[1]) || 0;
 
       // Si los IDs son muy cercanos (menos de 1 segundo de diferencia), ordenar por fecha
       if (Math.abs(timestampB - timestampA) < 1000) {

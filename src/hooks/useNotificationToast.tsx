@@ -1,7 +1,15 @@
 import { useEffect } from "react";
 import { useAppContext } from "@/contexts/AppContext";
 import { useToast } from "@/hooks/use-toast";
-import { CheckCircle, Bell, FileText, User, Calendar, CreditCard, Upload } from "lucide-react";
+import {
+  CheckCircle,
+  Bell,
+  FileText,
+  User,
+  Calendar,
+  CreditCard,
+  Upload,
+} from "lucide-react";
 
 export function useNotificationToast() {
   const { user, getNotificacionesByUser } = useAppContext();
