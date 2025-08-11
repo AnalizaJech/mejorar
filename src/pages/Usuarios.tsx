@@ -66,8 +66,14 @@ import {
 
 interface ClientFormData {
   nombre: string;
+  apellidos: string;
   email: string;
   telefono: string;
+  documento: string;
+  tipoDocumento: string;
+  genero: string;
+  fechaNacimiento: string;
+  direccion: string;
   password?: string;
 }
 
