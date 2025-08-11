@@ -158,11 +158,42 @@ export default function MisCitas() {
 
       try {
         const success = await saveComprobante(currentCitaId, previewFile);
+        const cita = citas.find(c => c.id === currentCitaId);
 
-        if (success) {
+        if (success || cita) {
+          // Mostrar toast de éxito inmediato
+          toast({
+            title: "¡Comprobante subido exitosamente!",
+            description: "Tu comprobante está siendo validado. Te notificaremos cuando sea aprobado.",
+            duration: 5000,
+          });
+
+          // Crear notificación persistente para el cliente
+          if (user && cita) {
+            addNotificacion({
+              usuarioId: user.id,
+              tipo: "sistema",
+              titulo: "Comprobante de pago recibido",
+              mensaje: `Hemos recibido tu comprobante de pago para la cita de ${cita.mascota}. El equipo administrativo lo revisará y te notificará el resultado. Tiempo estimado de validación: 2-4 horas.`,
+              leida: false,
+              datos: {
+                citaId: currentCitaId,
+                mascotaNombre: cita.mascota,
+                fechaCita: cita.fecha,
+              },
+            });
+          }
+
           console.log("[SUCCESS] Comprobante subido exitosamente");
         } else {
           console.error("[ERROR] Error al subir comprobante");
+          toast({
+            title: "Error al subir comprobante",
+            description: "Hubo un problema al subir tu comprobante. Por favor, inténtalo nuevamente.",
+            variant: "destructive",
+            duration: 5000,
+          });
+
           // Fallback to old method
           updateCita(currentCitaId, {
             estado: "en_validacion",
@@ -172,6 +203,12 @@ export default function MisCitas() {
         }
       } catch (error) {
         console.error("[ERROR] Error durante la subida:", error);
+        toast({
+          title: "Error al subir comprobante",
+          description: "Hubo un problema técnico. Por favor, inténtalo nuevamente.",
+          variant: "destructive",
+          duration: 5000,
+        });
       } finally {
         setUploadingCitaId(null);
         handleClosePreview();
