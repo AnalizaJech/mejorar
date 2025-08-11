@@ -94,6 +94,12 @@ export default function Notificaciones() {
           priority = "normal";
           type = "sistema";
           break;
+        case "comprobante_recibido":
+          icon = Upload;
+          color = "orange-500";
+          priority = "high";
+          type = "cita";
+          break;
       }
 
       const hoursAgo = Math.floor(
