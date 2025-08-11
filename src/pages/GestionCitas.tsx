@@ -141,7 +141,7 @@ export default function GestionCitas() {
       return matchesSearch && matchesStatus && matchesDate;
     })
     .sort((a, b) => {
-      // Ordenar por fecha más reciente primero
+      // Ordenar por fecha m��s reciente primero
       const dateA = new Date(a.fecha);
       const dateB = new Date(b.fecha);
       return dateB.getTime() - dateA.getTime();
@@ -1119,8 +1119,8 @@ export default function GestionCitas() {
                                         <User className="w-4 h-4 text-indigo-600" />
                                       </div>
                                       <div>
-                                        <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
-                                          Género
+                                        <span className="text-sm font-bold text-vet-gray-700 uppercase tracking-wide block mb-1">
+                                          GÉNERO
                                         </span>
                                         <p className="text-sm font-medium text-vet-gray-900 capitalize">
                                           {propietario.genero}
