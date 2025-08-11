@@ -285,18 +285,16 @@ export default function Servicios() {
         const newService = { ...formData, id: newId };
         updatedServices = [...servicios, newService];
 
-        // Notify all admins about the new service
-        const admins = usuarios.filter((u) => u.rol === "admin");
-        admins.forEach((admin) => {
-          if (admin.id !== user?.id) { // Don't notify the creator
-            addNotificacion({
-              usuarioId: admin.id,
-              tipo: "nuevo_servicio",
-              titulo: "Nuevo servicio agregado",
-              mensaje: `Se ha agregado el servicio "${newService.nombre}" por ${user?.nombre || "Administrador"} - Precio: S/. ${newService.precio}`,
-              leida: false,
-            });
-          }
+        // Notify all users about the new service
+        const allUsers = usuarios.filter((u) => u.id !== user?.id); // Don't notify the creator
+        allUsers.forEach((targetUser) => {
+          addNotificacion({
+            usuarioId: targetUser.id,
+            tipo: "nuevo_servicio",
+            titulo: "Nuevo servicio disponible",
+            mensaje: `Se ha agregado el servicio "${newService.nombre}" al catálogo - Precio: S/. ${newService.precio}`,
+            leida: false,
+          });
         });
       }
 
