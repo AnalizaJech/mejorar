@@ -258,9 +258,17 @@ export default function Usuarios() {
   const handleEdit = (cliente: any) => {
     setEditingUser(cliente.id);
     setFormData({
-      nombre: cliente.nombre,
-      email: cliente.email,
+      nombre: cliente.nombre || "",
+      apellidos: cliente.apellidos || "",
+      email: cliente.email || "",
       telefono: cliente.telefono || "",
+      documento: cliente.documento || "",
+      tipoDocumento: cliente.tipoDocumento || "dni",
+      genero: cliente.genero || "",
+      fechaNacimiento: cliente.fechaNacimiento
+        ? new Date(cliente.fechaNacimiento).toISOString().split('T')[0]
+        : "",
+      direccion: cliente.direccion || "",
       password: "", // Don't pre-fill password for security
     });
     setIsDialogOpen(true);
