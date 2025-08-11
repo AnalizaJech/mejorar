@@ -255,24 +255,22 @@ export default function MisCitas() {
         break;
     }
 
-    // Ordenar todas las citas por fecha más reciente (descendente)
-    const sorted = filteredCitas.sort((a, b) => {
-      // Asegurar que las fechas sean objetos Date válidos
-      const fechaA = a.fecha instanceof Date ? a.fecha : new Date(a.fecha);
-      const fechaB = b.fecha instanceof Date ? b.fecha : new Date(b.fecha);
+    // Ordenar todas las citas: primero por ID (más reciente = mayor timestamp en ID) y luego por fecha
+    return filteredCitas.sort((a, b) => {
+      // Extraer timestamp del ID de la cita (formato: cita-{timestamp}-{random})
+      const timestampA = parseInt(a.id.split('-')[1]) || 0;
+      const timestampB = parseInt(b.id.split('-')[1]) || 0;
 
-      // Ordenar de más reciente a más antigua (descendente)
-      return fechaB.getTime() - fechaA.getTime();
+      // Si los IDs son muy cercanos (menos de 1 segundo de diferencia), ordenar por fecha
+      if (Math.abs(timestampB - timestampA) < 1000) {
+        const fechaA = a.fecha instanceof Date ? a.fecha : new Date(a.fecha);
+        const fechaB = b.fecha instanceof Date ? b.fecha : new Date(b.fecha);
+        return fechaB.getTime() - fechaA.getTime();
+      }
+
+      // Ordenar por timestamp de creación (más reciente primero)
+      return timestampB - timestampA;
     });
-
-    // Debug: mostrar el orden de las fechas
-    console.log("Citas ordenadas para tab", filter, ":", sorted.map(c => ({
-      mascota: c.mascota,
-      fecha: c.fecha instanceof Date ? c.fecha.toISOString() : c.fecha,
-      timestamp: (c.fecha instanceof Date ? c.fecha : new Date(c.fecha)).getTime()
-    })));
-
-    return sorted;
   };
 
   const filteredCitas = filterCitas(selectedTab);
