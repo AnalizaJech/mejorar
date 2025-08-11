@@ -194,11 +194,6 @@ export default function Usuarios() {
         direccion: formData.direccion,
       };
 
-      // Only update password if provided
-      if (formData.password && formData.password.trim()) {
-        updateData.password = formData.password;
-      }
-
       updateUsuario(editingUser, updateData);
       setSuccess("Cliente actualizado exitosamente");
 
