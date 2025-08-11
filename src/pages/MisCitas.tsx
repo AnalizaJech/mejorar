@@ -233,23 +233,32 @@ export default function MisCitas() {
 
   const filterCitas = (filter) => {
     const now = new Date();
+    let filteredCitas;
+
     switch (filter) {
       case "proximas":
-        return userCitas.filter(
+        filteredCitas = userCitas.filter(
           (cita) =>
             new Date(cita.fecha) > now &&
             (cita.estado === "aceptada" || cita.estado === "en_validacion"),
         );
+        break;
       case "pendientes":
-        return userCitas.filter((cita) => cita.estado === "pendiente_pago");
+        filteredCitas = userCitas.filter((cita) => cita.estado === "pendiente_pago");
+        break;
       case "completadas":
-        return userCitas.filter((cita) => cita.estado === "atendida");
+        filteredCitas = userCitas.filter((cita) => cita.estado === "atendida");
+        break;
       case "todas":
       default:
-        return userCitas.sort(
-          (a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime(),
-        );
+        filteredCitas = [...userCitas];
+        break;
     }
+
+    // Ordenar todas las citas por fecha más reciente (descendente)
+    return filteredCitas.sort(
+      (a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime(),
+    );
   };
 
   const filteredCitas = filterCitas(selectedTab);
