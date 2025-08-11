@@ -66,9 +66,14 @@ import {
 
 interface ClientFormData {
   nombre: string;
+  apellidos: string;
   email: string;
   telefono: string;
-  password?: string;
+  documento: string;
+  tipoDocumento: string;
+  genero: string;
+  fechaNacimiento: string;
+  direccion: string;
 }
 
 export default function Usuarios() {
@@ -85,9 +90,14 @@ export default function Usuarios() {
   >(null);
   const [formData, setFormData] = useState<ClientFormData>({
     nombre: "",
+    apellidos: "",
     email: "",
     telefono: "",
-    password: "",
+    documento: "",
+    tipoDocumento: "dni",
+    genero: "",
+    fechaNacimiento: "",
+    direccion: "",
   });
   const [newPassword, setNewPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -173,20 +183,31 @@ export default function Usuarios() {
       // Update existing client
       const updateData: any = {
         nombre: formData.nombre,
+        apellidos: formData.apellidos,
         email: formData.email,
         telefono: formData.telefono,
+        documento: formData.documento,
+        tipoDocumento: formData.tipoDocumento,
+        genero: formData.genero,
+        fechaNacimiento: formData.fechaNacimiento,
+        direccion: formData.direccion,
       };
-
-      // Only update password if provided
-      if (formData.password && formData.password.trim()) {
-        updateData.password = formData.password;
-      }
 
       updateUsuario(editingUser, updateData);
       setSuccess("Cliente actualizado exitosamente");
 
       // Reset form
-      setFormData({ nombre: "", email: "", telefono: "", password: "" });
+      setFormData({
+        nombre: "",
+        apellidos: "",
+        email: "",
+        telefono: "",
+        documento: "",
+        tipoDocumento: "dni",
+        genero: "",
+        fechaNacimiento: "",
+        direccion: "",
+      });
       setIsDialogOpen(false);
       setEditingUser(null);
     } catch (error) {
@@ -228,10 +249,17 @@ export default function Usuarios() {
   const handleEdit = (cliente: any) => {
     setEditingUser(cliente.id);
     setFormData({
-      nombre: cliente.nombre,
-      email: cliente.email,
+      nombre: cliente.nombre || "",
+      apellidos: cliente.apellidos || "",
+      email: cliente.email || "",
       telefono: cliente.telefono || "",
-      password: "", // Don't pre-fill password for security
+      documento: cliente.documento || "",
+      tipoDocumento: cliente.tipoDocumento || "dni",
+      genero: cliente.genero || "",
+      fechaNacimiento: cliente.fechaNacimiento
+        ? new Date(cliente.fechaNacimiento).toISOString().split("T")[0]
+        : "",
+      direccion: cliente.direccion || "",
     });
     setIsDialogOpen(true);
   };
@@ -263,7 +291,17 @@ export default function Usuarios() {
   };
 
   const resetForm = () => {
-    setFormData({ nombre: "", email: "", telefono: "", password: "" });
+    setFormData({
+      nombre: "",
+      apellidos: "",
+      email: "",
+      telefono: "",
+      documento: "",
+      tipoDocumento: "dni",
+      genero: "",
+      fechaNacimiento: "",
+      direccion: "",
+    });
     setEditingUser(null);
     setError("");
   };
@@ -471,7 +509,7 @@ export default function Usuarios() {
               if (!open) resetForm();
             }}
           >
-            <DialogContent className="sm:max-w-md">
+            <DialogContent className="sm:max-w-2xl max-h-[90vh] overflow-y-auto">
               <DialogHeader>
                 <DialogTitle>Editar Cliente</DialogTitle>
                 <DialogDescription>
@@ -479,67 +517,172 @@ export default function Usuarios() {
                 </DialogDescription>
               </DialogHeader>
 
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <Label htmlFor="nombre">Nombre completo *</Label>
-                  <Input
-                    id="nombre"
-                    value={formData.nombre}
-                    onChange={(e) =>
-                      setFormData({ ...formData, nombre: e.target.value })
-                    }
-                    placeholder="Nombre completo"
-                    required
-                  />
+              <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Información Personal */}
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold text-vet-gray-900 border-b pb-2">
+                    Información Personal
+                  </h3>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="nombre">Nombres *</Label>
+                      <Input
+                        id="nombre"
+                        value={formData.nombre}
+                        onChange={(e) =>
+                          setFormData({ ...formData, nombre: e.target.value })
+                        }
+                        placeholder="Nombres"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="apellidos">Apellidos *</Label>
+                      <Input
+                        id="apellidos"
+                        value={formData.apellidos}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            apellidos: e.target.value,
+                          })
+                        }
+                        placeholder="Apellidos"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="genero">Género</Label>
+                      <Select
+                        value={formData.genero}
+                        onValueChange={(value) =>
+                          setFormData({ ...formData, genero: value })
+                        }
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Seleccionar género" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="masculino">Masculino</SelectItem>
+                          <SelectItem value="femenino">Femenino</SelectItem>
+                          <SelectItem value="otro">Otro</SelectItem>
+                          <SelectItem value="prefiero_no_decir">
+                            Prefiero no decir
+                          </SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="fechaNacimiento">
+                        Fecha de Nacimiento
+                      </Label>
+                      <Input
+                        id="fechaNacimiento"
+                        type="date"
+                        value={formData.fechaNacimiento}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            fechaNacimiento: e.target.value,
+                          })
+                        }
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                      <Label htmlFor="tipoDocumento">Tipo de Documento</Label>
+                      <Select
+                        value={formData.tipoDocumento}
+                        onValueChange={(value) =>
+                          setFormData({ ...formData, tipoDocumento: value })
+                        }
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Tipo de documento" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="dni">DNI</SelectItem>
+                          <SelectItem value="pasaporte">Pasaporte</SelectItem>
+                          <SelectItem value="carnet_extranjeria">
+                            Carnet de Extranjería
+                          </SelectItem>
+                          <SelectItem value="cedula">Cédula</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div className="md:col-span-2">
+                      <Label htmlFor="documento">Número de Documento</Label>
+                      <Input
+                        id="documento"
+                        value={formData.documento}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            documento: e.target.value,
+                          })
+                        }
+                        placeholder="Número de documento"
+                      />
+                    </div>
+                  </div>
                 </div>
 
-                <div>
-                  <Label htmlFor="email">Email *</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) =>
-                      setFormData({ ...formData, email: e.target.value })
-                    }
-                    placeholder="email@ejemplo.com"
-                    required
-                  />
-                </div>
+                {/* Información de Contacto */}
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold text-vet-gray-900 border-b pb-2">
+                    Información de Contacto
+                  </h3>
 
-                <div>
-                  <Label htmlFor="telefono">Teléfono</Label>
-                  <Input
-                    id="telefono"
-                    type="tel"
-                    value={formData.telefono}
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        telefono: e.target.value,
-                      })
-                    }
-                    placeholder="+52 55 1234 5678"
-                  />
-                </div>
+                  <div>
+                    <Label htmlFor="email">Email *</Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) =>
+                        setFormData({ ...formData, email: e.target.value })
+                      }
+                      placeholder="email@ejemplo.com"
+                      required
+                    />
+                  </div>
 
-                <div>
-                  <Label htmlFor="password">
-                    Contraseña (dejar en blanco para mantener actual)
-                  </Label>
-                  <Input
-                    id="password"
-                    type="password"
-                    value={formData.password}
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        password: e.target.value,
-                      })
-                    }
-                    placeholder="Nueva contraseña (opcional)"
-                    minLength={6}
-                  />
+                  <div>
+                    <Label htmlFor="telefono">Teléfono</Label>
+                    <Input
+                      id="telefono"
+                      type="tel"
+                      value={formData.telefono}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          telefono: e.target.value,
+                        })
+                      }
+                      placeholder="+51 999 999 999"
+                    />
+                  </div>
+
+                  <div>
+                    <Label htmlFor="direccion">Dirección</Label>
+                    <Input
+                      id="direccion"
+                      value={formData.direccion}
+                      onChange={(e) =>
+                        setFormData({ ...formData, direccion: e.target.value })
+                      }
+                      placeholder="Dirección completa"
+                    />
+                  </div>
                 </div>
 
                 <div className="flex gap-3 pt-4">

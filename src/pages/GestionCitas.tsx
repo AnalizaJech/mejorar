@@ -68,6 +68,8 @@ import {
   Shield,
   UserCheck,
   Download,
+  IdCard,
+  Bell,
 } from "lucide-react";
 import ConfirmationModal from "@/components/ConfirmationModal";
 
@@ -110,9 +112,30 @@ export default function GestionCitas() {
   const enhancedCitas = citas.map((cita) => {
     const mascota = mascotas.find((m) => m.nombre === cita.mascota);
     const veterinario = usuarios.find((u) => u.nombre === cita.veterinario);
-    const propietario = mascota
-      ? usuarios.find((u) => u.id === mascota.clienteId)
-      : null;
+
+    // Try multiple ways to find the propietario
+    let propietario = null;
+
+    // First try: use clienteId from cita directly
+    if (cita.clienteId) {
+      propietario = usuarios.find((u) => u.id === cita.clienteId);
+    }
+
+    // Second try: use clienteId from mascota
+    if (!propietario && mascota) {
+      propietario = usuarios.find((u) => u.id === mascota.clienteId);
+    }
+
+    // Third try: match by client name if available
+    if (!propietario && cita.clienteNombre) {
+      propietario = usuarios.find(
+        (u) =>
+          u.nombre?.toLowerCase() === cita.clienteNombre?.toLowerCase() ||
+          `${u.nombre} ${u.apellidos}`.toLowerCase() ===
+            cita.clienteNombre?.toLowerCase(),
+      );
+    }
+
     return {
       ...cita,
       mascotaInfo: mascota,
@@ -139,7 +162,7 @@ export default function GestionCitas() {
       return matchesSearch && matchesStatus && matchesDate;
     })
     .sort((a, b) => {
-      // Ordenar por fecha más reciente primero
+      // Ordenar por fecha m��s reciente primero
       const dateA = new Date(a.fecha);
       const dateB = new Date(b.fecha);
       return dateB.getTime() - dateA.getTime();
@@ -772,7 +795,7 @@ export default function GestionCitas() {
                 {selectedCita && (
                   <div className="space-y-6 pt-6">
                     {/* Información de la cita */}
-                    <div className="bg-vet-gray-50 rounded-lg p-6">
+                    <div className="bg-white rounded-lg p-6">
                       <div className="flex items-center space-x-2 mb-4">
                         <PawPrint className="w-5 h-5 text-vet-primary" />
                         <h4 className="font-semibold text-vet-gray-900">
@@ -846,7 +869,7 @@ export default function GestionCitas() {
                             Precio
                           </span>
                           <div className="flex items-center space-x-2">
-                            <Coins className="w-4 h-4 text-vet-gray-600" />
+                            <Coins className="w-4 h-4 text-yellow-600" />
                             <p className="font-medium text-vet-gray-900">
                               S/. {selectedCita.precio.toLocaleString()}
                             </p>
@@ -930,59 +953,13 @@ export default function GestionCitas() {
                         );
                         return enhancedCita?.propietarioInfo;
                       })() && (
-                        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-100">
-                          {/* Header con foto de perfil */}
-                          <div className="flex items-center space-x-4 mb-6">
-                            {/* Foto de perfil */}
-                            <div className="w-16 h-16 rounded-full overflow-hidden bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center flex-shrink-0 border-3 border-white shadow-lg">
-                              <User className="w-8 h-8 text-blue-600" />
-                            </div>
-
-                            <div className="flex-1">
-                              <h4 className="text-xl font-bold text-vet-gray-900 mb-1">
-                                Información del Propietario
-                              </h4>
-                              <div className="flex items-center space-x-2">
-                                <span className="w-2 h-2 bg-green-400 rounded-full"></span>
-                                <span className="text-sm text-vet-gray-600">
-                                  Cliente activo
-                                </span>
-                              </div>
-                            </div>
+                        <div className="bg-white rounded-lg p-6">
+                          <div className="flex items-center space-x-2 mb-4">
+                            <User className="w-5 h-5 text-vet-primary" />
+                            <h4 className="font-semibold text-vet-gray-900">
+                              Información del Propietario
+                            </h4>
                           </div>
-
-                          {/* Bio/Descripción personal si está disponible */}
-                          {(() => {
-                            try {
-                              const bio =
-                                localStorage.getItem("petla_user_bio");
-                              if (bio && bio !== '""' && bio !== "null") {
-                                const bioText = JSON.parse(bio);
-                                if (bioText && bioText.trim()) {
-                                  return (
-                                    <div className="mb-6 p-4 bg-white/60 rounded-lg border border-blue-100">
-                                      <div className="flex items-start space-x-2">
-                                        <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
-                                          <MessageCircle className="w-4 h-4 text-blue-600" />
-                                        </div>
-                                        <div>
-                                          <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block mb-1">
-                                            Acerca de mí
-                                          </span>
-                                          <p className="text-sm text-vet-gray-700 italic leading-relaxed">
-                                            "{bioText}"
-                                          </p>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  );
-                                }
-                              }
-                            } catch (e) {
-                              console.error("Error loading bio:", e);
-                            }
-                            return null;
-                          })()}
 
                           {(() => {
                             const enhancedCita = enhancedCitas.find(
@@ -993,445 +970,126 @@ export default function GestionCitas() {
                             if (!propietario) return null;
 
                             return (
-                              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                {/* Nombre Completo */}
-                                <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
-                                  <div className="flex items-center space-x-3">
-                                    <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
-                                      <User className="w-4 h-4 text-blue-600" />
-                                    </div>
-                                    <div>
-                                      <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
-                                        Nombre Completo
-                                      </span>
-                                      <p className="text-lg font-semibold text-vet-gray-900">
-                                        {propietario.nombre}{" "}
-                                        {propietario.apellidos || ""}
-                                      </p>
-                                    </div>
+                              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                {/* Nombres */}
+                                <div className="space-y-1">
+                                  <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide">
+                                    Nombres
+                                  </span>
+                                  <div className="flex items-center space-x-2">
+                                    <User className="w-4 h-4 text-vet-primary" />
+                                    <p className="font-medium text-vet-gray-900">
+                                      {propietario.nombre ||
+                                        propietario.name ||
+                                        "No registrado"}
+                                    </p>
                                   </div>
                                 </div>
 
-                                {/* Username */}
-                                {propietario.username && (
-                                  <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
-                                    <div className="flex items-center space-x-3">
-                                      <div className="w-8 h-8 bg-slate-100 rounded-lg flex items-center justify-center">
-                                        <span className="text-slate-600 font-bold text-sm">
-                                          @
-                                        </span>
-                                      </div>
-                                      <div>
-                                        <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
-                                          Nombre de Usuario
-                                        </span>
-                                        <p className="text-sm font-medium text-vet-gray-900">
-                                          @{propietario.username}
-                                        </p>
-                                      </div>
-                                    </div>
+                                {/* Apellidos */}
+                                <div className="space-y-1">
+                                  <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide">
+                                    Apellidos
+                                  </span>
+                                  <div className="flex items-center space-x-2">
+                                    <User className="w-4 h-4 text-vet-secondary" />
+                                    <p className="font-medium text-vet-gray-900">
+                                      {propietario.apellidos ||
+                                        propietario.lastName ||
+                                        "No registrado"}
+                                    </p>
                                   </div>
-                                )}
+                                </div>
 
                                 {/* Email */}
                                 {propietario.email && (
-                                  <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
-                                    <div className="flex items-center space-x-3">
-                                      <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
-                                        <Mail className="w-4 h-4 text-green-600" />
-                                      </div>
-                                      <div>
-                                        <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
-                                          Correo Electrónico
-                                        </span>
-                                        <p className="text-sm font-medium text-vet-gray-900 break-all">
-                                          {propietario.email}
-                                        </p>
-                                      </div>
+                                  <div className="space-y-1">
+                                    <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide">
+                                      Email
+                                    </span>
+                                    <div className="flex items-center space-x-2">
+                                      <Mail className="w-4 h-4 text-green-600" />
+                                      <p className="font-medium text-vet-gray-900 break-all">
+                                        {propietario.email}
+                                      </p>
                                     </div>
                                   </div>
                                 )}
 
                                 {/* Teléfono */}
                                 {propietario.telefono && (
-                                  <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
-                                    <div className="flex items-center space-x-3">
-                                      <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
-                                        <Phone className="w-4 h-4 text-purple-600" />
-                                      </div>
-                                      <div>
-                                        <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
-                                          Teléfono
-                                        </span>
-                                        <p className="text-lg font-semibold text-vet-gray-900">
-                                          {(() => {
-                                            const phoneNumber =
-                                              propietario.telefono.replace(
-                                                /\D/g,
-                                                "",
-                                              );
-                                            return phoneNumber.startsWith(
-                                              "51",
-                                            ) && phoneNumber.length === 11
-                                              ? `+${phoneNumber}`
-                                              : `+51${phoneNumber}`;
-                                          })()}
-                                        </p>
-                                      </div>
+                                  <div className="space-y-1">
+                                    <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide">
+                                      Teléfono
+                                    </span>
+                                    <div className="flex items-center space-x-2">
+                                      <Phone className="w-4 h-4 text-blue-600" />
+                                      <p className="font-medium text-vet-gray-900">
+                                        {(() => {
+                                          const phoneNumber =
+                                            propietario.telefono.replace(
+                                              /\D/g,
+                                              "",
+                                            );
+                                          return phoneNumber.startsWith("51") &&
+                                            phoneNumber.length === 11
+                                            ? `+${phoneNumber}`
+                                            : `+51${phoneNumber}`;
+                                        })()}
+                                      </p>
                                     </div>
                                   </div>
                                 )}
 
-                                {/* Documento de Identidad */}
+                                {/* Documento */}
                                 {(propietario.documento ||
                                   propietario.tipoDocumento) && (
-                                  <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
-                                    <div className="flex items-center space-x-3">
-                                      <div className="w-8 h-8 bg-yellow-100 rounded-lg flex items-center justify-center">
-                                        <span className="text-yellow-600 font-bold text-sm">
-                                          🆔
-                                        </span>
-                                      </div>
-                                      <div>
-                                        <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
-                                          Documento de Identidad
-                                        </span>
-                                        <p className="text-sm font-medium text-vet-gray-900">
-                                          {propietario.tipoDocumento?.toUpperCase() ||
-                                            "DOC"}
-                                          :{" "}
-                                          {propietario.documento ||
-                                            "No especificado"}
-                                        </p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                )}
-
-                                {/* Fecha de Nacimiento */}
-                                {propietario.fechaNacimiento && (
-                                  <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
-                                    <div className="flex items-center space-x-3">
-                                      <div className="w-8 h-8 bg-pink-100 rounded-lg flex items-center justify-center">
-                                        <span className="text-pink-600 font-bold text-sm">
-                                          🎂
-                                        </span>
-                                      </div>
-                                      <div>
-                                        <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
-                                          Fecha de Nacimiento
-                                        </span>
-                                        <p className="text-sm font-medium text-vet-gray-900">
-                                          {new Date(
-                                            propietario.fechaNacimiento,
-                                          ).toLocaleDateString("es-ES", {
-                                            year: "numeric",
-                                            month: "long",
-                                            day: "numeric",
-                                          })}
-                                        </p>
-                                        <p className="text-xs text-vet-gray-500">
-                                          {(() => {
-                                            const today = new Date();
-                                            const birthDate = new Date(
-                                              propietario.fechaNacimiento,
-                                            );
-                                            let age =
-                                              today.getFullYear() -
-                                              birthDate.getFullYear();
-                                            const monthDiff =
-                                              today.getMonth() -
-                                              birthDate.getMonth();
-                                            if (
-                                              monthDiff < 0 ||
-                                              (monthDiff === 0 &&
-                                                today.getDate() <
-                                                  birthDate.getDate())
-                                            ) {
-                                              age--;
-                                            }
-                                            return `${age} años`;
-                                          })()}
-                                        </p>
-                                      </div>
+                                  <div className="space-y-1">
+                                    <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide">
+                                      Documento
+                                    </span>
+                                    <div className="flex items-center space-x-2">
+                                      <IdCard className="w-4 h-4 text-purple-600" />
+                                      <p className="font-medium text-vet-gray-900">
+                                        {propietario.tipoDocumento?.toUpperCase() ||
+                                          "DOC"}
+                                        :{" "}
+                                        {propietario.documento ||
+                                          "No especificado"}
+                                      </p>
                                     </div>
                                   </div>
                                 )}
 
                                 {/* Género */}
                                 {propietario.genero && (
-                                  <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
-                                    <div className="flex items-center space-x-3">
-                                      <div className="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center">
-                                        <span className="text-indigo-600 font-bold text-sm">
-                                          {propietario.genero === "masculino"
-                                            ? "♂️"
-                                            : propietario.genero === "femenino"
-                                              ? "♀️"
-                                              : "⚧️"}
-                                        </span>
-                                      </div>
-                                      <div>
-                                        <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
-                                          Género
-                                        </span>
-                                        <p className="text-sm font-medium text-vet-gray-900 capitalize">
-                                          {propietario.genero}
-                                        </p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                )}
-
-                                {/* Fecha de Registro */}
-                                {propietario.fechaCreacion && (
-                                  <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
-                                    <div className="flex items-center space-x-3">
-                                      <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
-                                        <span className="text-gray-600 font-bold text-sm">
-                                          📅
-                                        </span>
-                                      </div>
-                                      <div>
-                                        <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
-                                          Cliente desde
-                                        </span>
-                                        <p className="text-sm font-medium text-vet-gray-900">
-                                          {new Date(
-                                            propietario.fechaCreacion,
-                                          ).toLocaleDateString("es-ES", {
-                                            year: "numeric",
-                                            month: "long",
-                                            day: "numeric",
-                                          })}
-                                        </p>
-                                        <p className="text-xs text-vet-gray-500">
-                                          {(() => {
-                                            const today = new Date();
-                                            const createdDate = new Date(
-                                              propietario.fechaCreacion,
-                                            );
-                                            const diffTime = Math.abs(
-                                              today - createdDate,
-                                            );
-                                            const diffDays = Math.ceil(
-                                              diffTime / (1000 * 60 * 60 * 24),
-                                            );
-                                            if (diffDays < 30) {
-                                              return `${diffDays} días`;
-                                            } else if (diffDays < 365) {
-                                              return `${Math.floor(diffDays / 30)} meses`;
-                                            } else {
-                                              return `${Math.floor(diffDays / 365)} años`;
-                                            }
-                                          })()}
-                                        </p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                )}
-
-                                {/* Estado de verificación de email */}
-                                <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
-                                  <div className="flex items-center space-x-3">
-                                    <div
-                                      className={`w-8 h-8 rounded-lg flex items-center justify-center ${propietario.emailVerificado ? "bg-green-100" : "bg-yellow-100"}`}
-                                    >
-                                      <span
-                                        className={`font-bold text-sm ${propietario.emailVerificado ? "text-green-600" : "text-yellow-600"}`}
-                                      >
-                                        {propietario.emailVerificado
-                                          ? "✓"
-                                          : "⚠️"}
-                                      </span>
-                                    </div>
-                                    <div>
-                                      <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
-                                        Estado del Email
-                                      </span>
-                                      <p
-                                        className={`text-sm font-medium ${propietario.emailVerificado ? "text-green-700" : "text-yellow-700"}`}
-                                      >
-                                        {propietario.emailVerificado
-                                          ? "Verificado"
-                                          : "No verificado"}
-                                      </p>
-                                      <p className="text-xs text-vet-gray-500">
-                                        {propietario.emailVerificado
-                                          ? "Email confirmado por el cliente"
-                                          : "Email pendiente de confirmación"}
+                                  <div className="space-y-1">
+                                    <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide">
+                                      Género
+                                    </span>
+                                    <div className="flex items-center space-x-2">
+                                      <User className="w-4 h-4 text-indigo-600" />
+                                      <p className="font-medium text-vet-gray-900 capitalize">
+                                        {propietario.genero}
                                       </p>
                                     </div>
                                   </div>
-                                </div>
-
-                                {/* Preferencias de comunicación */}
-                                {(() => {
-                                  try {
-                                    const notifications = localStorage.getItem(
-                                      "petla_notifications",
-                                    );
-                                    if (notifications) {
-                                      const prefs = JSON.parse(notifications);
-                                      return (
-                                        <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
-                                          <div className="flex items-start space-x-3">
-                                            <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
-                                              <span className="text-purple-600 font-bold text-sm">
-                                                🔔
-                                              </span>
-                                            </div>
-                                            <div className="flex-1">
-                                              <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block mb-2">
-                                                Preferencias de Comunicación
-                                              </span>
-                                              <div className="grid grid-cols-2 gap-2 text-xs">
-                                                <div
-                                                  className={`flex items-center space-x-1 ${prefs.emailNotifications ? "text-green-700" : "text-gray-500"}`}
-                                                >
-                                                  <span>
-                                                    {prefs.emailNotifications
-                                                      ? "✓"
-                                                      : "✗"}
-                                                  </span>
-                                                  <span>Email</span>
-                                                </div>
-                                                <div
-                                                  className={`flex items-center space-x-1 ${prefs.smsNotifications ? "text-green-700" : "text-gray-500"}`}
-                                                >
-                                                  <span>
-                                                    {prefs.smsNotifications
-                                                      ? "✓"
-                                                      : "✗"}
-                                                  </span>
-                                                  <span>SMS</span>
-                                                </div>
-                                                <div
-                                                  className={`flex items-center space-x-1 ${prefs.appointmentReminders ? "text-green-700" : "text-gray-500"}`}
-                                                >
-                                                  <span>
-                                                    {prefs.appointmentReminders
-                                                      ? "✓"
-                                                      : "✗"}
-                                                  </span>
-                                                  <span>Recordatorios</span>
-                                                </div>
-                                                <div
-                                                  className={`flex items-center space-x-1 ${prefs.vaccineReminders ? "text-green-700" : "text-gray-500"}`}
-                                                >
-                                                  <span>
-                                                    {prefs.vaccineReminders
-                                                      ? "✓"
-                                                      : "✗"}
-                                                  </span>
-                                                  <span>Vacunas</span>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      );
-                                    }
-                                  } catch (e) {
-                                    console.error(
-                                      "Error loading notification preferences:",
-                                      e,
-                                    );
-                                  }
-                                  return null;
-                                })()}
+                                )}
 
                                 {/* Dirección - ancho completo */}
                                 {propietario.direccion && (
-                                  <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100 md:col-span-2 lg:col-span-3">
-                                    <div className="flex items-start space-x-3">
-                                      <div className="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center mt-1">
-                                        <MapPin className="w-4 h-4 text-orange-600" />
-                                      </div>
-                                      <div className="flex-1">
-                                        <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
-                                          Dirección
-                                        </span>
-                                        <p className="text-sm font-medium text-vet-gray-900 leading-relaxed">
-                                          {propietario.direccion}
-                                        </p>
-                                      </div>
+                                  <div className="space-y-1 md:col-span-2 lg:col-span-3">
+                                    <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide">
+                                      Dirección
+                                    </span>
+                                    <div className="flex items-center space-x-2">
+                                      <MapPin className="w-4 h-4 text-orange-600" />
+                                      <p className="font-medium text-vet-gray-900">
+                                        {propietario.direccion}
+                                      </p>
                                     </div>
                                   </div>
                                 )}
-
-                                {/* Estadísticas del Cliente */}
-                                <div className="bg-gradient-to-r from-vet-primary/5 to-blue-50 rounded-lg p-4 shadow-sm border border-blue-100 md:col-span-2 lg:col-span-3">
-                                  <div className="flex items-center space-x-3 mb-4">
-                                    <div className="w-8 h-8 bg-vet-primary/20 rounded-lg flex items-center justify-center">
-                                      <span className="text-vet-primary font-bold text-sm">
-                                        📊
-                                      </span>
-                                    </div>
-                                    <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide">
-                                      Estadísticas del Cliente
-                                    </span>
-                                  </div>
-                                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                                    <div className="text-center">
-                                      <div className="text-2xl font-bold text-vet-primary">
-                                        {
-                                          mascotas.filter(
-                                            (m) =>
-                                              m.clienteId === propietario.id,
-                                          ).length
-                                        }
-                                      </div>
-                                      <div className="text-xs text-vet-gray-600">
-                                        Mascotas
-                                      </div>
-                                    </div>
-                                    <div className="text-center">
-                                      <div className="text-2xl font-bold text-green-600">
-                                        {
-                                          citas.filter(
-                                            (c) =>
-                                              c.clienteId === propietario.id,
-                                          ).length
-                                        }
-                                      </div>
-                                      <div className="text-xs text-vet-gray-600">
-                                        Total Citas
-                                      </div>
-                                    </div>
-                                    <div className="text-center">
-                                      <div className="text-2xl font-bold text-blue-600">
-                                        {
-                                          citas.filter(
-                                            (c) =>
-                                              c.clienteId === propietario.id &&
-                                              c.estado === "atendida",
-                                          ).length
-                                        }
-                                      </div>
-                                      <div className="text-xs text-vet-gray-600">
-                                        Citas Atendidas
-                                      </div>
-                                    </div>
-                                    <div className="text-center">
-                                      <div className="text-2xl font-bold text-yellow-600">
-                                        {
-                                          citas.filter(
-                                            (c) =>
-                                              c.clienteId === propietario.id &&
-                                              [
-                                                "pendiente_pago",
-                                                "aceptada",
-                                              ].includes(c.estado),
-                                          ).length
-                                        }
-                                      </div>
-                                      <div className="text-xs text-vet-gray-600">
-                                        Citas Pendientes
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
                               </div>
                             );
                           })()}
@@ -1873,7 +1531,8 @@ export default function GestionCitas() {
                               completa
                             </li>
                             <li>
-                              • Verificar que corresponda a los datos de la cita
+                              �� Verificar que corresponda a los datos de la
+                              cita
                             </li>
                           </ul>
                         </div>
