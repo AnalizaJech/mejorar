@@ -256,9 +256,23 @@ export default function MisCitas() {
     }
 
     // Ordenar todas las citas por fecha más reciente (descendente)
-    return filteredCitas.sort(
-      (a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime(),
-    );
+    const sorted = filteredCitas.sort((a, b) => {
+      // Asegurar que las fechas sean objetos Date válidos
+      const fechaA = a.fecha instanceof Date ? a.fecha : new Date(a.fecha);
+      const fechaB = b.fecha instanceof Date ? b.fecha : new Date(b.fecha);
+
+      // Ordenar de más reciente a más antigua (descendente)
+      return fechaB.getTime() - fechaA.getTime();
+    });
+
+    // Debug: mostrar el orden de las fechas
+    console.log("Citas ordenadas para tab", filter, ":", sorted.map(c => ({
+      mascota: c.mascota,
+      fecha: c.fecha instanceof Date ? c.fecha.toISOString() : c.fecha,
+      timestamp: (c.fecha instanceof Date ? c.fecha : new Date(c.fecha)).getTime()
+    })));
+
+    return sorted;
   };
 
   const filteredCitas = filterCitas(selectedTab);
