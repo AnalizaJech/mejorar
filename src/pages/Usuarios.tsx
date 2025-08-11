@@ -99,7 +99,6 @@ export default function Usuarios() {
     genero: "",
     fechaNacimiento: "",
     direccion: "",
-    password: "",
   });
   const [newPassword, setNewPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
