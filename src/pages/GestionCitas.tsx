@@ -1008,7 +1008,10 @@ export default function GestionCitas() {
                                   <div className="flex items-center space-x-2">
                                     <User className="w-4 h-4 text-vet-secondary" />
                                     <p className="font-medium text-vet-gray-900">
-                                      {propietario.apellidos || "No registrado"}
+                                      {propietario.apellidos || propietario.lastName || "No registrado"}
+                                    </p>
+                                    <p className="text-xs text-vet-gray-500 mt-1">
+                                      Full data: {JSON.stringify(propietario, null, 2).substring(0, 100)}...
                                     </p>
                                   </div>
                                 </div>
