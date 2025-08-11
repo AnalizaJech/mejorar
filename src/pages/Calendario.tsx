@@ -784,13 +784,6 @@ export default function Calendario() {
                       <Button
                         variant="outline"
                         size="sm"
-                        onClick={() => setCurrentDate(new Date())}
-                      >
-                        Hoy
-                      </Button>
-                      <Button
-                        variant="outline"
-                        size="sm"
                         onClick={() => setShowCompleted(!showCompleted)}
                       >
                         {showCompleted ? "Ocultar" : "Mostrar"} Completadas
