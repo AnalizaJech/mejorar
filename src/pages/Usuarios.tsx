@@ -91,8 +91,14 @@ export default function Usuarios() {
   >(null);
   const [formData, setFormData] = useState<ClientFormData>({
     nombre: "",
+    apellidos: "",
     email: "",
     telefono: "",
+    documento: "",
+    tipoDocumento: "dni",
+    genero: "",
+    fechaNacimiento: "",
+    direccion: "",
     password: "",
   });
   const [newPassword, setNewPassword] = useState("");
