@@ -75,7 +75,6 @@ interface ClientFormData {
   genero: string;
   fechaNacimiento: string;
   direccion: string;
-  password?: string;
 }
 
 export default function Usuarios() {
