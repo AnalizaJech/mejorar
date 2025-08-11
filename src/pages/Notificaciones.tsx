@@ -63,6 +63,12 @@ export default function Notificaciones() {
           priority = "high";
           type = "cita";
           break;
+        case "cita_agendada_confirmacion":
+          icon = Calendar;
+          color = "blue-500";
+          priority = "high";
+          type = "cita";
+          break;
         case "bienvenida_cliente":
           icon = User;
           color = "vet-primary";
