@@ -68,6 +68,8 @@ import {
   Shield,
   UserCheck,
   Download,
+  IdCard,
+  Bell,
 } from "lucide-react";
 import ConfirmationModal from "@/components/ConfirmationModal";
 
