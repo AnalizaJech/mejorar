@@ -67,7 +67,8 @@ export default function CitaAttendModal({
   selectedCita,
   onSave,
 }: CitaAttendModalProps) {
-  const { user, updateCita, addHistorialEntry, updateMascota } = useAppContext();
+  const { user, updateCita, addHistorialEntry, updateMascota } =
+    useAppContext();
 
   // Form state
   const [isProcessing, setIsProcessing] = useState(false);
@@ -149,7 +150,7 @@ export default function CitaAttendModal({
   };
 
   const handleImageUpload = async (index: number, file: File) => {
-    if (file && file.type.startsWith('image/')) {
+    if (file && file.type.startsWith("image/")) {
       try {
         const reader = new FileReader();
         reader.onload = (e) => {
@@ -160,18 +161,18 @@ export default function CitaAttendModal({
               data: e.target?.result as string,
               name: file.name,
               size: file.size,
-              type: file.type
-            }
+              type: file.type,
+            },
           };
           setExamenes(updated);
         };
         reader.readAsDataURL(file);
       } catch (error) {
-        console.error('Error uploading image:', error);
-        setError('Error al subir la imagen');
+        console.error("Error uploading image:", error);
+        setError("Error al subir la imagen");
       }
     } else {
-      setError('Por favor selecciona un archivo de imagen válido');
+      setError("Por favor selecciona un archivo de imagen válido");
     }
   };
 
@@ -179,7 +180,7 @@ export default function CitaAttendModal({
     const updated = [...examenes];
     updated[index] = {
       ...updated[index],
-      imagen: undefined
+      imagen: undefined,
     };
     setExamenes(updated);
   };
@@ -379,14 +380,16 @@ export default function CitaAttendModal({
               Registrar Historia Clínica
             </DialogTitle>
             <DialogDescription className="text-vet-gray-600">
-              {new Date(cita.fecha).toLocaleDateString('es-ES', {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-              })}, {new Date(cita.fecha).toLocaleTimeString('es-ES', {
-                hour: '2-digit',
-                minute: '2-digit'
+              {new Date(cita.fecha).toLocaleDateString("es-ES", {
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+              ,{" "}
+              {new Date(cita.fecha).toLocaleTimeString("es-ES", {
+                hour: "2-digit",
+                minute: "2-digit",
               })}
             </DialogDescription>
           </div>
@@ -811,7 +814,8 @@ export default function CitaAttendModal({
                               <div className="border border-vet-gray-200 rounded-lg p-3">
                                 <div className="flex items-center justify-between mb-2">
                                   <span className="text-sm text-vet-gray-600">
-                                    {exam.imagen.name} ({(exam.imagen.size / 1024).toFixed(1)} KB)
+                                    {exam.imagen.name} (
+                                    {(exam.imagen.size / 1024).toFixed(1)} KB)
                                   </span>
                                   <div className="flex space-x-2">
                                     <input
@@ -819,7 +823,8 @@ export default function CitaAttendModal({
                                       accept="image/*"
                                       onChange={(e) => {
                                         const file = e.target.files?.[0];
-                                        if (file) handleImageUpload(index, file);
+                                        if (file)
+                                          handleImageUpload(index, file);
                                       }}
                                       className="hidden"
                                       id={`exam-image-change-${index}`}
@@ -829,7 +834,9 @@ export default function CitaAttendModal({
                                       size="sm"
                                       variant="outline"
                                       onClick={() => {
-                                        const input = document.getElementById(`exam-image-change-${index}`);
+                                        const input = document.getElementById(
+                                          `exam-image-change-${index}`,
+                                        );
                                         input?.click();
                                       }}
                                     >
@@ -868,7 +875,9 @@ export default function CitaAttendModal({
                                   type="button"
                                   variant="outline"
                                   onClick={() => {
-                                    const input = document.getElementById(`exam-image-upload-${index}`);
+                                    const input = document.getElementById(
+                                      `exam-image-upload-${index}`,
+                                    );
                                     input?.click();
                                   }}
                                 >
@@ -876,7 +885,8 @@ export default function CitaAttendModal({
                                   Subir imagen
                                 </Button>
                                 <p className="text-xs text-vet-gray-500 mt-2">
-                                  Sube una imagen del resultado del examen (PNG, JPG, etc.)
+                                  Sube una imagen del resultado del examen (PNG,
+                                  JPG, etc.)
                                 </p>
                               </div>
                             )}

@@ -46,8 +46,14 @@ import { DatePicker } from "@/components/ui/date-picker";
 import { useToast } from "@/hooks/use-toast";
 
 export default function MisMascotas() {
-  const { user, mascotas, addMascota, updateMascota, deleteMascota, addNotificacion } =
-    useAppContext();
+  const {
+    user,
+    mascotas,
+    addMascota,
+    updateMascota,
+    deleteMascota,
+    addNotificacion,
+  } = useAppContext();
   const { toast } = useToast();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingMascota, setEditingMascota] = useState(null);

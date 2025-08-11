@@ -285,7 +285,9 @@ export default function Notificaciones() {
                   onClick={markAllAsRead}
                   className="text-vet-primary border-vet-primary hover:bg-vet-primary hover:text-white text-xs sm:text-sm px-2 sm:px-3"
                 >
-                  <span className="hidden sm:inline">Marcar todas como leídas</span>
+                  <span className="hidden sm:inline">
+                    Marcar todas como leídas
+                  </span>
                   <span className="sm:hidden">Marcar todas</span>
                 </Button>
               )}
@@ -294,13 +296,19 @@ export default function Notificaciones() {
 
           {/* Filters */}
           <Tabs value={selectedFilter} onValueChange={setSelectedFilter}>
-            <TabsList
-              className="grid w-full mb-6 grid-cols-2 sm:grid-cols-4"
-            >
-              <TabsTrigger value="todas" className="text-xs sm:text-sm">Todas</TabsTrigger>
-              <TabsTrigger value="no_leidas" className="text-xs sm:text-sm">No leídas</TabsTrigger>
-              <TabsTrigger value="cita" className="text-xs sm:text-sm">Citas</TabsTrigger>
-              <TabsTrigger value="sistema" className="text-xs sm:text-sm">Sistema</TabsTrigger>
+            <TabsList className="grid w-full mb-6 grid-cols-2 sm:grid-cols-4">
+              <TabsTrigger value="todas" className="text-xs sm:text-sm">
+                Todas
+              </TabsTrigger>
+              <TabsTrigger value="no_leidas" className="text-xs sm:text-sm">
+                No leídas
+              </TabsTrigger>
+              <TabsTrigger value="cita" className="text-xs sm:text-sm">
+                Citas
+              </TabsTrigger>
+              <TabsTrigger value="sistema" className="text-xs sm:text-sm">
+                Sistema
+              </TabsTrigger>
             </TabsList>
 
             <TabsContent value={selectedFilter} className="space-y-4">
