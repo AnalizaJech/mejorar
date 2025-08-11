@@ -112,9 +112,28 @@ export default function GestionCitas() {
   const enhancedCitas = citas.map((cita) => {
     const mascota = mascotas.find((m) => m.nombre === cita.mascota);
     const veterinario = usuarios.find((u) => u.nombre === cita.veterinario);
-    const propietario = mascota
-      ? usuarios.find((u) => u.id === mascota.clienteId)
-      : null;
+
+    // Try multiple ways to find the propietario
+    let propietario = null;
+
+    // First try: use clienteId from cita directly
+    if (cita.clienteId) {
+      propietario = usuarios.find((u) => u.id === cita.clienteId);
+    }
+
+    // Second try: use clienteId from mascota
+    if (!propietario && mascota) {
+      propietario = usuarios.find((u) => u.id === mascota.clienteId);
+    }
+
+    // Third try: match by client name if available
+    if (!propietario && cita.clienteNombre) {
+      propietario = usuarios.find((u) =>
+        u.nombre?.toLowerCase() === cita.clienteNombre?.toLowerCase() ||
+        `${u.nombre} ${u.apellidos}`.toLowerCase() === cita.clienteNombre?.toLowerCase()
+      );
+    }
+
     return {
       ...cita,
       mascotaInfo: mascota,
