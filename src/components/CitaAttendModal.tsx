@@ -53,6 +53,12 @@ interface Medicamento {
 interface Examen {
   tipo: string;
   resultado: string;
+  imagen?: {
+    data: string;
+    name: string;
+    size: number;
+    type: string;
+  };
 }
 
 export default function CitaAttendModal({
@@ -486,12 +492,15 @@ export default function CitaAttendModal({
                     </Label>
                     <Input
                       id="peso"
+                      type="number"
+                      step="0.1"
+                      min="0"
                       value={formData.peso}
                       onChange={(e) =>
                         setFormData({ ...formData, peso: e.target.value })
                       }
                       placeholder="Ej: 5.2"
-                      className="border-blue-200 focus:border-blue-500 focus:ring-blue-500"
+                      className="border-blue-200 focus:border-blue-500 focus:ring-blue-500 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                     />
                   </div>
                   <div className="bg-white rounded-md p-3 border border-blue-100">
@@ -504,6 +513,10 @@ export default function CitaAttendModal({
                     </Label>
                     <Input
                       id="temperatura"
+                      type="number"
+                      step="0.1"
+                      min="0"
+                      max="50"
                       value={formData.temperatura}
                       onChange={(e) =>
                         setFormData({
@@ -512,7 +525,7 @@ export default function CitaAttendModal({
                         })
                       }
                       placeholder="Ej: 38.5"
-                      className="border-blue-200 focus:border-blue-500 focus:ring-blue-500"
+                      className="border-blue-200 focus:border-blue-500 focus:ring-blue-500 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                     />
                   </div>
                   <div className="bg-white rounded-md p-3 border border-blue-100">
@@ -546,6 +559,9 @@ export default function CitaAttendModal({
                     </Label>
                     <Input
                       id="frecuenciaCardiaca"
+                      type="number"
+                      min="0"
+                      max="300"
                       value={formData.frecuenciaCardiaca}
                       onChange={(e) =>
                         setFormData({
@@ -554,7 +570,7 @@ export default function CitaAttendModal({
                         })
                       }
                       placeholder="Ej: 80"
-                      className="border-blue-200 focus:border-blue-500 focus:ring-blue-500"
+                      className="border-blue-200 focus:border-blue-500 focus:ring-blue-500 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                     />
                   </div>
                 </div>
