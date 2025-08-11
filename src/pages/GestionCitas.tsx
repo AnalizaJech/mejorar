@@ -949,157 +949,123 @@ export default function GestionCitas() {
                             if (!propietario) return null;
 
                             return (
-                              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                                 {/* Nombres */}
-                                <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
-                                  <div className="flex items-center space-x-3">
-                                    <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
-                                      <User className="w-4 h-4 text-blue-600" />
-                                    </div>
-                                    <div>
-                                      <span className="text-sm font-bold text-vet-gray-700 uppercase tracking-wide block mb-1">
-                                        NOMBRES
-                                      </span>
-                                      <p className="text-lg font-semibold text-vet-gray-900">
-                                        {propietario.nombre || "No registrado"}
-                                      </p>
-                                    </div>
+                                <div className="space-y-1">
+                                  <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide">
+                                    Nombres
+                                  </span>
+                                  <div className="flex items-center space-x-2">
+                                    <User className="w-4 h-4 text-vet-primary" />
+                                    <p className="font-medium text-vet-gray-900">
+                                      {propietario.nombre || "No registrado"}
+                                    </p>
                                   </div>
                                 </div>
 
                                 {/* Apellidos */}
-                                <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
-                                  <div className="flex items-center space-x-3">
-                                    <div className="w-8 h-8 bg-slate-100 rounded-lg flex items-center justify-center">
-                                      <User className="w-4 h-4 text-slate-600" />
-                                    </div>
-                                    <div>
-                                      <span className="text-sm font-bold text-vet-gray-700 uppercase tracking-wide block mb-1">
-                                        APELLIDOS
-                                      </span>
-                                      <p className="text-lg font-semibold text-vet-gray-900">
-                                        {propietario.apellidos || "No registrado"}
-                                      </p>
-                                    </div>
+                                <div className="space-y-1">
+                                  <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide">
+                                    Apellidos
+                                  </span>
+                                  <div className="flex items-center space-x-2">
+                                    <User className="w-4 h-4 text-vet-secondary" />
+                                    <p className="font-medium text-vet-gray-900">
+                                      {propietario.apellidos || "No registrado"}
+                                    </p>
                                   </div>
                                 </div>
 
-
                                 {/* Email */}
                                 {propietario.email && (
-                                  <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
-                                    <div className="flex items-center space-x-3">
-                                      <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
-                                        <Mail className="w-4 h-4 text-green-600" />
-                                      </div>
-                                      <div>
-                                        <span className="text-sm font-bold text-vet-gray-700 uppercase tracking-wide block mb-1">
-                                          EMAIL
-                                        </span>
-                                        <p className="text-sm font-medium text-vet-gray-900 break-all">
-                                          {propietario.email}
-                                        </p>
-                                      </div>
+                                  <div className="space-y-1">
+                                    <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide">
+                                      Email
+                                    </span>
+                                    <div className="flex items-center space-x-2">
+                                      <Mail className="w-4 h-4 text-green-600" />
+                                      <p className="font-medium text-vet-gray-900 break-all">
+                                        {propietario.email}
+                                      </p>
                                     </div>
                                   </div>
                                 )}
 
                                 {/* Teléfono */}
                                 {propietario.telefono && (
-                                  <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
-                                    <div className="flex items-center space-x-3">
-                                      <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
-                                        <Phone className="w-4 h-4 text-purple-600" />
-                                      </div>
-                                      <div>
-                                        <span className="text-sm font-bold text-vet-gray-700 uppercase tracking-wide block mb-1">
-                                          TELÉFONO
-                                        </span>
-                                        <p className="text-lg font-semibold text-vet-gray-900">
-                                          {(() => {
-                                            const phoneNumber =
-                                              propietario.telefono.replace(
-                                                /\D/g,
-                                                "",
-                                              );
-                                            return phoneNumber.startsWith(
-                                              "51",
-                                            ) && phoneNumber.length === 11
-                                              ? `+${phoneNumber}`
-                                              : `+51${phoneNumber}`;
-                                          })()}
-                                        </p>
-                                      </div>
+                                  <div className="space-y-1">
+                                    <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide">
+                                      Teléfono
+                                    </span>
+                                    <div className="flex items-center space-x-2">
+                                      <Phone className="w-4 h-4 text-blue-600" />
+                                      <p className="font-medium text-vet-gray-900">
+                                        {(() => {
+                                          const phoneNumber =
+                                            propietario.telefono.replace(
+                                              /\D/g,
+                                              "",
+                                            );
+                                          return phoneNumber.startsWith(
+                                            "51",
+                                          ) && phoneNumber.length === 11
+                                            ? `+${phoneNumber}`
+                                            : `+51${phoneNumber}`;
+                                        })()}
+                                      </p>
                                     </div>
                                   </div>
                                 )}
 
-                                {/* Documento de Identidad */}
+                                {/* Documento */}
                                 {(propietario.documento ||
                                   propietario.tipoDocumento) && (
-                                  <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
-                                    <div className="flex items-center space-x-3">
-                                      <div className="w-8 h-8 bg-yellow-100 rounded-lg flex items-center justify-center">
-                                        <IdCard className="w-4 h-4 text-yellow-600" />
-                                      </div>
-                                      <div>
-                                        <span className="text-sm font-bold text-vet-gray-700 uppercase tracking-wide block mb-1">
-                                          DOCUMENTO
-                                        </span>
-                                        <p className="text-sm font-medium text-vet-gray-900">
-                                          {propietario.tipoDocumento?.toUpperCase() ||
-                                            "DOC"}
-                                          :{" "}
-                                          {propietario.documento ||
-                                            "No especificado"}
-                                        </p>
-                                      </div>
+                                  <div className="space-y-1">
+                                    <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide">
+                                      Documento
+                                    </span>
+                                    <div className="flex items-center space-x-2">
+                                      <IdCard className="w-4 h-4 text-purple-600" />
+                                      <p className="font-medium text-vet-gray-900">
+                                        {propietario.tipoDocumento?.toUpperCase() ||
+                                          "DOC"}
+                                        :{" "}
+                                        {propietario.documento ||
+                                          "No especificado"}
+                                      </p>
                                     </div>
                                   </div>
                                 )}
-
 
                                 {/* Género */}
                                 {propietario.genero && (
-                                  <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
-                                    <div className="flex items-center space-x-3">
-                                      <div className="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center">
-                                        <User className="w-4 h-4 text-indigo-600" />
-                                      </div>
-                                      <div>
-                                        <span className="text-sm font-bold text-vet-gray-700 uppercase tracking-wide block mb-1">
-                                          GÉNERO
-                                        </span>
-                                        <p className="text-sm font-medium text-vet-gray-900 capitalize">
-                                          {propietario.genero}
-                                        </p>
-                                      </div>
+                                  <div className="space-y-1">
+                                    <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide">
+                                      Género
+                                    </span>
+                                    <div className="flex items-center space-x-2">
+                                      <User className="w-4 h-4 text-indigo-600" />
+                                      <p className="font-medium text-vet-gray-900 capitalize">
+                                        {propietario.genero}
+                                      </p>
                                     </div>
                                   </div>
                                 )}
-
-
-
 
                                 {/* Dirección - ancho completo */}
                                 {propietario.direccion && (
-                                  <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100 md:col-span-2 lg:col-span-3">
-                                    <div className="flex items-start space-x-3">
-                                      <div className="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center mt-1">
-                                        <MapPin className="w-4 h-4 text-orange-600" />
-                                      </div>
-                                      <div className="flex-1">
-                                        <span className="text-sm font-bold text-vet-gray-700 uppercase tracking-wide block mb-1">
-                                          DIRECCIÓN
-                                        </span>
-                                        <p className="text-sm font-medium text-vet-gray-900 leading-relaxed">
-                                          {propietario.direccion}
-                                        </p>
-                                      </div>
+                                  <div className="space-y-1 md:col-span-2 lg:col-span-3">
+                                    <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide">
+                                      Dirección
+                                    </span>
+                                    <div className="flex items-center space-x-2">
+                                      <MapPin className="w-4 h-4 text-orange-600" />
+                                      <p className="font-medium text-vet-gray-900">
+                                        {propietario.direccion}
+                                      </p>
                                     </div>
                                   </div>
                                 )}
-
                               </div>
                             );
                           })()}
@@ -1541,7 +1507,7 @@ export default function GestionCitas() {
                               completa
                             </li>
                             <li>
-                              • Verificar que corresponda a los datos de la cita
+                              �� Verificar que corresponda a los datos de la cita
                             </li>
                           </ul>
                         </div>
