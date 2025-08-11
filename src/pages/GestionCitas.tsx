@@ -992,7 +992,10 @@ export default function GestionCitas() {
                                   <div className="flex items-center space-x-2">
                                     <User className="w-4 h-4 text-vet-primary" />
                                     <p className="font-medium text-vet-gray-900">
-                                      {propietario.nombre || "No registrado"}
+                                      {propietario.nombre || propietario.name || "No registrado"}
+                                    </p>
+                                    <p className="text-xs text-vet-gray-500 mt-1">
+                                      Debug: {JSON.stringify(Object.keys(propietario))}
                                     </p>
                                   </div>
                                 </div>
