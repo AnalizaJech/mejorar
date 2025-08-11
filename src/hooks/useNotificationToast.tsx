@@ -42,6 +42,12 @@ export function useNotificationToast() {
         case "comprobante_recibido":
           icon = <Upload className="w-4 h-4 text-orange-600" />;
           break;
+        case "nueva_cita":
+          icon = <Calendar className="w-4 h-4 text-blue-600" />;
+          break;
+        case "nuevo_cliente":
+          icon = <User className="w-4 h-4 text-green-600" />;
+          break;
       }
 
       toast({
