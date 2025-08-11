@@ -186,8 +186,14 @@ export default function Usuarios() {
       // Update existing client
       const updateData: any = {
         nombre: formData.nombre,
+        apellidos: formData.apellidos,
         email: formData.email,
         telefono: formData.telefono,
+        documento: formData.documento,
+        tipoDocumento: formData.tipoDocumento,
+        genero: formData.genero,
+        fechaNacimiento: formData.fechaNacimiento,
+        direccion: formData.direccion,
       };
 
       // Only update password if provided
