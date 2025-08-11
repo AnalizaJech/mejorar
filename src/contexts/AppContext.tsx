@@ -149,6 +149,7 @@ interface Notificacion {
   usuarioId: string;
   tipo:
     | "cita_aceptada"
+    | "cita_agendada_confirmacion"
     | "bienvenida_cliente"
     | "consulta_registrada"
     | "sistema"
@@ -1481,6 +1482,35 @@ export function AppProvider({ children }: { children: ReactNode }) {
     console.log(
       `[CREATED] Nueva cita creada: ${newCita.mascota} - ${newCita.veterinario}`,
     );
+
+    // Notificar al cliente sobre la confirmación de su cita
+    if (user.rol === "cliente") {
+      const fechaFormateada = new Date(newCita.fecha).toLocaleDateString("es-ES", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+      const horaFormateada = new Date(newCita.fecha).toLocaleTimeString("es-ES", {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+
+      addNotificacion({
+        usuarioId: user.id,
+        tipo: "cita_agendada_confirmacion",
+        titulo: "¡Cita agendada exitosamente!",
+        mensaje: `Tu cita para ${newCita.mascota} ha sido programada el ${fechaFormateada} a las ${horaFormateada}. Estado: Pendiente de pago (S/. ${newCita.precio}). Sube tu comprobante de pago en 'Mis Citas' para confirmar la cita. Métodos aceptados: YAPE, PLIN, Banca Móvil.`,
+        leida: false,
+        datos: {
+          citaId: newCita.id,
+          mascotaNombre: newCita.mascota,
+          veterinario: newCita.veterinario,
+          fechaCita: new Date(newCita.fecha),
+          motivo: newCita.motivo,
+        },
+      });
+    }
 
     // Notificar a todos los administradores sobre la nueva cita
     const admins = usuarios.filter((u) => u.rol === "admin");
