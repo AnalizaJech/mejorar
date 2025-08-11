@@ -1063,53 +1063,6 @@ export default function GestionCitas() {
                                   </div>
                                 )}
 
-                                {/* Fecha de Nacimiento */}
-                                {propietario.fechaNacimiento && (
-                                  <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
-                                    <div className="flex items-center space-x-3">
-                                      <div className="w-8 h-8 bg-pink-100 rounded-lg flex items-center justify-center">
-                                        <Calendar className="w-4 h-4 text-pink-600" />
-                                      </div>
-                                      <div>
-                                        <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
-                                          Fecha de Nacimiento
-                                        </span>
-                                        <p className="text-sm font-medium text-vet-gray-900">
-                                          {new Date(
-                                            propietario.fechaNacimiento,
-                                          ).toLocaleDateString("es-ES", {
-                                            year: "numeric",
-                                            month: "long",
-                                            day: "numeric",
-                                          })}
-                                        </p>
-                                        <p className="text-xs text-vet-gray-500">
-                                          {(() => {
-                                            const today = new Date();
-                                            const birthDate = new Date(
-                                              propietario.fechaNacimiento,
-                                            );
-                                            let age =
-                                              today.getFullYear() -
-                                              birthDate.getFullYear();
-                                            const monthDiff =
-                                              today.getMonth() -
-                                              birthDate.getMonth();
-                                            if (
-                                              monthDiff < 0 ||
-                                              (monthDiff === 0 &&
-                                                today.getDate() <
-                                                  birthDate.getDate())
-                                            ) {
-                                              age--;
-                                            }
-                                            return `${age} años`;
-                                          })()}
-                                        </p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                )}
 
                                 {/* Género */}
                                 {propietario.genero && (
