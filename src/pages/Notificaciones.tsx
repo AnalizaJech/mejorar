@@ -100,6 +100,18 @@ export default function Notificaciones() {
           priority = "high";
           type = "cita";
           break;
+        case "nueva_cita":
+          icon = Calendar;
+          color = "blue-500";
+          priority = "high";
+          type = "cita";
+          break;
+        case "nuevo_cliente":
+          icon = User;
+          color = "green-500";
+          priority = "high";
+          type = "sistema";
+          break;
       }
 
       const hoursAgo = Math.floor(
