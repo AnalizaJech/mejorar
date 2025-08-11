@@ -27,6 +27,9 @@ export function useNotificationToast() {
         case "cita_aceptada":
           icon = <CheckCircle className="w-4 h-4 text-green-600" />;
           break;
+        case "cita_agendada_confirmacion":
+          icon = <Calendar className="w-4 h-4 text-blue-600" />;
+          break;
         case "bienvenida_cliente":
           icon = <User className="w-4 h-4 text-blue-600" />;
           break;
