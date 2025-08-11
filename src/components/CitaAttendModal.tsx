@@ -148,6 +148,42 @@ export default function CitaAttendModal({
     setExamenes(updated);
   };
 
+  const handleImageUpload = async (index: number, file: File) => {
+    if (file && file.type.startsWith('image/')) {
+      try {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const updated = [...examenes];
+          updated[index] = {
+            ...updated[index],
+            imagen: {
+              data: e.target?.result as string,
+              name: file.name,
+              size: file.size,
+              type: file.type
+            }
+          };
+          setExamenes(updated);
+        };
+        reader.readAsDataURL(file);
+      } catch (error) {
+        console.error('Error uploading image:', error);
+        setError('Error al subir la imagen');
+      }
+    } else {
+      setError('Por favor selecciona un archivo de imagen válido');
+    }
+  };
+
+  const removeImage = (index: number) => {
+    const updated = [...examenes];
+    updated[index] = {
+      ...updated[index],
+      imagen: undefined
+    };
+    setExamenes(updated);
+  };
+
   const handleSaveConsultation = async () => {
     if (!selectedCita || !user || attended === null) {
       setError("Información incompleta para registrar la consulta");
@@ -745,7 +781,7 @@ export default function CitaAttendModal({
                           <Trash2 className="w-4 h-4 text-red-500" />
                         </Button>
                       </div>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      <div className="space-y-3">
                         <div>
                           <Label>Tipo de examen</Label>
                           <Input
@@ -757,14 +793,93 @@ export default function CitaAttendModal({
                           />
                         </div>
                         <div>
-                          <Label>Resultado</Label>
-                          <Input
+                          <Label>Descripción del resultado</Label>
+                          <Textarea
                             value={exam.resultado}
                             onChange={(e) =>
                               updateExamen(index, "resultado", e.target.value)
                             }
-                            placeholder="Resultado del examen..."
+                            placeholder="Descripción del resultado del examen..."
+                            className="h-24 resize-none"
                           />
+                        </div>
+                        <div>
+                          <Label>Imagen del resultado</Label>
+                          <div className="space-y-2">
+                            {exam.imagen ? (
+                              <div className="border border-vet-gray-200 rounded-lg p-3">
+                                <div className="flex items-center justify-between mb-2">
+                                  <span className="text-sm text-vet-gray-600">
+                                    {exam.imagen.name} ({(exam.imagen.size / 1024).toFixed(1)} KB)
+                                  </span>
+                                  <div className="flex space-x-2">
+                                    <input
+                                      type="file"
+                                      accept="image/*"
+                                      onChange={(e) => {
+                                        const file = e.target.files?.[0];
+                                        if (file) handleImageUpload(index, file);
+                                      }}
+                                      className="hidden"
+                                      id={`exam-image-change-${index}`}
+                                    />
+                                    <Button
+                                      type="button"
+                                      size="sm"
+                                      variant="outline"
+                                      onClick={() => {
+                                        const input = document.getElementById(`exam-image-change-${index}`);
+                                        input?.click();
+                                      }}
+                                    >
+                                      Cambiar
+                                    </Button>
+                                    <Button
+                                      type="button"
+                                      size="sm"
+                                      variant="outline"
+                                      onClick={() => removeImage(index)}
+                                      className="text-red-600 hover:text-red-700"
+                                    >
+                                      <Trash2 className="w-4 h-4" />
+                                    </Button>
+                                  </div>
+                                </div>
+                                <img
+                                  src={exam.imagen.data}
+                                  alt={`Resultado ${exam.tipo}`}
+                                  className="max-w-full h-48 object-contain rounded border border-vet-gray-200"
+                                />
+                              </div>
+                            ) : (
+                              <div className="border-2 border-dashed border-vet-gray-300 rounded-lg p-6 text-center">
+                                <input
+                                  type="file"
+                                  accept="image/*"
+                                  onChange={(e) => {
+                                    const file = e.target.files?.[0];
+                                    if (file) handleImageUpload(index, file);
+                                  }}
+                                  className="hidden"
+                                  id={`exam-image-upload-${index}`}
+                                />
+                                <Button
+                                  type="button"
+                                  variant="outline"
+                                  onClick={() => {
+                                    const input = document.getElementById(`exam-image-upload-${index}`);
+                                    input?.click();
+                                  }}
+                                >
+                                  <Plus className="w-4 h-4 mr-2" />
+                                  Subir imagen
+                                </Button>
+                                <p className="text-xs text-vet-gray-500 mt-2">
+                                  Sube una imagen del resultado del examen (PNG, JPG, etc.)
+                                </p>
+                              </div>
+                            )}
+                          </div>
                         </div>
                       </div>
                     </div>
