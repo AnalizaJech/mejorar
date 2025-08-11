@@ -274,11 +274,33 @@ export default function Servicios() {
 
       if (editingService) {
         // Update existing service
+        const updatedService = { ...formData, id: editingService.id };
         updatedServices = servicios.map((s) =>
-          s.id === editingService.id
-            ? { ...formData, id: editingService.id }
-            : s,
+          s.id === editingService.id ? updatedService : s,
         );
+
+        // Notify the admin who updated the service
+        if (user) {
+          addNotificacion({
+            usuarioId: user.id,
+            tipo: "nuevo_servicio",
+            titulo: "Servicio actualizado exitosamente",
+            mensaje: `Has actualizado el servicio "${updatedService.nombre}" - Precio: S/. ${updatedService.precio}`,
+            leida: false,
+          });
+        }
+
+        // Notify all other users about the service update
+        const otherUsers = usuarios.filter((u) => u.id !== user?.id);
+        otherUsers.forEach((targetUser) => {
+          addNotificacion({
+            usuarioId: targetUser.id,
+            tipo: "nuevo_servicio",
+            titulo: "Servicio actualizado",
+            mensaje: `Se ha actualizado el servicio "${updatedService.nombre}" - Precio: S/. ${updatedService.precio}`,
+            leida: false,
+          });
+        });
       } else {
         // Add new service
         const newId = `servicio_${Date.now()}`;
@@ -334,6 +356,30 @@ export default function Servicios() {
       const updatedServices = servicios.filter(
         (s) => s.id !== deletingService.id,
       );
+
+      // Notify the admin who deleted the service
+      if (user) {
+        addNotificacion({
+          usuarioId: user.id,
+          tipo: "nuevo_servicio",
+          titulo: "Servicio eliminado exitosamente",
+          mensaje: `Has eliminado el servicio "${deletingService.nombre}" del catálogo`,
+          leida: false,
+        });
+      }
+
+      // Notify all other users about the service deletion
+      const otherUsers = usuarios.filter((u) => u.id !== user?.id);
+      otherUsers.forEach((targetUser) => {
+        addNotificacion({
+          usuarioId: targetUser.id,
+          tipo: "nuevo_servicio",
+          titulo: "Servicio eliminado",
+          mensaje: `El servicio "${deletingService.nombre}" ya no está disponible en el catálogo`,
+          leida: false,
+        });
+      });
+
       saveServices(updatedServices);
       setShowDeleteModal(false);
       setDeletingService(null);
