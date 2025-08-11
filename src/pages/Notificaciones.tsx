@@ -75,6 +75,12 @@ export default function Notificaciones() {
           priority = "normal";
           type = "sistema";
           break;
+        case "nuevo_servicio":
+          icon = PawPrint;
+          color = "vet-secondary";
+          priority = "normal";
+          type = "sistema";
+          break;
       }
 
       const hoursAgo = Math.floor(
