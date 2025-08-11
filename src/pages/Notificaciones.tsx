@@ -211,9 +211,9 @@ export default function Notificaciones() {
 
   const getIconComponent = (IconComponent, color) => (
     <div
-      className={`w-10 h-10 rounded-full flex items-center justify-center bg-${color}/10`}
+      className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center bg-${color}/10 flex-shrink-0`}
     >
-      <IconComponent className={`w-5 h-5 text-${color}`} />
+      <IconComponent className={`w-4 h-4 sm:w-5 sm:h-5 text-${color}`} />
     </div>
   );
 
@@ -260,22 +260,22 @@ export default function Notificaciones() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <div className="flex flex-col space-y-4 sm:flex-row sm:items-center sm:justify-between sm:space-y-0 mb-6">
-            <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 bg-vet-primary/10 rounded-xl flex items-center justify-center">
-                <Bell className="w-6 h-6 text-vet-primary" />
+            <div className="flex items-center space-x-3 sm:space-x-4">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-vet-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                <Bell className="w-5 h-5 sm:w-6 sm:h-6 text-vet-primary" />
               </div>
-              <div>
-                <h1 className="text-3xl font-bold text-vet-gray-900">
+              <div className="min-w-0 flex-1">
+                <h1 className="text-2xl sm:text-3xl font-bold text-vet-gray-900">
                   Notificaciones
                 </h1>
-                <p className="text-vet-gray-600">
+                <p className="text-sm sm:text-base text-vet-gray-600">
                   Mantente al día con tus citas y actualizaciones
                 </p>
               </div>
             </div>
 
-            <div className="flex items-center space-x-3">
-              <Badge variant="secondary" className="text-sm">
+            <div className="flex items-center flex-wrap gap-2 sm:gap-3">
+              <Badge variant="secondary" className="text-xs sm:text-sm">
                 {unreadCount} no leídas
               </Badge>
               {unreadCount > 0 && (
@@ -283,9 +283,10 @@ export default function Notificaciones() {
                   variant="outline"
                   size="sm"
                   onClick={markAllAsRead}
-                  className="text-vet-primary border-vet-primary hover:bg-vet-primary hover:text-white"
+                  className="text-vet-primary border-vet-primary hover:bg-vet-primary hover:text-white text-xs sm:text-sm px-2 sm:px-3"
                 >
-                  Marcar todas como leídas
+                  <span className="hidden sm:inline">Marcar todas como leídas</span>
+                  <span className="sm:hidden">Marcar todas</span>
                 </Button>
               )}
             </div>
@@ -294,14 +295,14 @@ export default function Notificaciones() {
           {/* Filters */}
           <Tabs value={selectedFilter} onValueChange={setSelectedFilter}>
             <TabsList
-              className={`grid w-full mb-6 ${user.rol === "admin" || user.rol === "veterinario" ? "grid-cols-2 lg:grid-cols-5" : "grid-cols-2 lg:grid-cols-4"}`}
+              className={`grid w-full mb-6 ${user.rol === "admin" || user.rol === "veterinario" ? "grid-cols-2 sm:grid-cols-3 lg:grid-cols-5" : "grid-cols-2 sm:grid-cols-2 lg:grid-cols-4"}`}
             >
-              <TabsTrigger value="todas">Todas</TabsTrigger>
-              <TabsTrigger value="no_leidas">No leídas</TabsTrigger>
-              <TabsTrigger value="cita">Citas</TabsTrigger>
-              <TabsTrigger value="sistema">Sistema</TabsTrigger>
+              <TabsTrigger value="todas" className="text-xs sm:text-sm">Todas</TabsTrigger>
+              <TabsTrigger value="no_leidas" className="text-xs sm:text-sm">No leídas</TabsTrigger>
+              <TabsTrigger value="cita" className="text-xs sm:text-sm">Citas</TabsTrigger>
+              <TabsTrigger value="sistema" className="text-xs sm:text-sm">Sistema</TabsTrigger>
               {(user.rol === "admin" || user.rol === "veterinario") && (
-                <TabsTrigger value="recordatorio">Recordatorios</TabsTrigger>
+                <TabsTrigger value="recordatorio" className="text-xs sm:text-sm">Recordatorios</TabsTrigger>
               )}
             </TabsList>
 
@@ -346,16 +347,16 @@ export default function Notificaciones() {
                         }`}
                         onClick={() => markAsRead(notification.id)}
                       >
-                        <CardContent className="p-4">
-                          <div className="flex items-start space-x-4">
+                        <CardContent className="p-3 sm:p-4">
+                          <div className="flex items-start space-x-3 sm:space-x-4">
                             {getIconComponent(
                               notification.icon,
                               notification.color,
                             )}
                             <div className="flex-1 min-w-0">
-                              <div className="flex items-center justify-between mb-1">
+                              <div className="flex items-start justify-between mb-1 gap-2">
                                 <h4
-                                  className={`text-sm font-medium ${
+                                  className={`text-sm font-medium leading-tight pr-2 ${
                                     !notification.read
                                       ? "text-vet-gray-900"
                                       : "text-vet-gray-700"
@@ -363,14 +364,14 @@ export default function Notificaciones() {
                                 >
                                   {notification.title}
                                 </h4>
-                                <div className="flex items-center space-x-2">
+                                <div className="flex items-center space-x-1 sm:space-x-2 flex-shrink-0">
                                   {getPriorityBadge(notification.priority)}
                                   {!notification.read && (
                                     <div className="w-2 h-2 bg-vet-primary rounded-full"></div>
                                   )}
                                 </div>
                               </div>
-                              <p className="text-sm text-vet-gray-600 mb-2">
+                              <p className="text-sm text-vet-gray-600 mb-2 leading-relaxed">
                                 {notification.message}
                               </p>
                               <p className="text-xs text-vet-gray-500">
