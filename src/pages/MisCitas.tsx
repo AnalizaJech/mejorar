@@ -182,6 +182,30 @@ export default function MisCitas() {
                 fechaCita: cita.fecha,
               },
             });
+
+            // Notificar a todos los administradores sobre el comprobante subido
+            const admins = usuarios.filter((u) => u.rol === "admin");
+            const fechaCitaFormateada = new Date(cita.fecha).toLocaleDateString("es-ES", {
+              weekday: "short",
+              month: "short",
+              day: "numeric",
+            });
+
+            admins.forEach((admin) => {
+              addNotificacion({
+                usuarioId: admin.id,
+                tipo: "comprobante_recibido",
+                titulo: "Comprobante de pago recibido",
+                mensaje: `${user.nombre} ha subido un comprobante de pago para la cita de ${cita.mascota} programada el ${fechaCitaFormateada}. Requiere validación administrativa.`,
+                leida: false,
+                datos: {
+                  citaId: currentCitaId,
+                  mascotaNombre: cita.mascota,
+                  fechaCita: cita.fecha,
+                  clienteNombre: user.nombre,
+                },
+              });
+            });
           }
 
           console.log("[SUCCESS] Comprobante subido exitosamente");
