@@ -205,7 +205,18 @@ export default function Usuarios() {
       setSuccess("Cliente actualizado exitosamente");
 
       // Reset form
-      setFormData({ nombre: "", email: "", telefono: "", password: "" });
+      setFormData({
+        nombre: "",
+        apellidos: "",
+        email: "",
+        telefono: "",
+        documento: "",
+        tipoDocumento: "dni",
+        genero: "",
+        fechaNacimiento: "",
+        direccion: "",
+        password: ""
+      });
       setIsDialogOpen(false);
       setEditingUser(null);
     } catch (error) {
