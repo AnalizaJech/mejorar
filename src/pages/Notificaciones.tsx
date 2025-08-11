@@ -155,7 +155,7 @@ export default function Notificaciones() {
       todaysCitas.forEach((cita) => {
         realNotifications.push({
           id: `today-${cita.id}`,
-          type: "recordatorio",
+          type: "sistema",
           title: "Cita programada para hoy",
           message: `${cita.mascota} - ${cita.motivo}`,
           time: new Date(cita.fecha).toLocaleTimeString("es-ES", {
