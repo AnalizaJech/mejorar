@@ -40,11 +40,11 @@
 
 ### 👥 Roles del Sistema
 
-| Rol | Funcionalidades Principales | Acceso |
-|-----|----------------------------|--------|
-| **Cliente** | Gestión mascotas, agendamiento citas, historial médico | App web + móvil |
-| **Veterinario** | Agenda médica, consultas, historial clínico | App web especializada |
-| **Administrador** | Gestión usuarios, validación pagos, configuración | Panel administrativo |
+| Rol               | Funcionalidades Principales                            | Acceso                |
+| ----------------- | ------------------------------------------------------ | --------------------- |
+| **Cliente**       | Gestión mascotas, agendamiento citas, historial médico | App web + móvil       |
+| **Veterinario**   | Agenda médica, consultas, historial clínico            | App web especializada |
+| **Administrador** | Gestión usuarios, validación pagos, configuración      | Panel administrativo  |
 
 ---
 
@@ -59,11 +59,11 @@ graph TB
         B[TailwindCSS + Radix UI]
         C[React Query + Zustand]
     end
-    
+
     subgraph "Load Balancer"
         D[Nginx / Cloudflare]
     end
-    
+
     subgraph "Backend Services"
         E[Node.js + Express/Fastify]
         F[JWT Authentication]
@@ -72,21 +72,21 @@ graph TB
         I[WebSocket Service]
         J[Email Service]
     end
-    
+
     subgraph "Data Layer"
         K[(PostgreSQL 15+)]
         L[(Redis Cache)]
         M[AWS S3/MinIO]
         N[ElasticSearch]
     end
-    
+
     subgraph "External Services"
         O[SendGrid/SES]
         P[WhatsApp API]
         Q[SMS Gateway]
         R[Payment Gateway]
     end
-    
+
     A --> D
     D --> E
     E --> K
@@ -97,7 +97,7 @@ graph TB
     E --> P
     E --> Q
     E --> R
-    
+
     style A fill:#61dafb
     style E fill:#339933
     style K fill:#336791
@@ -193,31 +193,31 @@ backend/
     "cors": "^2.8.5",              // CORS handling
     "helmet": "^7.0.0",            // Security headers
     "compression": "^1.7.4",       // Response compression
-    
+
     // Database & ORM
     "pg": "^8.11.0",               // PostgreSQL driver
     "sequelize": "^6.32.1",        // ORM
     "redis": "^4.6.7",             // Caching
-    
+
     // Authentication & Security
     "jsonwebtoken": "^9.0.1",      // JWT tokens
     "bcryptjs": "^2.4.3",          // Password hashing
     "express-rate-limit": "^6.8.1", // Rate limiting
     "express-validator": "^7.0.1",  // Input validation
-    
+
     // File handling
     "multer": "^1.4.5",            // File upload
     "sharp": "^0.32.1",            // Image processing
     "aws-sdk": "^2.1415.0",        // AWS S3
-    
+
     // Communication
     "nodemailer": "^6.9.3",        // Email service
     "twilio": "^4.14.0",           // SMS service
-    
+
     // Monitoring & Logging
     "winston": "^3.9.0",           // Logging
     "express-prometheus-middleware": "^1.2.0", // Metrics
-    
+
     // Utilities
     "dayjs": "^1.11.9",            // Date handling
     "lodash": "^4.17.21",          // Utilities
@@ -233,18 +233,18 @@ backend/
 
 ```typescript
 // Auth endpoints
-POST   /api/v1/auth/register                    // Registro de usuarios
-POST   /api/v1/auth/login                       // Inicio de sesión
-POST   /api/v1/auth/refresh                     // Renovar token
-POST   /api/v1/auth/logout                      // Cerrar sesión
-POST   /api/v1/auth/forgot-password             // Recuperar contraseña
-POST   /api/v1/auth/reset-password              // Resetear contraseña
-GET    /api/v1/auth/me                          // Obtener usuario actual
-PUT    /api/v1/auth/change-password             // Cambiar contraseña
+POST / api / v1 / auth / register; // Registro de usuarios
+POST / api / v1 / auth / login; // Inicio de sesión
+POST / api / v1 / auth / refresh; // Renovar token
+POST / api / v1 / auth / logout; // Cerrar sesión
+POST / api / v1 / auth / forgot - password; // Recuperar contraseña
+POST / api / v1 / auth / reset - password; // Resetear contraseña
+GET / api / v1 / auth / me; // Obtener usuario actual
+PUT / api / v1 / auth / change - password; // Cambiar contraseña
 
 // Request/Response examples
 interface LoginRequest {
-  identifier: string;      // email, username, or phone
+  identifier: string; // email, username, or phone
   password: string;
 }
 
@@ -370,14 +370,14 @@ interface MedicalConsultation {
   petId: string;
   veterinarianId: string;
   consultationDate: string;
-  
+
   // Vital signs
   weight?: number;
   temperature?: number;
   heartRate?: number;
   respiratoryRate?: number;
   bloodPressure?: string;
-  
+
   // Clinical examination
   reason: string;
   symptoms: string[];
@@ -386,15 +386,15 @@ interface MedicalConsultation {
   secondaryDiagnosis?: string[];
   treatment: string;
   procedures?: string[];
-  
+
   // Medications
   medications: Medication[];
-  
+
   // Follow-up
   nextAppointment?: string;
   instructions: string;
   observations?: string;
-  
+
   // Attachments
   attachments?: FileAttachment[];
 }
@@ -503,29 +503,29 @@ CREATE TABLE users (
     email VARCHAR(100) UNIQUE NOT NULL,
     phone VARCHAR(20),
     password_hash VARCHAR(255) NOT NULL,
-    
+
     -- Personal information
     first_name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100),
     date_of_birth DATE,
     gender VARCHAR(20),
     address TEXT,
-    
+
     -- Document information
     document_number VARCHAR(50),
     document_type VARCHAR(30) CHECK (document_type IN ('dni', 'passport', 'foreigner_card', 'cedula')),
-    
+
     -- Role and status
     role VARCHAR(20) NOT NULL CHECK (role IN ('cliente', 'veterinario', 'admin')),
     status VARCHAR(20) DEFAULT 'active' CHECK (status IN ('active', 'inactive', 'suspended')),
     email_verified BOOLEAN DEFAULT FALSE,
-    
+
     -- Professional information (for veterinarians)
     specialty VARCHAR(100),
     license_number VARCHAR(50),
     experience_years INTEGER,
     education TEXT,
-    
+
     -- Metadata
     avatar_url VARCHAR(500),
     bio TEXT,
@@ -533,7 +533,7 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     last_login TIMESTAMP,
-    
+
     -- Indexes
     CONSTRAINT users_email_check CHECK (email ~* '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$')
 );
@@ -542,34 +542,34 @@ CREATE TABLE users (
 CREATE TABLE pets (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     owner_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    
+
     -- Basic information
     name VARCHAR(100) NOT NULL,
     species VARCHAR(50) NOT NULL,
     breed VARCHAR(100) NOT NULL,
     sex VARCHAR(20) CHECK (sex IN ('male', 'female', 'unknown')),
     date_of_birth DATE NOT NULL,
-    
+
     -- Physical characteristics
     weight DECIMAL(5,2),
     color VARCHAR(100),
     microchip_number VARCHAR(50) UNIQUE,
-    
+
     -- Health information
     health_status VARCHAR(50) DEFAULT 'healthy',
     allergies TEXT[],
     medical_conditions TEXT[],
     current_medications TEXT[],
-    
+
     -- Metadata
     photo_url VARCHAR(500),
     description TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    
+
     -- Calculated fields
     age_months INTEGER GENERATED ALWAYS AS (
-        EXTRACT(YEAR FROM AGE(CURRENT_DATE, date_of_birth)) * 12 + 
+        EXTRACT(YEAR FROM AGE(CURRENT_DATE, date_of_birth)) * 12 +
         EXTRACT(MONTH FROM AGE(CURRENT_DATE, date_of_birth))
     ) STORED
 );
@@ -577,45 +577,45 @@ CREATE TABLE pets (
 -- Appointments table with comprehensive status tracking
 CREATE TABLE appointments (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    
+
     -- Relations
     pet_id UUID NOT NULL REFERENCES pets(id) ON DELETE CASCADE,
     client_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     veterinarian_id UUID REFERENCES users(id) ON DELETE SET NULL,
-    
+
     -- Appointment details
     scheduled_date TIMESTAMP NOT NULL,
     consultation_type VARCHAR(50) NOT NULL,
     reason TEXT NOT NULL,
     location VARCHAR(100) DEFAULT 'Main Clinic',
     estimated_duration INTEGER DEFAULT 30, -- minutes
-    
+
     -- Status and workflow
-    status VARCHAR(20) NOT NULL DEFAULT 'pending_payment' 
+    status VARCHAR(20) NOT NULL DEFAULT 'pending_payment'
         CHECK (status IN (
-            'pending_payment', 'payment_validation', 'confirmed', 
+            'pending_payment', 'payment_validation', 'confirmed',
             'attended', 'cancelled', 'expired', 'rejected', 'no_show'
         )),
-    
+
     -- Payment information
     service_price DECIMAL(8,2) NOT NULL,
     payment_method VARCHAR(50),
     payment_proof_url VARCHAR(500),
     payment_validated_at TIMESTAMP,
     payment_validated_by UUID REFERENCES users(id),
-    
+
     -- Notes and observations
     client_notes TEXT,
     admin_notes TEXT,
     veterinarian_notes TEXT,
     cancellation_reason TEXT,
-    
+
     -- Metadata
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     confirmed_at TIMESTAMP,
     attended_at TIMESTAMP,
-    
+
     -- Constraints
     CONSTRAINT valid_scheduled_date CHECK (scheduled_date > CURRENT_TIMESTAMP),
     CONSTRAINT valid_veterinarian CHECK (
@@ -630,11 +630,11 @@ CREATE TABLE medical_consultations (
     appointment_id UUID NOT NULL REFERENCES appointments(id) ON DELETE CASCADE,
     pet_id UUID NOT NULL REFERENCES pets(id) ON DELETE CASCADE,
     veterinarian_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    
+
     -- Consultation metadata
     consultation_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     consultation_type VARCHAR(50) NOT NULL,
-    
+
     -- Vital signs
     weight DECIMAL(5,2),
     temperature DECIMAL(4,1),
@@ -642,31 +642,31 @@ CREATE TABLE medical_consultations (
     respiratory_rate INTEGER,
     blood_pressure_systolic INTEGER,
     blood_pressure_diastolic INTEGER,
-    
+
     -- Clinical examination
     chief_complaint TEXT NOT NULL,
     history_of_present_illness TEXT,
     physical_examination JSONB, -- Structured physical exam data
-    
+
     -- Diagnosis and treatment
     primary_diagnosis TEXT NOT NULL,
     secondary_diagnoses TEXT[],
     differential_diagnoses TEXT[],
-    
+
     treatment_plan TEXT NOT NULL,
     procedures_performed TEXT[],
-    
+
     -- Follow-up
     next_appointment_recommended BOOLEAN DEFAULT FALSE,
     next_appointment_date DATE,
     home_care_instructions TEXT,
     diet_recommendations TEXT,
     exercise_recommendations TEXT,
-    
+
     -- Additional notes
     veterinarian_observations TEXT,
     client_concerns TEXT,
-    
+
     -- Metadata
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -676,7 +676,7 @@ CREATE TABLE medical_consultations (
 CREATE TABLE prescribed_medications (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     consultation_id UUID NOT NULL REFERENCES medical_consultations(id) ON DELETE CASCADE,
-    
+
     -- Medication details
     medication_name VARCHAR(200) NOT NULL,
     active_ingredient VARCHAR(200),
@@ -684,12 +684,12 @@ CREATE TABLE prescribed_medications (
     frequency VARCHAR(100) NOT NULL,
     duration VARCHAR(100) NOT NULL,
     quantity_prescribed INTEGER,
-    
+
     -- Instructions
     administration_instructions TEXT,
     special_instructions TEXT,
     side_effects_warning TEXT,
-    
+
     -- Metadata
     prescribed_date DATE DEFAULT CURRENT_DATE,
     start_date DATE DEFAULT CURRENT_DATE,
@@ -700,25 +700,25 @@ CREATE TABLE prescribed_medications (
 CREATE TABLE notifications (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     recipient_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    
+
     -- Notification content
     type VARCHAR(50) NOT NULL,
     title VARCHAR(200) NOT NULL,
     message TEXT NOT NULL,
-    
+
     -- Related entity (polymorphic relation)
     related_entity_type VARCHAR(50), -- 'appointment', 'consultation', 'payment', etc.
     related_entity_id UUID,
-    
+
     -- Status and priority
     is_read BOOLEAN DEFAULT FALSE,
     priority VARCHAR(20) DEFAULT 'medium' CHECK (priority IN ('low', 'medium', 'high', 'urgent')),
-    
+
     -- Delivery channels
     email_sent BOOLEAN DEFAULT FALSE,
     sms_sent BOOLEAN DEFAULT FALSE,
     push_sent BOOLEAN DEFAULT FALSE,
-    
+
     -- Metadata
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     read_at TIMESTAMP,
@@ -728,7 +728,7 @@ CREATE TABLE notifications (
 -- File attachments (images, documents, reports)
 CREATE TABLE file_attachments (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    
+
     -- File information
     original_name VARCHAR(255) NOT NULL,
     filename VARCHAR(255) NOT NULL UNIQUE,
@@ -736,21 +736,21 @@ CREATE TABLE file_attachments (
     file_url VARCHAR(500) NOT NULL,
     file_size BIGINT NOT NULL,
     mime_type VARCHAR(100) NOT NULL,
-    
+
     -- Related entity (polymorphic)
     entity_type VARCHAR(50) NOT NULL, -- 'user', 'pet', 'appointment', 'consultation'
     entity_id UUID NOT NULL,
     attachment_type VARCHAR(50), -- 'avatar', 'photo', 'payment_proof', 'medical_report'
-    
+
     -- Image-specific data
     image_width INTEGER,
     image_height INTEGER,
     thumbnail_url VARCHAR(500),
-    
+
     -- Metadata
     uploaded_by UUID REFERENCES users(id),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    
+
     -- Security
     is_public BOOLEAN DEFAULT FALSE,
     access_level VARCHAR(20) DEFAULT 'private' CHECK (access_level IN ('public', 'private', 'restricted'))
@@ -766,7 +766,7 @@ CREATE TABLE system_settings (
     is_public BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    
+
     UNIQUE(category, key)
 );
 
@@ -809,7 +809,7 @@ CREATE INDEX idx_files_entity ON file_attachments(entity_type, entity_id);
 
 -- Views for common queries
 CREATE VIEW appointment_summary AS
-SELECT 
+SELECT
     a.id,
     a.scheduled_date,
     a.status,
@@ -827,7 +827,7 @@ JOIN users u ON a.client_id = u.id
 LEFT JOIN users v ON a.veterinarian_id = v.id;
 
 CREATE VIEW pet_summary AS
-SELECT 
+SELECT
     p.*,
     u.first_name || ' ' || u.last_name as owner_name,
     u.email as owner_email,
@@ -846,66 +846,88 @@ GROUP BY p.id, u.first_name, u.last_name, u.email, u.phone;
 
 ```javascript
 // Migration example: Create appointments table
-exports.up = async function(knex) {
-  return knex.schema.createTable('appointments', function(table) {
-    table.uuid('id').primary().defaultTo(knex.raw('gen_random_uuid()'));
-    table.uuid('pet_id').notNullable().references('id').inTable('pets').onDelete('CASCADE');
-    table.uuid('client_id').notNullable().references('id').inTable('users').onDelete('CASCADE');
-    table.uuid('veterinarian_id').references('id').inTable('users').onDelete('SET NULL');
-    
-    table.timestamp('scheduled_date').notNullable();
-    table.string('consultation_type', 50).notNullable();
-    table.text('reason').notNullable();
-    table.string('location', 100).defaultTo('Main Clinic');
-    table.integer('estimated_duration').defaultTo(30);
-    
-    table.enum('status', [
-      'pending_payment', 'payment_validation', 'confirmed', 
-      'attended', 'cancelled', 'expired', 'rejected', 'no_show'
-    ]).defaultTo('pending_payment');
-    
-    table.decimal('service_price', 8, 2).notNullable();
-    table.string('payment_method', 50);
-    table.string('payment_proof_url', 500);
-    table.timestamp('payment_validated_at');
-    table.uuid('payment_validated_by').references('id').inTable('users');
-    
-    table.text('client_notes');
-    table.text('admin_notes');
-    table.text('veterinarian_notes');
-    table.text('cancellation_reason');
-    
-    table.timestamp('created_at').defaultTo(knex.fn.now());
-    table.timestamp('updated_at').defaultTo(knex.fn.now());
-    table.timestamp('confirmed_at');
-    table.timestamp('attended_at');
-    
+exports.up = async function (knex) {
+  return knex.schema.createTable("appointments", function (table) {
+    table.uuid("id").primary().defaultTo(knex.raw("gen_random_uuid()"));
+    table
+      .uuid("pet_id")
+      .notNullable()
+      .references("id")
+      .inTable("pets")
+      .onDelete("CASCADE");
+    table
+      .uuid("client_id")
+      .notNullable()
+      .references("id")
+      .inTable("users")
+      .onDelete("CASCADE");
+    table
+      .uuid("veterinarian_id")
+      .references("id")
+      .inTable("users")
+      .onDelete("SET NULL");
+
+    table.timestamp("scheduled_date").notNullable();
+    table.string("consultation_type", 50).notNullable();
+    table.text("reason").notNullable();
+    table.string("location", 100).defaultTo("Main Clinic");
+    table.integer("estimated_duration").defaultTo(30);
+
+    table
+      .enum("status", [
+        "pending_payment",
+        "payment_validation",
+        "confirmed",
+        "attended",
+        "cancelled",
+        "expired",
+        "rejected",
+        "no_show",
+      ])
+      .defaultTo("pending_payment");
+
+    table.decimal("service_price", 8, 2).notNullable();
+    table.string("payment_method", 50);
+    table.string("payment_proof_url", 500);
+    table.timestamp("payment_validated_at");
+    table.uuid("payment_validated_by").references("id").inTable("users");
+
+    table.text("client_notes");
+    table.text("admin_notes");
+    table.text("veterinarian_notes");
+    table.text("cancellation_reason");
+
+    table.timestamp("created_at").defaultTo(knex.fn.now());
+    table.timestamp("updated_at").defaultTo(knex.fn.now());
+    table.timestamp("confirmed_at");
+    table.timestamp("attended_at");
+
     // Indexes
-    table.index(['client_id']);
-    table.index(['veterinarian_id']);
-    table.index(['pet_id']);
-    table.index(['scheduled_date']);
-    table.index(['status']);
+    table.index(["client_id"]);
+    table.index(["veterinarian_id"]);
+    table.index(["pet_id"]);
+    table.index(["scheduled_date"]);
+    table.index(["status"]);
   });
 };
 
 // Seed data for services
-exports.seed = async function(knex) {
-  await knex('system_settings').insert([
+exports.seed = async function (knex) {
+  await knex("system_settings").insert([
     {
-      category: 'services',
-      key: 'consultation_types',
+      category: "services",
+      key: "consultation_types",
       value: JSON.stringify([
-        { id: 'general', name: 'Consulta General', price: 80, duration: 30 },
-        { id: 'vaccination', name: 'Vacunación', price: 65, duration: 20 },
-        { id: 'emergency', name: 'Emergencia', price: 150, duration: 60 },
-        { id: 'grooming', name: 'Grooming', price: 45, duration: 45 },
-        { id: 'surgery', name: 'Cirugía', price: 250, duration: 120 },
-        { id: 'diagnostic', name: 'Diagnóstico', price: 120, duration: 45 }
+        { id: "general", name: "Consulta General", price: 80, duration: 30 },
+        { id: "vaccination", name: "Vacunación", price: 65, duration: 20 },
+        { id: "emergency", name: "Emergencia", price: 150, duration: 60 },
+        { id: "grooming", name: "Grooming", price: 45, duration: 45 },
+        { id: "surgery", name: "Cirugía", price: 250, duration: 120 },
+        { id: "diagnostic", name: "Diagnóstico", price: 120, duration: 45 },
       ]),
-      description: 'Available consultation types and pricing',
-      is_public: true
-    }
+      description: "Available consultation types and pricing",
+      is_public: true,
+    },
   ]);
 };
 ```
@@ -924,31 +946,31 @@ exports.seed = async function(knex) {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.14.0",
-    
+
     // State Management
     "zustand": "^4.3.9",              // Global state
     "@tanstack/react-query": "^4.29.19", // Server state
-    
+
     // UI Framework
     "@radix-ui/react-*": "latest",    // Headless UI primitives
     "tailwindcss": "^3.3.3",         // Utility-first CSS
     "tailwind-merge": "^1.14.0",     // Merge Tailwind classes
     "class-variance-authority": "^0.7.0", // Component variants
     "lucide-react": "^0.263.1",      // Icons
-    
+
     // Forms & Validation
     "react-hook-form": "^7.45.2",    // Form handling
     "zod": "^3.21.4",                // Schema validation
     "@hookform/resolvers": "^3.1.1", // Form resolvers
-    
+
     // HTTP Client
     "axios": "^1.4.0",               // HTTP client
-    
+
     // Utilities
     "date-fns": "^2.30.0",           // Date manipulation
     "lodash-es": "^4.17.21",         // Utilities
     "clsx": "^2.0.0",                // Conditional classes
-    
+
     // Development
     "typescript": "^5.1.6",
     "vite": "^4.4.5",
@@ -1017,15 +1039,15 @@ export { Button, buttonVariants };
 
 ```typescript
 // src/app/store/authStore.ts
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
-import { User } from '@/shared/types';
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
+import { User } from "@/shared/types";
 
 interface AuthState {
   user: User | null;
   token: string | null;
   isAuthenticated: boolean;
-  
+
   // Actions
   login: (user: User, token: string) => void;
   logout: () => void;
@@ -1039,34 +1061,37 @@ export const useAuthStore = create<AuthState>()(
       user: null,
       token: null,
       isAuthenticated: false,
-      
-      login: (user, token) => set({
-        user,
-        token,
-        isAuthenticated: true
-      }),
-      
-      logout: () => set({
-        user: null,
-        token: null,
-        isAuthenticated: false
-      }),
-      
-      updateUser: (updates) => set((state) => ({
-        user: state.user ? { ...state.user, ...updates } : null
-      })),
-      
-      setToken: (token) => set({ token })
+
+      login: (user, token) =>
+        set({
+          user,
+          token,
+          isAuthenticated: true,
+        }),
+
+      logout: () =>
+        set({
+          user: null,
+          token: null,
+          isAuthenticated: false,
+        }),
+
+      updateUser: (updates) =>
+        set((state) => ({
+          user: state.user ? { ...state.user, ...updates } : null,
+        })),
+
+      setToken: (token) => set({ token }),
     }),
     {
-      name: 'auth-storage',
+      name: "auth-storage",
       partialize: (state) => ({
         user: state.user,
         token: state.token,
-        isAuthenticated: state.isAuthenticated
-      })
-    }
-  )
+        isAuthenticated: state.isAuthenticated,
+      }),
+    },
+  ),
 );
 
 // src/app/store/appointmentStore.ts
@@ -1075,7 +1100,7 @@ interface AppointmentState {
   currentAppointment: Appointment | null;
   filters: AppointmentFilters;
   pagination: Pagination;
-  
+
   // Actions
   setAppointments: (appointments: Appointment[]) => void;
   addAppointment: (appointment: Appointment) => void;
@@ -1090,28 +1115,33 @@ export const useAppointmentStore = create<AppointmentState>()((set) => ({
   currentAppointment: null,
   filters: {},
   pagination: { page: 1, limit: 10, total: 0 },
-  
+
   setAppointments: (appointments) => set({ appointments }),
-  
-  addAppointment: (appointment) => set((state) => ({
-    appointments: [...state.appointments, appointment]
-  })),
-  
-  updateAppointment: (id, updates) => set((state) => ({
-    appointments: state.appointments.map(apt => 
-      apt.id === id ? { ...apt, ...updates } : apt
-    )
-  })),
-  
-  removeAppointment: (id) => set((state) => ({
-    appointments: state.appointments.filter(apt => apt.id !== id)
-  })),
-  
-  setFilters: (filters) => set((state) => ({
-    filters: { ...state.filters, ...filters }
-  })),
-  
-  setCurrentAppointment: (appointment) => set({ currentAppointment: appointment })
+
+  addAppointment: (appointment) =>
+    set((state) => ({
+      appointments: [...state.appointments, appointment],
+    })),
+
+  updateAppointment: (id, updates) =>
+    set((state) => ({
+      appointments: state.appointments.map((apt) =>
+        apt.id === id ? { ...apt, ...updates } : apt,
+      ),
+    })),
+
+  removeAppointment: (id) =>
+    set((state) => ({
+      appointments: state.appointments.filter((apt) => apt.id !== id),
+    })),
+
+  setFilters: (filters) =>
+    set((state) => ({
+      filters: { ...state.filters, ...filters },
+    })),
+
+  setCurrentAppointment: (appointment) =>
+    set({ currentAppointment: appointment }),
 }));
 ```
 
@@ -1119,11 +1149,11 @@ export const useAppointmentStore = create<AppointmentState>()((set) => ({
 
 ```typescript
 // src/shared/services/api.ts
-import axios from 'axios';
-import { useAuthStore } from '@/app/store/authStore';
+import axios from "axios";
+import { useAuthStore } from "@/app/store/authStore";
 
 const api = axios.create({
-  baseURL: process.env.VITE_API_URL || 'http://localhost:3001/api/v1',
+  baseURL: process.env.VITE_API_URL || "http://localhost:3001/api/v1",
   timeout: 10000,
 });
 
@@ -1136,7 +1166,7 @@ api.interceptors.request.use(
     }
     return config;
   },
-  (error) => Promise.reject(error)
+  (error) => Promise.reject(error),
 );
 
 // Response interceptor for error handling
@@ -1145,70 +1175,91 @@ api.interceptors.response.use(
   async (error) => {
     if (error.response?.status === 401) {
       useAuthStore.getState().logout();
-      window.location.href = '/login';
+      window.location.href = "/login";
     }
     return Promise.reject(error);
-  }
+  },
 );
 
 export { api };
 
 // src/features/appointments/services/appointmentApi.ts
-import { api } from '@/shared/services/api';
-import { Appointment, CreateAppointmentDto, AppointmentFilters } from '../types';
+import { api } from "@/shared/services/api";
+import {
+  Appointment,
+  CreateAppointmentDto,
+  AppointmentFilters,
+} from "../types";
 
 export const appointmentApi = {
   getAll: async (filters?: AppointmentFilters) => {
-    const { data } = await api.get<{ data: Appointment[]; pagination: Pagination }>('/appointments', {
-      params: filters
+    const { data } = await api.get<{
+      data: Appointment[];
+      pagination: Pagination;
+    }>("/appointments", {
+      params: filters,
     });
     return data;
   },
-  
+
   getById: async (id: string) => {
-    const { data } = await api.get<{ data: Appointment }>(`/appointments/${id}`);
+    const { data } = await api.get<{ data: Appointment }>(
+      `/appointments/${id}`,
+    );
     return data.data;
   },
-  
+
   create: async (appointment: CreateAppointmentDto) => {
-    const { data } = await api.post<{ data: Appointment }>('/appointments', appointment);
+    const { data } = await api.post<{ data: Appointment }>(
+      "/appointments",
+      appointment,
+    );
     return data.data;
   },
-  
+
   update: async (id: string, updates: Partial<Appointment>) => {
-    const { data } = await api.put<{ data: Appointment }>(`/appointments/${id}`, updates);
+    const { data } = await api.put<{ data: Appointment }>(
+      `/appointments/${id}`,
+      updates,
+    );
     return data.data;
   },
-  
+
   updateStatus: async (id: string, status: AppointmentStatus) => {
-    const { data } = await api.put<{ data: Appointment }>(`/appointments/${id}/status`, { status });
+    const { data } = await api.put<{ data: Appointment }>(
+      `/appointments/${id}/status`,
+      { status },
+    );
     return data.data;
   },
-  
+
   uploadPaymentProof: async (id: string, file: File) => {
     const formData = new FormData();
-    formData.append('file', file);
-    const { data } = await api.post<{ data: FileUpload }>(`/appointments/${id}/payment-proof`, formData);
+    formData.append("file", file);
+    const { data } = await api.post<{ data: FileUpload }>(
+      `/appointments/${id}/payment-proof`,
+      formData,
+    );
     return data.data;
   },
-  
+
   delete: async (id: string) => {
     await api.delete(`/appointments/${id}`);
-  }
+  },
 };
 
 // src/features/appointments/hooks/useAppointments.ts
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { appointmentApi } from '../services/appointmentApi';
-import { useAppointmentStore } from '@/app/store/appointmentStore';
-import { toast } from 'sonner';
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { appointmentApi } from "../services/appointmentApi";
+import { useAppointmentStore } from "@/app/store/appointmentStore";
+import { toast } from "sonner";
 
 export const useAppointments = (filters?: AppointmentFilters) => {
   const queryClient = useQueryClient();
   const { setAppointments } = useAppointmentStore();
-  
+
   return useQuery({
-    queryKey: ['appointments', filters],
+    queryKey: ["appointments", filters],
     queryFn: () => appointmentApi.getAll(filters),
     onSuccess: (data) => {
       setAppointments(data.data);
@@ -1220,18 +1271,18 @@ export const useAppointments = (filters?: AppointmentFilters) => {
 export const useCreateAppointment = () => {
   const queryClient = useQueryClient();
   const { addAppointment } = useAppointmentStore();
-  
+
   return useMutation({
     mutationFn: appointmentApi.create,
     onSuccess: (newAppointment) => {
-      queryClient.invalidateQueries(['appointments']);
+      queryClient.invalidateQueries(["appointments"]);
       addAppointment(newAppointment);
-      toast.success('Cita creada exitosamente');
+      toast.success("Cita creada exitosamente");
     },
     onError: (error) => {
-      toast.error('Error al crear la cita');
-      console.error('Error creating appointment:', error);
-    }
+      toast.error("Error al crear la cita");
+      console.error("Error creating appointment:", error);
+    },
   });
 };
 ```
@@ -1264,7 +1315,7 @@ type AppointmentFormData = z.infer<typeof appointmentSchema>;
 export const AppointmentForm = () => {
   const { data: pets } = usePets();
   const createAppointment = useCreateAppointment();
-  
+
   const {
     register,
     handleSubmit,
@@ -1273,7 +1324,7 @@ export const AppointmentForm = () => {
   } = useForm<AppointmentFormData>({
     resolver: zodResolver(appointmentSchema)
   });
-  
+
   const onSubmit = async (data: AppointmentFormData) => {
     try {
       await createAppointment.mutateAsync({
@@ -1285,7 +1336,7 @@ export const AppointmentForm = () => {
       console.error('Error submitting form:', error);
     }
   };
-  
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1303,7 +1354,7 @@ export const AppointmentForm = () => {
             <p className="text-red-500 text-sm mt-1">{errors.petId.message}</p>
           )}
         </div>
-        
+
         <div>
           <label className="block text-sm font-medium mb-2">Tipo de Consulta</label>
           <Select {...register('consultationType')}>
@@ -1320,7 +1371,7 @@ export const AppointmentForm = () => {
           )}
         </div>
       </div>
-      
+
       <div>
         <label className="block text-sm font-medium mb-2">Fecha y Hora</label>
         <Input
@@ -1332,7 +1383,7 @@ export const AppointmentForm = () => {
           <p className="text-red-500 text-sm mt-1">{errors.scheduledDate.message}</p>
         )}
       </div>
-      
+
       <div>
         <label className="block text-sm font-medium mb-2">Motivo de la Consulta</label>
         <Textarea
@@ -1344,7 +1395,7 @@ export const AppointmentForm = () => {
           <p className="text-red-500 text-sm mt-1">{errors.reason.message}</p>
         )}
       </div>
-      
+
       <div>
         <label className="block text-sm font-medium mb-2">Notas Adicionales</label>
         <Textarea
@@ -1353,7 +1404,7 @@ export const AppointmentForm = () => {
           rows={3}
         />
       </div>
-      
+
       <Button
         type="submit"
         disabled={isSubmitting}
@@ -1380,22 +1431,22 @@ interface ProtectedRouteProps {
   requireAuth?: boolean;
 }
 
-export const ProtectedRoute = ({ 
-  children, 
-  allowedRoles = [], 
-  requireAuth = true 
+export const ProtectedRoute = ({
+  children,
+  allowedRoles = [],
+  requireAuth = true
 }: ProtectedRouteProps) => {
   const { isAuthenticated, user } = useAuthStore();
   const location = useLocation();
-  
+
   if (requireAuth && !isAuthenticated) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
-  
+
   if (allowedRoles.length > 0 && user && !allowedRoles.includes(user.role)) {
     return <Navigate to="/unauthorized" replace />;
   }
-  
+
   return <>{children}</>;
 };
 
@@ -1410,7 +1461,7 @@ export const AppRouter = () => {
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
-      
+
       {/* Protected routes */}
       <Route
         path="/dashboard"
@@ -1420,7 +1471,7 @@ export const AppRouter = () => {
           </ProtectedRoute>
         }
       />
-      
+
       {/* Client routes */}
       <Route
         path="/pets/*"
@@ -1430,7 +1481,7 @@ export const AppRouter = () => {
           </ProtectedRoute>
         }
       />
-      
+
       {/* Veterinarian routes */}
       <Route
         path="/calendar"
@@ -1440,7 +1491,7 @@ export const AppRouter = () => {
           </ProtectedRoute>
         }
       />
-      
+
       {/* Admin routes */}
       <Route
         path="/admin/*"
@@ -1450,7 +1501,7 @@ export const AppRouter = () => {
           </ProtectedRoute>
         }
       />
-      
+
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
@@ -1465,9 +1516,9 @@ export const AppRouter = () => {
 
 ```typescript
 // Backend authentication service
-import jwt from 'jsonwebtoken';
-import bcrypt from 'bcryptjs';
-import { User } from '../models/User.js';
+import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
+import { User } from "../models/User.js";
 
 class AuthService {
   // Generate JWT tokens
@@ -1475,49 +1526,49 @@ class AuthService {
     const payload = {
       id: user.id,
       email: user.email,
-      role: user.role
+      role: user.role,
     };
-    
+
     const accessToken = jwt.sign(payload, process.env.JWT_SECRET, {
-      expiresIn: process.env.JWT_EXPIRES_IN || '15m'
+      expiresIn: process.env.JWT_EXPIRES_IN || "15m",
     });
-    
+
     const refreshToken = jwt.sign(payload, process.env.JWT_REFRESH_SECRET, {
-      expiresIn: process.env.JWT_REFRESH_EXPIRES_IN || '7d'
+      expiresIn: process.env.JWT_REFRESH_EXPIRES_IN || "7d",
     });
-    
+
     return { accessToken, refreshToken };
   }
-  
+
   // Verify access token
   verifyAccessToken(token) {
     try {
       return jwt.verify(token, process.env.JWT_SECRET);
     } catch (error) {
-      throw new Error('Invalid access token');
+      throw new Error("Invalid access token");
     }
   }
-  
+
   // Verify refresh token
   verifyRefreshToken(token) {
     try {
       return jwt.verify(token, process.env.JWT_REFRESH_SECRET);
     } catch (error) {
-      throw new Error('Invalid refresh token');
+      throw new Error("Invalid refresh token");
     }
   }
-  
+
   // Hash password
   async hashPassword(password) {
     const saltRounds = 12;
     return await bcrypt.hash(password, saltRounds);
   }
-  
+
   // Compare password
   async comparePassword(password, hashedPassword) {
     return await bcrypt.compare(password, hashedPassword);
   }
-  
+
   // Login user
   async login(identifier, password) {
     // Find user by email, username, or phone
@@ -1526,77 +1577,77 @@ class AuthService {
         [Op.or]: [
           { email: identifier },
           { username: identifier },
-          { phone: identifier }
-        ]
-      }
+          { phone: identifier },
+        ],
+      },
     });
-    
+
     if (!user) {
-      throw new Error('Usuario no encontrado');
+      throw new Error("Usuario no encontrado");
     }
-    
-    if (user.status !== 'active') {
-      throw new Error('Cuenta inactiva. Contacta al administrador.');
+
+    if (user.status !== "active") {
+      throw new Error("Cuenta inactiva. Contacta al administrador.");
     }
-    
-    const isValidPassword = await this.comparePassword(password, user.password_hash);
+
+    const isValidPassword = await this.comparePassword(
+      password,
+      user.password_hash,
+    );
     if (!isValidPassword) {
-      throw new Error('Contraseña incorrecta');
+      throw new Error("Contraseña incorrecta");
     }
-    
+
     // Update last login
     await user.update({ last_login: new Date() });
-    
+
     const tokens = this.generateTokens(user);
-    
+
     // Remove sensitive data
     const userResponse = user.toJSON();
     delete userResponse.password_hash;
-    
+
     return {
       user: userResponse,
-      tokens
+      tokens,
     };
   }
-  
+
   // Register user
   async register(userData) {
     const { password, ...userInfo } = userData;
-    
+
     // Check if user already exists
     const existingUser = await User.findOne({
       where: {
-        [Op.or]: [
-          { email: userInfo.email },
-          { username: userInfo.username }
-        ]
-      }
+        [Op.or]: [{ email: userInfo.email }, { username: userInfo.username }],
+      },
     });
-    
+
     if (existingUser) {
-      throw new Error('El usuario ya existe');
+      throw new Error("El usuario ya existe");
     }
-    
+
     // Hash password
     const password_hash = await this.hashPassword(password);
-    
+
     // Create user
     const user = await User.create({
       ...userInfo,
       password_hash,
-      role: userInfo.role || 'cliente',
-      status: 'active'
+      role: userInfo.role || "cliente",
+      status: "active",
     });
-    
+
     const tokens = this.generateTokens(user);
-    
+
     // Remove sensitive data
     const userResponse = user.toJSON();
     delete userResponse.password_hash;
-    
+
     return {
       user: userResponse,
-      tokens
+      tokens,
     };
   }
 }
@@ -1611,25 +1662,25 @@ export default new AuthService();
 export const authorize = (allowedRoles = []) => {
   return (req, res, next) => {
     const { user } = req;
-    
+
     if (!user) {
       return res.status(401).json({
         success: false,
-        message: 'No autorizado'
+        message: "No autorizado",
       });
     }
-    
+
     if (allowedRoles.length === 0) {
       return next(); // No role restriction
     }
-    
+
     if (!allowedRoles.includes(user.role)) {
       return res.status(403).json({
         success: false,
-        message: 'Acceso denegado. Permisos insuficientes.'
+        message: "Acceso denegado. Permisos insuficientes.",
       });
     }
-    
+
     next();
   };
 };
@@ -1640,50 +1691,51 @@ export const authorizeResource = (resourceChecker) => {
     try {
       const { user } = req;
       const resourceId = req.params.id;
-      
+
       const hasAccess = await resourceChecker(user, resourceId);
-      
+
       if (!hasAccess) {
         return res.status(403).json({
           success: false,
-          message: 'No tienes acceso a este recurso'
+          message: "No tienes acceso a este recurso",
         });
       }
-      
+
       next();
     } catch (error) {
       res.status(500).json({
         success: false,
-        message: 'Error verificando permisos'
+        message: "Error verificando permisos",
       });
     }
   };
 };
 
 // Usage in routes
-router.get('/appointments/:id', 
-  authenticate, 
+router.get(
+  "/appointments/:id",
+  authenticate,
   authorizeResource(async (user, appointmentId) => {
     const appointment = await Appointment.findByPk(appointmentId);
-    
+
     if (!appointment) return false;
-    
+
     // Admin can access all
-    if (user.role === 'admin') return true;
-    
+    if (user.role === "admin") return true;
+
     // Veterinarian can access assigned appointments
-    if (user.role === 'veterinario') {
+    if (user.role === "veterinario") {
       return appointment.veterinarian_id === user.id;
     }
-    
+
     // Client can access their own appointments
-    if (user.role === 'cliente') {
+    if (user.role === "cliente") {
       return appointment.client_id === user.id;
     }
-    
+
     return false;
   }),
-  appointmentController.getById
+  appointmentController.getById,
 );
 ```
 
@@ -1691,53 +1743,59 @@ router.get('/appointments/:id',
 
 ```typescript
 // src/features/auth/hooks/useAuth.ts
-import { useAuthStore } from '@/app/store/authStore';
-import { useMutation } from '@tanstack/react-query';
-import { authApi } from '../services/authApi';
-import { toast } from 'sonner';
-import { useNavigate } from 'react-router-dom';
+import { useAuthStore } from "@/app/store/authStore";
+import { useMutation } from "@tanstack/react-query";
+import { authApi } from "../services/authApi";
+import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 export const useAuth = () => {
-  const { user, token, isAuthenticated, login, logout: logoutStore } = useAuthStore();
+  const {
+    user,
+    token,
+    isAuthenticated,
+    login,
+    logout: logoutStore,
+  } = useAuthStore();
   const navigate = useNavigate();
-  
+
   const loginMutation = useMutation({
     mutationFn: authApi.login,
     onSuccess: (data) => {
       login(data.user, data.tokens.accessToken);
       toast.success(`¡Bienvenido, ${data.user.first_name}!`);
-      
+
       // Redirect based on role
       const redirectPath = getRoleBasedRedirect(data.user.role);
       navigate(redirectPath);
     },
     onError: (error) => {
-      toast.error(error.response?.data?.message || 'Error al iniciar sesión');
-    }
+      toast.error(error.response?.data?.message || "Error al iniciar sesión");
+    },
   });
-  
+
   const logoutMutation = useMutation({
     mutationFn: authApi.logout,
     onSettled: () => {
       logoutStore();
-      navigate('/login');
-      toast.success('Sesión cerrada correctamente');
-    }
+      navigate("/login");
+      toast.success("Sesión cerrada correctamente");
+    },
   });
-  
+
   const getRoleBasedRedirect = (role: string) => {
     switch (role) {
-      case 'admin':
-        return '/admin/dashboard';
-      case 'veterinario':
-        return '/veterinary/calendar';
-      case 'cliente':
-        return '/client/dashboard';
+      case "admin":
+        return "/admin/dashboard";
+      case "veterinario":
+        return "/veterinary/calendar";
+      case "cliente":
+        return "/client/dashboard";
       default:
-        return '/dashboard';
+        return "/dashboard";
     }
   };
-  
+
   return {
     user,
     token,
@@ -1745,62 +1803,62 @@ export const useAuth = () => {
     login: loginMutation.mutate,
     logout: logoutMutation.mutate,
     isLoggingIn: loginMutation.isLoading,
-    isLoggingOut: logoutMutation.isLoading
+    isLoggingOut: logoutMutation.isLoading,
   };
 };
 
 // Permission checks
 export const usePermissions = () => {
   const { user } = useAuthStore();
-  
+
   const hasRole = (roles: string | string[]) => {
     if (!user) return false;
     const roleArray = Array.isArray(roles) ? roles : [roles];
     return roleArray.includes(user.role);
   };
-  
-  const canAccessResource = (resource: string, action: string = 'read') => {
+
+  const canAccessResource = (resource: string, action: string = "read") => {
     if (!user) return false;
-    
+
     // Define permission matrix
     const permissions = {
       admin: {
-        '*': ['create', 'read', 'update', 'delete']
+        "*": ["create", "read", "update", "delete"],
       },
       veterinario: {
-        appointments: ['read', 'update'],
-        medical_history: ['create', 'read', 'update'],
-        pets: ['read'],
-        users: ['read'] // Only clients
+        appointments: ["read", "update"],
+        medical_history: ["create", "read", "update"],
+        pets: ["read"],
+        users: ["read"], // Only clients
       },
       cliente: {
-        appointments: ['create', 'read'],
-        pets: ['create', 'read', 'update', 'delete'],
-        medical_history: ['read'] // Only own pets
-      }
+        appointments: ["create", "read"],
+        pets: ["create", "read", "update", "delete"],
+        medical_history: ["read"], // Only own pets
+      },
     };
-    
+
     const userPermissions = permissions[user.role];
     if (!userPermissions) return false;
-    
+
     // Check wildcard permission (admin)
-    if (userPermissions['*']) {
-      return userPermissions['*'].includes(action);
+    if (userPermissions["*"]) {
+      return userPermissions["*"].includes(action);
     }
-    
+
     // Check specific resource permission
     const resourcePermissions = userPermissions[resource];
     if (!resourcePermissions) return false;
-    
+
     return resourcePermissions.includes(action);
   };
-  
+
   return {
     hasRole,
     canAccessResource,
-    isAdmin: hasRole('admin'),
-    isVeterinarian: hasRole('veterinario'),
-    isClient: hasRole('cliente')
+    isAdmin: hasRole("admin"),
+    isVeterinarian: hasRole("veterinario"),
+    isClient: hasRole("cliente"),
   };
 };
 ```
@@ -1819,14 +1877,14 @@ sequenceDiagram
     participant DB as Database
     participant E as Email Service
     participant N as Notification Service
-    
+
     C->>F: Accede a "Nueva Cita"
     F->>B: GET /api/v1/pets (obtener mascotas)
     B->>DB: Query pets by owner_id
     DB-->>B: Pet list
     B-->>F: Pet data
     F-->>C: Muestra formulario con mascotas
-    
+
     C->>F: Completa formulario cita
     F->>F: Validación frontend (Zod)
     F->>B: POST /api/v1/appointments
@@ -1836,7 +1894,7 @@ sequenceDiagram
     B->>N: Create notification
     B-->>F: Success response
     F-->>C: Confirma creación + instrucciones pago
-    
+
     C->>F: Sube comprobante pago
     F->>B: POST /api/v1/appointments/{id}/payment-proof
     B->>B: Process image upload
@@ -1844,12 +1902,12 @@ sequenceDiagram
     B->>N: Notify admin (payment pending)
     B-->>F: Upload success
     F-->>C: Confirma comprobante subido
-    
+
     Note over B, N: Admin valida pago
     B->>DB: Update appointment (status: confirmed)
     B->>N: Notify client (appointment confirmed)
     B->>E: Send confirmation email
-    
+
     Note over B, N: Sistema asigna veterinario
     B->>DB: Assign veterinarian
     B->>N: Notify veterinarian
@@ -1864,14 +1922,14 @@ sequenceDiagram
     participant B as Backend
     participant DB as Database
     participant N as Notification Service
-    
+
     V->>F: Accede a calendario
     F->>B: GET /api/v1/appointments?veterinarian_id={id}&date={today}
     B->>DB: Query assigned appointments
     DB-->>B: Appointment list
     B-->>F: Today's appointments
     F-->>V: Muestra agenda del día
-    
+
     V->>F: Selecciona cita para atender
     F->>B: GET /api/v1/appointments/{id}
     B->>DB: Get full appointment details
@@ -1879,7 +1937,7 @@ sequenceDiagram
     DB-->>B: Complete data
     B-->>F: Appointment + history
     F-->>V: Modal con información completa
-    
+
     V->>F: Completa formulario consulta
     F->>B: POST /api/v1/medical-history
     B->>B: Validate medical data
@@ -1888,7 +1946,7 @@ sequenceDiagram
     B->>N: Notify client (consultation completed)
     B-->>F: Consultation saved
     F-->>V: Confirma consulta registrada
-    
+
     Note over F, V: Cliente puede ver actualización
     F->>B: GET /api/v1/medical-history/pet/{id}
     B->>DB: Get updated history
@@ -1906,21 +1964,21 @@ sequenceDiagram
     participant DB as Database
     participant E as Email Service
     participant W as WhatsApp API
-    
+
     A->>F: Accede a validación pagos
     F->>B: GET /api/v1/appointments?status=payment_validation
     B->>DB: Query pending validations
     DB-->>B: Pending appointments
     B-->>F: Appointments list
     F-->>A: Lista citas pendientes
-    
+
     A->>F: Selecciona cita para validar
     F->>B: GET /api/v1/appointments/{id}
     B->>DB: Get appointment + payment proof
     DB-->>B: Complete data
     B-->>F: Appointment details
     F-->>A: Modal con comprobante
-    
+
     A->>F: Aprueba/Rechaza pago
     F->>B: PUT /api/v1/appointments/{id}/validate-payment
     B->>B: Update payment status
@@ -2008,7 +2066,7 @@ CMD ["nginx", "-g", "daemon off;"]
 
 ```yaml
 # docker-compose.yml
-version: '3.8'
+version: "3.8"
 
 services:
   # Database
@@ -2175,7 +2233,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    
+
     services:
       postgres:
         image: postgres:15
@@ -2187,38 +2245,38 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-    
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          cache: 'npm'
-      
+          node-version: "18"
+          cache: "npm"
+
       - name: Install backend dependencies
         run: |
           cd backend
           npm ci
-      
+
       - name: Run backend tests
         run: |
           cd backend
           npm run test:coverage
         env:
           DATABASE_URL: postgresql://postgres:postgres@localhost:5432/test_db
-      
+
       - name: Install frontend dependencies
         run: |
           cd frontend
           npm ci
-      
+
       - name: Run frontend tests
         run: |
           cd frontend
           npm run test:coverage
-      
+
       - name: Build frontend
         run: |
           cd frontend
@@ -2228,33 +2286,33 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
-    
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v3
-      
+
       - name: Login to DockerHub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
-      
+
       - name: Build and push backend
         uses: docker/build-push-action@v5
         with:
           context: ./backend
           push: true
           tags: petla/backend:latest
-      
+
       - name: Build and push frontend
         uses: docker/build-push-action@v5
         with:
           context: ./frontend
           push: true
           tags: petla/frontend:latest
-      
+
       - name: Deploy to server
         uses: appleboy/ssh-action@v1.0.0
         with:
@@ -2276,52 +2334,54 @@ export const healthController = {
   // Basic health check
   health: async (req, res) => {
     const healthData = {
-      status: 'OK',
+      status: "OK",
       timestamp: new Date().toISOString(),
       uptime: process.uptime(),
-      version: process.env.APP_VERSION || '1.0.0',
-      environment: process.env.NODE_ENV
+      version: process.env.APP_VERSION || "1.0.0",
+      environment: process.env.NODE_ENV,
     };
-    
+
     res.status(200).json(healthData);
   },
-  
+
   // Detailed health check
   detailed: async (req, res) => {
     const checks = {
       database: await checkDatabase(),
       redis: await checkRedis(),
       email: await checkEmailService(),
-      storage: await checkFileStorage()
+      storage: await checkFileStorage(),
     };
-    
-    const overallStatus = Object.values(checks).every(check => check.status === 'healthy')
-      ? 'healthy'
-      : 'unhealthy';
-    
-    res.status(overallStatus === 'healthy' ? 200 : 503).json({
+
+    const overallStatus = Object.values(checks).every(
+      (check) => check.status === "healthy",
+    )
+      ? "healthy"
+      : "unhealthy";
+
+    res.status(overallStatus === "healthy" ? 200 : 503).json({
       status: overallStatus,
       timestamp: new Date().toISOString(),
-      checks
+      checks,
     });
-  }
+  },
 };
 
 async function checkDatabase() {
   try {
     await sequelize.authenticate();
-    return { status: 'healthy', message: 'Database connection successful' };
+    return { status: "healthy", message: "Database connection successful" };
   } catch (error) {
-    return { status: 'unhealthy', message: error.message };
+    return { status: "unhealthy", message: error.message };
   }
 }
 
 async function checkRedis() {
   try {
     await redis.ping();
-    return { status: 'healthy', message: 'Redis connection successful' };
+    return { status: "healthy", message: "Redis connection successful" };
   } catch (error) {
-    return { status: 'unhealthy', message: error.message };
+    return { status: "unhealthy", message: error.message };
   }
 }
 ```
@@ -2342,19 +2402,19 @@ import { createTestUser, createTestPet } from '../helpers/factories.js';
 
 describe('Appointments API', () => {
   let testUser, testPet, authToken;
-  
+
   beforeAll(async () => {
     await setupTestDB();
   });
-  
+
   afterAll(async () => {
     await cleanupTestDB();
   });
-  
+
   beforeEach(async () => {
     testUser = await createTestUser({ role: 'cliente' });
     testPet = await createTestPet({ owner_id: testUser.id });
-    
+
     // Login to get auth token
     const loginResponse = await request(app)
       .post('/api/v1/auth/login')
@@ -2362,10 +2422,10 @@ describe('Appointments API', () => {
         identifier: testUser.email,
         password: 'password123'
       });
-    
+
     authToken = loginResponse.body.data.tokens.accessToken;
   });
-  
+
   describe('POST /api/v1/appointments', () => {
     it('should create appointment successfully', async () => {
       const appointmentData = {
@@ -2375,19 +2435,19 @@ describe('Appointments API', () => {
         reason: 'Routine checkup for my pet',
         clientNotes: 'Pet seems healthy but want to be sure'
       };
-      
+
       const response = await request(app)
         .post('/api/v1/appointments')
         .set('Authorization', `Bearer ${authToken}`)
         .send(appointmentData)
         .expect(201);
-      
+
       expect(response.body.success).toBe(true);
       expect(response.body.data.status).toBe('pending_payment');
       expect(response.body.data.pet_id).toBe(testPet.id);
       expect(response.body.data.client_id).toBe(testUser.id);
     });
-    
+
     it('should reject appointment with past date', async () => {
       const appointmentData = {
         petId: testPet.id,
@@ -2395,17 +2455,17 @@ describe('Appointments API', () => {
         scheduledDate: new Date(Date.now() - 86400000), // Yesterday
         reason: 'Routine checkup'
       };
-      
+
       const response = await request(app)
         .post('/api/v1/appointments')
         .set('Authorization', `Bearer ${authToken}`)
         .send(appointmentData)
         .expect(400);
-      
+
       expect(response.body.success).toBe(false);
       expect(response.body.message).toContain('fecha');
     });
-    
+
     it('should reject unauthorized access', async () => {
       const appointmentData = {
         petId: testPet.id,
@@ -2413,27 +2473,27 @@ describe('Appointments API', () => {
         scheduledDate: new Date(Date.now() + 86400000),
         reason: 'Routine checkup'
       };
-      
+
       await request(app)
         .post('/api/v1/appointments')
         .send(appointmentData)
         .expect(401);
     });
   });
-  
+
   describe('GET /api/v1/appointments', () => {
     it('should return user appointments', async () => {
       // Create test appointment
-      await createTestAppointment({ 
-        client_id: testUser.id, 
-        pet_id: testPet.id 
+      await createTestAppointment({
+        client_id: testUser.id,
+        pet_id: testPet.id
       });
-      
+
       const response = await request(app)
         .get('/api/v1/appointments')
         .set('Authorization', `Bearer ${authToken}`)
         .expect(200);
-      
+
       expect(response.body.success).toBe(true);
       expect(response.body.data).toHaveLength(1);
       expect(response.body.data[0].client_id).toBe(testUser.id);
@@ -2460,7 +2520,7 @@ const renderAppointmentForm = () => {
       mutations: { retry: false }
     }
   });
-  
+
   return render(
     <QueryClientProvider client={queryClient}>
       <AppointmentForm />
@@ -2477,53 +2537,53 @@ describe('AppointmentForm', () => {
       error: null
     });
   });
-  
+
   it('renders all form fields', () => {
     renderAppointmentForm();
-    
+
     expect(screen.getByLabelText(/mascota/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/tipo de consulta/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/fecha y hora/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/motivo de la consulta/i)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /agendar cita/i })).toBeInTheDocument();
   });
-  
+
   it('validates required fields', async () => {
     const user = userEvent.setup();
     renderAppointmentForm();
-    
+
     const submitButton = screen.getByRole('button', { name: /agendar cita/i });
     await user.click(submitButton);
-    
+
     await waitFor(() => {
       expect(screen.getByText(/selecciona una mascota/i)).toBeInTheDocument();
       expect(screen.getByText(/selecciona el tipo/i)).toBeInTheDocument();
       expect(screen.getByText(/selecciona fecha y hora/i)).toBeInTheDocument();
     });
   });
-  
+
   it('submits form with valid data', async () => {
     const mockCreateAppointment = jest.fn();
     require('../../hooks/useAppointments').useCreateAppointment.mockReturnValue({
       mutateAsync: mockCreateAppointment,
       isLoading: false
     });
-    
+
     const user = userEvent.setup();
     renderAppointmentForm();
-    
+
     // Fill form
     await user.selectOptions(screen.getByLabelText(/mascota/i), mockPets[0].id);
     await user.selectOptions(screen.getByLabelText(/tipo de consulta/i), 'general');
     await user.type(screen.getByLabelText(/fecha y hora/i), '2024-12-25T10:00');
     await user.type(
-      screen.getByLabelText(/motivo de la consulta/i), 
+      screen.getByLabelText(/motivo de la consulta/i),
       'Routine checkup for my pet health'
     );
-    
+
     // Submit
     await user.click(screen.getByRole('button', { name: /agendar cita/i }));
-    
+
     await waitFor(() => {
       expect(mockCreateAppointment).toHaveBeenCalledWith({
         petId: mockPets[0].id,
@@ -2543,44 +2603,44 @@ describe('AppointmentForm', () => {
 ```javascript
 // jest.config.js
 module.exports = {
-  testEnvironment: 'node',
-  setupFilesAfterEnv: ['<rootDir>/tests/setup.js'],
+  testEnvironment: "node",
+  setupFilesAfterEnv: ["<rootDir>/tests/setup.js"],
   testMatch: [
-    '<rootDir>/tests/**/*.test.js',
-    '<rootDir>/src/**/__tests__/**/*.test.js'
+    "<rootDir>/tests/**/*.test.js",
+    "<rootDir>/src/**/__tests__/**/*.test.js",
   ],
   collectCoverageFrom: [
-    'src/**/*.js',
-    '!src/server.js',
-    '!src/config/**',
-    '!**/node_modules/**'
+    "src/**/*.js",
+    "!src/server.js",
+    "!src/config/**",
+    "!**/node_modules/**",
   ],
   coverageThreshold: {
     global: {
       branches: 80,
       functions: 80,
       lines: 80,
-      statements: 80
-    }
+      statements: 80,
+    },
   },
-  coverageReporters: ['text', 'lcov', 'html']
+  coverageReporters: ["text", "lcov", "html"],
 };
 
 // ESLint configuration
 module.exports = {
   extends: [
-    'eslint:recommended',
-    '@typescript-eslint/recommended',
-    'plugin:react/recommended',
-    'plugin:react-hooks/recommended'
+    "eslint:recommended",
+    "@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
   ],
   rules: {
-    'no-console': 'warn',
-    'no-unused-vars': 'error',
-    '@typescript-eslint/no-explicit-any': 'warn',
-    'react/prop-types': 'off',
-    'react/react-in-jsx-scope': 'off'
-  }
+    "no-console": "warn",
+    "no-unused-vars": "error",
+    "@typescript-eslint/no-explicit-any": "warn",
+    "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off",
+  },
 };
 ```
 
@@ -2592,7 +2652,7 @@ module.exports = {
 
 ```yaml
 # monitoring/docker-compose.monitoring.yml
-version: '3.8'
+version: "3.8"
 
 services:
   # Prometheus for metrics collection
@@ -2604,10 +2664,10 @@ services:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
       - prometheus_data:/prometheus
     command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
-      - '--storage.tsdb.path=/prometheus'
-      - '--web.console.libraries=/etc/prometheus/console_libraries'
-      - '--web.console.templates=/etc/prometheus/consoles'
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--web.console.libraries=/etc/prometheus/console_libraries"
+      - "--web.console.templates=/etc/prometheus/consoles"
 
   # Grafana for visualization
   grafana:
@@ -2630,9 +2690,9 @@ services:
       - /sys:/host/sys:ro
       - /:/rootfs:ro
     command:
-      - '--path.procfs=/host/proc'
-      - '--path.rootfs=/rootfs'
-      - '--path.sysfs=/host/sys'
+      - "--path.procfs=/host/proc"
+      - "--path.rootfs=/rootfs"
+      - "--path.sysfs=/host/sys"
 
 volumes:
   prometheus_data:
@@ -2643,48 +2703,48 @@ volumes:
 
 ```typescript
 // Backend metrics with Prometheus
-import promClient from 'prom-client';
+import promClient from "prom-client";
 
 // Create metrics
 const httpRequestsTotal = new promClient.Counter({
-  name: 'http_requests_total',
-  help: 'Total number of HTTP requests',
-  labelNames: ['method', 'route', 'status_code']
+  name: "http_requests_total",
+  help: "Total number of HTTP requests",
+  labelNames: ["method", "route", "status_code"],
 });
 
 const httpRequestDuration = new promClient.Histogram({
-  name: 'http_request_duration_seconds',
-  help: 'Duration of HTTP requests in seconds',
-  labelNames: ['method', 'route'],
-  buckets: [0.1, 0.5, 1, 2, 5]
+  name: "http_request_duration_seconds",
+  help: "Duration of HTTP requests in seconds",
+  labelNames: ["method", "route"],
+  buckets: [0.1, 0.5, 1, 2, 5],
 });
 
 const appointmentsCreated = new promClient.Counter({
-  name: 'appointments_created_total',
-  help: 'Total number of appointments created'
+  name: "appointments_created_total",
+  help: "Total number of appointments created",
 });
 
 const databaseConnections = new promClient.Gauge({
-  name: 'database_connections_active',
-  help: 'Number of active database connections'
+  name: "database_connections_active",
+  help: "Number of active database connections",
 });
 
 // Middleware to collect metrics
 export const metricsMiddleware = (req, res, next) => {
   const start = Date.now();
-  
-  res.on('finish', () => {
+
+  res.on("finish", () => {
     const duration = (Date.now() - start) / 1000;
-    
+
     httpRequestsTotal
       .labels(req.method, req.route?.path || req.path, res.statusCode)
       .inc();
-    
+
     httpRequestDuration
       .labels(req.method, req.route?.path || req.path)
       .observe(duration);
   });
-  
+
   next();
 };
 
@@ -2693,16 +2753,16 @@ export class BusinessMetrics {
   static recordAppointmentCreated() {
     appointmentsCreated.inc();
   }
-  
+
   static updateDatabaseConnections(count) {
     databaseConnections.set(count);
   }
-  
+
   static async collectCustomMetrics() {
     // Collect business-specific metrics
     const activeConnections = await getDatabaseConnectionCount();
     this.updateDatabaseConnections(activeConnections);
-    
+
     // Daily appointment counts
     const todayAppointments = await getTodayAppointmentCount();
     appointmentsToday.set(todayAppointments);
@@ -2710,9 +2770,9 @@ export class BusinessMetrics {
 }
 
 // Metrics endpoint
-app.get('/metrics', async (req, res) => {
+app.get("/metrics", async (req, res) => {
   await BusinessMetrics.collectCustomMetrics();
-  res.set('Content-Type', promClient.register.contentType);
+  res.set("Content-Type", promClient.register.contentType);
   res.end(await promClient.register.metrics());
 });
 ```
@@ -2740,12 +2800,12 @@ export const errorHandler = (error, req, res, next) => {
       query: req.query
     }
   });
-  
+
   // Log to console for development
   if (process.env.NODE_ENV === 'development') {
     console.error(error);
   }
-  
+
   // Send appropriate error response
   if (error.name === 'ValidationError') {
     return res.status(400).json({
@@ -2754,14 +2814,14 @@ export const errorHandler = (error, req, res, next) => {
       errors: error.details
     });
   }
-  
+
   if (error.name === 'UnauthorizedError') {
     return res.status(401).json({
       success: false,
       message: 'No autorizado'
     });
   }
-  
+
   // Generic error response
   res.status(500).json({
     success: false,
@@ -2838,7 +2898,7 @@ const VirtualizedAppointmentList = ({ appointments }) => {
       <AppointmentCard appointment={appointments[index]} />
     </div>
   );
-  
+
   return (
     <List
       height={600}
@@ -2855,7 +2915,7 @@ const VirtualizedAppointmentList = ({ appointments }) => {
 const OptimizedImage = ({ src, alt, ...props }) => {
   const [imageSrc, setImageSrc] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  
+
   useEffect(() => {
     const img = new Image();
     img.onload = () => {
@@ -2864,11 +2924,11 @@ const OptimizedImage = ({ src, alt, ...props }) => {
     };
     img.src = src;
   }, [src]);
-  
+
   if (isLoading) {
     return <div className="bg-gray-200 animate-pulse" {...props} />;
   }
-  
+
   return (
     <img
       src={imageSrc}
@@ -2884,21 +2944,21 @@ import { memo, useMemo, useCallback } from 'react';
 
 const ExpensiveComponent = memo(({ data, filters }) => {
   const filteredData = useMemo(() => {
-    return data.filter(item => 
+    return data.filter(item =>
       filters.every(filter => filter(item))
     );
   }, [data, filters]);
-  
+
   const handleItemClick = useCallback((itemId) => {
     // Handle click
   }, []);
-  
+
   return (
     <div>
       {filteredData.map(item => (
-        <ItemCard 
-          key={item.id} 
-          item={item} 
+        <ItemCard
+          key={item.id}
+          item={item}
           onClick={handleItemClick}
         />
       ))}
@@ -2911,53 +2971,55 @@ const ExpensiveComponent = memo(({ data, filters }) => {
 
 ```typescript
 // Database query optimization
-import { Op } from 'sequelize';
+import { Op } from "sequelize";
 
 class AppointmentService {
   // Optimized query with eager loading
   async getAppointmentsWithDetails(filters = {}) {
     const whereClause = this.buildWhereClause(filters);
-    
+
     return await Appointment.findAll({
       where: whereClause,
       include: [
         {
           model: Pet,
-          as: 'pet',
-          attributes: ['id', 'name', 'species', 'breed'],
-          include: [{
-            model: User,
-            as: 'owner',
-            attributes: ['id', 'first_name', 'last_name', 'email', 'phone']
-          }]
+          as: "pet",
+          attributes: ["id", "name", "species", "breed"],
+          include: [
+            {
+              model: User,
+              as: "owner",
+              attributes: ["id", "first_name", "last_name", "email", "phone"],
+            },
+          ],
         },
         {
           model: User,
-          as: 'veterinarian',
-          attributes: ['id', 'first_name', 'last_name', 'specialty']
-        }
+          as: "veterinarian",
+          attributes: ["id", "first_name", "last_name", "specialty"],
+        },
       ],
-      order: [['scheduled_date', 'DESC']],
+      order: [["scheduled_date", "DESC"]],
       limit: filters.limit || 20,
-      offset: filters.offset || 0
+      offset: filters.offset || 0,
     });
   }
-  
+
   // Bulk operations for better performance
   async updateAppointmentStatuses(updates) {
     const transaction = await sequelize.transaction();
-    
+
     try {
       const updatePromises = updates.map(({ id, status }) =>
         Appointment.update(
           { status, updated_at: new Date() },
-          { where: { id }, transaction }
-        )
+          { where: { id }, transaction },
+        ),
       );
-      
+
       await Promise.all(updatePromises);
       await transaction.commit();
-      
+
       return { success: true, updated: updates.length };
     } catch (error) {
       await transaction.rollback();
@@ -2967,7 +3029,7 @@ class AppointmentService {
 }
 
 // Caching strategy with Redis
-import Redis from 'ioredis';
+import Redis from "ioredis";
 
 const redis = new Redis(process.env.REDIS_URL);
 
@@ -2977,19 +3039,19 @@ class CacheService {
       const data = await redis.get(key);
       return data ? JSON.parse(data) : null;
     } catch (error) {
-      console.error('Cache get error:', error);
+      console.error("Cache get error:", error);
       return null;
     }
   }
-  
+
   static async set(key, data, ttl = 3600) {
     try {
       await redis.setex(key, ttl, JSON.stringify(data));
     } catch (error) {
-      console.error('Cache set error:', error);
+      console.error("Cache set error:", error);
     }
   }
-  
+
   static async del(pattern) {
     try {
       const keys = await redis.keys(pattern);
@@ -2997,7 +3059,7 @@ class CacheService {
         await redis.del(...keys);
       }
     } catch (error) {
-      console.error('Cache delete error:', error);
+      console.error("Cache delete error:", error);
     }
   }
 }
@@ -3005,99 +3067,101 @@ class CacheService {
 // Cached controller method
 export const getAppointments = async (req, res) => {
   const cacheKey = `appointments:${req.user.id}:${JSON.stringify(req.query)}`;
-  
+
   // Try cache first
   let appointments = await CacheService.get(cacheKey);
-  
+
   if (!appointments) {
     // Fetch from database
     appointments = await appointmentService.getAppointmentsWithDetails({
       userId: req.user.id,
-      ...req.query
+      ...req.query,
     });
-    
+
     // Cache for 5 minutes
     await CacheService.set(cacheKey, appointments, 300);
   }
-  
+
   res.json({
     success: true,
     data: appointments,
-    cached: !!appointments._cached
+    cached: !!appointments._cached,
   });
 };
 
 // File upload optimization with Multer and Sharp
-import multer from 'multer';
-import sharp from 'sharp';
-import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
+import multer from "multer";
+import sharp from "sharp";
+import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 
 const s3 = new S3Client({
   region: process.env.AWS_REGION,
   credentials: {
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
-  }
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  },
 });
 
 const upload = multer({
   storage: multer.memoryStorage(),
   limits: {
-    fileSize: 10 * 1024 * 1024 // 10MB limit
+    fileSize: 10 * 1024 * 1024, // 10MB limit
   },
   fileFilter: (req, file, cb) => {
-    if (file.mimetype.startsWith('image/')) {
+    if (file.mimetype.startsWith("image/")) {
       cb(null, true);
     } else {
-      cb(new Error('Solo se permiten imágenes'));
+      cb(new Error("Solo se permiten imágenes"));
     }
-  }
+  },
 });
 
 export const uploadImage = async (req, res) => {
   try {
     const { buffer, originalname, mimetype } = req.file;
-    
+
     // Optimize image with Sharp
     const optimizedBuffer = await sharp(buffer)
-      .resize(1200, 1200, { 
-        fit: 'inside', 
-        withoutEnlargement: true 
+      .resize(1200, 1200, {
+        fit: "inside",
+        withoutEnlargement: true,
       })
-      .jpeg({ 
-        quality: 80, 
-        progressive: true 
+      .jpeg({
+        quality: 80,
+        progressive: true,
       })
       .toBuffer();
-    
+
     // Generate unique filename
     const filename = `${Date.now()}-${Math.random().toString(36).substring(7)}.jpg`;
     const key = `uploads/images/${filename}`;
-    
+
     // Upload to S3
-    await s3.send(new PutObjectCommand({
-      Bucket: process.env.AWS_S3_BUCKET,
-      Key: key,
-      Body: optimizedBuffer,
-      ContentType: 'image/jpeg',
-      ACL: 'public-read'
-    }));
-    
+    await s3.send(
+      new PutObjectCommand({
+        Bucket: process.env.AWS_S3_BUCKET,
+        Key: key,
+        Body: optimizedBuffer,
+        ContentType: "image/jpeg",
+        ACL: "public-read",
+      }),
+    );
+
     const url = `https://${process.env.AWS_S3_BUCKET}.s3.amazonaws.com/${key}`;
-    
+
     res.json({
       success: true,
       data: {
         url,
         filename,
         originalName: originalname,
-        size: optimizedBuffer.length
-      }
+        size: optimizedBuffer.length,
+      },
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: 'Error al subir imagen'
+      message: "Error al subir imagen",
     });
   }
 };
@@ -3112,6 +3176,7 @@ export const uploadImage = async (req, res) => {
 ### 🚀 Beneficios de la Arquitectura Propuesta
 
 #### 🔧 **Técnicos**
+
 - **Escalabilidad**: Separación clara entre frontend y backend
 - **Performance**: Caching, optimización de queries, CDN
 - **Seguridad**: JWT, RBAC, validación en múltiples capas
@@ -3119,6 +3184,7 @@ export const uploadImage = async (req, res) => {
 - **Observabilidad**: Monitoring completo, logs estructurados
 
 #### 💼 **De Negocio**
+
 - **Disponibilidad 99.9%**: Infraestructura redundante
 - **Experiencia de Usuario**: Responsive, tiempo real, offline-ready
 - **Compliance**: Auditoría completa, backup automático
@@ -3127,13 +3193,13 @@ export const uploadImage = async (req, res) => {
 
 ### 📈 **Roadmap de Implementación**
 
-| Fase | Duración | Entregables |
-|------|----------|-------------|
-| **Fase 1** | 4 semanas | Backend MVP + Autenticación |
+| Fase       | Duración  | Entregables                   |
+| ---------- | --------- | ----------------------------- |
+| **Fase 1** | 4 semanas | Backend MVP + Autenticación   |
 | **Fase 2** | 3 semanas | Frontend Core + Gestión Citas |
-| **Fase 3** | 3 semanas | Historial Médico + Dashboard |
+| **Fase 3** | 3 semanas | Historial Médico + Dashboard  |
 | **Fase 4** | 2 semanas | Testing + Deploy + Monitoring |
-| **Fase 5** | 2 semanas | Optimización + Documentación |
+| **Fase 5** | 2 semanas | Optimización + Documentación  |
 
 ### 🛠️ **Tecnologías de Vanguardia**
 
