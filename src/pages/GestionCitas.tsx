@@ -962,8 +962,8 @@ export default function GestionCitas() {
                                       <User className="w-4 h-4 text-blue-600" />
                                     </div>
                                     <div>
-                                      <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
-                                        Nombres
+                                      <span className="text-sm font-bold text-vet-gray-700 uppercase tracking-wide block mb-1">
+                                        NOMBRES
                                       </span>
                                       <p className="text-lg font-semibold text-vet-gray-900">
                                         {propietario.nombre || "No registrado"}
@@ -979,8 +979,8 @@ export default function GestionCitas() {
                                       <User className="w-4 h-4 text-slate-600" />
                                     </div>
                                     <div>
-                                      <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
-                                        Apellidos
+                                      <span className="text-sm font-bold text-vet-gray-700 uppercase tracking-wide block mb-1">
+                                        APELLIDOS
                                       </span>
                                       <p className="text-lg font-semibold text-vet-gray-900">
                                         {propietario.apellidos || "No registrado"}
@@ -1016,8 +1016,8 @@ export default function GestionCitas() {
                                         <Mail className="w-4 h-4 text-green-600" />
                                       </div>
                                       <div>
-                                        <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
-                                          Correo Electrónico
+                                        <span className="text-sm font-bold text-vet-gray-700 uppercase tracking-wide block mb-1">
+                                          EMAIL
                                         </span>
                                         <p className="text-sm font-medium text-vet-gray-900 break-all">
                                           {propietario.email}
@@ -1035,8 +1035,8 @@ export default function GestionCitas() {
                                         <Phone className="w-4 h-4 text-purple-600" />
                                       </div>
                                       <div>
-                                        <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
-                                          Teléfono
+                                        <span className="text-sm font-bold text-vet-gray-700 uppercase tracking-wide block mb-1">
+                                          TELÉFONO
                                         </span>
                                         <p className="text-lg font-semibold text-vet-gray-900">
                                           {(() => {
@@ -1066,8 +1066,8 @@ export default function GestionCitas() {
                                         <IdCard className="w-4 h-4 text-yellow-600" />
                                       </div>
                                       <div>
-                                        <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
-                                          Documento de Identidad
+                                        <span className="text-sm font-bold text-vet-gray-700 uppercase tracking-wide block mb-1">
+                                          DOCUMENTO
                                         </span>
                                         <p className="text-sm font-medium text-vet-gray-900">
                                           {propietario.tipoDocumento?.toUpperCase() ||
