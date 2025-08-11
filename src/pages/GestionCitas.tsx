@@ -793,7 +793,7 @@ export default function GestionCitas() {
                 {selectedCita && (
                   <div className="space-y-6 pt-6">
                     {/* Información de la cita */}
-                    <div className="bg-blue-50 rounded-lg p-6">
+                    <div className="bg-white rounded-lg p-6">
                       <div className="flex items-center space-x-2 mb-4">
                         <PawPrint className="w-5 h-5 text-vet-primary" />
                         <h4 className="font-semibold text-vet-gray-900">
@@ -951,7 +951,7 @@ export default function GestionCitas() {
                         );
                         return enhancedCita?.propietarioInfo;
                       })() && (
-                        <div className="bg-green-50 rounded-lg p-6">
+                        <div className="bg-white rounded-lg p-6">
                           <div className="flex items-center space-x-2 mb-4">
                             <User className="w-5 h-5 text-vet-primary" />
                             <h4 className="font-semibold text-vet-gray-900">
