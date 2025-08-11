@@ -932,17 +932,12 @@ export default function GestionCitas() {
                         );
                         return enhancedCita?.propietarioInfo;
                       })() && (
-                        <div className="bg-gradient-to-br from-vet-primary/5 to-vet-secondary/5 rounded-2xl p-8 border-2 border-vet-primary/10 shadow-lg">
-                          {/* Header rediseñado */}
-                          <div className="flex items-center space-x-4 mb-8 pb-4 border-b border-vet-primary/20">
-                            <div className="p-3 bg-gradient-to-br from-vet-primary to-vet-primary-dark rounded-xl shadow-md">
-                              <User className="w-8 h-8 text-white" />
-                            </div>
-                            <div>
-                              <h4 className="text-2xl font-bold text-vet-gray-900">
-                                INFORMACIÓN DEL PROPIETARIO
-                              </h4>
-                            </div>
+                        <div className="bg-vet-gray-50 rounded-lg p-6">
+                          <div className="flex items-center space-x-2 mb-4">
+                            <User className="w-5 h-5 text-vet-primary" />
+                            <h4 className="font-semibold text-vet-gray-900">
+                              Información del Propietario
+                            </h4>
                           </div>
 
                           {(() => {
