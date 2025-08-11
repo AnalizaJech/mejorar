@@ -22,6 +22,7 @@ import {
   AlertCircle,
   CheckCircle,
   PawPrint,
+  Upload,
 } from "lucide-react";
 
 export default function Notificaciones() {
