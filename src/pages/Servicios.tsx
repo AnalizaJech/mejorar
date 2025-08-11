@@ -180,7 +180,7 @@ const defaultServices: Servicio[] = [
 ];
 
 export default function Servicios() {
-  const { user } = useAppContext();
+  const { user, addNotificacion, usuarios } = useAppContext();
   const { toast } = useToast();
   const [servicios, setServicios] = useState<Servicio[]>([]);
   const [showModal, setShowModal] = useState(false);
@@ -265,7 +265,7 @@ export default function Servicios() {
       }
 
       if (!formData.descripcion.trim()) {
-        setError("La descripción es requerida");
+        setError("La descripci��n es requerida");
         setIsLoading(false);
         return;
       }
@@ -284,6 +284,20 @@ export default function Servicios() {
         const newId = `servicio_${Date.now()}`;
         const newService = { ...formData, id: newId };
         updatedServices = [...servicios, newService];
+
+        // Notify all admins about the new service
+        const admins = usuarios.filter((u) => u.rol === "admin");
+        admins.forEach((admin) => {
+          if (admin.id !== user?.id) { // Don't notify the creator
+            addNotificacion({
+              usuarioId: admin.id,
+              tipo: "nuevo_servicio",
+              titulo: "Nuevo servicio agregado",
+              mensaje: `Se ha agregado el servicio "${newService.nombre}" por ${user?.nombre || "Administrador"} - Precio: S/. ${newService.precio}`,
+              leida: false,
+            });
+          }
+        });
       }
 
       saveServices(updatedServices);
