@@ -75,6 +75,7 @@ export default function MisCitas() {
     deleteCita,
     saveComprobante,
     getComprobante,
+    addNotificacion,
   } = useAppContext();
   const [selectedTab, setSelectedTab] = useState("todas");
   const [uploadingCitaId, setUploadingCitaId] = useState<string | null>(null);
