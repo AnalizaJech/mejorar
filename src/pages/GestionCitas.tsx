@@ -994,7 +994,7 @@ export default function GestionCitas() {
 
                             return (
                               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                {/* Nombre Completo */}
+                                {/* Nombres */}
                                 <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
                                   <div className="flex items-center space-x-3">
                                     <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
@@ -1002,11 +1002,27 @@ export default function GestionCitas() {
                                     </div>
                                     <div>
                                       <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
-                                        Nombre Completo
+                                        Nombres
                                       </span>
                                       <p className="text-lg font-semibold text-vet-gray-900">
-                                        {propietario.nombre}{" "}
-                                        {propietario.apellidos || ""}
+                                        {propietario.nombre || "No registrado"}
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                {/* Apellidos */}
+                                <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
+                                  <div className="flex items-center space-x-3">
+                                    <div className="w-8 h-8 bg-slate-100 rounded-lg flex items-center justify-center">
+                                      <User className="w-4 h-4 text-slate-600" />
+                                    </div>
+                                    <div>
+                                      <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
+                                        Apellidos
+                                      </span>
+                                      <p className="text-lg font-semibold text-vet-gray-900">
+                                        {propietario.apellidos || "No registrado"}
                                       </p>
                                     </div>
                                   </div>
