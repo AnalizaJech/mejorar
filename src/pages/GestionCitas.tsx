@@ -989,24 +989,6 @@ export default function GestionCitas() {
                                   </div>
                                 </div>
 
-                                {/* Username */}
-                                {propietario.username && (
-                                  <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
-                                    <div className="flex items-center space-x-3">
-                                      <div className="w-8 h-8 bg-slate-100 rounded-lg flex items-center justify-center">
-                                        <User className="w-4 h-4 text-slate-600" />
-                                      </div>
-                                      <div>
-                                        <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
-                                          Nombre de Usuario
-                                        </span>
-                                        <p className="text-sm font-medium text-vet-gray-900">
-                                          @{propietario.username}
-                                        </p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                )}
 
                                 {/* Email */}
                                 {propietario.email && (
