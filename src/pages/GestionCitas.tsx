@@ -1106,6 +1106,16 @@ export default function GestionCitas() {
                                     </div>
                                   </div>
                                 )}
+
+                                {/* DEBUG: Todos los datos disponibles del propietario */}
+                                <div className="space-y-1 md:col-span-2 lg:col-span-3 bg-yellow-50 p-3 rounded">
+                                  <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide">
+                                    DEBUG: Todos los datos del propietario
+                                  </span>
+                                  <div className="text-xs text-vet-gray-700 font-mono">
+                                    <pre>{JSON.stringify(propietario, null, 2)}</pre>
+                                  </div>
+                                </div>
                               </div>
                             );
                           })()}
