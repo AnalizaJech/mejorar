@@ -979,9 +979,6 @@ export default function GestionCitas() {
                                     <p className="font-medium text-vet-gray-900">
                                       {propietario.nombre || propietario.name || "No registrado"}
                                     </p>
-                                    <p className="text-xs text-vet-gray-500 mt-1">
-                                      Debug: {JSON.stringify(Object.keys(propietario))}
-                                    </p>
                                   </div>
                                 </div>
 
