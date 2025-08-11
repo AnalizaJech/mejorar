@@ -285,9 +285,20 @@ export default function Servicios() {
         const newService = { ...formData, id: newId };
         updatedServices = [...servicios, newService];
 
-        // Notify all users about the new service
-        const allUsers = usuarios.filter((u) => u.id !== user?.id); // Don't notify the creator
-        allUsers.forEach((targetUser) => {
+        // Notify the creator (admin) with a confirmation message
+        if (user) {
+          addNotificacion({
+            usuarioId: user.id,
+            tipo: "nuevo_servicio",
+            titulo: "Servicio creado exitosamente",
+            mensaje: `Has agregado el servicio "${newService.nombre}" al catálogo - Precio: S/. ${newService.precio}`,
+            leida: false,
+          });
+        }
+
+        // Notify all other users about the new service
+        const otherUsers = usuarios.filter((u) => u.id !== user?.id);
+        otherUsers.forEach((targetUser) => {
           addNotificacion({
             usuarioId: targetUser.id,
             tipo: "nuevo_servicio",
