@@ -36,6 +36,9 @@ export function useNotificationToast() {
         case "consulta_registrada":
           icon = <FileText className="w-4 h-4 text-blue-600" />;
           break;
+        case "sistema":
+          icon = <Bell className="w-4 h-4 text-blue-600" />;
+          break;
       }
 
       toast({
