@@ -302,7 +302,6 @@ export default function Usuarios() {
       genero: "",
       fechaNacimiento: "",
       direccion: "",
-      password: ""
     });
     setEditingUser(null);
     setError("");
