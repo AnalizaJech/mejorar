@@ -67,6 +67,7 @@ const estadoLabels = {
 
 export default function MisCitas() {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const {
     user,
     citas,
