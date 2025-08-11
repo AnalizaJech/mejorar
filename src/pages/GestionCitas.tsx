@@ -128,9 +128,11 @@ export default function GestionCitas() {
 
     // Third try: match by client name if available
     if (!propietario && cita.clienteNombre) {
-      propietario = usuarios.find((u) =>
-        u.nombre?.toLowerCase() === cita.clienteNombre?.toLowerCase() ||
-        `${u.nombre} ${u.apellidos}`.toLowerCase() === cita.clienteNombre?.toLowerCase()
+      propietario = usuarios.find(
+        (u) =>
+          u.nombre?.toLowerCase() === cita.clienteNombre?.toLowerCase() ||
+          `${u.nombre} ${u.apellidos}`.toLowerCase() ===
+            cita.clienteNombre?.toLowerCase(),
       );
     }
 
@@ -977,7 +979,9 @@ export default function GestionCitas() {
                                   <div className="flex items-center space-x-2">
                                     <User className="w-4 h-4 text-vet-primary" />
                                     <p className="font-medium text-vet-gray-900">
-                                      {propietario.nombre || propietario.name || "No registrado"}
+                                      {propietario.nombre ||
+                                        propietario.name ||
+                                        "No registrado"}
                                     </p>
                                   </div>
                                 </div>
@@ -990,7 +994,9 @@ export default function GestionCitas() {
                                   <div className="flex items-center space-x-2">
                                     <User className="w-4 h-4 text-vet-secondary" />
                                     <p className="font-medium text-vet-gray-900">
-                                      {propietario.apellidos || propietario.lastName || "No registrado"}
+                                      {propietario.apellidos ||
+                                        propietario.lastName ||
+                                        "No registrado"}
                                     </p>
                                   </div>
                                 </div>
@@ -1025,9 +1031,8 @@ export default function GestionCitas() {
                                               /\D/g,
                                               "",
                                             );
-                                          return phoneNumber.startsWith(
-                                            "51",
-                                          ) && phoneNumber.length === 11
+                                          return phoneNumber.startsWith("51") &&
+                                            phoneNumber.length === 11
                                             ? `+${phoneNumber}`
                                             : `+51${phoneNumber}`;
                                         })()}
@@ -1526,7 +1531,8 @@ export default function GestionCitas() {
                               completa
                             </li>
                             <li>
-                              �� Verificar que corresponda a los datos de la cita
+                              �� Verificar que corresponda a los datos de la
+                              cita
                             </li>
                           </ul>
                         </div>

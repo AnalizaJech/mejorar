@@ -194,7 +194,9 @@ export default function CitaDetailModal({
                   <div className="p-2 bg-vet-primary/10 rounded-lg">
                     <User className="w-5 h-5 text-vet-primary" />
                   </div>
-                  <span className="text-vet-gray-900">Información del Propietario</span>
+                  <span className="text-vet-gray-900">
+                    Información del Propietario
+                  </span>
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-6 space-y-6">
@@ -220,7 +222,8 @@ export default function CitaDetailModal({
                       </Label>
                       <div className="p-3 bg-vet-gray-50 rounded-lg border border-vet-gray-200">
                         <p className="font-semibold text-vet-gray-900 text-lg">
-                          {selectedCita.propietario?.apellidos || "No registrado"}
+                          {selectedCita.propietario?.apellidos ||
+                            "No registrado"}
                         </p>
                       </div>
                     </div>
@@ -259,7 +262,8 @@ export default function CitaDetailModal({
                       <div className="p-3 bg-green-50 rounded-lg border border-green-200">
                         <div className="flex items-center justify-between">
                           <p className="text-vet-gray-900 font-mono font-semibold">
-                            {selectedCita.propietario?.telefono || "No registrado"}
+                            {selectedCita.propietario?.telefono ||
+                              "No registrado"}
                           </p>
                           {selectedCita.propietario?.telefono && (
                             <div className="flex space-x-2">
@@ -331,10 +335,11 @@ export default function CitaDetailModal({
                             "pasaporte" && "Pasaporte: "}
                           {selectedCita.propietario?.tipoDocumento ===
                             "carnet_extranjeria" && "Carnet: "}
-                          {selectedCita.propietario?.tipoDocumento === "cedula" &&
-                            "Cédula: "}
+                          {selectedCita.propietario?.tipoDocumento ===
+                            "cedula" && "Cédula: "}
                           {!selectedCita.propietario?.tipoDocumento && "DNI: "}
-                          {selectedCita.propietario?.documento || "No registrado"}
+                          {selectedCita.propietario?.documento ||
+                            "No registrado"}
                         </p>
                       </div>
                     </div>
@@ -352,7 +357,8 @@ export default function CitaDetailModal({
                               "Masculino"}
                             {selectedCita.propietario.genero === "femenino" &&
                               "Femenino"}
-                            {selectedCita.propietario.genero === "otro" && "Otro"}
+                            {selectedCita.propietario.genero === "otro" &&
+                              "Otro"}
                             {selectedCita.propietario.genero ===
                               "prefiero_no_decir" && "Prefiero no decir"}
                             {![
