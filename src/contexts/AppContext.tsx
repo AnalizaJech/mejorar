@@ -111,6 +111,12 @@ interface HistorialClinico {
     tipo: string;
     resultado: string;
     archivo?: string;
+    imagen?: {
+      data: string;
+      name: string;
+      size: number;
+      type: string;
+    };
   }>;
   vacunas?: Array<{
     nombre: string;
