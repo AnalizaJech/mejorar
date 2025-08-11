@@ -965,7 +965,22 @@ export default function GestionCitas() {
                             );
                             const propietario = enhancedCita?.propietarioInfo;
 
-                            if (!propietario) return null;
+                            // Debug logging
+                            console.log("Propietario data:", propietario);
+                            console.log("Enhanced cita:", enhancedCita);
+
+                            if (!propietario) {
+                              return (
+                                <div className="text-center py-4">
+                                  <p className="text-vet-gray-600">
+                                    No se encontró información del propietario.
+                                  </p>
+                                  <p className="text-xs text-vet-gray-500 mt-1">
+                                    ClienteId: {enhancedCita?.clienteId} | MascotaClienteId: {enhancedCita?.mascotaInfo?.clienteId}
+                                  </p>
+                                </div>
+                              );
+                            }
 
                             return (
                               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
