@@ -76,6 +76,11 @@ export default function MisMascotas() {
     window.scrollTo(0, 0);
   }, []);
 
+  // Filtrar mascotas del usuario actual
+  const misMascotas = user?.id
+    ? mascotas.filter((mascota) => mascota.clienteId === user.id)
+    : [];
+
   const calcularEdad = (fechaNacimiento) => {
     const hoy = new Date();
     const diffTime = Math.abs(hoy.getTime() - fechaNacimiento.getTime());
