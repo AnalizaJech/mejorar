@@ -607,7 +607,7 @@ export default function MisMascotas() {
           </div>
 
           {/* Mascotas Grid */}
-          {mascotas.length === 0 ? (
+          {misMascotas.length === 0 ? (
             <Card>
               <CardContent className="p-12 text-center">
                 <PawPrint className="w-16 h-16 text-vet-gray-400 mx-auto mb-4" />
