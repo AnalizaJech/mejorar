@@ -257,7 +257,7 @@ export default function Usuarios() {
       tipoDocumento: cliente.tipoDocumento || "dni",
       genero: cliente.genero || "",
       fechaNacimiento: cliente.fechaNacimiento
-        ? new Date(cliente.fechaNacimiento).toISOString().split('T')[0]
+        ? new Date(cliente.fechaNacimiento).toISOString().split("T")[0]
         : "",
       direccion: cliente.direccion || "",
     });
@@ -544,7 +544,10 @@ export default function Usuarios() {
                         id="apellidos"
                         value={formData.apellidos}
                         onChange={(e) =>
-                          setFormData({ ...formData, apellidos: e.target.value })
+                          setFormData({
+                            ...formData,
+                            apellidos: e.target.value,
+                          })
                         }
                         placeholder="Apellidos"
                         required
@@ -568,19 +571,26 @@ export default function Usuarios() {
                           <SelectItem value="masculino">Masculino</SelectItem>
                           <SelectItem value="femenino">Femenino</SelectItem>
                           <SelectItem value="otro">Otro</SelectItem>
-                          <SelectItem value="prefiero_no_decir">Prefiero no decir</SelectItem>
+                          <SelectItem value="prefiero_no_decir">
+                            Prefiero no decir
+                          </SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
 
                     <div>
-                      <Label htmlFor="fechaNacimiento">Fecha de Nacimiento</Label>
+                      <Label htmlFor="fechaNacimiento">
+                        Fecha de Nacimiento
+                      </Label>
                       <Input
                         id="fechaNacimiento"
                         type="date"
                         value={formData.fechaNacimiento}
                         onChange={(e) =>
-                          setFormData({ ...formData, fechaNacimiento: e.target.value })
+                          setFormData({
+                            ...formData,
+                            fechaNacimiento: e.target.value,
+                          })
                         }
                       />
                     </div>
@@ -601,7 +611,9 @@ export default function Usuarios() {
                         <SelectContent>
                           <SelectItem value="dni">DNI</SelectItem>
                           <SelectItem value="pasaporte">Pasaporte</SelectItem>
-                          <SelectItem value="carnet_extranjeria">Carnet de Extranjería</SelectItem>
+                          <SelectItem value="carnet_extranjeria">
+                            Carnet de Extranjería
+                          </SelectItem>
                           <SelectItem value="cedula">Cédula</SelectItem>
                         </SelectContent>
                       </Select>
@@ -613,7 +625,10 @@ export default function Usuarios() {
                         id="documento"
                         value={formData.documento}
                         onChange={(e) =>
-                          setFormData({ ...formData, documento: e.target.value })
+                          setFormData({
+                            ...formData,
+                            documento: e.target.value,
+                          })
                         }
                         placeholder="Número de documento"
                       />
