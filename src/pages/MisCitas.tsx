@@ -41,6 +41,7 @@ import {
   Download,
   MessageCircle,
 } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const estadoColors = {
   pendiente_pago: "bg-yellow-100 text-yellow-800",
