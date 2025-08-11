@@ -1094,8 +1094,8 @@ export default function GestionCitas() {
                                         <MapPin className="w-4 h-4 text-orange-600" />
                                       </div>
                                       <div className="flex-1">
-                                        <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide block">
-                                          Dirección
+                                        <span className="text-sm font-bold text-vet-gray-700 uppercase tracking-wide block mb-1">
+                                          DIRECCIÓN
                                         </span>
                                         <p className="text-sm font-medium text-vet-gray-900 leading-relaxed">
                                           {propietario.direccion}
@@ -1105,78 +1105,6 @@ export default function GestionCitas() {
                                   </div>
                                 )}
 
-                                {/* Estadísticas del Cliente */}
-                                <div className="bg-gradient-to-r from-vet-primary/5 to-blue-50 rounded-lg p-4 shadow-sm border border-blue-100 md:col-span-2 lg:col-span-3">
-                                  <div className="flex items-center space-x-3 mb-4">
-                                    <div className="w-8 h-8 bg-vet-primary/20 rounded-lg flex items-center justify-center">
-                                      <span className="text-vet-primary font-bold text-sm">
-                                        📊
-                                      </span>
-                                    </div>
-                                    <span className="text-xs font-medium text-vet-gray-500 uppercase tracking-wide">
-                                      Estadísticas del Cliente
-                                    </span>
-                                  </div>
-                                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                                    <div className="text-center">
-                                      <div className="text-2xl font-bold text-vet-primary">
-                                        {
-                                          mascotas.filter(
-                                            (m) =>
-                                              m.clienteId === propietario.id,
-                                          ).length
-                                        }
-                                      </div>
-                                      <div className="text-xs text-vet-gray-600">
-                                        Mascotas
-                                      </div>
-                                    </div>
-                                    <div className="text-center">
-                                      <div className="text-2xl font-bold text-green-600">
-                                        {
-                                          citas.filter(
-                                            (c) =>
-                                              c.clienteId === propietario.id,
-                                          ).length
-                                        }
-                                      </div>
-                                      <div className="text-xs text-vet-gray-600">
-                                        Total Citas
-                                      </div>
-                                    </div>
-                                    <div className="text-center">
-                                      <div className="text-2xl font-bold text-blue-600">
-                                        {
-                                          citas.filter(
-                                            (c) =>
-                                              c.clienteId === propietario.id &&
-                                              c.estado === "atendida",
-                                          ).length
-                                        }
-                                      </div>
-                                      <div className="text-xs text-vet-gray-600">
-                                        Citas Atendidas
-                                      </div>
-                                    </div>
-                                    <div className="text-center">
-                                      <div className="text-2xl font-bold text-yellow-600">
-                                        {
-                                          citas.filter(
-                                            (c) =>
-                                              c.clienteId === propietario.id &&
-                                              [
-                                                "pendiente_pago",
-                                                "aceptada",
-                                              ].includes(c.estado),
-                                          ).length
-                                        }
-                                      </div>
-                                      <div className="text-xs text-vet-gray-600">
-                                        Citas Pendientes
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
                               </div>
                             );
                           })()}
