@@ -67,7 +67,7 @@ export default function CitaAttendModal({
   selectedCita,
   onSave,
 }: CitaAttendModalProps) {
-  const { user, updateCita, addHistorialEntry } = useAppContext();
+  const { user, updateCita, addHistorialEntry, updateMascota } = useAppContext();
 
   // Form state
   const [isProcessing, setIsProcessing] = useState(false);
