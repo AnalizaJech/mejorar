@@ -155,7 +155,8 @@ interface Notificacion {
     | "sistema"
     | "nuevo_cliente"
     | "nueva_cita"
-    | "nuevo_servicio";
+    | "nuevo_servicio"
+    | "comprobante_recibido";
   titulo: string;
   mensaje: string;
   fechaCreacion: Date;
