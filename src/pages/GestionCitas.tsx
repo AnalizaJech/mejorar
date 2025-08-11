@@ -867,7 +867,7 @@ export default function GestionCitas() {
                             Precio
                           </span>
                           <div className="flex items-center space-x-2">
-                            <Coins className="w-4 h-4 text-vet-gray-600" />
+                            <Coins className="w-4 h-4 text-yellow-600" />
                             <p className="font-medium text-vet-gray-900">
                               S/. {selectedCita.precio.toLocaleString()}
                             </p>
@@ -1746,7 +1746,7 @@ export default function GestionCitas() {
                               /\D/g,
                               "",
                             );
-                            // Validar si ya tiene código de país (+51)
+                            // Validar si ya tiene c��digo de país (+51)
                             const finalNumber =
                               phoneNumber.startsWith("51") &&
                               phoneNumber.length === 11
