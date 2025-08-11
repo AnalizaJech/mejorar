@@ -301,7 +301,18 @@ export default function Usuarios() {
   };
 
   const resetForm = () => {
-    setFormData({ nombre: "", email: "", telefono: "", password: "" });
+    setFormData({
+      nombre: "",
+      apellidos: "",
+      email: "",
+      telefono: "",
+      documento: "",
+      tipoDocumento: "dni",
+      genero: "",
+      fechaNacimiento: "",
+      direccion: "",
+      password: ""
+    });
     setEditingUser(null);
     setError("");
   };
