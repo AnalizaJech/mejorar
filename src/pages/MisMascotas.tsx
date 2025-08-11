@@ -219,6 +219,12 @@ export default function MisMascotas() {
           leida: false,
         });
       }
+
+      // Show toast notification
+      toast({
+        title: "¡Mascota registrada!",
+        description: `${newMascota.nombre} ha sido registrada exitosamente en el sistema.`,
+      });
     }
 
     // Reset form
