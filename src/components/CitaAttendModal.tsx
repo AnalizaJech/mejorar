@@ -375,17 +375,23 @@ export default function CitaAttendModal({
       <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <div className="flex items-center space-x-3">
-            <div
-              className={`w-10 h-10 bg-${serviceConfig.color}/10 rounded-lg flex items-center justify-center`}
-            >
-              <ServiceIcon className={`w-5 h-5 text-${serviceConfig.color}`} />
+            <div className="w-10 h-10 bg-vet-primary/10 rounded-lg flex items-center justify-center">
+              <Stethoscope className="w-5 h-5 text-vet-primary" />
             </div>
             <div>
               <DialogTitle className="text-xl font-semibold text-vet-gray-900">
-                Registrar {serviceConfig.title}
+                Registrar Historia Clínica
               </DialogTitle>
               <DialogDescription className="text-vet-gray-600">
-                {serviceConfig.description} para {cita.mascota}
+                {new Date(cita.fecha).toLocaleDateString('es-ES', {
+                  weekday: 'long',
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}, {new Date(cita.fecha).toLocaleTimeString('es-ES', {
+                  hour: '2-digit',
+                  minute: '2-digit'
+                })}
               </DialogDescription>
             </div>
           </div>
