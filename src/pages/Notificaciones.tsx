@@ -22,6 +22,7 @@ import {
   AlertCircle,
   CheckCircle,
   PawPrint,
+  Upload,
 } from "lucide-react";
 
 export default function Notificaciones() {
@@ -63,6 +64,12 @@ export default function Notificaciones() {
           priority = "high";
           type = "cita";
           break;
+        case "cita_agendada_confirmacion":
+          icon = Calendar;
+          color = "blue-500";
+          priority = "high";
+          type = "cita";
+          break;
         case "bienvenida_cliente":
           icon = User;
           color = "vet-primary";
@@ -79,6 +86,30 @@ export default function Notificaciones() {
           icon = PawPrint;
           color = "vet-secondary";
           priority = "normal";
+          type = "sistema";
+          break;
+        case "sistema":
+          icon = Bell;
+          color = "blue-500";
+          priority = "normal";
+          type = "sistema";
+          break;
+        case "comprobante_recibido":
+          icon = Upload;
+          color = "orange-500";
+          priority = "high";
+          type = "cita";
+          break;
+        case "nueva_cita":
+          icon = Calendar;
+          color = "blue-500";
+          priority = "high";
+          type = "cita";
+          break;
+        case "nuevo_cliente":
+          icon = User;
+          color = "green-500";
+          priority = "high";
           type = "sistema";
           break;
       }

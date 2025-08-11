@@ -76,6 +76,11 @@ export default function MisMascotas() {
     window.scrollTo(0, 0);
   }, []);
 
+  // Filtrar mascotas del usuario actual
+  const misMascotas = user?.id
+    ? mascotas.filter((mascota) => mascota.clienteId === user.id)
+    : [];
+
   const calcularEdad = (fechaNacimiento) => {
     const hoy = new Date();
     const diffTime = Math.abs(hoy.getTime() - fechaNacimiento.getTime());
@@ -602,7 +607,7 @@ export default function MisMascotas() {
           </div>
 
           {/* Mascotas Grid */}
-          {mascotas.length === 0 ? (
+          {misMascotas.length === 0 ? (
             <Card>
               <CardContent className="p-12 text-center">
                 <PawPrint className="w-16 h-16 text-vet-gray-400 mx-auto mb-4" />
@@ -623,7 +628,7 @@ export default function MisMascotas() {
             </Card>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {mascotas.map((mascota) => (
+              {misMascotas.map((mascota) => (
                 <Card
                   key={mascota.id}
                   className="hover:shadow-lg transition-all duration-200"

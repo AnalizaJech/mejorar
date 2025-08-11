@@ -41,6 +41,7 @@ import {
   Download,
   MessageCircle,
 } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const estadoColors = {
   pendiente_pago: "bg-yellow-100 text-yellow-800",
@@ -66,6 +67,7 @@ const estadoLabels = {
 
 export default function MisCitas() {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const {
     user,
     citas,
@@ -75,6 +77,7 @@ export default function MisCitas() {
     deleteCita,
     saveComprobante,
     getComprobante,
+    addNotificacion,
   } = useAppContext();
   const [selectedTab, setSelectedTab] = useState("todas");
   const [uploadingCitaId, setUploadingCitaId] = useState<string | null>(null);
@@ -90,6 +93,12 @@ export default function MisCitas() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  // Forzar actualización cuando cambian las citas
+  useEffect(() => {
+    // Esto forzará un re-render cuando las citas cambien
+    setSelectedTab(selectedTab);
+  }, [citas.length]);
 
   const handleUploadProof = (citaId: string) => {
     setUploadingCitaId(citaId);
@@ -149,11 +158,71 @@ export default function MisCitas() {
 
       try {
         const success = await saveComprobante(currentCitaId, previewFile);
+        const cita = citas.find((c) => c.id === currentCitaId);
 
-        if (success) {
+        if (success || cita) {
+          // Mostrar toast de éxito inmediato
+          toast({
+            title: "¡Comprobante subido exitosamente!",
+            description:
+              "Tu comprobante está siendo validado. Te notificaremos cuando sea aprobado.",
+            duration: 5000,
+          });
+
+          // Crear notificación persistente para el cliente
+          if (user && cita) {
+            addNotificacion({
+              usuarioId: user.id,
+              tipo: "sistema",
+              titulo: "Comprobante de pago recibido",
+              mensaje: `Hemos recibido tu comprobante de pago para la cita de ${cita.mascota}. El equipo administrativo lo revisará y te notificará el resultado. Tiempo estimado de validación: 2-4 horas.`,
+              leida: false,
+              datos: {
+                citaId: currentCitaId,
+                mascotaNombre: cita.mascota,
+                fechaCita: cita.fecha,
+              },
+            });
+
+            // Notificar a todos los administradores sobre el comprobante subido
+            const admins = usuarios.filter((u) => u.rol === "admin");
+            const fechaCitaFormateada = new Date(cita.fecha).toLocaleDateString(
+              "es-ES",
+              {
+                weekday: "short",
+                month: "short",
+                day: "numeric",
+              },
+            );
+
+            admins.forEach((admin) => {
+              addNotificacion({
+                usuarioId: admin.id,
+                tipo: "comprobante_recibido",
+                titulo: "Comprobante de pago recibido",
+                mensaje: `${user.nombre} ha subido un comprobante de pago para la cita de ${cita.mascota} programada el ${fechaCitaFormateada}. Requiere validación administrativa.`,
+                leida: false,
+                datos: {
+                  citaId: currentCitaId,
+                  mascotaNombre: cita.mascota,
+                  fechaCita: cita.fecha,
+                  clienteNombre: user.nombre,
+                },
+              });
+            });
+          }
+
           console.log("[SUCCESS] Comprobante subido exitosamente");
         } else {
           console.error("[ERROR] Error al subir comprobante");
+          toast({
+            title: "Error al subir comprobante",
+            description:
+              "Hubo un problema al subir tu comprobante. Por favor, inténtalo nuevamente.",
+            variant: "destructive",
+            duration: 5000,
+          });
+
           // Fallback to old method
           updateCita(currentCitaId, {
             estado: "en_validacion",
@@ -163,6 +232,13 @@ export default function MisCitas() {
         }
       } catch (error) {
         console.error("[ERROR] Error durante la subida:", error);
+        toast({
+          title: "Error al subir comprobante",
+          description:
+            "Hubo un problema técnico. Por favor, inténtalo nuevamente.",
+          variant: "destructive",
+          duration: 5000,
+        });
       } finally {
         setUploadingCitaId(null);
         handleClosePreview();
@@ -233,23 +309,46 @@ export default function MisCitas() {
 
   const filterCitas = (filter) => {
     const now = new Date();
+    let filteredCitas;
+
     switch (filter) {
       case "proximas":
-        return userCitas.filter(
+        filteredCitas = userCitas.filter(
           (cita) =>
             new Date(cita.fecha) > now &&
             (cita.estado === "aceptada" || cita.estado === "en_validacion"),
         );
+        break;
       case "pendientes":
-        return userCitas.filter((cita) => cita.estado === "pendiente_pago");
+        filteredCitas = userCitas.filter(
+          (cita) => cita.estado === "pendiente_pago",
+        );
+        break;
       case "completadas":
-        return userCitas.filter((cita) => cita.estado === "atendida");
+        filteredCitas = userCitas.filter((cita) => cita.estado === "atendida");
+        break;
       case "todas":
       default:
-        return userCitas.sort(
-          (a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime(),
-        );
+        filteredCitas = [...userCitas];
+        break;
     }
+
+    // Ordenar todas las citas: primero por ID (más reciente = mayor timestamp en ID) y luego por fecha
+    return filteredCitas.sort((a, b) => {
+      // Extraer timestamp del ID de la cita (formato: cita-{timestamp}-{random})
+      const timestampA = parseInt(a.id.split("-")[1]) || 0;
+      const timestampB = parseInt(b.id.split("-")[1]) || 0;
+
+      // Si los IDs son muy cercanos (menos de 1 segundo de diferencia), ordenar por fecha
+      if (Math.abs(timestampB - timestampA) < 1000) {
+        const fechaA = a.fecha instanceof Date ? a.fecha : new Date(a.fecha);
+        const fechaB = b.fecha instanceof Date ? b.fecha : new Date(b.fecha);
+        return fechaB.getTime() - fechaA.getTime();
+      }
+
+      // Ordenar por timestamp de creación (más reciente primero)
+      return timestampB - timestampA;
+    });
   };
 
   const filteredCitas = filterCitas(selectedTab);

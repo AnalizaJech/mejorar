@@ -1,7 +1,15 @@
 import { useEffect } from "react";
 import { useAppContext } from "@/contexts/AppContext";
 import { useToast } from "@/hooks/use-toast";
-import { CheckCircle, Bell, FileText, User } from "lucide-react";
+import {
+  CheckCircle,
+  Bell,
+  FileText,
+  User,
+  Calendar,
+  CreditCard,
+  Upload,
+} from "lucide-react";
 
 export function useNotificationToast() {
   const { user, getNotificacionesByUser } = useAppContext();
@@ -27,11 +35,26 @@ export function useNotificationToast() {
         case "cita_aceptada":
           icon = <CheckCircle className="w-4 h-4 text-green-600" />;
           break;
+        case "cita_agendada_confirmacion":
+          icon = <Calendar className="w-4 h-4 text-blue-600" />;
+          break;
         case "bienvenida_cliente":
           icon = <User className="w-4 h-4 text-blue-600" />;
           break;
         case "consulta_registrada":
           icon = <FileText className="w-4 h-4 text-blue-600" />;
+          break;
+        case "sistema":
+          icon = <Bell className="w-4 h-4 text-blue-600" />;
+          break;
+        case "comprobante_recibido":
+          icon = <Upload className="w-4 h-4 text-orange-600" />;
+          break;
+        case "nueva_cita":
+          icon = <Calendar className="w-4 h-4 text-blue-600" />;
+          break;
+        case "nuevo_cliente":
+          icon = <User className="w-4 h-4 text-green-600" />;
           break;
       }
 
