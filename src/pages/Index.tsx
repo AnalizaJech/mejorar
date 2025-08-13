@@ -49,7 +49,20 @@ import {
   Syringe,
   Zap,
   Bell,
+  AlertCircle,
+  Search,
+  MonitorSpeaker,
+  Scan,
+  TestTube,
+  AlertTriangle,
+  Monitor,
+  Droplets,
+  Bed,
+  ShoppingBag,
+  Pill,
+  Gift,
 } from "lucide-react";
+import { getVeterinaryServices, getServicesByCategory } from "@/lib/veterinaryServices";
 
 // Default services configuration
 const defaultServices = [
