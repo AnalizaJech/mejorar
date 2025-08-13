@@ -10,6 +10,14 @@
   <body>
     <div id="root"></div>
 
+    <!-- Clear old services to force reinitialization with comprehensive services -->
+    <script>
+      if (typeof(Storage) !== 'undefined') {
+        localStorage.removeItem('veterinary_services');
+        console.log('Cleared old veterinary services - will reinitialize with comprehensive services');
+      }
+    </script>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
