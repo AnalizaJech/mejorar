@@ -810,13 +810,11 @@ export default function Servicios() {
                         <SelectValue placeholder="Selecciona una categoría" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="Atención médica">Atención médica</SelectItem>
-                        <SelectItem value="Diagnóstico">Diagnóstico</SelectItem>
-                        <SelectItem value="Cirugía">Cirugía</SelectItem>
-                        <SelectItem value="Estética y cuidado">Estética y cuidado</SelectItem>
-                        <SelectItem value="Hospitalización">Hospitalización</SelectItem>
-                        <SelectItem value="Tienda y nutrición">Tienda y nutrición</SelectItem>
-                        <SelectItem value="Otros">Otros</SelectItem>
+                        {serviceCategories.map((category) => (
+                          <SelectItem key={category} value={category}>
+                            {category}
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                   </div>
