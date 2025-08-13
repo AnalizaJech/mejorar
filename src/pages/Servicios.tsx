@@ -375,6 +375,7 @@ export default function Servicios() {
     precio: 0,
     icono: "Stethoscope",
     descripcion: "",
+    categoria: "Atención médica",
     activo: true,
   });
 
