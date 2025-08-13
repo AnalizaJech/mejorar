@@ -721,7 +721,7 @@ export default function Index() {
                   </h3>
 
                   <a
-                    href="tel:+5551234567"
+                    href="tel:+51999123456"
                     className="group block bg-vet-primary/5 border-2 border-vet-primary/20 rounded-2xl p-4 md:p-6 hover:bg-vet-primary/10 hover:border-vet-primary/40 transition-all duration-300 hover:scale-105 min-h-[92px] md:h-[108px]"
                   >
                     <div className="flex items-center space-x-3 md:space-x-4 h-full">
@@ -746,7 +746,7 @@ export default function Index() {
                   </a>
 
                   <a
-                    href="https://wa.me/5551234567"
+                    href="https://wa.me/51999123456"
                     className="group block bg-green-50 border-2 border-green-200 rounded-2xl p-4 md:p-6 hover:bg-green-100 hover:border-green-300 transition-all duration-300 hover:scale-105 min-h-[92px] md:h-[108px]"
                   >
                     <div className="flex items-center space-x-3 md:space-x-4 h-full">
