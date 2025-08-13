@@ -283,7 +283,7 @@ export default function Terminos() {
                   <strong>Email Legal:</strong> legal@petla.com
                 </p>
                 <p>
-                  <strong>Teléfono:</strong> (555) 123-4567 ext. 102
+                  <strong>Teléfono:</strong> +51 999 123 456 ext. 102
                 </p>
                 <p>
                   <strong>Horario:</strong> Lunes a Viernes, 9:00 AM - 6:00 PM
