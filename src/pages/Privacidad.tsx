@@ -213,7 +213,7 @@ export default function Privacidad() {
                   <strong>Email:</strong> privacidad@petla.com
                 </p>
                 <p>
-                  <strong>Teléfono:</strong> (555) 123-4567 ext. 101
+                  <strong>Teléfono:</strong> +51 999 123 456 ext. 101
                 </p>
                 <p>
                   <strong>Dirección:</strong> Av. Principal 123, Centro Médico
