@@ -79,7 +79,7 @@ import {
   saveVeterinaryServices,
   getVeterinaryServices,
   serviceCategories,
-  type VeterinaryService
+  type VeterinaryService,
 } from "@/lib/veterinaryServices";
 
 // Use the shared interface
@@ -429,92 +429,99 @@ export default function Servicios() {
               return acc;
             }, {});
 
-            return Object.entries(groupedServices).map(([category, services]) => (
-              <div key={category} className="mb-12">
-                <div className="mb-6">
-                  <h2 className="text-2xl font-bold text-vet-gray-900 border-b border-vet-gray-200 pb-2">
-                    {category}
-                  </h2>
-                  <p className="text-vet-gray-600 mt-2">
-                    {services.length} servicio{services.length !== 1 ? 's' : ''} en esta categoría
-                  </p>
-                </div>
+            return Object.entries(groupedServices).map(
+              ([category, services]) => (
+                <div key={category} className="mb-12">
+                  <div className="mb-6">
+                    <h2 className="text-2xl font-bold text-vet-gray-900 border-b border-vet-gray-200 pb-2">
+                      {category}
+                    </h2>
+                    <p className="text-vet-gray-600 mt-2">
+                      {services.length} servicio
+                      {services.length !== 1 ? "s" : ""} en esta categoría
+                    </p>
+                  </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {services.map((servicio) => {
-                    const IconComponent = getIconComponent(servicio.icono);
-                    return (
-                      <Card
-                        key={servicio.id}
-                        className={`transition-all hover:shadow-lg ${
-                          !servicio.activo ? "opacity-60" : ""
-                        }`}
-                      >
-                        <CardHeader className="pb-4">
-                          <div className="flex items-start justify-between">
-                            <div className="flex items-center space-x-3">
-                              <div className="w-12 h-12 bg-vet-primary/10 rounded-lg flex items-center justify-center">
-                                <IconComponent className="w-6 h-6 text-vet-primary" />
-                              </div>
-                              <div>
-                                <CardTitle className="text-lg">
-                                  {servicio.nombre}
-                                </CardTitle>
-                                <div className="flex items-center space-x-2 mt-1">
-                                  <Badge className="bg-vet-primary/10 text-vet-primary">
-                                    S/. {servicio.precio}
-                                  </Badge>
-                                  <Badge
-                                    variant={
-                                      servicio.activo ? "default" : "secondary"
-                                    }
-                                  >
-                                    {servicio.activo ? "Activo" : "Inactivo"}
-                                  </Badge>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {services.map((servicio) => {
+                      const IconComponent = getIconComponent(servicio.icono);
+                      return (
+                        <Card
+                          key={servicio.id}
+                          className={`transition-all hover:shadow-lg ${
+                            !servicio.activo ? "opacity-60" : ""
+                          }`}
+                        >
+                          <CardHeader className="pb-4">
+                            <div className="flex items-start justify-between">
+                              <div className="flex items-center space-x-3">
+                                <div className="w-12 h-12 bg-vet-primary/10 rounded-lg flex items-center justify-center">
+                                  <IconComponent className="w-6 h-6 text-vet-primary" />
+                                </div>
+                                <div>
+                                  <CardTitle className="text-lg">
+                                    {servicio.nombre}
+                                  </CardTitle>
+                                  <div className="flex items-center space-x-2 mt-1">
+                                    <Badge className="bg-vet-primary/10 text-vet-primary">
+                                      S/. {servicio.precio}
+                                    </Badge>
+                                    <Badge
+                                      variant={
+                                        servicio.activo
+                                          ? "default"
+                                          : "secondary"
+                                      }
+                                    >
+                                      {servicio.activo ? "Activo" : "Inactivo"}
+                                    </Badge>
+                                  </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
-                        </CardHeader>
-                        <CardContent>
-                          <p className="text-vet-gray-600 mb-4 text-sm">
-                            {servicio.descripcion}
-                          </p>
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center space-x-2">
-                              <span className="text-sm text-vet-gray-500">
-                                Estado:
-                              </span>
-                              <Switch
-                                checked={servicio.activo}
-                                onCheckedChange={() => handleToggleActive(servicio)}
-                              />
+                          </CardHeader>
+                          <CardContent>
+                            <p className="text-vet-gray-600 mb-4 text-sm">
+                              {servicio.descripcion}
+                            </p>
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center space-x-2">
+                                <span className="text-sm text-vet-gray-500">
+                                  Estado:
+                                </span>
+                                <Switch
+                                  checked={servicio.activo}
+                                  onCheckedChange={() =>
+                                    handleToggleActive(servicio)
+                                  }
+                                />
+                              </div>
+                              <div className="flex space-x-2">
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={() => handleEdit(servicio)}
+                                >
+                                  <Edit className="w-4 h-4" />
+                                </Button>
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={() => handleDelete(servicio)}
+                                  className="text-red-600 hover:text-red-700"
+                                >
+                                  <Trash2 className="w-4 h-4" />
+                                </Button>
+                              </div>
                             </div>
-                            <div className="flex space-x-2">
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={() => handleEdit(servicio)}
-                              >
-                                <Edit className="w-4 h-4" />
-                              </Button>
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={() => handleDelete(servicio)}
-                                className="text-red-600 hover:text-red-700"
-                              >
-                                <Trash2 className="w-4 h-4" />
-                              </Button>
-                            </div>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    );
-                  })}
+                          </CardContent>
+                        </Card>
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
-            ));
+              ),
+            );
           })()}
 
           {/* Create/Edit Modal */}

@@ -62,7 +62,10 @@ import {
   Pill,
   Gift,
 } from "lucide-react";
-import { getVeterinaryServices, getServicesByCategory } from "@/lib/veterinaryServices";
+import {
+  getVeterinaryServices,
+  getServicesByCategory,
+} from "@/lib/veterinaryServices";
 
 // Color themes for different service categories
 const categoryColors = {
@@ -71,12 +74,12 @@ const categoryColors = {
     colorBg: "vet-primary/10",
     colorHover: "vet-primary/30",
   },
-  "Diagnóstico": {
+  Diagnóstico: {
     color: "blue-600",
     colorBg: "blue-500/10",
     colorHover: "blue-500/30",
   },
-  "Cirugía": {
+  Cirugía: {
     color: "purple-600",
     colorBg: "purple-500/10",
     colorHover: "purple-500/30",
@@ -86,7 +89,7 @@ const categoryColors = {
     colorBg: "vet-secondary/10",
     colorHover: "vet-secondary/30",
   },
-  "Hospitalización": {
+  Hospitalización: {
     color: "red-600",
     colorBg: "red-500/10",
     colorHover: "red-500/30",
@@ -96,7 +99,7 @@ const categoryColors = {
     colorBg: "green-500/10",
     colorHover: "green-500/30",
   },
-  "Otros": {
+  Otros: {
     color: "gray-600",
     colorBg: "gray-500/10",
     colorHover: "gray-500/30",
@@ -107,7 +110,8 @@ const categoryColors = {
 const getServicios = () => {
   const services = getVeterinaryServices();
   return services.map((service) => {
-    const categoryColor = categoryColors[service.categoria] || categoryColors["Otros"];
+    const categoryColor =
+      categoryColors[service.categoria] || categoryColors["Otros"];
     return {
       ...service,
       ...categoryColor,

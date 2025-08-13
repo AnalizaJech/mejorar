@@ -50,7 +50,7 @@ export const defaultVeterinaryServices: VeterinaryService[] = [
     categoria: "Atención médica",
     activo: true,
   },
-  
+
   // Diagnóstico
   {
     id: "ecografias",
@@ -236,12 +236,12 @@ export const defaultVeterinaryServices: VeterinaryService[] = [
 // Service categories
 export const serviceCategories = [
   "Atención médica",
-  "Diagnóstico", 
+  "Diagnóstico",
   "Cirugía",
   "Estética y cuidado",
   "Hospitalización",
   "Tienda y nutrición",
-  "Otros"
+  "Otros",
 ];
 
 // Function to get services from localStorage or initialize with defaults
@@ -258,10 +258,13 @@ export const getVeterinaryServices = (): VeterinaryService[] => {
   } catch (error) {
     console.error("Error loading services from localStorage:", error);
   }
-  
+
   // Initialize localStorage with default comprehensive services
-  localStorage.setItem("veterinary_services", JSON.stringify(defaultVeterinaryServices));
-  return defaultVeterinaryServices.filter(service => service.activo);
+  localStorage.setItem(
+    "veterinary_services",
+    JSON.stringify(defaultVeterinaryServices),
+  );
+  return defaultVeterinaryServices.filter((service) => service.activo);
 };
 
 // Function to save services to localStorage and notify components
@@ -276,14 +279,20 @@ export const saveVeterinaryServices = (services: VeterinaryService[]): void => {
 };
 
 // Function to get services grouped by category
-export const getServicesByCategory = (): Record<string, VeterinaryService[]> => {
+export const getServicesByCategory = (): Record<
+  string,
+  VeterinaryService[]
+> => {
   const services = getVeterinaryServices();
-  return services.reduce((acc, service) => {
-    const category = service.categoria || "Otros";
-    if (!acc[category]) {
-      acc[category] = [];
-    }
-    acc[category].push(service);
-    return acc;
-  }, {} as Record<string, VeterinaryService[]>);
+  return services.reduce(
+    (acc, service) => {
+      const category = service.categoria || "Otros";
+      if (!acc[category]) {
+        acc[category] = [];
+      }
+      acc[category].push(service);
+      return acc;
+    },
+    {} as Record<string, VeterinaryService[]>,
+  );
 };
