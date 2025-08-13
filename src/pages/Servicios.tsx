@@ -74,6 +74,13 @@ import {
 } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { useToast } from "@/hooks/use-toast";
+import {
+  defaultVeterinaryServices,
+  saveVeterinaryServices,
+  getVeterinaryServices,
+  serviceCategories,
+  type VeterinaryService
+} from "@/lib/veterinaryServices";
 
 interface Servicio {
   id: string;
