@@ -418,7 +418,7 @@ export default function Login() {
                       <Input
                         id="register-phone"
                         type="tel"
-                        placeholder="+52 55 1234 5678"
+                        placeholder="+51 999 123 456"
                         className="pl-10 h-10 border-vet-gray-200 focus:border-vet-primary focus:ring-vet-primary/10"
                         value={registerData.telefono}
                         onChange={(e) =>
