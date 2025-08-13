@@ -185,11 +185,8 @@ export default function Servicios() {
 
   const saveServices = (newServices: Servicio[]) => {
     try {
-      localStorage.setItem("veterinary_services", JSON.stringify(newServices));
+      saveVeterinaryServices(newServices);
       setServicios(newServices);
-
-      // Dispatch custom event to notify other components
-      window.dispatchEvent(new Event("servicesUpdated"));
 
       toast({
         title: "Servicios actualizados",
