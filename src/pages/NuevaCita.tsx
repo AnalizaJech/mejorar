@@ -53,6 +53,7 @@ import {
 } from "lucide-react";
 import { DatePicker } from "@/components/ui/date-picker";
 import { useToast } from "@/hooks/use-toast";
+import { getVeterinaryServices } from "@/lib/veterinaryServices";
 
 interface NuevaCitaData {
   mascotaId: string;
