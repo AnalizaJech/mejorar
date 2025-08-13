@@ -510,7 +510,7 @@ export default function Veterinarios() {
                                 telefono: e.target.value,
                               })
                             }
-                            placeholder="+52 55 1234 5678"
+                            placeholder="+51 999 123 456"
                             className="border-vet-gray-300 focus:border-vet-primary focus:ring-vet-primary"
                           />
                         </div>

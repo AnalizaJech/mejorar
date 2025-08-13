@@ -152,7 +152,7 @@ backend/
 │   │   ├── appointments.controller.js
 │   │   └── admin.controller.js
 │   ├── services/             # Business logic
-│   │   ├── auth.service.js
+│   │   ├─�� auth.service.js
 │   │   ├── users.service.js
 │   │   ├── appointments.service.js
 │   │   ├── notifications.service.js
@@ -2202,7 +2202,7 @@ FROM_EMAIL=noreply@petla.com
 # SMS Service (Twilio)
 TWILIO_ACCOUNT_SID=your_twilio_account_sid
 TWILIO_AUTH_TOKEN=your_twilio_auth_token
-TWILIO_PHONE_NUMBER=+1234567890
+TWILIO_PHONE_NUMBER=+51999123456
 
 # Application
 APP_URL=https://petla.com
@@ -3189,7 +3189,7 @@ export const uploadImage = async (req, res) => {
 - **Experiencia de Usuario**: Responsive, tiempo real, offline-ready
 - **Compliance**: Auditoría completa, backup automático
 - **Integración**: APIs para expandir funcionalidades
-- **ROI**: Reducción 70% en tiempos administrativos
+- **ROI**: Reducci��n 70% en tiempos administrativos
 
 ### 📈 **Roadmap de Implementación**
 

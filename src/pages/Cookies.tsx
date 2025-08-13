@@ -68,7 +68,7 @@ export default function Cookies() {
                 <ul className="list-disc list-inside space-y-2 text-sm text-vet-gray-700">
                   <li>Mantener tu sesión activa mientras navegas</li>
                   <li>Recordar tus preferencias de idioma y configuración</li>
-                  <li>Analizar cómo usas nuestra plataforma para mejorarla</li>
+                  <li>Analizar c��mo usas nuestra plataforma para mejorarla</li>
                   <li>Personalizar el contenido que te mostramos</li>
                   <li>Proteger tu cuenta contra actividades sospechosas</li>
                 </ul>
@@ -327,7 +327,7 @@ export default function Cookies() {
                     Chrome
                   </h3>
                   <p className="text-sm text-vet-gray-600">
-                    Configuración → Privacidad y seguridad → Cookies
+                    Configuración �� Privacidad y seguridad → Cookies
                   </p>
                 </div>
                 <div className="border border-vet-gray-200 rounded-xl p-4 text-center">
@@ -363,7 +363,7 @@ export default function Cookies() {
                   <strong>Email:</strong> cookies@petla.com
                 </p>
                 <p>
-                  <strong>Teléfono:</strong> (555) 123-4567 ext. 103
+                  <strong>Teléfono:</strong> +51 999 123 456 ext. 103
                 </p>
               </div>
             </div>

@@ -62,18 +62,28 @@ import {
   Building,
   Sparkles,
   Star,
+  MonitorSpeaker,
+  Scan,
+  TestTube,
+  AlertTriangle,
+  Monitor,
+  Bed,
+  ShoppingBag,
+  Pill,
+  Gift,
 } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { useToast } from "@/hooks/use-toast";
+import {
+  defaultVeterinaryServices,
+  saveVeterinaryServices,
+  getVeterinaryServices,
+  serviceCategories,
+  type VeterinaryService,
+} from "@/lib/veterinaryServices";
 
-interface Servicio {
-  id: string;
-  nombre: string;
-  precio: number;
-  icono: string;
-  descripcion: string;
-  activo: boolean;
-}
+// Use the shared interface
+type Servicio = VeterinaryService;
 
 const iconos = [
   // Equipos médicos veterinarios
@@ -81,103 +91,52 @@ const iconos = [
   { id: "Syringe", nombre: "Jeringa", component: Syringe },
   { id: "Thermometer", nombre: "Termómetro", component: Thermometer },
   { id: "Eye_Microscopio", nombre: "Microscopio", component: Eye },
-  { id: "Search_Radiografia", nombre: "Radiografía", component: Search },
-  { id: "FileText_Laboratorio", nombre: "Laboratorio", component: FileText },
-  { id: "Heart_Vendaje", nombre: "Vendaje", component: Heart },
+  { id: "Search", nombre: "Búsqueda", component: Search },
+  { id: "FileText", nombre: "Documento", component: FileText },
+  { id: "Heart", nombre: "Corazón", component: Heart },
   { id: "CrossIcon", nombre: "Cruz Médica", component: CrossIcon },
+  { id: "MonitorSpeaker", nombre: "Monitor", component: MonitorSpeaker },
+  { id: "Scan", nombre: "Escaneo", component: Scan },
+  { id: "TestTube", nombre: "Tubo de ensayo", component: TestTube },
+  { id: "Monitor", nombre: "Monitor", component: Monitor },
 
   // Procedimientos y servicios
-  { id: "Activity_Cirugia", nombre: "Cirugía", component: Activity },
-  { id: "Scissors", nombre: "Grooming", component: Scissors },
+  { id: "Activity", nombre: "Actividad", component: Activity },
+  { id: "Scissors", nombre: "Tijeras", component: Scissors },
   { id: "Eye_Examen", nombre: "Examen", component: Eye },
-  { id: "Search_Diagnostico", nombre: "Diagnóstico", component: Search },
-  { id: "Heart_Medicamento", nombre: "Medicamento", component: Heart },
-  { id: "Shield", nombre: "Prevención", component: Shield },
-  { id: "Heart_Cardiologia", nombre: "Cardiología", component: Heart },
-  { id: "Activity_Ultrasonido", nombre: "Ultrasonido", component: Activity },
-  { id: "Star_Genetica", nombre: "Genética", component: Star },
-  { id: "Target", nombre: "Tratamiento", component: Target },
+  { id: "Shield", nombre: "Protección", component: Shield },
+  { id: "Target", nombre: "Objetivo", component: Target },
+  { id: "AlertTriangle", nombre: "Alerta", component: AlertTriangle },
+  { id: "Bed", nombre: "Cama", component: Bed },
 
   // Estados y urgencias
   { id: "AlertCircle", nombre: "Emergencia", component: AlertCircle },
   { id: "Zap", nombre: "Urgente", component: Zap },
-  { id: "Heart_Cuidado", nombre: "Cuidado", component: Heart },
-  { id: "CheckCircle", nombre: "Control", component: CheckCircle },
-  { id: "FileText_Revision", nombre: "Revisión", component: FileText },
+  { id: "CheckCircle", nombre: "Verificación", component: CheckCircle },
 
   // Tipos de animales/pacientes
   { id: "PawPrint", nombre: "Mascota", component: PawPrint },
-  { id: "Activity_Ortopedia", nombre: "Ortopedia", component: Activity },
-  { id: "Heart_Pediatria", nombre: "Pediatría", component: Heart },
-  { id: "Star_Premium", nombre: "Premium", component: Star },
+  { id: "Star", nombre: "Estrella", component: Star },
 
   // Servicios especiales
-  { id: "Droplets", nombre: "Hidratación", component: Droplets },
-  { id: "Snowflake", nombre: "Criocirugía", component: Snowflake },
-  { id: "Sun", nombre: "Fototerapia", component: Sun },
-  { id: "Sparkles", nombre: "Estética", component: Sparkles },
-  { id: "Star_Especialidad", nombre: "Especialidad", component: Star },
+  { id: "Droplets", nombre: "Gotas", component: Droplets },
+  { id: "Snowflake", nombre: "Copo de nieve", component: Snowflake },
+  { id: "Sun", nombre: "Sol", component: Sun },
+  { id: "Sparkles", nombre: "Destellos", component: Sparkles },
+  { id: "ShoppingBag", nombre: "Bolsa de compras", component: ShoppingBag },
+  { id: "Pill", nombre: "Píldora", component: Pill },
+  { id: "Gift", nombre: "Regalo", component: Gift },
 
   // Logística y ubicación
-  { id: "Clock", nombre: "Programado", component: Clock },
-  { id: "Calendar", nombre: "Cita", component: Calendar },
+  { id: "Clock", nombre: "Reloj", component: Clock },
+  { id: "Calendar", nombre: "Calendario", component: Calendar },
   { id: "MapPin", nombre: "Ubicación", component: MapPin },
-  { id: "Car", nombre: "Móvil", component: Car },
-  { id: "Home", nombre: "Domicilio", component: Home },
-  { id: "Building", nombre: "Clínica", component: Building },
+  { id: "Car", nombre: "Auto", component: Car },
+  { id: "Home", nombre: "Casa", component: Home },
+  { id: "Building", nombre: "Edificio", component: Building },
 ];
 
-// Default services
-const defaultServices: Servicio[] = [
-  {
-    id: "consulta_general",
-    nombre: "Consulta General",
-    precio: 80,
-    icono: "Stethoscope",
-    descripcion: "Examen médico rutinario y evaluación de salud general",
-    activo: true,
-  },
-  {
-    id: "vacunacion",
-    nombre: "Vacunación",
-    precio: 65,
-    icono: "Syringe",
-    descripcion: "Aplicación de vacunas preventivas y refuerzos",
-    activo: true,
-  },
-  {
-    id: "emergencia",
-    nombre: "Emergencia",
-    precio: 150,
-    icono: "AlertCircle",
-    descripcion: "Atención médica urgente las 24 horas",
-    activo: true,
-  },
-  {
-    id: "grooming",
-    nombre: "Grooming",
-    precio: 45,
-    icono: "Heart",
-    descripcion: "Baño, corte de pelo, limpieza de oídos y uñas",
-    activo: true,
-  },
-  {
-    id: "cirugia",
-    nombre: "Cirugía",
-    precio: 250,
-    icono: "Activity",
-    descripcion: "Procedimientos quirúrgicos especializados",
-    activo: true,
-  },
-  {
-    id: "diagnostico",
-    nombre: "Diagnóstico",
-    precio: 120,
-    icono: "Search",
-    descripcion: "Exámenes y análisis para determinar diagnósticos",
-    activo: true,
-  },
-];
+// Services are now loaded from shared configuration
 
 export default function Servicios() {
   const { user, addNotificacion, usuarios } = useAppContext();
@@ -196,6 +155,7 @@ export default function Servicios() {
     precio: 0,
     icono: "Stethoscope",
     descripcion: "",
+    categoria: "Atención médica",
     activo: true,
   });
 
@@ -207,16 +167,16 @@ export default function Servicios() {
         if (savedServices) {
           setServicios(JSON.parse(savedServices));
         } else {
-          // Initialize with default services
-          setServicios(defaultServices);
+          // Initialize with comprehensive default services
+          setServicios(defaultVeterinaryServices);
           localStorage.setItem(
             "veterinary_services",
-            JSON.stringify(defaultServices),
+            JSON.stringify(defaultVeterinaryServices),
           );
         }
       } catch (error) {
         console.error("Error loading services:", error);
-        setServicios(defaultServices);
+        setServicios(defaultVeterinaryServices);
       }
     };
 
@@ -225,11 +185,8 @@ export default function Servicios() {
 
   const saveServices = (newServices: Servicio[]) => {
     try {
-      localStorage.setItem("veterinary_services", JSON.stringify(newServices));
+      saveVeterinaryServices(newServices);
       setServicios(newServices);
-
-      // Dispatch custom event to notify other components
-      window.dispatchEvent(new Event("servicesUpdated"));
 
       toast({
         title: "Servicios actualizados",
@@ -402,6 +359,7 @@ export default function Servicios() {
       precio: 0,
       icono: "Stethoscope",
       descripcion: "",
+      categoria: "Atención médica",
       activo: true,
     });
     setError("");
@@ -460,80 +418,111 @@ export default function Servicios() {
             </div>
           </div>
 
-          {/* Services Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {servicios.map((servicio) => {
-              const IconComponent = getIconComponent(servicio.icono);
-              return (
-                <Card
-                  key={servicio.id}
-                  className={`transition-all hover:shadow-lg ${
-                    !servicio.activo ? "opacity-60" : ""
-                  }`}
-                >
-                  <CardHeader className="pb-4">
-                    <div className="flex items-start justify-between">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-12 h-12 bg-vet-primary/10 rounded-lg flex items-center justify-center">
-                          <IconComponent className="w-6 h-6 text-vet-primary" />
-                        </div>
-                        <div>
-                          <CardTitle className="text-lg">
-                            {servicio.nombre}
-                          </CardTitle>
-                          <div className="flex items-center space-x-2 mt-1">
-                            <Badge className="bg-vet-primary/10 text-vet-primary">
-                              S/. {servicio.precio}
-                            </Badge>
-                            <Badge
-                              variant={
-                                servicio.activo ? "default" : "secondary"
-                              }
-                            >
-                              {servicio.activo ? "Activo" : "Inactivo"}
-                            </Badge>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-vet-gray-600 mb-4 text-sm">
-                      {servicio.descripcion}
+          {/* Services Grid - Grouped by Category */}
+          {(() => {
+            const groupedServices = servicios.reduce((acc, service) => {
+              const category = service.categoria || "Otros";
+              if (!acc[category]) {
+                acc[category] = [];
+              }
+              acc[category].push(service);
+              return acc;
+            }, {});
+
+            return Object.entries(groupedServices).map(
+              ([category, services]) => (
+                <div key={category} className="mb-12">
+                  <div className="mb-6">
+                    <h2 className="text-2xl font-bold text-vet-gray-900 border-b border-vet-gray-200 pb-2">
+                      {category}
+                    </h2>
+                    <p className="text-vet-gray-600 mt-2">
+                      {services.length} servicio
+                      {services.length !== 1 ? "s" : ""} en esta categoría
                     </p>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-2">
-                        <span className="text-sm text-vet-gray-500">
-                          Estado:
-                        </span>
-                        <Switch
-                          checked={servicio.activo}
-                          onCheckedChange={() => handleToggleActive(servicio)}
-                        />
-                      </div>
-                      <div className="flex space-x-2">
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => handleEdit(servicio)}
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {services.map((servicio) => {
+                      const IconComponent = getIconComponent(servicio.icono);
+                      return (
+                        <Card
+                          key={servicio.id}
+                          className={`transition-all hover:shadow-lg ${
+                            !servicio.activo ? "opacity-60" : ""
+                          }`}
                         >
-                          <Edit className="w-4 h-4" />
-                        </Button>
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => handleDelete(servicio)}
-                          className="text-red-600 hover:text-red-700"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </Button>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              );
-            })}
-          </div>
+                          <CardHeader className="pb-4">
+                            <div className="flex items-start justify-between">
+                              <div className="flex items-center space-x-3">
+                                <div className="w-12 h-12 bg-vet-primary/10 rounded-lg flex items-center justify-center">
+                                  <IconComponent className="w-6 h-6 text-vet-primary" />
+                                </div>
+                                <div>
+                                  <CardTitle className="text-lg">
+                                    {servicio.nombre}
+                                  </CardTitle>
+                                  <div className="flex items-center space-x-2 mt-1">
+                                    <Badge className="bg-vet-primary/10 text-vet-primary">
+                                      S/. {servicio.precio}
+                                    </Badge>
+                                    <Badge
+                                      variant={
+                                        servicio.activo
+                                          ? "default"
+                                          : "secondary"
+                                      }
+                                    >
+                                      {servicio.activo ? "Activo" : "Inactivo"}
+                                    </Badge>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </CardHeader>
+                          <CardContent>
+                            <p className="text-vet-gray-600 mb-4 text-sm">
+                              {servicio.descripcion}
+                            </p>
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center space-x-2">
+                                <span className="text-sm text-vet-gray-500">
+                                  Estado:
+                                </span>
+                                <Switch
+                                  checked={servicio.activo}
+                                  onCheckedChange={() =>
+                                    handleToggleActive(servicio)
+                                  }
+                                />
+                              </div>
+                              <div className="flex space-x-2">
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={() => handleEdit(servicio)}
+                                >
+                                  <Edit className="w-4 h-4" />
+                                </Button>
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={() => handleDelete(servicio)}
+                                  className="text-red-600 hover:text-red-700"
+                                >
+                                  <Trash2 className="w-4 h-4" />
+                                </Button>
+                              </div>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      );
+                    })}
+                  </div>
+                </div>
+              ),
+            );
+          })()}
 
           {/* Create/Edit Modal */}
           <Dialog open={showModal} onOpenChange={setShowModal}>
@@ -591,6 +580,27 @@ export default function Servicios() {
                         className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                       />
                     </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="categoria">Categoría</Label>
+                    <Select
+                      value={formData.categoria}
+                      onValueChange={(value) =>
+                        setFormData({ ...formData, categoria: value })
+                      }
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Selecciona una categoría" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {serviceCategories.map((category) => (
+                          <SelectItem key={category} value={category}>
+                            {category}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                   </div>
 
                   <div className="space-y-2">

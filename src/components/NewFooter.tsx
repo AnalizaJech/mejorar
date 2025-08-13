@@ -79,10 +79,10 @@ export default function NewFooter() {
                 </div>
                 <div>
                   <a
-                    href="tel:+5551234567"
+                    href="tel:+51999123456"
                     className="text-white font-semibold text-sm hover:text-vet-primary transition-colors"
                   >
-                    (555) 123-4567
+                    +51 999 123 456
                   </a>
                   <p className="text-vet-gray-300 text-xs">Citas y consultas</p>
                   <p className="text-vet-gray-400 text-xs">
