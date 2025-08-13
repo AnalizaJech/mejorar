@@ -64,107 +64,55 @@ import {
 } from "lucide-react";
 import { getVeterinaryServices, getServicesByCategory } from "@/lib/veterinaryServices";
 
-// Default services configuration
-const defaultServices = [
-  {
-    id: "consulta_general",
-    nombre: "Consulta General",
-    precio: 80,
-    icono: "Stethoscope",
-    descripcion:
-      "Evaluaciones médicas completas con diagnóstico preciso y plan de tratamiento personalizado.",
-    activo: true,
+// Color themes for different service categories
+const categoryColors = {
+  "Atención médica": {
     color: "vet-primary",
     colorBg: "vet-primary/10",
     colorHover: "vet-primary/30",
   },
-  {
-    id: "vacunacion",
-    nombre: "Vacunación",
-    precio: 65,
-    icono: "Syringe",
-    descripcion:
-      "Esquemas de vacunación completos adaptados a la edad, especie y necesidades de tu mascota.",
-    activo: true,
-    color: "green-600",
-    colorBg: "green-500/10",
-    colorHover: "green-500/30",
-  },
-  {
-    id: "emergencia",
-    nombre: "Emergencias",
-    precio: 150,
-    icono: "AlertCircle",
-    descripcion:
-      "Atención médica urgente 24/7 para situaciones críticas con respuesta inmediata.",
-    activo: true,
-    color: "red-600",
-    colorBg: "red-500/10",
-    colorHover: "red-500/30",
-  },
-  {
-    id: "grooming",
-    nombre: "Grooming",
-    precio: 45,
-    icono: "Heart",
-    descripcion:
-      "Servicios completos de higiene y estética para mantener a tu mascota bella y saludable.",
-    activo: true,
-    color: "vet-secondary",
-    colorBg: "vet-secondary/10",
-    colorHover: "vet-secondary/30",
-  },
-  {
-    id: "cirugia",
-    nombre: "Cirugía",
-    precio: 250,
-    icono: "Activity",
-    descripcion:
-      "Procedimientos quirúrgicos especializados con anestesia segura y recuperación monitoreada.",
-    activo: true,
-    color: "purple-600",
-    colorBg: "purple-500/10",
-    colorHover: "purple-500/30",
-  },
-  {
-    id: "diagnostico",
-    nombre: "Diagnóstico",
-    precio: 120,
-    icono: "Search",
-    descripcion:
-      "Análisis clínicos, radiografías y estudios especializados para diagnósticos precisos.",
-    activo: true,
+  "Diagnóstico": {
     color: "blue-600",
     colorBg: "blue-500/10",
     colorHover: "blue-500/30",
   },
-];
+  "Cirugía": {
+    color: "purple-600",
+    colorBg: "purple-500/10",
+    colorHover: "purple-500/30",
+  },
+  "Estética y cuidado": {
+    color: "vet-secondary",
+    colorBg: "vet-secondary/10",
+    colorHover: "vet-secondary/30",
+  },
+  "Hospitalización": {
+    color: "red-600",
+    colorBg: "red-500/10",
+    colorHover: "red-500/30",
+  },
+  "Tienda y nutrición": {
+    color: "green-600",
+    colorBg: "green-500/10",
+    colorHover: "green-500/30",
+  },
+  "Otros": {
+    color: "gray-600",
+    colorBg: "gray-500/10",
+    colorHover: "gray-500/30",
+  },
+};
 
-// Function to get services from localStorage or default
+// Function to get services with display colors
 const getServicios = () => {
-  try {
-    const savedServices = localStorage.getItem("veterinary_services");
-    if (savedServices) {
-      const services = JSON.parse(savedServices);
-      // Only return active services and add display colors
-      return services
-        .filter((service: any) => service.activo)
-        .map((service: any, index: number) => {
-          const defaultService =
-            defaultServices[index % defaultServices.length];
-          return {
-            ...service,
-            color: defaultService.color,
-            colorBg: defaultService.colorBg,
-            colorHover: defaultService.colorHover,
-          };
-        });
-    }
-  } catch (error) {
-    console.error("Error loading services from localStorage:", error);
-  }
-  // Return default services if localStorage is empty or error
-  return defaultServices;
+  const services = getVeterinaryServices();
+  return services.map((service) => {
+    const categoryColor = categoryColors[service.categoria] || categoryColors["Otros"];
+    return {
+      ...service,
+      ...categoryColor,
+    };
+  });
 };
 
 // Function to get service icon
