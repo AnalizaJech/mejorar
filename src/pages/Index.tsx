@@ -733,7 +733,7 @@ export default function Index() {
                           Llamar Ahora
                         </h4>
                         <p className="text-lg md:text-2xl font-bold text-vet-primary">
-                          (555) 123-4567
+                          +51 999 123 456
                         </p>
                         <p className="text-sm md:text-base text-vet-gray-600">
                           Respuesta inmediata garantizada
