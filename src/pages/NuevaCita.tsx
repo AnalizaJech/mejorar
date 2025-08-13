@@ -38,6 +38,18 @@ import {
   Heart,
   Activity,
   Search,
+  FileText,
+  MonitorSpeaker,
+  Scan,
+  TestTube,
+  Scissors,
+  AlertTriangle,
+  Monitor,
+  Droplets,
+  Bed,
+  ShoppingBag,
+  Pill,
+  Gift,
 } from "lucide-react";
 import { DatePicker } from "@/components/ui/date-picker";
 import { useToast } from "@/hooks/use-toast";
@@ -147,7 +159,7 @@ const defaultTiposConsulta = [
     precio: 300,
     icono: "Scissors",
     descripcion: "Cirugías de tejidos blandos",
-    categoria: "Cirugía",
+    categoria: "Cirug��a",
     activo: true,
   },
   {
