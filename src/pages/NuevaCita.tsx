@@ -729,51 +729,70 @@ export default function NuevaCita() {
                     </p>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {tiposConsulta.map((tipo) => (
-                      <Card
-                        key={tipo.id}
-                        className={`cursor-pointer transition-all ${
-                          citaData.tipoConsulta === tipo.id
-                            ? "ring-2 ring-vet-primary bg-vet-primary/5"
-                            : "hover:shadow-md"
-                        }`}
-                        onClick={() =>
-                          setCitaData({ ...citaData, tipoConsulta: tipo.id })
-                        }
-                      >
-                        <CardContent className="p-4">
-                          <div className="flex items-start justify-between">
-                            <div className="flex items-start space-x-3">
-                              <div
-                                className={`p-2 rounded-lg ${
-                                  citaData.tipoConsulta === tipo.id
-                                    ? "bg-vet-primary text-white"
-                                    : "bg-vet-primary/10 text-vet-primary"
-                                }`}
-                              >
-                                {getServiceIcon(tipo.icono)}
-                              </div>
-                              <div className="flex-1">
-                                <h4 className="font-semibold text-vet-gray-900 mb-1">
-                                  {tipo.nombre}
-                                </h4>
-                                <p className="text-sm text-vet-gray-600 mb-2 leading-tight">
-                                  {tipo.descripcion}
-                                </p>
-                                <Badge className="bg-vet-primary/10 text-vet-primary font-semibold">
-                                  S/. {tipo.precio.toLocaleString()}
-                                </Badge>
-                              </div>
-                            </div>
-                            {citaData.tipoConsulta === tipo.id && (
-                              <CheckCircle className="w-5 h-5 text-vet-primary flex-shrink-0 mt-1" />
-                            )}
-                          </div>
-                        </CardContent>
-                      </Card>
-                    ))}
-                  </div>
+{/* Group services by category */}
+                  {(() => {
+                    const groupedServices = tiposConsulta.reduce((acc, service) => {
+                      const category = service.categoria || "Otros";
+                      if (!acc[category]) {
+                        acc[category] = [];
+                      }
+                      acc[category].push(service);
+                      return acc;
+                    }, {});
+
+                    return Object.entries(groupedServices).map(([category, services]) => (
+                      <div key={category} className="mb-8">
+                        <h3 className="text-lg font-semibold text-vet-gray-900 mb-4 border-b border-vet-gray-200 pb-2">
+                          {category}
+                        </h3>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          {services.map((tipo) => (
+                            <Card
+                              key={tipo.id}
+                              className={`cursor-pointer transition-all ${
+                                citaData.tipoConsulta === tipo.id
+                                  ? "ring-2 ring-vet-primary bg-vet-primary/5"
+                                  : "hover:shadow-md"
+                              }`}
+                              onClick={() =>
+                                setCitaData({ ...citaData, tipoConsulta: tipo.id })
+                              }
+                            >
+                              <CardContent className="p-4">
+                                <div className="flex items-start justify-between">
+                                  <div className="flex items-start space-x-3">
+                                    <div
+                                      className={`p-2 rounded-lg ${
+                                        citaData.tipoConsulta === tipo.id
+                                          ? "bg-vet-primary text-white"
+                                          : "bg-vet-primary/10 text-vet-primary"
+                                      }`}
+                                    >
+                                      {getServiceIcon(tipo.icono)}
+                                    </div>
+                                    <div className="flex-1">
+                                      <h4 className="font-semibold text-vet-gray-900 mb-1">
+                                        {tipo.nombre}
+                                      </h4>
+                                      <p className="text-sm text-vet-gray-600 mb-2 leading-tight">
+                                        {tipo.descripcion}
+                                      </p>
+                                      <Badge className="bg-vet-primary/10 text-vet-primary font-semibold">
+                                        S/. {tipo.precio.toLocaleString()}
+                                      </Badge>
+                                    </div>
+                                  </div>
+                                  {citaData.tipoConsulta === tipo.id && (
+                                    <CheckCircle className="w-5 h-5 text-vet-primary flex-shrink-0 mt-1" />
+                                  )}
+                                </div>
+                              </CardContent>
+                            </Card>
+                          ))}
+                        </div>
+                      </div>
+                    ));
+                  })()}
 
                   <div>
                     <Label htmlFor="motivo">Motivo de la consulta *</Label>
