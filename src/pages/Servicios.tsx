@@ -799,6 +799,29 @@ export default function Servicios() {
                   </div>
 
                   <div className="space-y-2">
+                    <Label htmlFor="categoria">Categoría</Label>
+                    <Select
+                      value={formData.categoria}
+                      onValueChange={(value) =>
+                        setFormData({ ...formData, categoria: value })
+                      }
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Selecciona una categoría" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="Atención médica">Atención médica</SelectItem>
+                        <SelectItem value="Diagnóstico">Diagnóstico</SelectItem>
+                        <SelectItem value="Cirugía">Cirugía</SelectItem>
+                        <SelectItem value="Estética y cuidado">Estética y cuidado</SelectItem>
+                        <SelectItem value="Hospitalización">Hospitalización</SelectItem>
+                        <SelectItem value="Tienda y nutrición">Tienda y nutrición</SelectItem>
+                        <SelectItem value="Otros">Otros</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="space-y-2">
                     <Label htmlFor="icono">Icono</Label>
                     <div className="space-y-3">
                       {/* Icono seleccionado actualmente */}
