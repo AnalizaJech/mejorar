@@ -387,16 +387,16 @@ export default function Servicios() {
         if (savedServices) {
           setServicios(JSON.parse(savedServices));
         } else {
-          // Initialize with default services
-          setServicios(defaultServices);
+          // Initialize with comprehensive default services
+          setServicios(defaultVeterinaryServices);
           localStorage.setItem(
             "veterinary_services",
-            JSON.stringify(defaultServices),
+            JSON.stringify(defaultVeterinaryServices),
           );
         }
       } catch (error) {
         console.error("Error loading services:", error);
-        setServicios(defaultServices);
+        setServicios(defaultVeterinaryServices);
       }
     };
 
