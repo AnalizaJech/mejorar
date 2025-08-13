@@ -288,20 +288,9 @@ const defaultTiposConsulta = [
   },
 ];
 
-// Function to get services from localStorage or default
+// Function to get services using shared configuration
 const getTiposConsulta = () => {
-  try {
-    const savedServices = localStorage.getItem("veterinary_services");
-    if (savedServices) {
-      const services = JSON.parse(savedServices);
-      // Only return active services
-      return services.filter((service: any) => service.activo);
-    }
-  } catch (error) {
-    console.error("Error loading services from localStorage:", error);
-  }
-  // Return default services if localStorage is empty or error
-  return defaultTiposConsulta;
+  return getVeterinaryServices();
 };
 
 const ubicaciones = [
