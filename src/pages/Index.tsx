@@ -124,13 +124,37 @@ const getServiceIcon = (iconName: string) => {
     case "Syringe":
       return <Syringe {...iconProps} />;
     case "AlertCircle":
-      return <Zap {...iconProps} />;
+      return <AlertCircle {...iconProps} />;
     case "Heart":
-      return <Scissors {...iconProps} />;
+      return <Heart {...iconProps} />;
     case "Activity":
       return <Activity {...iconProps} />;
     case "Search":
+      return <Search {...iconProps} />;
+    case "FileText":
       return <FileText {...iconProps} />;
+    case "MonitorSpeaker":
+      return <MonitorSpeaker {...iconProps} />;
+    case "Scan":
+      return <Scan {...iconProps} />;
+    case "TestTube":
+      return <TestTube {...iconProps} />;
+    case "Scissors":
+      return <Scissors {...iconProps} />;
+    case "AlertTriangle":
+      return <AlertTriangle {...iconProps} />;
+    case "Monitor":
+      return <Monitor {...iconProps} />;
+    case "Droplets":
+      return <Droplets {...iconProps} />;
+    case "Bed":
+      return <Bed {...iconProps} />;
+    case "ShoppingBag":
+      return <ShoppingBag {...iconProps} />;
+    case "Pill":
+      return <Pill {...iconProps} />;
+    case "Gift":
+      return <Gift {...iconProps} />;
     default:
       return <Stethoscope {...iconProps} />;
   }
