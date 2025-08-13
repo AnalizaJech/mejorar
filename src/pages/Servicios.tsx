@@ -82,15 +82,8 @@ import {
   type VeterinaryService
 } from "@/lib/veterinaryServices";
 
-interface Servicio {
-  id: string;
-  nombre: string;
-  precio: number;
-  icono: string;
-  descripcion: string;
-  categoria?: string;
-  activo: boolean;
-}
+// Use the shared interface
+type Servicio = VeterinaryService;
 
 const iconos = [
   // Equipos médicos veterinarios
